@@ -1,5 +1,29 @@
 package kr.kh.team3.app.service;
 
-public class MemberServiceImp {
+import java.io.IOException;
+import java.io.InputStream;
 
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import kr.kh.team3.app.dao.MemberDAO;
+
+public class MemberServiceImp implements MemberService {
+
+private MemberDAO memberDao;
+	
+	public MemberServiceImp() {
+		String resource = "kr/kh/team3/app/config/mybatis-config.xml";
+		
+		try {
+			InputStream inputStream = Resources.getResourceAsStream(resource);
+			SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+			SqlSession session = sessionFactory.openSession(true);
+			memberDao = session.getMapper(MemberDAO.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
