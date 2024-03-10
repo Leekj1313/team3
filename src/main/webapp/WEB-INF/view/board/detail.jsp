@@ -92,7 +92,7 @@
   		<a href="<c:url value="/board/list"/>" class="btn btn-outline-dark">목록으로</a>
   		<c:if test="${board.bo_me_id == user.me_id}">
   			<a href="<c:url value="/board/delete?num=${board.bo_num}"/>" class="btn btn-outline-danger">삭제</a>
-  			<a href="<c:url value="/board/update?num=${board.bo_num}"/>" class="btn btn-outline-success">수정</a>
+  			<a href="<c:url value="/board/update"/>" class="btn btn-outline-success">수정</a>
   		</c:if>
   		<hr>
   		<div class="mt-3 mb-3 comment-box">
