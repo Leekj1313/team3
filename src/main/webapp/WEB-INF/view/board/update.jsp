@@ -59,7 +59,7 @@
 		    <input type="file" class="form-control" name="file">
 		    <input type="file" class="form-control" name="file">
 	  	</div>
-	  	<button class="btn btn-success col-12">글 등록</button>
+	  	<button class="btn btn-success col-12">수정하기</button>
 	</form>
 </div>
 <script type="text/javascript">
