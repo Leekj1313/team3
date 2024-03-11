@@ -19,4 +19,11 @@ public class MemberVO {
 	private int me_fail_count;
 	private Date me_stop;
 	
+	public MemberVO(String uname, String id, String pw, String email, String phone) {
+		me_name = uname;
+		me_id = id;
+		me_pw = pw;
+		me_email = email;
+		me_phone = phone;
+	}
 }
