@@ -47,16 +47,27 @@
   </div>
 </nav>
 <div class="box1">
+
+	<c:if test="${user.me_authority eq ADMIN }">
 	<a href="<c:url value="/category/insert"/>" class="btn btn-outline-success">카테고리 등록</a>
 	<a href="<c:url value="/post/insert"/>" class="btn btn-outline-success">게시판 등록</a>
+	</c:if>
+	
+	<!-- forEach로 카테고리, 카테고리번호를 가지고있는 게시판 -->
 	<hr>
 	<h5>카테고리명</h5>
 	<button class="btn btn-outline-warning btn-update float-end">!</button>
 	<hr>
-	<a href="#">게시판명1</a>
+	<a href="#">${board.bo_name} </a>
+	<c:if test="${user.me_authority eq ADMIN}">
+	<!-- button으로 할거면 자바스크립트, ajax 비동기통신 -->
+	<!-- a href로 할거면 걍 서블릿  -->
 	<button class="btn btn-outline-warning">!</button>
 	<button class="btn btn-outline-danger">X</button>
+	</c:if>
 	<br>
+	<!-- 여기까지 반복문 -->
+	
 	<a href="#">게시판명2</a>
 	<button class="btn btn-outline-warning">!</button>
 	<button class="btn btn-outline-danger">X</button>
