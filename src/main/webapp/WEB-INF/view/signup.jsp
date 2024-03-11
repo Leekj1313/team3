@@ -1,60 +1,81 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 부트스트랩5 css/js -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script type="text/javascript">
+import { Ripple, initMDB, Input } from "mdb-ui-kit";
+initMDB({ Ripple, Input });
+</script> -->
 <style type="text/css">
- body {
-           
-        }
-
-        .signup-box {
-            margin: auto;
-            width: 500px;
-            height : 600px;
-            background-color: #EEEFF1;
-            border-radius: 5px;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .signup-box input {
-            width: 70%;
-            padding: 10px;
-            box-sizing: border-box;
-            border-radius: 5px;
-            border: none;
-            margin-top : 10px;
-        }
-
-        .signup-box .in {
-            margin-bottom: 10px;
-        }
-
-        .signup-box #btn {
-            background-color: #1BBC9B;
-            margin-bottom: 30px;
-            color: white;
-        }
-
+	.divv {
+		border: solid 1px gray;
+		box-shadow: 5px 5px 5px 5px gray inset;
+		margin: 20px;
+	}
+	.card {
+		background: #fff;
+		border-radius: 2px;
+		display: inline-block;
+		height: 1000px;
+		margin: 1rem;
+		position: relative;
+		width: 1000px;
+	}
+	.card-1 {
+		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	}
+	
+	.card-1:hover {
+		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
 </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
-<div class="signup-box">
-        <form action="">
-        	<h1>ȸ������</h1>
-            <input type="text" placeholder="���̵�" class="in">
-            <button type="button" class="btn btn-success idCheck">�ߺ�Ȯ��</button>
-            <input type="password" placeholder="��й�ȣ" class="in">
-            <input type="password" placeholder="��й�ȣ Ȯ��" class="in">
-            <input type="text" placeholder="�̸�" class="in">
-            <input type="text" placeholder="��ȭ��ȣ" class="in">
-            <input type="text" placeholder="�̸���" class="in">
-            <input type="submit" id="btn" value="ȸ������"><br>
-        </form>
-    </div>
+<div class="card card-1 container col-5 p-5">
+<h3>회원가입</h3>
+<form action="" class="was-validated">
+	<div class="mb-3 mt-3">
+		<label for="uname" class="form-label">이름(실명)</label>
+		<input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+		<div class="valid-feedback"></div>
+		<div class="invalid-feedback">필수 입력 정보입니다.</div>
+	</div>
+	<label for="id" class="form-label">아이디</label>
+	<div class=" input-group">
+		<input type="text" class="form-control" id="id" placeholder="Enter id" name="id" required>
+		<button class="btn btn-outline-dark" type="button">중복 확인</button>
+		<div class="valid-feedback"></div>
+		<div class="invalid-feedback">필수 입력 정보입니다.</div>
+	</div>
+	<div class="mb-3 mt-3">
+		<label for="pwd" class="form-label">비밀번호</label>
+		<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" required>
+		<div class="valid-feedback"></div>
+		<div class="invalid-feedback">필수 입력 정보입니다.</div>
+	</div>
+	<div class="mb-3">
+		<label for="pwd2" class="form-label">비밀번호 확인</label>
+		<input type="password" class="form-control" id="pwd2" placeholder="Enter password check" name="pwd2" required>
+		<div class="valid-feedback"></div>
+		<div class="invalid-feedback">필수 입력 정보입니다.</div>
+	</div>
+	<div class="mb-3 mt-3">
+		<label for="email" class="form-label">이메일</label>
+		<input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+		<div class="valid-feedback"></div>
+		<div class="invalid-feedback">필수 입력 정보입니다.</div>
+	</div>
+	<button type="submit" class="btn btn-outline-dark col-12">가입하기</button>
+</form>
+</div>
 </body>
 </html>

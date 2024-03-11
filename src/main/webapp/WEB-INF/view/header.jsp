@@ -6,58 +6,128 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <style type="text/css">
-	.navbar-nav {
-    margin-left: auto; 
-	}
-
 	.nav-item {
-	    margin-left: 10px;
-	    font
+	  padding: 0.5rem 0xp;
 	}
 	
-	.navbar {
-	    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	.dropdown-hover:hover>.dropdown-menu {
+	display: inline-block;
 	}
-
-
+	
+	.dropdown-hover>.dropdown-toggle:active {
+	/*Without this, clicking will make it sticky*/
+	pointer-events: none;
+	}
 </style>
-
-
 </head>
 <body>
-<nav class="navbar navbar-expand-sm">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0px; height: 80px">
+  <!-- Container wrapper -->
   <div class="container-fluid">
-    <a class="navbar-brand" href="<c:url value="/"/>">Logo</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
+    <!-- Toggle button -->
+    <button class="navbar-toggler px-0" type="button" data-mdb-toggle="collapse"
+      data-mdb-target="#navbarExampleOnHover" aria-controls="navbarExampleOnHover" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
     </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav">
-      	<c:if test="${user == null}">
-	        <li class="nav-item">
-	          <a class="nav-link" href="<c:url value="/signup"/>">회원가입</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="<c:url value="/login"/>">로그인</a>
-	        </li>
-        </c:if>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarExampleOnHover">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto ps-lg-0" style="padding-left: 0.15rem">
         <li class="nav-item">
-          <a class="nav-link" href="<c:url value="/board/list"/>">게시글</a>
+          <a class="nav-link" href="<c:url value="/"/>">HOME</a>
         </li>
-        <c:if test="${user != null}">
-	        <li class="nav-item">
-	        	<a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
-	        </li>
-        </c:if>
+        <!-- Navbar dropdown -->
+        <li class="nav-item dropdown dropdown-hover position-static">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+            data-mdb-toggle="dropdown" aria-expanded="false">
+            Category
+          </a>
+          <!-- Dropdown menu -->
+          <div class="dropdown-menu col-11 mt-0" aria-labelledby="navbarDropdown" style="border-top-left-radius: 0;
+                            border-top-right-radius: 0;
+                          ">
+
+            <div class="container">
+              <div class="row my-4">
+                <div class="col-md-6 col-lg-2 mb-3 mb-lg-0" style="border-right: solid 1px gray;">
+                  <div class="list-group list-group-flush">
+                    <div style="font-weight: bold; margin-bottom: 20px;">카테고리</div>
+                    <a href="<c:url value="/board/list"/>" class="list-group-item list-group-item-action">자유 게시판</a>
+                    <a href="" class="list-group-item list-group-item-action">Amet consectetur</a>
+                    <a href="" class="list-group-item list-group-item-action">Cras justo odio</a>
+                    <a href="" class="list-group-item list-group-item-action">Adipisicing elit</a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-2 mb-3 mb-lg-0" style="border-right: solid 1px gray;">
+                  <div class="list-group list-group-flush">
+                    <div style="font-weight: bold; margin-bottom: 20px;">Lorem ipsum</div>
+                    <a href="" class="list-group-item list-group-item-action">Perspiciatis quo</a>
+                    <a href="" class="list-group-item list-group-item-action">Cras justo odio</a>
+                    <a href="" class="list-group-item list-group-item-action">Laudantium maiores</a>
+                    <a href="" class="list-group-item list-group-item-action">Provident dolor</a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-2 mb-3 mb-md-0" style="border-right: solid 1px gray;">
+                  <div class="list-group list-group-flush">
+                    <div style="font-weight: bold; margin-bottom: 20px;">Lorem ipsum</div>
+                    <a href="" class="list-group-item list-group-item-action">Cras justo odio</a>
+                    <a href="" class="list-group-item list-group-item-action">Est iure</a>
+                    <a href="" class="list-group-item list-group-item-action">Praesentium</a>
+                    <a href="" class="list-group-item list-group-item-action">Laboriosam</a>
+                  </div>
+                </div>
+				<div class="col-md-6 col-lg-2 mb-3 mb-md-0" style="border-right: solid 1px gray;">
+                  <div class="list-group list-group-flush">
+                    <div style="font-weight: bold; margin-bottom: 20px;">Lorem ipsum</div>
+                    <a href="" class="list-group-item list-group-item-action">Cras justo odio</a>
+                    <a href="" class="list-group-item list-group-item-action">Est iure</a>
+                    <a href="" class="list-group-item list-group-item-action">Praesentium</a>
+                    <a href="" class="list-group-item list-group-item-action">Laboriosam</a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-2 mb-3 mb-md-0" style="border-right: solid 1px gray;">
+                  <div class="list-group list-group-flush">
+                    <div style="font-weight: bold; margin-bottom: 20px;">Lorem ipsum</div>
+                    <a href="" class="list-group-item list-group-item-action">Cras justo odio</a>
+                    <a href="" class="list-group-item list-group-item-action">Est iure</a>
+                    <a href="" class="list-group-item list-group-item-action">Praesentium</a>
+                    <a href="" class="list-group-item list-group-item-action">Laboriosam</a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-2">
+                  <div class="list-group list-group-flush">
+                    <div style="font-weight: bold; margin-bottom: 20px;">Lorem ipsum</div>
+                    <a href="" class="list-group-item list-group-item-action">Saepe</a>
+                    <a href="" class="list-group-item list-group-item-action">Vel alias</a>
+                    <a href="" class="list-group-item list-group-item-action">Sunt doloribus</a>
+                    <a href="" class="list-group-item list-group-item-action">Cum dolores</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
       </ul>
+      <ul class="navbar-nav ms-auto ps-lg-0" style="padding-right: 0.15rem">
+      	<li class="nav-item">
+          <a class="nav-link" href="<c:url value="/signup"/>">회원가입</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<c:url value="login"/>">로그인</a>
+        </li>
+      </ul>
+      <!-- Left links -->
     </div>
+    <!-- Collapsible wrapper -->
   </div>
+  <!-- Container wrapper -->
 </nav>
- <a class="nav-link" href="<c:url value="/board/insert"/>">게시글입력</a>
- <a class="nav-link" href="<c:url value="/board/detail"/>">게시글상세</a>
- <a class="nav-link" href="<c:url value="/board/update"/>">게시글수정</a>
 </body>
 </html>
+
