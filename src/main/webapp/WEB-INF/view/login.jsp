@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
  body {
@@ -51,13 +52,13 @@
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="login-box">
         <form action="<%=request.getContextPath()%>/login" method="post">
-        	<h1>�α���</h1>
-            <input type="text" placeholder="���̵�" class="in" id="id" name="id">
-            <input type="password" placeholder="��й�ȣ" class="in" id="pw" name="pw">
-            <input type="submit" id="btn" value="�α���"><br>
+        	<h1>로그인</h1>
+            <input type="text" placeholder="아이디" class="in" id="id" name="id">
+            <input type="password" placeholder="비밀번호" class="in" id="pw" name="pw">
+            <input type="submit" id="btn" value="로그인"><br>
         </form>
-        <a href="#none">���̵�ã��</a>
-        <a href="#none">��й�ȣã��</a>
+        <a href="#none">아이디찾기</a>
+        <a href="#none">비밀번호찾기</a>
     </div>
 </body>
 </html>
