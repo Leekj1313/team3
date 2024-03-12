@@ -49,7 +49,7 @@
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="login-box">
-        <form action="">
+        <form action="<%=request.getContextPath()%>/login" method="post">
         	<h1>로그인</h1>
             <input type="text" placeholder="아이디" class="in">
             <input type="password" placeholder="비밀번호" class="in">
