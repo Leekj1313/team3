@@ -52,7 +52,7 @@ initMDB({ Ripple, Input });
 	<label for="id" class="form-label">아이디</label>
 	<div class="input-group">
 		<input type="text" class="form-control" id="id" placeholder="Enter id" name="id" required>
-		<button class="btn btn-outline-dark" type="button">중복 확인</button>
+		<button class="btn btn-outline-dark" type="button" id="idCheck">중복 확인</button>
 		<div class="valid-feedback"></div>
 		<div class="invalid-feedback">필수 입력 정보입니다.</div>
 	</div>
@@ -85,7 +85,7 @@ initMDB({ Ripple, Input });
 </div>
 <script src="//code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript">
-/* let flag = false;
+let flag = false;
 $("#idCheck").click(function(){
 	let id = $("[name=id]").val();
 	fetch(`<c:url value="/id/check"/>?id=\${id}`)
@@ -110,7 +110,7 @@ $("form").submit(function(){
 		alert("아이디 중복 확인을 하세요.");
 		return false;
 	}
-}); */
+});
 
 $('#pw2').keyup(function(){
 	let pw1 = document.getElementById('pw').value;
