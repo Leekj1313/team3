@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-
-@WebServlet("/board/list")
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/post/insert")
+public class PostInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/board/list.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/post/insert.jsp").forward(request, response);
 	}
 
 

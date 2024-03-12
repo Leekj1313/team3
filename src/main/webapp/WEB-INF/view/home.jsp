@@ -83,7 +83,7 @@
 		  <thead>
 		    <tr>
 		      <th>
-		      	<a href="<c:url value="/board/list"/>" class="boardname">자유게시판</a>
+		      	<a href="<c:url value="/post/list"/>" class="boardname">자유게시판</a>
 		      </th>
 		    </tr>
 		  </thead>

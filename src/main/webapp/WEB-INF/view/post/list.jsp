@@ -35,8 +35,8 @@
 			<li class="nav-item dropdown">
 	   			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">카페 이용</a>
 			    <ul class="dropdown-menu">
-			      	<li><a class="dropdown-item" href="<c:url value="/board/insert"/>">카페 글쓰기</a></li>
-			      	<li><a class="dropdown-item" href="<c:url value="/board/list"/>">카페글 보기</a></li>
+			      	<li><a class="dropdown-item" href="<c:url value="/post/insert"/>">카페 글쓰기</a></li>
+			      	<li><a class="dropdown-item" href="<c:url value="/post/list"/>">카페글 보기</a></li>
 			    </ul>
 			</li>
 		 	<li class="nav-item">
@@ -50,10 +50,7 @@
 
 	<c:if test="${user.me_authority eq ADMIN }">
 	<a href="<c:url value="/category/insert"/>" class="btn btn-outline-success">카테고리 등록</a>
-	<a href="<c:url value="/post/insert"/>" class="btn btn-outline-success">게시판 등록</a>
-	</c:if>
-	
-	<!-- forEach로 카테고리, 카테고리번호를 가지고있는 게시판 -->
+	<a href="<c:url value="/board/insert"/>" class="btn btn-outline-success">게시판 등록</a>
 	<hr>
 	<h5>카테고리명</h5>
 	<button class="btn btn-outline-warning btn-update float-end">!</button>
@@ -104,10 +101,10 @@
 				<tr>
 					<td>1</td>
 					<td>
-						<a href="<c:url value="/board/detail"/>">테스트</a>
+						<a href="<c:url value="/post/detail"/>">테스트</a>
 					</td>
 					<td>
-						<c:url var="page" value="/board/list">
+						<c:url var="page" value="/post/list">
 							<c:param name="type" value="writer"/>
 	    					<c:param name="search" value="${board.bo_me_id}"/>
 	    					<c:param name="page" value="1"/>
@@ -129,7 +126,7 @@
 	<ul class="pagination justify-content-center">
 		<c:if test="${pm.prev}">
 	    	<li class="page-item">
-	    		<c:url var="prevUrl" value="/board/list">
+	    		<c:url var="prevUrl" value="/post/list">
 	    			<c:param name="type" value="${pm.cri.type}"/>
 	    			<c:param name="search" value="${pm.cri.search}"/>
 	    			<c:param name="page" value="${pm.startPage-1}"/>
@@ -139,7 +136,7 @@
 		</c:if>
 		<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
 	    	<li class="page-item <c:if test="${pm.cri.page == i}">active</c:if>">
-	    		<c:url var="page" value="/board/list">
+	    		<c:url var="page" value="/post/list">
 	    			<c:param name="type" value="${pm.cri.type}"/>
 	    			<c:param name="search" value="${pm.cri.search}"/>
 	    			<c:param name="page" value="${i}"/>
@@ -149,7 +146,7 @@
 		</c:forEach>
     	<c:if test="${pm.next}">
 	    	<li class="page-item">
-	    		<c:url var="nextUrl" value="/board/list">
+	    		<c:url var="nextUrl" value="/post/list">
 	    			<c:param name="type" value="${pm.cri.type}"/>
 	    			<c:param name="search" value="${pm.cri.search}"/>
 	    			<c:param name="page" value="${pm.endPage+1}"/>
@@ -169,7 +166,7 @@
 	    <button class="btn btn-outline-danger">검색</button>
   	</div>
   	<br>
-	<a href="<c:url value="/board/insert"/>" class="btn btn-outline-success">글등록</a>
+	<a href="<c:url value="/post/insert"/>" class="btn btn-outline-success">글등록</a>
 </div>
 </body>
 </html>
