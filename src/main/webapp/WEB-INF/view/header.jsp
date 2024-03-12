@@ -128,6 +128,45 @@
   </div>
   <!-- Container wrapper -->
 </nav>
+<h1>헤더테스트</h1>
+<div class="headTest">
+
+</div>
+<div class="headTest2">
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+getBoard();
+function getBoard(){
+	$.ajax({
+		url : '<c:url value="/header"/>',
+		method : 'get',
+		success : function(data){
+			let str = '';
+			for(board of data.boardList){
+			str +=	
+				`
+				boardNum = \${board.bo_num}
+				boardName = \${board.bo_name}
+				`
+				
+			}
+			$(".headTest").html(str);
+			let str2 = '';
+			for(category of data.categoryList){
+				str2 +=
+					`
+					categoryNum = \${category.ca_num}
+					categoryName = \${category.ca_name}
+					`
+			}
+			$(".headTest2").html(str2);
+		}
+	})
+}
+
+</script>
 </body>
 </html>
 
