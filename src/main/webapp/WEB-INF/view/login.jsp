@@ -12,6 +12,7 @@
 
         .login-box {
             margin: auto;
+            margin-top: 100px;
             width: 500px;
             height : 400px;
             background-color: #EEEFF1;
@@ -51,8 +52,8 @@
 <div class="login-box">
         <form action="<%=request.getContextPath()%>/login" method="post">
         	<h1>로그인</h1>
-            <input type="text" placeholder="아이디" class="in">
-            <input type="password" placeholder="비밀번호" class="in">
+            <input type="text" placeholder="아이디" class="in" id="id" name="id">
+            <input type="password" placeholder="비밀번호" class="in" id="pw" name="pw">
             <input type="submit" id="btn" value="로그인"><br>
         </form>
         <a href="#none">아이디찾기</a>

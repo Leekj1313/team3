@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.team3.app.dao.MemberDAO;
+import kr.kh.team3.app.model.dto.LoginDTO;
 import kr.kh.team3.app.model.vo.MemberVO;
 
 public class MemberServiceImp implements MemberService {
@@ -48,6 +49,26 @@ private MemberDAO memberDao;
 			return false;
 		}
 		
+	}
+	
+	@Override
+	public MemberVO login(LoginDTO loginDTO) {
+		if(loginDTO == null) {
+			return null;
+		}
+		//아이디를 주고 회원 정보를 요청
+		MemberVO user = memberDao.selectMember(loginDTO.getId());
+		
+		//아이디를 잘못 입력하면
+		if(user == null) {
+			return null;
+		}
+		//비번이 같은지 확인
+		if(user.getMe_pw().equals(loginDTO.getPw())) {
+			return user;
+		}
+		
+		return null;
 	}
 	
 	@Override
