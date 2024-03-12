@@ -7,4 +7,8 @@
 		INSERT INTO MEMBER(me_name, me_id, me_pw, me_email, me_phone, me_ms_state)
 		VALUES(#{member.me_name},#{member.me_id},#{member.me_pw},#{member.me_email},#{member.me_phone},"이용중")
 	</insert>
+	
+	<select id="selectMember" resultType="kr.kh.app.model.vo.MemberVO">
+		SELECT * FROM MEMBER WHERE me_id = #{me_id}
+	</select>
 </mapper>
