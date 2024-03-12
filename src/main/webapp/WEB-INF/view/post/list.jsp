@@ -51,6 +51,7 @@
 	<c:if test="${user.me_authority eq ADMIN }">
 	<a href="<c:url value="/category/insert"/>" class="btn btn-outline-success">카테고리 등록</a>
 	<a href="<c:url value="/board/insert"/>" class="btn btn-outline-success">게시판 등록</a>
+	</c:if>
 	<hr>
 	<h5>카테고리명</h5>
 	<button class="btn btn-outline-warning btn-update float-end">!</button>
@@ -62,6 +63,7 @@
 	<button class="btn btn-outline-warning">!</button>
 	<button class="btn btn-outline-danger">X</button>
 	</c:if>
+	
 	<br>
 	<!-- 여기까지 반복문 -->
 	
