@@ -32,7 +32,7 @@
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="container">
-	<form action="<c:url value="/board/insert" />" method="post" enctype="multipart/form-data">
+	<form action="<c:url value="/post/insert" />" method="post" enctype="multipart/form-data">
 		<div class="mb-3 mt-3">
 		    <label for="community" class="form-label">게시판:</label>
 		    <select class="form-control" id="community" name="community">
@@ -59,7 +59,7 @@
 		    <input type="file" class="form-control" name="file">
 		    <input type="file" class="form-control" name="file">
 	  	</div>
-	  	<button class="btn btn-success col-12">수정하기</button>
+	  	<button class="btn btn-success col-12">글 등록</button>
 	</form>
 </div>
 <script type="text/javascript">

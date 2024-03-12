@@ -8,13 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/board/update")
-public class BoardUpdateServlet extends HttpServlet {
+@WebServlet("/post/list")
+public class PostListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/board/update.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/post/list.jsp").forward(request, response);
 	}
 
 

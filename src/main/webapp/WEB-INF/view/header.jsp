@@ -58,7 +58,7 @@
                 <div class="col-md-6 col-lg-2 mb-3 mb-lg-0" style="border-right: solid 1px gray;">
                   <div class="list-group list-group-flush">
                     <div style="font-weight: bold; margin-bottom: 20px;">카테고리</div>
-                    <a href="<c:url value="/board/list"/>" class="list-group-item list-group-item-action">자유 게시판</a>
+                    <a href="<c:url value="/post/list"/>" class="list-group-item list-group-item-action">자유 게시판</a>
                     <a href="" class="list-group-item list-group-item-action">Amet consectetur</a>
                     <a href="" class="list-group-item list-group-item-action">Cras justo odio</a>
                     <a href="" class="list-group-item list-group-item-action">Adipisicing elit</a>

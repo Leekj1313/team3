@@ -34,8 +34,8 @@
 			<li class="nav-item dropdown">
 	   			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">카페 이용</a>
 			    <ul class="dropdown-menu">
-			      	<li><a class="dropdown-item" href="<c:url value="/board/insert"/>">카페 글쓰기</a></li>
-			      	<li><a class="dropdown-item" href="<c:url value="/board/list"/>">카페글 보기</a></li>
+			      	<li><a class="dropdown-item" href="<c:url value="/post/insert"/>">카페 글쓰기</a></li>
+			      	<li><a class="dropdown-item" href="<c:url value="/post/list"/>">카페글 보기</a></li>
 			    </ul>
 			</li>
 		 	<li class="nav-item">
@@ -79,11 +79,11 @@
 	    <label for="content" class="form-label">첨부파일:</label>
 	    <a href="<c:url value="/download?filename=${file.fi_name}"/>" class="form-control" download="${file.fi_ori_name}">123.txt</a>
   	</div>
-  	<a href="<c:url value="/board/list"/>" class="btn btn-outline-primary">목록으로</a>
+  	<a href="<c:url value="/post/list"/>" class="btn btn-outline-primary">목록으로</a>
   	<c:if test="${board.bo_me_id == user.me_id }">
-  		<a href="<c:url value="/board/delete"/>" class="btn btn-outline-danger">삭제</a>
-  		<a href="<c:url value="/board/update"/>" class="btn btn-outline-warning">수정</a>
-  		<a href="<c:url value="/board/report"/>" class="btn btn-outline-dark">신고</a>
+  		<a href="<c:url value="/post/delete"/>" class="btn btn-outline-danger">삭제</a>
+  		<a href="<c:url value="/post/update"/>" class="btn btn-outline-warning">수정</a>
+  		<a href="<c:url value="/post/report"/>" class="btn btn-outline-dark">신고</a>
   	</c:if>
  		<hr>
   	<div class="mt-3 mb-3 comment-box">
