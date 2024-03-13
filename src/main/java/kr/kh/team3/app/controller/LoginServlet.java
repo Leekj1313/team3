@@ -18,12 +18,13 @@ import kr.kh.team3.app.service.MemberServiceImp;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	private MemberService memberService = new MemberServiceImp();
 
-    /* 화면에서 전달한 id와 pw를 콘솔창에 출력 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
