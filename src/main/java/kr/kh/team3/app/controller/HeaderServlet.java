@@ -27,7 +27,6 @@ public class HeaderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<CategoryVO> categoryList = boardService.getCategoryList();
 		ArrayList<BoardVO> boardList = boardService.getBoardList();
-		System.out.println(categoryList);
 		
 		JSONObject jobj = new JSONObject();
 		jobj.put("categoryList", categoryList);
