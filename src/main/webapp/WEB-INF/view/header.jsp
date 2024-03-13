@@ -54,73 +54,23 @@
                           ">
 
             <div class="container">
-              <div class="row my-4">
-                <div class="col-md-6 col-lg-2 mb-3 mb-lg-0" style="border-right: solid 1px gray;">
-                  <div class="list-group list-group-flush">
-                    <div style="font-weight: bold; margin-bottom: 20px;">카테고리</div>
-                    <a href="<c:url value="/post/list"/>" class="list-group-item list-group-item-action">자유 게시판</a>
-                    <a href="" class="list-group-item list-group-item-action">Amet consectetur</a>
-                    <a href="" class="list-group-item list-group-item-action">Cras justo odio</a>
-                    <a href="" class="list-group-item list-group-item-action">Adipisicing elit</a>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-2 mb-3 mb-lg-0" style="border-right: solid 1px gray;">
-                  <div class="list-group list-group-flush">
-                    <div style="font-weight: bold; margin-bottom: 20px;">Lorem ipsum</div>
-                    <a href="" class="list-group-item list-group-item-action">Perspiciatis quo</a>
-                    <a href="" class="list-group-item list-group-item-action">Cras justo odio</a>
-                    <a href="" class="list-group-item list-group-item-action">Laudantium maiores</a>
-                    <a href="" class="list-group-item list-group-item-action">Provident dolor</a>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-2 mb-3 mb-md-0" style="border-right: solid 1px gray;">
-                  <div class="list-group list-group-flush">
-                    <div style="font-weight: bold; margin-bottom: 20px;">Lorem ipsum</div>
-                    <a href="" class="list-group-item list-group-item-action">Cras justo odio</a>
-                    <a href="" class="list-group-item list-group-item-action">Est iure</a>
-                    <a href="" class="list-group-item list-group-item-action">Praesentium</a>
-                    <a href="" class="list-group-item list-group-item-action">Laboriosam</a>
-                  </div>
-                </div>
-				<div class="col-md-6 col-lg-2 mb-3 mb-md-0" style="border-right: solid 1px gray;">
-                  <div class="list-group list-group-flush">
-                    <div style="font-weight: bold; margin-bottom: 20px;">Lorem ipsum</div>
-                    <a href="" class="list-group-item list-group-item-action">Cras justo odio</a>
-                    <a href="" class="list-group-item list-group-item-action">Est iure</a>
-                    <a href="" class="list-group-item list-group-item-action">Praesentium</a>
-                    <a href="" class="list-group-item list-group-item-action">Laboriosam</a>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-2 mb-3 mb-md-0" style="border-right: solid 1px gray;">
-                  <div class="list-group list-group-flush">
-                    <div style="font-weight: bold; margin-bottom: 20px;">Lorem ipsum</div>
-                    <a href="" class="list-group-item list-group-item-action">Cras justo odio</a>
-                    <a href="" class="list-group-item list-group-item-action">Est iure</a>
-                    <a href="" class="list-group-item list-group-item-action">Praesentium</a>
-                    <a href="" class="list-group-item list-group-item-action">Laboriosam</a>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-2">
-                  <div class="list-group list-group-flush">
-                    <div style="font-weight: bold; margin-bottom: 20px;">Lorem ipsum</div>
-                    <a href="" class="list-group-item list-group-item-action">Saepe</a>
-                    <a href="" class="list-group-item list-group-item-action">Vel alias</a>
-                    <a href="" class="list-group-item list-group-item-action">Sunt doloribus</a>
-                    <a href="" class="list-group-item list-group-item-action">Cum dolores</a>
-                  </div>
-                </div>
+              <div class="row my-4 here">
+
+               
               </div>
             </div>
           </div>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto ps-lg-0" style="padding-right: 0.15rem">
+      	<c:if test="${user == null}">
       	<li class="nav-item">
           <a class="nav-link" href="<c:url value="/signup"/>">회원가입</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<c:url value="login"/>">로그인</a>
         </li>
+        </c:if>
       </ul>
       <!-- Left links -->
     </div>
@@ -128,13 +78,6 @@
   </div>
   <!-- Container wrapper -->
 </nav>
-<h1>헤더테스트</h1>
-<div class="headTest">
-
-</div>
-<div class="headTest2">
-
-</div>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
 getBoard();
@@ -156,7 +99,6 @@ function getBoard(){
                 str += '</div>';
                 str += '</div>';
             }
-			$(".headTest").html(str);
 			$(".here").html(str);
 		}
 	})
