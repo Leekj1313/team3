@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
  body {
@@ -12,6 +13,7 @@
 
         .login-box {
             margin: auto;
+            margin-top: 100px;
             width: 500px;
             height : 400px;
             background-color: #EEEFF1;
@@ -49,14 +51,14 @@
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="login-box">
-        <form action="">
-        	<h1>·Î±×ÀÎ</h1>
-            <input type="text" placeholder="¾ÆÀÌµğ" class="in">
-            <input type="password" placeholder="ºñ¹Ğ¹øÈ£" class="in">
-            <input type="submit" id="btn" value="·Î±×ÀÎ"><br>
+        <form action="<%=request.getContextPath()%>/login" method="post">
+        	<h1>ë¡œê·¸ì¸</h1>
+            <input type="text" placeholder="ì•„ì´ë””" class="in" id="id" name="id">
+            <input type="password" placeholder="ë¹„ë°€ë²ˆí˜¸" class="in" id="pw" name="pw">
+            <input type="submit" id="btn" value="ë¡œê·¸ì¸"><br>
         </form>
-        <a href="#none">¾ÆÀÌµğÃ£±â</a>
-        <a href="#none">ºñ¹Ğ¹øÈ£Ã£±â</a>
+        <a href="#none">ì•„ì´ë””ì°¾ê¸°</a>
+        <a href="#none">ë¹„ë°€ë²ˆí˜¸ì°¾ê¸°</a>
     </div>
 </body>
 </html>
