@@ -3,10 +3,25 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.team3.app.dao.BoardDAO">
+	<resultMap type="kr.kh.team3.app.model.vo.BoardVO" id="BoardMap">
+		<id property="bo_num" column="bo_num"/>
+		<result property="bo_co_num" column="bo_co_num"/>
+		<result property="bo_name" column="bo_name"/>
+		<collection property="category" ofType="kr.kh.team3.app.model.vo.CategoryVO"
+			column="bo_co_num" select="selectCategory"/>
+	</resultMap>
+	
+	<select id="selectCategory" resultType="kr.kh.team3.app.model.vo.CategoryVO">
+		select * from category where ca_num = #{bo_co_num}
+	</select>
+
 	<select id ="selectCategoryList" resultType="kr.kh.team3.app.model.vo.CategoryVO">
 		select * from category
 	</select>
 	<select id ="selectBoardList" resultType="kr.kh.team3.app.model.vo.BoardVO">
 		select * from board
 	</select>
+	<insert id="insertBoard" useGeneratedKeys="true" keyProperty="board.bo_num">
+		insert into board(bo_name, bo_co_num) values(#{board.bo_name},#{board.bo_co_num})
+	</insert>
 </mapper>
