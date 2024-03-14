@@ -19,10 +19,30 @@
   	color : #046582;
   	text-decoration: none;
   }
+  .box1{width: 10%; height: 100%; float: left; background-color: aliceblue; margin-top: 20px; margin-left: 5%; margin-top: 5%}
 </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
+<div class="box1">
+
+	<c:if test="${user.me_authority eq ADMIN }">
+		<a href="<c:url value="/category/insert"/>" class="btn btn-outline-success">카테고리 등록</a>
+		<a href="<c:url value="/board/insert"/>" class="btn btn-outline-success">게시판 등록</a>
+	</c:if>
+	<hr>
+	<h5>카테고리명</h5>
+	<button class="btn btn-outline-warning btn-update float-end">!</button>
+	<hr>
+	<a href="#">${board.bo_name} </a>
+	<c:if test="${user.me_authority eq ADMIN}">
+	<!-- button으로 할거면 자바스크립트, ajax 비동기통신 -->
+	<!-- a href로 할거면 걍 서블릿  -->
+	<button class="btn btn-outline-warning">!</button>
+	<button class="btn btn-outline-danger">X</button>
+	</c:if>
+
+</div>
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-sm-4">
