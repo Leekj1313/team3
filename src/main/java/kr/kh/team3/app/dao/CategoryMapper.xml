@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.team3.app.dao.CategoryDAO">
+	<select id ="selectCategoryList" resultType="kr.kh.team3.app.model.vo.CategoryVO">
+		select * from category
+	</select>
+	<select id="selectTotalCountCategory" resultType="int">
+		SELECT COUNT(*) FROM category
+	</select>
+</mapper>
