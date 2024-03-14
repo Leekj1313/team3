@@ -49,23 +49,23 @@
 	<h1>게시글 상세</h1>
 	<div class="mb-3 mt-3">
 	    <label for="community" class="form-label">게시판:</label>
-	    <a href="#">게시판명1</a>
+	    <a href="#">${board.bo_name}</a>
   	</div>
 	<div class="mb-3 mt-3">
 	    <label for="title" class="form-label">제목:</label>
-	    <input type="text" class="form-control" id="title" name="title" readonly value="테스트">
+	    <input type="text" class="form-control" id="title" name="title" readonly value="${post.po_title}">
   	</div>
   	<div class="mb-3 mt-3">
 	    <label for="writer" class="form-label">작성자:</label>
-	    <input type="text" class="form-control" id="writer" name="writer" readonly value="user">
+	    <input type="text" class="form-control" id="writer" name="writer" readonly value="${post.po_me_id}">
   	</div>
   	<div class="mb-3 mt-3">
 	    <label for="date" class="form-label">작성일:</label>
-	    <input type="text" class="form-control" id="date" name="date" readonly value="2024-03-09">
+	    <input type="text" class="form-control" id="date" name="date" readonly value="${post.po_date}">
   	</div>
   	<div class="mb-3 mt-3">
 	    <label for="view" class="form-label">조회수:</label>
-	    <input type="text" class="form-control" id="view" name="view" readonly value="0">
+	    <input type="text" class="form-control" id="view" name="view" readonly value="${post.po_view}">
   	</div>
   	<div class="mb-3 mt-3 clearfix">
   		<button type="button" id="btnUp" data-state="1" class="btn btn-outline-success col-5 float-start">추천</button>
@@ -80,7 +80,7 @@
 	    <a href="<c:url value="/download?filename=${file.fi_name}"/>" class="form-control" download="${file.fi_ori_name}">123.txt</a>
   	</div>
   	<a href="<c:url value="/post/list"/>" class="btn btn-outline-primary">목록으로</a>
-  	<c:if test="${board.bo_me_id == user.me_id }">
+  	<c:if test="${post.po_me_id == user.me_id }">
   		<a href="<c:url value="/post/delete"/>" class="btn btn-outline-danger">삭제</a>
   		<a href="<c:url value="/post/update"/>" class="btn btn-outline-warning">수정</a>
   		<a href="<c:url value="/post/report"/>" class="btn btn-outline-dark">신고</a>
@@ -131,7 +131,7 @@
 			}
 		}
 		
-		let boNum = '${board.bo_num}';
+		let poNum = '${post.po_num}';
 		//state가 1이면 추천, -1이면 비추천
 		let state = this.getAttribute("data-state");
 		

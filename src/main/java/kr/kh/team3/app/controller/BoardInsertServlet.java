@@ -21,12 +21,8 @@ public class BoardInsertServlet extends HttpServlet {
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//서비스에게 게시판 리스트를 가져오라고 시킴
-    	try {
 		ArrayList<CategoryVO> list = boardService.getCategoryList();
 		request.setAttribute("list", list);
-    	}catch(NullPointerException e) {
-    		e.printStackTrace();
-    	}
 		//화면에 게시판 리스트를 보냄 
 		request.getRequestDispatcher("/WEB-INF/view/board/insert.jsp").forward(request, response);
 	}

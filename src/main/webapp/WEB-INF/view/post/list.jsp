@@ -46,48 +46,11 @@
     </div>
   </div>
 </nav>
-<div class="box1">
-
-	<c:if test="${user.me_authority eq ADMIN }">
-	<a href="<c:url value="/category/insert"/>" class="btn btn-outline-success">카테고리 등록</a>
-	<a href="<c:url value="/board/insert"/>" class="btn btn-outline-success">게시판 등록</a>
-	</c:if>
-	<hr>
-	<h5>카테고리명</h5>
-	<button class="btn btn-outline-warning btn-update float-end">!</button>
-	<hr>
-	<a href="#">${board.bo_name} </a>
-	<c:if test="${user.me_authority eq ADMIN}">
-	<!-- button으로 할거면 자바스크립트, ajax 비동기통신 -->
-	<!-- a href로 할거면 걍 서블릿  -->
-	<button class="btn btn-outline-warning">!</button>
-	<button class="btn btn-outline-danger">X</button>
-	</c:if>
-	
-	<br>
-	<!-- 여기까지 반복문 -->
-	
-	<a href="#">게시판명2</a>
-	<button class="btn btn-outline-warning">!</button>
-	<button class="btn btn-outline-danger">X</button>
-	<br>
-	<a href="#">게시판명3</a>
-	<button class="btn btn-outline-warning">!</button>
-	<button class="btn btn-outline-danger">X</button>
-	<hr>
-	<h5>카테고리명</h5>
-	<hr>
-	<a href="#">게시판명4</a>
-	<br>
-	<a href="#">게시판명5</a>
-	<br>
-	<a href="#">게시판명6</a>
-</div>
 
 <div class="container">
 	<h1>게시글 리스트</h1>
-	<h2>게시판명1</h2>
-	<form action="<c:url value="/board/list"/>" class="mb-3 mt-3">
+	<h2>${board.bo_name}</h2>
+	<form action="<c:url value="/post/list"/>" class="mb-3 mt-3">
 	</form>
 	<table class="table table-hover">
 		<thead>
@@ -101,20 +64,20 @@
 		</thead>
 		<tbody>
 				<tr>
-					<td>1</td>
+					<td>${post.po_num }</td>
 					<td>
-						<a href="<c:url value="/post/detail"/>">테스트</a>
+						<a href="<c:url value="/post/detail"/>">${post.po_title}</a>
 					</td>
 					<td>
 						<c:url var="page" value="/post/list">
 							<c:param name="type" value="writer"/>
-	    					<c:param name="search" value="${board.bo_me_id}"/>
+	    					<c:param name="search" value="${post.po_me_id}"/>
 	    					<c:param name="page" value="1"/>
 						</c:url>
-						<a href="#">user</a>
+						<a href="#">${post.po_me_id}</a>
 					</td>
-					<td>2024-03-09</td>
-					<td>0</td>
+					<td>${post.po_date}</td>
+					<td>${post.po_view}</td>
 				</tr>
 			<c:if test="${list.size() == 0}">
 				<tr>
