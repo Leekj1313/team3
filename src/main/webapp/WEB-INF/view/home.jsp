@@ -188,7 +188,6 @@
     </div>
   </div>
   <a href="<c:url value="/board/insert"/>" class="btn btn-outline-primary">게시판 등록</a>
-  ${categoryList}
 </div>
 </body>
 </html>

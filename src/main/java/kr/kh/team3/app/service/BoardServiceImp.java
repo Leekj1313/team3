@@ -14,6 +14,7 @@ import kr.kh.team3.app.model.vo.BoardVO;
 import kr.kh.team3.app.model.vo.CategoryVO;
 
 public class BoardServiceImp implements BoardService{
+	
 	private BoardDAO boardDao;
 	
 	public BoardServiceImp() {

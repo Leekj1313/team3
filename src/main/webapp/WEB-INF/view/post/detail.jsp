@@ -14,100 +14,79 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="<c:url value="/"/>">Logo</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav">
-		   <li class="nav-item dropdown">
-	   			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">내 정보</a>
-			    <ul class="dropdown-menu">
-		      		<li><a class="dropdown-item" href="<c:url value="/myinfo"/>">내 정보 수정</a></li>
-			      	<li><a class="dropdown-item" href="#">작성글</a></li>
-			      	<li><a class="dropdown-item" href="#">작성댓글</a></li>
-			      	<li><a class="dropdown-item" href="#">추천한 글</a></li>
-			    </ul>
-			</li>
-			<li class="nav-item dropdown">
-	   			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">카페 이용</a>
-			    <ul class="dropdown-menu">
-			      	<li><a class="dropdown-item" href="<c:url value="/post/insert"/>">카페 글쓰기</a></li>
-			      	<li><a class="dropdown-item" href="<c:url value="/post/list"/>">카페글 보기</a></li>
-			    </ul>
-			</li>
-		 	<li class="nav-item">
-				<a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
-			</li>
-      </ul>
-    </div>
-  </div>
-</nav>
 <div class="container">
-	<h1>게시글 상세</h1>
-	<div class="mb-3 mt-3">
-	    <label for="community" class="form-label">게시판:</label>
-	    <a href="#">${board.bo_name}</a>
-  	</div>
-	<div class="mb-3 mt-3">
-	    <label for="title" class="form-label">제목:</label>
-	    <input type="text" class="form-control" id="title" name="title" readonly value="${post.po_title}">
-  	</div>
-  	<div class="mb-3 mt-3">
-	    <label for="writer" class="form-label">작성자:</label>
-	    <input type="text" class="form-control" id="writer" name="writer" readonly value="${post.po_me_id}">
-  	</div>
-  	<div class="mb-3 mt-3">
-	    <label for="date" class="form-label">작성일:</label>
-	    <input type="text" class="form-control" id="date" name="date" readonly value="${post.po_date}">
-  	</div>
-  	<div class="mb-3 mt-3">
-	    <label for="view" class="form-label">조회수:</label>
-	    <input type="text" class="form-control" id="view" name="view" readonly value="${post.po_view}">
-  	</div>
-  	<div class="mb-3 mt-3 clearfix">
-  		<button type="button" id="btnUp" data-state="1" class="btn btn-outline-success col-5 float-start">추천</button>
-  		<button type="button" id="btnDown" data-state="-1"  class="btn btn-outline-danger col-5 float-end">비추천</button>
-  	</div>
-  	<div class="mb-3 mt-3">
-	    <label for="content" class="form-label">내용:</label>
-	    <div class="form-control" style="min-height: 400px;">테스트</div>
-  	</div>
-  	<div class="mb-3 mt-3">
-	    <label for="content" class="form-label">첨부파일:</label>
-	    <a href="<c:url value="/download?filename=${file.fi_name}"/>" class="form-control" download="${file.fi_ori_name}">123.txt</a>
-  	</div>
-  	<a href="<c:url value="/post/list"/>" class="btn btn-outline-primary">목록으로</a>
-  	<c:if test="${post.po_me_id == user.me_id }">
-  		<a href="<c:url value="/post/delete"/>" class="btn btn-outline-danger">삭제</a>
-  		<a href="<c:url value="/post/update"/>" class="btn btn-outline-warning">수정</a>
-  		<a href="<c:url value="/post/report"/>" class="btn btn-outline-dark">신고</a>
-  	</c:if>
- 		<hr>
-  	<div class="mt-3 mb-3 comment-box">
-  		<h3>댓글</h3>
-  		<!-- 댓글 리스트를 보여주는 박스 -->
-  		<div class="comment-list">
-  			<div class="input-group mb-3">
-  				<div class="col-3">user</div>
-  				<div class="col-9">댓글 내용</div>
-  			</div>
-  		</div>
-  		<!-- 댓글 페이지네이션 박스 -->
-  		<div class="comment-pagination">
-  			<ul class="pagination justify-content-center">
-  				
-			</ul>
-  		</div>
-  		<!-- 댓글 입력 박스 -->
-  		<div class="comment-input-box"></div>
-  			<div class="input-group">
-			    <textarea class="form-control comment-content"></textarea>
-			    <button type="button" class="btn btn-outline-success btn-comment-insert">등록</button>
+	<c:choose>
+		<c:when test="${post != null }">
+			<h1>게시글 상세</h1>
+			<div class="mb-3 mt-3">
+			    <label for="board" class="form-label">게시판:</label>
+			    <a href="<c:url value="/post/list"/>">${post.board.bo_name}</a>
+		  	</div>
+			<div class="mb-3 mt-3">
+			    <label for="title" class="form-label">제목:</label>
+			    <input type="text" class="form-control" id="title" name="title" readonly value="${post.po_title}">
+		  	</div>
+		  	<div class="mb-3 mt-3">
+			    <label for="writer" class="form-label">작성자:</label>
+			    <input type="text" class="form-control" id="writer" name="writer" readonly value="${post.po_me_id}">
+		  	</div>
+		  	<div class="mb-3 mt-3">
+			    <label for="date" class="form-label">작성일:</label>
+			    <input type="text" class="form-control" id="date" name="date" readonly value="${post.po_date}">
+		  	</div>
+		  	<div class="mb-3 mt-3">
+			    <label for="view" class="form-label">조회수:</label>
+			    <input type="text" class="form-control" id="view" name="view" readonly value="${post.po_view}">
+		  	</div>
+		  	<div class="mb-3 mt-3 clearfix">
+		  		<button type="button" id="btnUp" data-state="1" class="btn btn-outline-danger col-5 float-start">추천</button>
+		  		<button type="button" id="btnDown" data-state="-1"  class="btn btn-outline-danger col-5 float-end">비추천</button>
+		  	</div>
+		  	<div class="mb-3 mt-3">
+			    <label for="content" class="form-label">내용:</label>
+			    <div class="form-control" style="min-height: 400px;">${post.po_content}</div>
+		  	</div>
+		  	<c:if test="${fileList != null && fileList.size() != 0}">
+			  	<div class="mb-3 mt-3">
+				    <label for="content" class="form-label">첨부파일:</label>
+				    <a href="<c:url value="/download?filename=${file.fi_name}"/>" class="form-control" download="${file.fi_ori_name}">${file.fi_ori_name}</a>
+			  	</div>
+		  	</c:if>
+		  	<a href="<c:url value="/post/list"/>" class="btn btn-outline-primary">목록으로</a>
+		  	<c:if test="${post.po_me_id == user.me_id }">
+		  		<a href="<c:url value="/post/delete"/>" class="btn btn-outline-danger">삭제</a>
+		  		<a href="<c:url value="/post/update"/>" class="btn btn-outline-warning">수정</a>
+		  	</c:if>
+	  		<a href="<c:url value="/post/report"/>" class="btn btn-outline-dark">신고</a>
+		 		<hr>
+		  	<div class="mt-3 mb-3 comment-box">
+		  		<h3>댓글</h3>
+		  		<!-- 댓글 리스트를 보여주는 박스 -->
+		  		<div class="comment-list">
+		  			<div class="input-group mb-3">
+		  				<div class="col-3">user</div>
+		  				<div class="col-9">댓글 내용</div>
+		  			</div>
+		  		</div>
+		  		<!-- 댓글 페이지네이션 박스 -->
+		  		<div class="comment-pagination">
+		  			<ul class="pagination justify-content-center">
+		  				
+					</ul>
+		  		</div>
+		  		<!-- 댓글 입력 박스 -->
+		  		<div class="comment-input-box">
+		  			<div class="input-group">
+					    <textarea class="form-control comment-content"></textarea>
+					    <button type="button" class="btn btn-outline-success btn-comment-insert">등록</button>
 					</div>
-  	</div>
+		  		</div>
+		  	</div>
+  		</c:when>
+  		<c:otherwise>
+			<h1>등록되지 않은 게시글이거나 삭제된 게시글입니다.</h1>
+		</c:otherwise>
+	</c:choose>
 </div>
 <!-- 추천 기능 구현 -->
 <script type="text/javascript">
@@ -135,7 +114,7 @@
 		//state가 1이면 추천, -1이면 비추천
 		let state = this.getAttribute("data-state");
 		
-		fetch(`<c:url value="/recommend"/>?boNum=\${boNum}&state=\${state}`)
+		fetch(`<c:url value="/recommend"/>?poNum=\${poNum}&state=\${state}`)
 		.then(response => response.text())
 		.then(data =>{
 			let str = state == 1 ? '추천' : '비추천';
@@ -169,9 +148,9 @@
 		btn.classList.add('btn-danger');
 	}
 	<c:if test="${recommend != null}">
-		if(${recommend.re_state == 1}){
+		if(${recommend.rc_state == 1}){
 			selectRecommendBtn(btnUp);
-		}else if(${recommend.re_state == -1}){
+		}else if(${recommend.rc_state == -1}){
 			selectRecommendBtn(btnDown);
 		}
 	</c:if>
@@ -195,7 +174,7 @@
 		//입력받은 댓글을 가져옴
 		let content = $(".comment-content").val();
 		//게시글 번호를 가져옴
-		let num = '${board.bo_num}';
+		let num = '${post.po_num}';
 		$.ajax({
 			url : '<c:url value="/comment/insert"/>',
 			method : "post",
@@ -225,7 +204,7 @@
 	//댓글 현재페이지 정보
 	let cri = {
 		page : 1,
-		boNum : '${board.bo_num}'
+		poNum : '${post.po_num}'
 	}
 	function getCommentList(cri) {
 		$.ajax({

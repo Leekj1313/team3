@@ -16,37 +16,79 @@
 	<collection property="board" ofType="kr.kh.team3.app.model.vo.BoardVO"
 		column="po_bo_num" select="selectBoard"/>
 	</resultMap>
-		<select id="selectBoard" resultType="kr.kh.app.model.vo.BoardVO">
+	<select id="selectBoard" resultType="kr.kh.team3.app.model.vo.BoardVO">
 		select * from board where bo_num = #{po_bo_num}
 	</select>
 	<select id="selectTotalCount" resultType="int">
-		SELECT count(*) 
-		FROM Post 
+		select count(*) 
+		from post 
 		<if test='cri.type=="all"'>
-			where bo_title like concat('%', #{cri.search},'%') 
-				or bo_me_id = #{cri.search}
+			where po_title like concat('%', #{cri.search},'%') 
+				or po_me_id = #{cri.search}
 		</if>
 		<if test='cri.type=="title"'>
-			where bo_title like concat('%', #{cri.search},'%') 
+			where po_title like concat('%', #{cri.search},'%') 
 		</if>
 		<if test='cri.type=="writer"'>
-			where bo_me_id = #{cri.search}
+			where po_me_id = #{cri.search}
 		</if>
 	</select>
 	<select id="selectPostList" resultMap="PostMap">
-		SELECT * 
-		FROM BOARD 
+		select * 
+		from post 
 		<if test='cri.type=="all"'>
-			where bo_title like concat('%', #{cri.search},'%') 
-				or bo_me_id = #{cri.search}
+			where po_title like concat('%', #{cri.search},'%') 
+				or po_me_id = #{cri.search}
 		</if>
 		<if test='cri.type=="title"'>
-			where bo_title like concat('%', #{cri.search},'%') 
+			where po_title like concat('%', #{cri.search},'%') 
 		</if>
 		<if test='cri.type=="writer"'>
-			where bo_me_id = #{cri.search}
+			where po_me_id = #{cri.search}
 		</if>
-		ORDER BY BO_NUM DESC
-		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+		order by po_num desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
+	<update id="updateView">
+		update post set po_view = po_view + 1 where po_num = #{num}
+	</update>
+	<select id="selectPost" resultMap="PostMap">
+		select * from post where po_num = #{num}
+	</select>
+	<select id="selectFileByBo_num" resultType="kr.kh.team3.app.model.vo.FileVO">
+		select * from file where fi_po_num = #{num}
+	</select>
+	<select id="selectRecommend" resultType="kr.kh.team3.app.model.vo.RecommendVO">
+		select * from recommend where rc_po_num = #{po_num} and rc_me_id = #{me_id}
+	</select>
+	<insert id="insertRecommend">
+		insert into recommend(rc_me_id, rc_po_num, rc_state)
+		values(#{re.rc_me_id},#{re.rc_po_num},#{re.rc_state})
+	</insert>
+	<update id="updateRecommend">
+		update recommend set rc_state = #{re.rc_state} where rc_num = #{re.rc_num}
+	</update>
+	<insert id="insertComment">
+		insert into comment(cm_po_num, cm_content, cm_me_id)
+		values(#{co.cm_po_num},#{co.cm_content},#{co.cm_me_id})
+	</insert>
+	<select id="selectCommentList" resultType="kr.kh.team3.app.model.vo.CommentVO">
+		select * from comment 
+		where cm_po_num = #{cri.poNum}
+		order by cm_num desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	<select id="selectTotalCountComment" resultType="int">
+		select count(*) from comment 
+		where cm_po_num = #{cri.poNum}
+	</select>
+	<select id="selectComment" resultType="kr.kh.team3.app.model.vo.CommentVO">
+		select * from comment where cm_num = #{cm_num}
+	</select>
+	<update id="updateComment">
+		update comment set cm_content = #{co.cm_content} where cm_num = #{co.cm_num}
+	</update>
+	<delete id="deleteComment">
+		delete from comment where cm_num = #{cm_num}
+	</delete>
 </mapper>

@@ -6,131 +6,99 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 리스트</title>
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<style type="text/css">
-	.box1{width: 10%; height: 100%; float: left; background-color: aliceblue; margin-top: 20px;}
-	.btn-update{bottom: 40px; position: relative;}
-</style>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="<c:url value="/"/>">Logo</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav">
-		   <li class="nav-item dropdown">
-	   			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">내 정보</a>
-			    <ul class="dropdown-menu">
-		      		<li><a class="dropdown-item" href="<c:url value="/myinfo"/>">내 정보 수정</a></li>
-			      	<li><a class="dropdown-item" href="#">작성글</a></li>
-			      	<li><a class="dropdown-item" href="#">작성댓글</a></li>
-			      	<li><a class="dropdown-item" href="#">추천한 글</a></li>
-			    </ul>
-			</li>
-			<li class="nav-item dropdown">
-	   			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">카페 이용</a>
-			    <ul class="dropdown-menu">
-			      	<li><a class="dropdown-item" href="<c:url value="/post/insert"/>">카페 글쓰기</a></li>
-			      	<li><a class="dropdown-item" href="<c:url value="/post/list"/>">카페글 보기</a></li>
-			    </ul>
-			</li>
-		 	<li class="nav-item">
-				<a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
-			</li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
+<jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="container">
 	<h1>게시글 리스트</h1>
-	<h2>${board.bo_name}</h2>
-	<form action="<c:url value="/post/list"/>" class="mb-3 mt-3">
-	</form>
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-		</thead>
-		<tbody>
+	<h2>${post.board.bo_name}</h2>
+	<form action="<c:url value="/post/list?boNum=${board.bo_num}"/>">
+		<table class="table table-hover">
+			<thead>
 				<tr>
-					<td>${post.po_num }</td>
-					<td>
-						<a href="<c:url value="/post/detail"/>">${post.po_title}</a>
-					</td>
-					<td>
-						<c:url var="page" value="/post/list">
-							<c:param name="type" value="writer"/>
-	    					<c:param name="search" value="${post.po_me_id}"/>
-	    					<c:param name="page" value="1"/>
-						</c:url>
-						<a href="#">${post.po_me_id}</a>
-					</td>
-					<td>${post.po_date}</td>
-					<td>${post.po_view}</td>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
 				</tr>
-			<c:if test="${list.size() == 0}">
-				<tr>
-					<th colspan = "5">
-						<h3 class="text-center">등록된 게시글이 없습니다.</h3>
-					</th>
-				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${list}" var="post">
+					<tr>
+						<td>${post.po_num}</td>
+						<td>
+							<a href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title}</a>
+						</td>
+						<td>
+							<c:url var="page" value="/post/list">
+								<c:param name="type" value="writer"/>
+		    					<c:param name="search" value="${post.po_me_id}"/>
+		    					<c:param name="page" value="1"/>
+							</c:url>
+							<a href="${page}">${post.po_me_id}</a>
+						</td>
+						<td>${post.po_date}</td>
+						<td>${post.po_view}</td>
+					</tr>
+				</c:forEach>
+				<c:if test="${list.size() == 0}">
+					<tr>
+						<th colspan = "5">
+							<h3 class="text-center">등록된 게시글이 없습니다.</h3>
+						</th>
+					</tr>
+				</c:if>
+			</tbody>
+		</table>
+		<ul class="pagination justify-content-center">
+			<c:if test="${pm.prev}">
+		    	<li class="page-item">
+		    		<c:url var="prevUrl" value="/post/list">
+		    			<c:param name="type" value="${pm.cri.type}"/>
+		    			<c:param name="search" value="${pm.cri.search}"/>
+		    			<c:param name="page" value="${pm.startPage-1}"/>
+		    		</c:url>
+		    		<a class="page-link" href="${prevUrl}">이전</a>
+		    	</li>
 			</c:if>
-		</tbody>
-	</table>
-	<ul class="pagination justify-content-center">
-		<c:if test="${pm.prev}">
-	    	<li class="page-item">
-	    		<c:url var="prevUrl" value="/post/list">
-	    			<c:param name="type" value="${pm.cri.type}"/>
-	    			<c:param name="search" value="${pm.cri.search}"/>
-	    			<c:param name="page" value="${pm.startPage-1}"/>
-	    		</c:url>
-	    		<a class="page-link" href="${prevUrl}">이전</a>
-	    	</li>
-		</c:if>
-		<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
-	    	<li class="page-item <c:if test="${pm.cri.page == i}">active</c:if>">
-	    		<c:url var="page" value="/post/list">
-	    			<c:param name="type" value="${pm.cri.type}"/>
-	    			<c:param name="search" value="${pm.cri.search}"/>
-	    			<c:param name="page" value="${i}"/>
-	    		</c:url>
-	    		<a class="page-link" href="${page}">${i}</a>
-	    	</li>
-		</c:forEach>
-    	<c:if test="${pm.next}">
-	    	<li class="page-item">
-	    		<c:url var="nextUrl" value="/post/list">
-	    			<c:param name="type" value="${pm.cri.type}"/>
-	    			<c:param name="search" value="${pm.cri.search}"/>
-	    			<c:param name="page" value="${pm.endPage+1}"/>
-	    		</c:url>
-	    		<a class="page-link" href="${nextUrl}">다음</a>
-	    	</li>
-    	</c:if>
-  	</ul>
-  	<hr>
-	<div class="input-group">
-		<select name="type" class="form-control">
-			<option value="all" <c:if test='${pm.cri.type == "all"}'>selected</c:if>>전체</option>
-			<option value="title" <c:if test='${pm.cri.type == "title"}'>selected</c:if>>제목</option>
-			<option value="writer" <c:if test='${pm.cri.type == "writer"}'>selected</c:if>>작성자</option>
-		</select>
-	    <input type="text" class="form-control" placeholder="검색어" name="search" value="${pm.cri.search}">
-	    <button class="btn btn-outline-danger">검색</button>
-  	</div>
-  	<br>
+			<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
+		    	<li class="page-item <c:if test="${pm.cri.page == i}">active</c:if>">
+		    		<c:url var="page" value="/post/list">
+		    			<c:param name="type" value="${pm.cri.type}"/>
+		    			<c:param name="search" value="${pm.cri.search}"/>
+		    			<c:param name="page" value="${i}"/>
+		    		</c:url>
+		    		<a class="page-link" href="${page}">${i}</a>
+		    	</li>
+			</c:forEach>
+	    	<c:if test="${pm.next}">
+		    	<li class="page-item">
+		    		<c:url var="nextUrl" value="/post/list">
+		    			<c:param name="type" value="${pm.cri.type}"/>
+		    			<c:param name="search" value="${pm.cri.search}"/>
+		    			<c:param name="page" value="${pm.endPage+1}"/>
+		    		</c:url>
+		    		<a class="page-link" href="${nextUrl}">다음</a>
+		    	</li>
+	    	</c:if>
+	  	</ul>
+	  	<hr>
+	  	<form action="<c:url value="/post/list"/>" class="mb-3 mt-3">
+			<div class="input-group">
+				<select name="type" class="form-control">
+					<option value="all" <c:if test='${pm.cri.type == "all"}'>selected</c:if>>전체</option>
+					<option value="title" <c:if test='${pm.cri.type == "title"}'>selected</c:if>>제목</option>
+					<option value="writer" <c:if test='${pm.cri.type == "writer"}'>selected</c:if>>작성자</option>
+				</select>
+			    <input type="text" class="form-control" placeholder="검색어" name="search" value="${pm.cri.search}">
+			    <button class="btn btn-outline-danger">검색</button>
+		  	</div>
+		</form>
+	  	<br>
+  	</form>
 	<a href="<c:url value="/post/insert"/>" class="btn btn-outline-success">글등록</a>
 </div>
 </body>

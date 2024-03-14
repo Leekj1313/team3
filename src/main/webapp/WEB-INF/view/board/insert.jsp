@@ -11,9 +11,10 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="container">
 	<form action="<c:url value="/board/insert"/>" method="post" enctype="multipart/form-data">
-		<h1>게시글 등록</h1>
+		<h1>게시판 등록</h1>
 		<div class="mb-3 mt-3">
 			<label for="category" class="form-label">카테고리</label>
 			<select class="form-control" name="category" id="category">

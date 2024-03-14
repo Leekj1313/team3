@@ -15,7 +15,8 @@ public class PostVO {
 	private String po_content; 
 	private int po_view; 
 	private Date po_date;
-	private int po_report_count; 
+	private int po_report_count;
 	private int po_temp; 
 	private int po_notice;
+	private BoardVO board;
 }
