@@ -23,6 +23,7 @@ public class BoardInsertServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//서비스에게 카테고리 리스트를 가져오라고 시킴
 		ArrayList<CategoryVO> list = boardService.getCategoryList();
+		System.out.println(list);
 		request.setAttribute("list", list);
 		//화면에 카테고리 리스트를 보냄 
 		request.getRequestDispatcher("/WEB-INF/view/board/insert.jsp").forward(request, response);
@@ -36,11 +37,11 @@ public class BoardInsertServlet extends HttpServlet {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(ca_num);
 		//화면에서 보낸 제목을 가져옴
 		String title = request.getParameter("title");
 		//게시판명, 카테고리 번호를 이용하여 게시판 객체를 생성
 		BoardVO board = new BoardVO(ca_num, title);
-		
 		//서비스에게 게시판 객체를 주면서 등록하라고 시킴
 		boolean res = boardService.insertBoard(board);
 		//등록을 하면 화면에 msg로 게시판을 등록했습니다라고 전송

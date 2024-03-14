@@ -80,7 +80,6 @@
 	<script type="text/javascript">
 getBoard();
 function getBoard(){
-
 	$.ajax({
 		url : '<c:url value="/header"/>',
 		method : 'get',

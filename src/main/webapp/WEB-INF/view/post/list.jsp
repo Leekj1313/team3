@@ -12,8 +12,7 @@
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="container">
-	<h1>게시글 리스트</h1>
-	<h2>${post.board.bo_name}</h2>
+	<h1>${post.board.bo_name}</h1>
 	<form action="<c:url value="/post/list?boNum=${board.bo_num}"/>">
 		<table class="table table-hover">
 			<thead>
@@ -27,22 +26,24 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${list}" var="post">
-					<tr>
-						<td>${post.po_num}</td>
-						<td>
-							<a href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title}</a>
-						</td>
-						<td>
-							<c:url var="page" value="/post/list">
-								<c:param name="type" value="writer"/>
-		    					<c:param name="search" value="${post.po_me_id}"/>
-		    					<c:param name="page" value="1"/>
-							</c:url>
-							<a href="${page}">${post.po_me_id}</a>
-						</td>
-						<td>${post.po_date}</td>
-						<td>${post.po_view}</td>
-					</tr>
+					<c:if test="${board.bo_num == po_bo_num}">
+						<tr>
+							<td>${post.po_num}</td>
+							<td>
+								<a href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title}</a>
+							</td>
+							<td>
+								<c:url var="page" value="/post/list">
+									<c:param name="type" value="writer"/>
+			    					<c:param name="search" value="${post.po_me_id}"/>
+			    					<c:param name="page" value="1"/>
+								</c:url>
+								<a href="${page}">${post.po_me_id}</a>
+							</td>
+							<td>${post.po_date}</td>
+							<td>${post.po_view}</td>
+						</tr>
+					</c:if>
 				</c:forEach>
 				<c:if test="${list.size() == 0}">
 					<tr>

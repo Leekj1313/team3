@@ -13,7 +13,7 @@
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="container">
-	<form action="<c:url value="/board/insert"/>" method="post" enctype="multipart/form-data">
+	<form action="<c:url value="/board/insert"/>" method="post">
 		<h1>게시판 등록</h1>
 		<div class="mb-3 mt-3">
 			<label for="category" class="form-label">카테고리</label>

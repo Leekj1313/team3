@@ -22,6 +22,19 @@ public class PostListServlet extends HttpServlet {
 	private PostService postService = new PostServiceImp();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//화면에서 보낸 게시판 번호를 가져옴
+		int num;
+		
+		try {
+			num = Integer.parseInt(request.getParameter("boNum"));
+		}catch (Exception e) {
+			num = 0;
+		}
+		//서비스에게 게시글 번호를 주면서 게시글을 가져오라고 시킴
+		PostVO post = postService.getPost(num);
+		//화면에 게시글을 전송
+		request.setAttribute("post", post);
+		
 		//검색어와 검색 타입을 가져옴. 현재 페이지 정보도 가져옴
 		String search = request.getParameter("search");
 		String type = request.getParameter("type");
