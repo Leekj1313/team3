@@ -24,14 +24,6 @@
 		select * from board where bo_num = #{po_bo_num}
 	</select>
 	
-	<select id="selectRecommend" resultType ="kr.kh.team3.app.model.vo.RecommendVO">
-		select * from recommend where rc_po_num = #{po_num}
-	</select>
-	
-	<select id="selectTest" resultMap ="PostMap">
-		select * from post;
-	</select>
-	
 	<select id ="selectCategoryList" resultType="kr.kh.team3.app.model.vo.CategoryVO">
 		select * from category
 	</select>
@@ -42,23 +34,6 @@
 		SELECT * 
 		FROM POST
 		where po_bo_num = #{boNum}
-	</select>
-	
-	
-	
-	<select id="selectTotalCount" resultType="int">
-		SELECT count(*) 
-		FROM POST
-		<if test='cri.type=="all"'>
-			where po_title like concat('%', #{cri.search},'%') 
-				or po_me_id = #{cri.search}
-		</if>
-		<if test='cri.type=="title"'>
-			where po_title like concat('%', #{cri.search},'%') 
-		</if>
-		<if test='cri.type=="writer"'>
-			where po_me_id = #{cri.search}
-		</if>
 	</select>
 	
 	<select id="selectRecentNotice" resultMap="PostMap">

@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.team3.app.model.vo.PostVO;
-import kr.kh.team3.app.pagination.Criteria;
-import kr.kh.team3.app.pagination.PageMaker;
 import kr.kh.team3.app.service.BoardService;
 import kr.kh.team3.app.service.BoardServiceImp;
 
@@ -33,7 +31,6 @@ public class PostListServlet extends HttpServlet {
 		
 		
 		ArrayList<PostVO> postList = boardService.getPostList(boNum);
-		System.out.println(postList);
 		request.setAttribute("postList", postList);
 		request.getRequestDispatcher("/WEB-INF/view/post/list.jsp").forward(request, response);
 		

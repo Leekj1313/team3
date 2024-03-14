@@ -48,21 +48,6 @@ public class BoardServiceImp implements BoardService{
 		return boardDao.selectPostList(boNum);
 	}
 
-
-
-	@Override
-	public int getTotalCount(Criteria cri) {
-		if(cri == null) {
-			cri = new Criteria();
-		}
-		return boardDao.selectTotalCount(cri);
-	}
-
-	@Override
-	public ArrayList<PostVO> getTestPost() {
-		return boardDao.selectTest();
-	}
-
 	@Override
 	public ArrayList<PostVO> getRecentNotice() {
 		return boardDao.selectRecentNotice();
