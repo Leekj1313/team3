@@ -18,9 +18,6 @@ public interface PostDAO {
 
 	void updateRecommend(@Param("re")RecommendVO recommend);
 
-	int selectTotalCount(@Param("cri")Criteria cri);
-
-	ArrayList<PostVO> selectPostList(@Param("cri")Criteria cri);
 
 	boolean updateView(@Param("num")int num);
 
@@ -28,7 +25,7 @@ public interface PostDAO {
 
 	ArrayList<FileVO> selectFileByBo_num(@Param("num")int num);
 
-	boolean insertComment(@Param("cm")CommentVO comment);
+	boolean insertComment(@Param("co")CommentVO comment);
 
 	ArrayList<CommentVO> selectCommentList(@Param("cri")Criteria cri);
 
@@ -39,5 +36,7 @@ public interface PostDAO {
 	boolean updateComment(@Param("co")CommentVO comment);
 
 	boolean deleteComment(@Param("cm_num")int num);
+
+	ArrayList<PostVO> selectPostList(@Param("boNum")int boNum);
 
 }

@@ -14,9 +14,6 @@ public interface PostService {
 
 	int recommend(int po_num, int state, MemberVO user);
 
-	int getTotalCount(Criteria cri);
-
-	ArrayList<PostVO> getPostList(Criteria cri);
 
 	boolean updateView(int num);
 
@@ -35,5 +32,8 @@ public interface PostService {
 	boolean updateComment(CommentVO comment);
 
 	boolean deleteComment(int num, MemberVO user);
+
+	ArrayList<PostVO> getPostList(int boNum);
+
 
 }

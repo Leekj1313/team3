@@ -23,7 +23,6 @@ public class BoardInsertServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//서비스에게 카테고리 리스트를 가져오라고 시킴
 		ArrayList<CategoryVO> list = boardService.getCategoryList();
-		System.out.println(list);
 		request.setAttribute("list", list);
 		//화면에 카테고리 리스트를 보냄 
 		request.getRequestDispatcher("/WEB-INF/view/board/insert.jsp").forward(request, response);

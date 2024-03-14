@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,6 @@
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="container">
 	<h1>${post.board.bo_name}</h1>
-	<form action="<c:url value="/post/list?boNum=${board.bo_num}"/>">
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -40,7 +40,7 @@
 								</c:url>
 								<a href="${page}">${post.po_me_id}</a>
 							</td>
-							<td>${post.po_date}</td>
+							<td><fmt:formatDate pattern="yyyy/MM/dd hh:mm" value="${post.po_date}"/></td>
 							<td>${post.po_view}</td>
 						</tr>
 					</c:if>
@@ -99,7 +99,6 @@
 		  	</div>
 		</form>
 	  	<br>
-  	</form>
 	<a href="<c:url value="/post/insert"/>" class="btn btn-outline-success">글등록</a>
 </div>
 </body>

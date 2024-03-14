@@ -62,21 +62,7 @@ public class PostServiceImp implements PostService {
 			return recommend.getRc_state();
 		}	}
 
-	@Override
-	public int getTotalCount(Criteria cri) {
-		if(cri == null) {
-			cri = new Criteria();
-		}
-		return postDao.selectTotalCount(cri);
-	}
 
-	@Override
-	public ArrayList<PostVO> getPostList(Criteria cri) {
-		if(cri == null) {
-			cri = new Criteria();
-		}
-		return postDao.selectPostList(cri);
-	}
 
 	@Override
 	public boolean updateView(int num) {
@@ -167,4 +153,10 @@ public class PostServiceImp implements PostService {
 		
 		return postDao.deleteComment(num);
 	}
+
+	@Override
+	public ArrayList<PostVO> getPostList(int boNum) {
+		return postDao.selectPostList(boNum);
+	}
+
 }
