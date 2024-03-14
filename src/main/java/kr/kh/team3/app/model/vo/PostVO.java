@@ -16,7 +16,8 @@ public class PostVO {
 	private int po_report_count; 
 	private int po_temp; 
 	private int po_notice;
-	
+	private BoardVO board;
+	private RecommendVO recommend;
 	
 	
 }

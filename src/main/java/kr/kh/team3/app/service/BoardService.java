@@ -17,4 +17,8 @@ public interface BoardService {
 
 	int getTotalCount(Criteria cri);
 
+	ArrayList<PostVO> getTestPost();
+
+	ArrayList<PostVO> getRecentNotice();
+
 }

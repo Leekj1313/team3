@@ -19,4 +19,8 @@ public interface BoardDAO {
 
 	int selectTotalCount(@Param("cri")Criteria cri);
 
+	ArrayList<PostVO> selectTest();
+
+	ArrayList<PostVO> selectRecentNotice();
+
 }

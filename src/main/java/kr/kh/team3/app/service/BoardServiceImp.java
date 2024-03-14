@@ -58,4 +58,15 @@ public class BoardServiceImp implements BoardService{
 		return boardDao.selectTotalCount(cri);
 	}
 
+	@Override
+	public ArrayList<PostVO> getTestPost() {
+		return boardDao.selectTest();
+	}
+
+	@Override
+	public ArrayList<PostVO> getRecentNotice() {
+		return boardDao.selectRecentNotice();
+		
+	}
+
 }

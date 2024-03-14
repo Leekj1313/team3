@@ -3,6 +3,35 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.team3.app.dao.BoardDAO">
+
+
+	<resultMap type="kr.kh.team3.app.model.vo.PostVO" id="PostMap">
+		<id property="po_num" column="po_num"/>
+		<result property="po_bo_num" column="po_bo_num"/>
+		<result property="po_me_id" column="po_me_id"/>
+		<result property="po_title" column="po_title"/>
+		<result property="po_content" column="po_content"/>
+		<result property="po_view" column="po_view"/>
+		<result property="po_date" column="po_date"/>
+		<result property="po_report_count" column="po_report_count"/>
+		<result property="po_temp" column="po_temp"/>
+		<result property="po_notice" column="po_notice"/>
+		<collection property="board" ofType="kr.kh.team3.app.model.vo.BoardVO"
+			column="po_bo_num" select="selectBoard"/>
+	</resultMap>
+	
+	<select id="selectBoard" resultType ="kr.kh.team3.app.model.vo.BoardVO">
+		select * from board where bo_num = #{po_bo_num}
+	</select>
+	
+	<select id="selectRecommend" resultType ="kr.kh.team3.app.model.vo.RecommendVO">
+		select * from recommend where rc_po_num = #{po_num}
+	</select>
+	
+	<select id="selectTest" resultMap ="PostMap">
+		select * from post;
+	</select>
+	
 	<select id ="selectCategoryList" resultType="kr.kh.team3.app.model.vo.CategoryVO">
 		select * from category
 	</select>
@@ -30,5 +59,13 @@
 		<if test='cri.type=="writer"'>
 			where po_me_id = #{cri.search}
 		</if>
+	</select>
+	
+	<select id="selectRecentNotice" resultMap="PostMap">
+		SELECT * 
+		FROM post
+		WHERE po_notice = 1 AND po_bo_num = 1
+		ORDER BY po_date DESC
+		LIMIT 5;
 	</select>
 </mapper>
