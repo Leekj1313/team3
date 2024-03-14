@@ -159,4 +159,5 @@ public class PostServiceImp implements PostService {
 		return postDao.selectPostList(boNum);
 	}
 
+
 }

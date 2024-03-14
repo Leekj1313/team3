@@ -63,6 +63,7 @@
 		delete from comment where cm_num = #{cm_num}
 	</delete>
 	<select id="selectPostList" resultType="kr.kh.team3.app.model.vo.PostVO">
-		select * from post where po_bo_num = #{boNum}
+		select * from post
+		where po_bo_num = #{boNum}
 	</select>
 </mapper>

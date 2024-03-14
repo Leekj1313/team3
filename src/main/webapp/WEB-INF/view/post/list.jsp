@@ -13,7 +13,7 @@
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="container">
-	<h1>${post.board.bo_name}</h1>
+		<a href="#">${post.board.bo_name}</a>
 		<table class="table table-hover">
 			<thead>
 				<tr>

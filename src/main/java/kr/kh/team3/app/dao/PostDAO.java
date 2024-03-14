@@ -18,7 +18,6 @@ public interface PostDAO {
 
 	void updateRecommend(@Param("re")RecommendVO recommend);
 
-
 	boolean updateView(@Param("num")int num);
 
 	PostVO selectPost(@Param("num")int num);
@@ -38,5 +37,6 @@ public interface PostDAO {
 	boolean deleteComment(@Param("cm_num")int num);
 
 	ArrayList<PostVO> selectPostList(@Param("boNum")int boNum);
+
 
 }

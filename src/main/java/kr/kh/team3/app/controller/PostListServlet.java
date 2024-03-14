@@ -23,7 +23,6 @@ public class PostListServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boNum = 0;
-
 		try {
 			boNum = Integer.parseInt(request.getParameter("boNum"));
 		}catch(Exception e) {
@@ -32,6 +31,7 @@ public class PostListServlet extends HttpServlet {
 		
 		ArrayList<PostVO> list = postService.getPostList(boNum);
 		request.setAttribute("list", list);
+		
 		request.getRequestDispatcher("/WEB-INF/view/post/list.jsp").forward(request, response);
 	}
 }
