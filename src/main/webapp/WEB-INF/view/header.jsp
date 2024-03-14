@@ -87,13 +87,14 @@ function getBoard(){
 		method : 'get',
 		success : function(data){
 			let str = '';
+			var url = '<c:url value="/post/list"/>';
 			for (category of data.categoryList){
                 str += '<div class="col-md-6 col-lg-2 mb-3 mb-lg-0" style="border-right: solid 1px gray;">';
                 str += '<div class="list-group list-group-flush">';
                 str += '<div style="font-weight: bold; margin-bottom: 20px;">' + category.ca_name + '</div>'; // 카테고리 이름 출력
                 for (board of data.boardList){
                     if (board.bo_ca_num === category.ca_num){
-                        str += '<a href="" class="list-group-item list-group-item-action">' + board.bo_name + '</a>'; // 해당 카테고리에 속하는 보드 출력
+                        str += '<a href="' + url + '?boNum=' + board.bo_num + '" class="list-group-item list-group-item-action">' + board.bo_name + '</a>'; // 해당 카테고리에 속하는 보드 출력
                     }
                 }
                 str += '</div>';

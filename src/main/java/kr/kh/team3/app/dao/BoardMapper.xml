@@ -9,4 +9,26 @@
 	<select id ="selectBoardList" resultType="kr.kh.team3.app.model.vo.BoardVO">
 		select * from board
 	</select>
+	<select id="selectPostList" resultType="kr.kh.team3.app.model.vo.PostVO">
+		SELECT * 
+		FROM POST
+		where po_bo_num = #{boNum}
+	</select>
+	
+	
+	
+	<select id="selectTotalCount" resultType="int">
+		SELECT count(*) 
+		FROM POST
+		<if test='cri.type=="all"'>
+			where po_title like concat('%', #{cri.search},'%') 
+				or po_me_id = #{cri.search}
+		</if>
+		<if test='cri.type=="title"'>
+			where po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="writer"'>
+			where po_me_id = #{cri.search}
+		</if>
+	</select>
 </mapper>
