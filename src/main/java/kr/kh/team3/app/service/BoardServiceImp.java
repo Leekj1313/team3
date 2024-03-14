@@ -12,6 +12,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import kr.kh.team3.app.dao.BoardDAO;
 import kr.kh.team3.app.model.vo.BoardVO;
 import kr.kh.team3.app.model.vo.CategoryVO;
+import kr.kh.team3.app.model.vo.PostVO;
+import kr.kh.team3.app.pagination.Criteria;
 
 public class BoardServiceImp implements BoardService{
 	private BoardDAO boardDao;
@@ -37,6 +39,34 @@ public class BoardServiceImp implements BoardService{
 	@Override
 	public ArrayList<BoardVO> getBoardList() {
 		return boardDao.selectBoardList();
+	}
+
+	@Override
+	public ArrayList<PostVO> getPostList(int boNum) {
+
+		
+		return boardDao.selectPostList(boNum);
+	}
+
+
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return boardDao.selectTotalCount(cri);
+	}
+
+	@Override
+	public ArrayList<PostVO> getTestPost() {
+		return boardDao.selectTest();
+	}
+
+	@Override
+	public ArrayList<PostVO> getRecentNotice() {
+		return boardDao.selectRecentNotice();
+		
 	}
 
 }
