@@ -64,6 +64,9 @@
 	</div>
 </div>
 <script type="text/javascript">
+let cri = {
+	page : 1,
+}
 //댓글을 불러와서 화면에 출력하는 함수 : 현재 댓글 페이지 정보
 displayCategoryAndPagination();
 function displayCategoryAndPagination(){
@@ -72,9 +75,7 @@ function displayCategoryAndPagination(){
 	$.ajax({
 		url : '<c:url value="/category/list"/>',
 		method : 'post',
-		data : {
-			page : 1
-		},
+		data : cri,
 		success : function(data){
 			displayCategory(data.list);
 			displayCategoryPagination(JSON.parse(data.pm));
