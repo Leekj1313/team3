@@ -174,6 +174,12 @@ public class PostServiceImp implements PostService {
 		}
 		return postDao.selectPostList(cri);
 	}
+	
+	@Override
+	public ArrayList<PostVO> getRecentNotice() {
+		return postDao.selectRecentNotice();
+		
+	}
 
 
 }

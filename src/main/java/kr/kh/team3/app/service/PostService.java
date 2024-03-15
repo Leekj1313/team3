@@ -38,6 +38,8 @@ public interface PostService {
 	int getTotalCount(Criteria cri);
 
 	ArrayList<PostVO> getPostList(Criteria cri);
+	
+	ArrayList<PostVO> getRecentNotice();
 
 
 }

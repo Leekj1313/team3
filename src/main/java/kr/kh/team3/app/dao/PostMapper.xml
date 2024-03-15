@@ -99,4 +99,12 @@
 			and po_me_id = #{cri.search}
 		</if>
 	</select>
+	
+	<select id="selectRecentNotice" resultMap="PostMap">
+		SELECT * 
+		FROM post
+		WHERE po_notice = 1 AND po_bo_num = 1
+		ORDER BY po_date DESC
+		LIMIT 5;
+	</select>
 </mapper>

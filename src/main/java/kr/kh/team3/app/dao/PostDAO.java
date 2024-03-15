@@ -42,5 +42,7 @@ public interface PostDAO {
 
 	ArrayList<PostVO> selectPostList(@Param("cri")Criteria cri);
 
+	ArrayList<PostVO> selectRecentNotice();
+
 
 }
