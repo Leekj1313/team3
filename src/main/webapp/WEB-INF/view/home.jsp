@@ -10,19 +10,18 @@
 <!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
-  .fakeimg {
-    height: 200px;
-    background: #aaa;
-  }
   .boardname {
   	color : #046582;
   	text-decoration: none;
   }
+  .box1{padding: 10px; width: 220px; height: 100%; float: left; margin-top: 50px; margin-left: 60px; box-shadow: 0 3px 3px rgba(0,0,0,0.2);}
 </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
+<jsp:include page="/WEB-INF/view/profile.jsp"/>
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-sm-4">
@@ -182,6 +181,5 @@
     </div>
   </div>
 </div>
-
 </body>
 </html>

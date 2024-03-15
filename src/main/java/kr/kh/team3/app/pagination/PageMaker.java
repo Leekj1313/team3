@@ -22,6 +22,7 @@ public class PageMaker {
 		endPage = (int)(Math.ceil(cri.getPage()/(double)displayPageNum)*displayPageNum);
 		
 		startPage = endPage - displayPageNum + 1;
+    
 		//컨텐츠 개수를 이용하여 계산한 최대 페이지 번호 : 14
 		int tmpEndPage = (int)(Math.ceil(totalCount/(double)cri.getPerPageNum()));
 		//endPage와 tmpEndPage 중 작은 값을 endPage로 설정
@@ -33,6 +34,7 @@ public class PageMaker {
 		//마지막 페이지네이션이면 false 아니면 true
 		next = endPage == tmpEndPage ? false : true;
 	}
+
 	public PageMaker(int displayPageNum, Criteria cri, int totalCount) {
 		this.displayPageNum = displayPageNum;
 		this.cri = cri;
