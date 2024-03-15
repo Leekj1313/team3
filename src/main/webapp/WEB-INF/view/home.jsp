@@ -36,18 +36,13 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr>
-		      <td>John</td>
-		    </tr>
-		    <tr>
-		      <td>Mary</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
+		  <c:forEach items="${postList}" var="post">
+		   		<tr>
+		   			<td>
+		   				<a href="">${post.po_title} ${post.po_me_id} ${post.po_view}</a>
+		   			</td>
+		   		</tr>
+		  </c:forEach>
 		  </tbody>
 		</table>
       <hr class="d-sm-none">

@@ -20,8 +20,16 @@
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
-				<th>작성일</th>
 				<th>조회수</th>
+			</tr>
+		</thead>
+	<tbody>
+		<c:forEach items ="${postList}" var="post">
+			<tr>
+				<td>${post.po_num}</td>
+				<td>${post.po_title}</td>
+				<td>${post.po_me_id}</td>
+				<td>${post.po_view}</td>
 			</tr>
 		</thead>
 		<tbody>
