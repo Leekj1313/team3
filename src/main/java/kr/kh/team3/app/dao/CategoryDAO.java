@@ -1,0 +1,18 @@
+package kr.kh.team3.app.dao;
+
+import java.util.ArrayList;
+
+import org.apache.ibatis.annotations.Param;
+
+import kr.kh.team3.app.model.vo.CategoryVO;
+import kr.kh.team3.app.model.vo.CommunityVO;
+import kr.kh.team3.app.pagination.Criteria;
+
+public interface CategoryDAO {
+
+	ArrayList<CategoryVO> selectCategoryList(@Param("cri")Criteria cri);
+
+	int selectTotalCountCategory(@Param("cri")Criteria cri);
+
+
+}

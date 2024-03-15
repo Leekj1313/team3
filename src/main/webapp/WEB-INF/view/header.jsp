@@ -54,7 +54,6 @@
 						<div class="dropdown-menu col-11 mt-0"
 							aria-labelledby="navbarDropdown"
 							style="border-top-left-radius: 0; border-top-right-radius: 0;">
-
 							<div class="container">
 								<div class="row my-4 here"></div>
 							</div>
