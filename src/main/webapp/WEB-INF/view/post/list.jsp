@@ -23,15 +23,6 @@
 				<th>조회수</th>
 			</tr>
 		</thead>
-	<tbody>
-		<c:forEach items ="${postList}" var="post">
-			<tr>
-				<td>${post.po_num}</td>
-				<td>${post.po_title}</td>
-				<td>${post.po_me_id}</td>
-				<td>${post.po_view}</td>
-			</tr>
-		</thead>
 		<tbody>
 			<c:forEach items="${list}" var="post">
 					<tr>
