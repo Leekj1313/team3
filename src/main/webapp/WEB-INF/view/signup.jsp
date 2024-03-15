@@ -14,11 +14,6 @@ import { Ripple, initMDB, Input } from "mdb-ui-kit";
 initMDB({ Ripple, Input });
 </script> -->
 <style type="text/css">
-	.divv {
-		border: solid 1px gray;
-		box-shadow: 5px 5px 5px 5px gray inset;
-		margin: 20px;
-	}
 	.card {
 		background: #fff;
 		border-radius: 2px;
