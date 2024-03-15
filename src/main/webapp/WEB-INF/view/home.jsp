@@ -182,7 +182,6 @@
       <hr class="d-sm-none">
     </div>
   </div>
-  <a href="<c:url value="/board/insert"/>">게시판 등록</a>
 </div>
 </body>
 </html>
