@@ -22,7 +22,7 @@
 		width: 100%;
 		margin: 2px 0;
 	}
-	.box1 { 
+	.side-box { 
 		padding: 10px; width: 220px; height: 100%;
 		float: left;
 		margin-top: 50px; margin-left: 60px;
@@ -31,7 +31,7 @@
 </style>
 </head>
 <body>
-<div class="box1">
+<div class="side-box">
 	<div class="profile">
 	</div>
 	<c:if test="${user.me_authority eq 'ADMIN' }">
