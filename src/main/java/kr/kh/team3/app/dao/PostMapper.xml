@@ -72,7 +72,7 @@
 		FROM post
 		<if test='cri.type=="all"'>
 			where po_title like concat('%', #{cri.search},'%') 
-				or po_me_id = #{cri.search}
+				or po_me_id = #{cri.search};
 		</if>
 		<if test='cri.type=="title"'>
 			where po_title like concat('%', #{cri.search},'%') 
@@ -80,8 +80,7 @@
 		<if test='cri.type=="writer"'>
 			where po_me_id = #{cri.search}
 		</if>
-		where po_bo_num = #{boNum}
-		GROUP BY po_num
+		where po_bo_num = #{cri.boNum}
 		ORDER BY po_num DESC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>
@@ -98,6 +97,6 @@
 		<if test='cri.type=="writer"'>
 			where po_me_id = #{cri.search}
 		</if>
-		where po_bo_num = #{boNum}
+		where po_bo_num = #{cri.boNum}
 	</select>
 </mapper>

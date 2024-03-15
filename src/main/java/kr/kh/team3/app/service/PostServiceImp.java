@@ -160,19 +160,19 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public int getTotalCount(Criteria cri, int boNum) {
+	public int getTotalCount(Criteria cri) {
 		if(cri == null) {
 			cri = new Criteria();
 		}
-		return postDao.selectTotalCount(cri, boNum);
+		return postDao.selectTotalCount(cri);
 	}
 
 	@Override
-	public ArrayList<PostVO> getPostList(Criteria cri, int boNum) {
+	public ArrayList<PostVO> getPostList(Criteria cri) {
 		if(cri == null) {
 			cri = new Criteria();
 		}
-		return postDao.selectPostList(cri, boNum);
+		return postDao.selectPostList(cri);
 	}
 
 

@@ -85,7 +85,7 @@
     	</c:if>
   	</ul>
   	<hr>
-  	<form action="<c:url value="/post/list"/>" class="mb-3 mt-3">
+  	<form action="<c:url value="/post/list?boNum=${board.bo_num}"/>" class="mb-3 mt-3">
 		<div class="input-group">
 			<select name="type" class="form-control">
 				<option value="all" <c:if test='${pm.cri.type == "all"}'>selected</c:if>>전체</option>

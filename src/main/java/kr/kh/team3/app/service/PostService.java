@@ -35,9 +35,9 @@ public interface PostService {
 
 	ArrayList<PostVO> getPostList(int boNum);
 
-	int getTotalCount(Criteria cri, int boNum);
+	int getTotalCount(Criteria cri);
 
-	ArrayList<PostVO> getPostList(Criteria cri, int boNum);
+	ArrayList<PostVO> getPostList(Criteria cri);
 
 
 }
