@@ -21,9 +21,6 @@ public class MainServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<PostVO> postList = boardService.getRecentNotice();
-		
-		request.setAttribute("postList", postList);
 		
 		request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
 
