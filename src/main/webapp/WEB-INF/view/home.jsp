@@ -10,6 +10,7 @@
 <!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
   .boardname {
   	color : #046582;
@@ -180,6 +181,5 @@
     </div>
   </div>
 </div>
-
 </body>
 </html>

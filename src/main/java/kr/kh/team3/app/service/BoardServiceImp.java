@@ -12,10 +12,10 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import kr.kh.team3.app.dao.BoardDAO;
 import kr.kh.team3.app.model.vo.BoardVO;
 import kr.kh.team3.app.model.vo.CategoryVO;
-import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.pagination.Criteria;
 
 public class BoardServiceImp implements BoardService{
+	
 	private BoardDAO boardDao;
 	
 	public BoardServiceImp() {
@@ -42,16 +42,37 @@ public class BoardServiceImp implements BoardService{
 	}
 
 	@Override
-	public ArrayList<PostVO> getPostList(int boNum) {
-
+	public boolean insertBoard(BoardVO board) {
+		if(board == null ||
+				!checkString(board.getBo_name())) {
+			return false;
+		}
+		boolean res = boardDao.insertBoard(board);
 		
-		return boardDao.selectPostList(boNum);
+		if(!res) {
+			return false;
+		}
+		return res;
+	}
+	
+	private boolean checkString(String str) {
+		if(str == null || str.length() == 0) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
-	public ArrayList<PostVO> getRecentNotice() {
-		return boardDao.selectRecentNotice();
-		
+	public BoardVO getBorad(int boNum) {
+		return boardDao.selectBoard(boNum);
+	}
+
+	@Override
+	public ArrayList<BoardVO> getBoardList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return boardDao.selectBoList(cri);
 	}
 
 }
