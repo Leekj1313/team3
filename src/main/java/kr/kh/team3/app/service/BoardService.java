@@ -13,4 +13,6 @@ public interface BoardService {
 
 	boolean insertBoard(BoardVO board);
 
+	BoardVO getBorad(int boNum);
+
 }

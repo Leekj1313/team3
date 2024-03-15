@@ -60,4 +60,9 @@ public class BoardServiceImp implements BoardService{
 		}
 		return true;
 	}
+
+	@Override
+	public BoardVO getBorad(int boNum) {
+		return boardDao.selectBoard(boNum);
+	}
 }

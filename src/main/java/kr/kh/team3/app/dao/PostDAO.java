@@ -38,5 +38,9 @@ public interface PostDAO {
 
 	ArrayList<PostVO> selectPostList(@Param("boNum")int boNum);
 
+	int selectTotalCount(@Param("cri")Criteria cri, @Param("boNum")int boNum);
+
+	ArrayList<PostVO> selectPostList(@Param("cri")Criteria cri, @Param("boNum")int boNum);
+
 
 }

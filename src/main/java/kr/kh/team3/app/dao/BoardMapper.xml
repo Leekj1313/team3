@@ -24,4 +24,7 @@
 	<insert id="insertBoard" useGeneratedKeys="true" keyProperty="board.bo_num">
 		insert into board(bo_name, bo_ca_num) values(#{board.bo_name},#{board.bo_ca_num})
 	</insert>
+	<select id="selectBoard" resultType="kr.kh.team3.app.model.vo.BoardVO">
+		select * from board where bo_num = #{boNum}
+	</select>
 </mapper>
