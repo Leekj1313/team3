@@ -85,7 +85,7 @@
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<select id="selectTotalCount" resultType="int">
-		SELECT count(*) 
+		SELECT count(*)
 		FROM post
 		where po_bo_num = #{cri.boNum}
 		<if test='cri.type=="all"'>
