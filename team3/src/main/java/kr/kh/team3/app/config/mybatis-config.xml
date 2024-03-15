@@ -13,7 +13,7 @@
 	    <transactionManager type="JDBC"/>
 	    <dataSource type="POOLED">
 	      <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-	      <property name="url" value="jdbc:mysql://localhost:3306/db이름"/>
+	      <property name="url" value="jdbc:mysql://localhost:3306/team3_community"/>
 	      <property name="username" value="root"/>
 	      <property name="password" value="root"/>
 	    </dataSource>
@@ -21,7 +21,9 @@
 	</environments>
   <mappers>
     <!-- <mapper resource="kr/kh/app/dao/MemberMapper.xml"/> -->
-    <mapper resource="kr/kh/team3/app/dao/MemberMapper.xml"/>
-    <mapper resource="kr/kh/team3/app/dao/BoardMapper.xml"/>
+   <mapper resource="kr/kh/team3/app/dao/MemberMapper.xml"/>
+   <mapper resource="kr/kh/team3/app/dao/BoardMapper.xml"/>
+   <mapper resource="kr/kh/team3/app/dao/CategoryMapper.xml"/>
+   <mapper resource="kr/kh/team3/app/dao/PostMapper.xml"/>
   </mappers>
 </configuration>
