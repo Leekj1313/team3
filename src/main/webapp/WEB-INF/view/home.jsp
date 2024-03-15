@@ -33,6 +33,27 @@
 		    </tr>
 		  </thead>
 		  <tbody>
+		  <c:forEach items="${postList}" var="post">
+		   		<tr>
+		   			<td>
+		   				<a href="">${post.po_title} ${post.po_me_id} ${post.po_view}</a>
+		   			</td>
+		   		</tr>
+		  </c:forEach>
+		  </tbody>
+		</table>
+      <hr class="d-sm-none">
+    </div>
+    <div class="col-sm-4">
+		<table class="table table-hover table-bordered">
+		  <thead>
+		    <tr>
+		      <th>
+		      	<a href="<c:url value="#"/>" class="boardname">HOT게시판</a>
+		      </th>
+		    </tr>
+		  </thead>
+		  <tbody>
 		    <tr>
 		      <td>John</td>
 		    </tr>
@@ -41,6 +62,31 @@
 		    </tr>
 		    <tr>
 		      <td>July</td>
+		    </tr>
+		    <tr>
+		      <td>July</td>
+		    </tr>
+		  </tbody>
+		</table>
+      <hr class="d-sm-none">
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-sm-4">
+		<table class="table table-hover table-bordered">
+		  <thead>
+		    <tr>
+		      <th>
+		      	<a href="<c:url value="/post/list"/>" class="boardname">자유게시판</a>
+		      </th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td>John</td>
+		    </tr>
+		    <tr>
+		      <td>Mary</td>
 		    </tr>
 		    <tr>
 		      <td>July</td>
