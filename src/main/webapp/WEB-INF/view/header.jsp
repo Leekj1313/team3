@@ -39,7 +39,7 @@
 				aria-label="Toggle navigation">
 				<i class="fas fa-bars"></i>
 			</button>
-
+			
 			<!-- Collapsible wrapper -->
 			<div class="collapse navbar-collapse" id="navbarExampleOnHover">
 				<!-- Left links -->

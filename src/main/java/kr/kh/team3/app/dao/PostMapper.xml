@@ -70,33 +70,33 @@
 	<select id="selectPostList" resultMap="PostMap">
 		SELECT * 
 		FROM post
+		where po_bo_num = #{cri.boNum}
 		<if test='cri.type=="all"'>
-			where po_title like concat('%', #{cri.search},'%') 
-				or po_me_id = #{cri.search};
+			and po_title like concat('%', #{cri.search},'%') 
+				or po_me_id = #{cri.search}
 		</if>
 		<if test='cri.type=="title"'>
-			where po_title like concat('%', #{cri.search},'%') 
+			and po_title like concat('%', #{cri.search},'%') 
 		</if>
 		<if test='cri.type=="writer"'>
-			where po_me_id = #{cri.search}
+			and po_me_id = #{cri.search}
 		</if>
-		where po_bo_num = #{cri.boNum}
 		ORDER BY po_num DESC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<select id="selectTotalCount" resultType="int">
 		SELECT count(*) 
 		FROM post
+		where po_bo_num = #{cri.boNum}
 		<if test='cri.type=="all"'>
-			where po_title like concat('%', #{cri.search},'%') 
+			and po_title like concat('%', #{cri.search},'%') 
 				or po_me_id = #{cri.search}
 		</if>
 		<if test='cri.type=="title"'>
-			where po_title like concat('%', #{cri.search},'%') 
+			and po_title like concat('%', #{cri.search},'%') 
 		</if>
 		<if test='cri.type=="writer"'>
-			where po_me_id = #{cri.search}
+			and po_me_id = #{cri.search}
 		</if>
-		where po_bo_num = #{cri.boNum}
 	</select>
 </mapper>

@@ -187,9 +187,7 @@
       <hr class="d-sm-none">
     </div>
   </div>
-  <a href="<c:url value="/board/insert"/>" class="btn btn-outline-primary">게시판 등록</a>
-  <a href="<c:url value="/board/update"/>" class="btn btn-outline-warning">게시판 수정</a>
-  <a href="<c:url value="/board/delete"/>" class="btn btn-outline-danger">게시판 삭제</a>
+  <a href="<c:url value="/board/insert"/>">게시판 등록</a>
 </div>
 </body>
 </html>
