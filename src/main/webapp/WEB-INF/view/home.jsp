@@ -58,7 +58,12 @@
 		   	<c:forEach items="${postHotList}" var="post">
 		   		<c:if test="${post.po_up >= 5}">
 			   		<tr>
-			   			<td>${post.po_title} ${post.po_me_id} ${post.po_view} ${post.po_up}</td>
+			   			<td>
+			   				<a href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title}</a>
+			   				${post.po_me_id} 
+			   				${post.po_view} 
+			   				${post.po_up}
+			   			</td>
 			   		</tr>
 		   		</c:if>
 		  	</c:forEach>
