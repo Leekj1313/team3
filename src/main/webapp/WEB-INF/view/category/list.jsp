@@ -30,8 +30,8 @@
 <div class="container mt-3 col-6 card-1">
 	<h2>카테고리 관리</h2>
 	<div class="input-group mb-3 mt-3">
-		<input type="text" class="form-control" placeholder="새로 등록할 카테고리 이름을 입력하세요.">
-		<button class="btn btn-outline-secondary" type="button">등록</button>
+		<input type="text" class="form-control category-content" placeholder="새로 등록할 카테고리 이름을 입력하세요.">
+		<button class="btn btn-outline-secondary btn-category-insert" type="button">등록</button>
 	</div>
 
 	<table class="table table-hover">
@@ -68,8 +68,8 @@ let cri = {
 	page : 1,
 }
 //댓글을 불러와서 화면에 출력하는 함수 : 현재 댓글 페이지 정보
-displayCategoryAndPagination();
-function displayCategoryAndPagination(){
+displayCategoryAndPagination(cri);
+function displayCategoryAndPagination(cri){
 	//ajax를 이용해서 서버에 현재 댓글 페이지 정보를 보내고,
 	//서버에서 보낸 댓글 리스트와 페이지네이션 정보를 받아와서 화면에 출력
 	$.ajax({
@@ -143,6 +143,49 @@ $(document).on("click", ".box-category-pagination .page-link", function(){
 	cri.page = $(this).data("page");
 	displayCategoryAndPagination(cri);
 });
+</script>
+<script type="text/javascript">
+$(".btn-category-insert").click(function(){
+	//로그인 체크
+	if(!${user.me_authority eq 'ADMIN' }){
+		if(confirm("관리자 기능입니다. 로그인 화면으로 이동하시겠습니까?")){
+			location.href = "<c:url value='/login'/>";
+			return;
+		}
+		//취소 누르면 현재 페이지에서 추천/비추천 동작을 안 함
+		else{
+			location.href = "<c:url value='/'/>";
+			return;
+		}
+	}
+	
+	let category = $(".category-content").val();
+	
+	$.ajax({
+		url : '<c:url value="/category/insert"/>',
+		method : "post",
+		data : {
+			category
+		},
+		success : function(data){
+			if(data == "ok"){
+				alert("카테고리를 등록했숩니다.");
+				cri.page = 1;
+				displayCategoryAndPagination(cri);
+				$(".category-content").val("");
+			}else if(data == "dup"){
+				alert("중복된 카테고리입니다.")
+			}else{
+				alert("카테고리를 등록하지 못했습니다.");
+			}
+		},
+		error : function(a, b, c){
+			
+		}
+	})
+	
+}); //click end
+
 </script>
 </body>
 </html>

@@ -11,4 +11,8 @@ public interface CategoryService {
 
 	int getTotalCountCategory(Criteria cri);
 
+	boolean checkCat(String category);
+
+	boolean insertCategory(String category);
+
 }

@@ -14,5 +14,9 @@ public interface CategoryDAO {
 
 	int selectTotalCountCategory(@Param("cri")Criteria cri);
 
+	CategoryVO selectCategoryCheck(@Param("cat")String category);
+
+	boolean insertCategory(@Param("cat")String category);
+
 
 }

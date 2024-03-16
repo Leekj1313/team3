@@ -44,4 +44,28 @@ public class CategoryServiceImp implements CategoryService {
 		}
 		return categoryDao.selectTotalCountCategory(cri);
 	}
+
+	@Override
+	public boolean checkCat(String category) {
+		CategoryVO cat = categoryDao.selectCategoryCheck(category);
+		System.out.println(category);
+		return cat == null;
+	}
+
+	@Override
+	public boolean insertCategory(String category) {
+		if(!checkString(category)) {
+			return false;
+		}
+		if(!checkCat(category)) {
+			return false;
+		}
+		return categoryDao.insertCategory(category);
+	}
+	private boolean checkString(String str) {
+		if(str == null || str.length() == 0) {
+			return false;
+		}
+		return true;
+	}
 }
