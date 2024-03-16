@@ -17,7 +17,4 @@ public interface BoardService {
 
 	BoardVO getBorad(int boNum);
 	
-
-	ArrayList<BoardVO> getBoardList(Criteria cri);
-
 }

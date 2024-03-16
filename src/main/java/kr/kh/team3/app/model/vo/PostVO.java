@@ -19,4 +19,5 @@ public class PostVO {
 	private int po_temp; 
 	private int po_notice;
 	private BoardVO board;
+	private int po_up;
 }

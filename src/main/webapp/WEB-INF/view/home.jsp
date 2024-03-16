@@ -55,18 +55,18 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr>
-		      <td>John</td>
-		    </tr>
-		    <tr>
-		      <td>Mary</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
+		   	<c:forEach items="${postHotList}" var="post">
+		   		<c:if test="${post.po_up >= 5}">
+			   		<tr>
+			   			<td>${post.po_title} ${post.po_me_id} ${post.po_view} ${post.po_up}</td>
+			   		</tr>
+		   		</c:if>
+		  	</c:forEach>
+		  	<c:if test="#">
+				<tr>
+					<td>등록된 게시글이 없습니다.</td>
+				</tr>
+			</c:if>
 		  </tbody>
 		</table>
       <hr class="d-sm-none">

@@ -67,12 +67,4 @@ public class BoardServiceImp implements BoardService{
 		return boardDao.selectBoard(boNum);
 	}
 
-	@Override
-	public ArrayList<BoardVO> getBoardList(Criteria cri) {
-		if(cri == null) {
-			cri = new Criteria();
-		}
-		return boardDao.selectBoList(cri);
-	}
-
 }

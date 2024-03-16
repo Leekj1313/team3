@@ -44,5 +44,7 @@ public interface PostDAO {
 
 	ArrayList<PostVO> selectRecentNotice();
 
+	ArrayList<PostVO> selectPostHotList();
+
 
 }

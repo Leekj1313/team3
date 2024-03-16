@@ -181,5 +181,10 @@ public class PostServiceImp implements PostService {
 		
 	}
 
+	@Override
+	public ArrayList<PostVO> getPostHotList() {
+		return postDao.selectPostHotList();
+	}
+
 
 }
