@@ -68,4 +68,10 @@ public class CategoryServiceImp implements CategoryService {
 		}
 		return true;
 	}
+
+	@Override
+	public boolean deleteCategory(int num) {
+				
+		return categoryDao.deleteCategory(num);
+	}
 }

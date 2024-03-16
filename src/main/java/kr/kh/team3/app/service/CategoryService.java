@@ -15,4 +15,6 @@ public interface CategoryService {
 
 	boolean insertCategory(String category);
 
+	boolean deleteCategory(int num);
+
 }

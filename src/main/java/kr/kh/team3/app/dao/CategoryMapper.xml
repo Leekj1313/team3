@@ -19,4 +19,8 @@
 		INSERT INTO category(ca_name)
 		VALUES(#{cat})
 	</insert>
+	<delete id="deleteCategory">
+		DELETE FROM category
+		WHERE ca_num = #{ca_num}
+	</delete>
 </mapper>

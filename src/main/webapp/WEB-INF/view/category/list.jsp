@@ -18,7 +18,7 @@
 	.card-1:hover {
 	  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	}
-	table {
+	.category-list-table {
 		margin-top: 20px
 	}
 </style>
@@ -34,7 +34,7 @@
 		<button class="btn btn-outline-secondary btn-category-insert" type="button">등록</button>
 	</div>
 
-	<table class="table table-hover">
+	<table class="table table-hover category-list-table">
 		<tbody class="box-category-list">
 			<tr class="box-category">
 				<td class="col-2">카테고리 번호</td>
@@ -98,8 +98,8 @@ function displayCategory(categoryList){
 			<td class="col-7">\${category.ca_name}</td>
 			<td class="col-3">
 				<div class="btn-group">
-					<button class="btn btn-outline-warning">수정</button>
-					<button class="btn btn-outline-danger">삭제</button>
+					<button class="btn btn-outline-warning btn-category-update" data-num="\${category.ca_num}">수정</button>
+					<button class="btn btn-outline-danger btn-category-delete" data-num="\${category.ca_num}">삭제</button>
 				</div>
 			</td>
 		</tr>`;
@@ -144,6 +144,7 @@ $(document).on("click", ".box-category-pagination .page-link", function(){
 	displayCategoryAndPagination(cri);
 });
 </script>
+<!-- 카테고리 등록 -->
 <script type="text/javascript">
 $(".btn-category-insert").click(function(){
 	//로그인 체크
@@ -186,6 +187,44 @@ $(".btn-category-insert").click(function(){
 	
 }); //click end
 
+</script>
+<!-- 카테고리 삭제 -->
+<script type="text/javascript">
+$(document).on("click",".btn-category-delete", function(){
+	//로그인 체크
+	if(!${user.me_authority eq 'ADMIN' }){
+		if(confirm("관리자 기능입니다. 로그인 화면으로 이동하시겠습니까?")){
+			location.href = "<c:url value='/login'/>";
+			return;
+		}
+		//취소 누르면 현재 페이지에서 추천/비추천 동작을 안 함
+		else{
+			location.href = "<c:url value='/'/>";
+			return;
+		}
+	}
+	
+	let num = $(this).data("num");
+	$.ajax({
+		url : '<c:url value="/category/delete"/>',
+		method : "post",
+		data : {
+			num
+		},
+		success : function(data){
+			console.log(data);
+			if(data == "ok"){
+				alert("카테고리를 삭제했습니다.");
+				displayCategoryAndPagination(cri);
+			}else{
+				alert("카테고리를 삭제하지 못했습니다.");
+			}
+		},
+		error : function(a, b, c){
+			
+		}
+	})
+});
 </script>
 </body>
 </html>

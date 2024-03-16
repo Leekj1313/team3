@@ -18,5 +18,7 @@ public interface CategoryDAO {
 
 	boolean insertCategory(@Param("cat")String category);
 
+	boolean deleteCategory(@Param("ca_num")int num);
+
 
 }
