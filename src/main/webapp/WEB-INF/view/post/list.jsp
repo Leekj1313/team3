@@ -20,7 +20,9 @@
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
+				<th>작성일</th>
 				<th>조회수</th>
+				<th>추천수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -40,6 +42,7 @@
 						</td>
 						<td><fmt:formatDate pattern="yy/MM/dd hh:mm" value="${post.po_date}"/></td>
 						<td>${post.po_view}</td>
+						<td>${post.po_up}</td>
 					</tr>
 			</c:forEach>
 			<c:if test="${list.size() == 0}">

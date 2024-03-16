@@ -41,5 +41,7 @@ public interface PostService {
 	
 	ArrayList<PostVO> getRecentNotice();
 
+	ArrayList<PostVO> getPostHotList();
+
 
 }

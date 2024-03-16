@@ -18,8 +18,4 @@ public interface BoardDAO {
 
 	BoardVO selectBoard(@Param("boNum")int boNum);
 
-	int selectTotalCount(@Param("cri")Criteria cri);
-
-	ArrayList<BoardVO> selectBoList(@Param("cri")Criteria cri);
-
 }
