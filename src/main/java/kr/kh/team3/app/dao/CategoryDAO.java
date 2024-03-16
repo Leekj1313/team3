@@ -20,5 +20,9 @@ public interface CategoryDAO {
 
 	boolean deleteCategory(@Param("ca_num")int num);
 
+	CategoryVO selectCategory(@Param("ca_num")int ca_num);
+
+	boolean updateCategory(@Param("cat")CategoryVO category);
+
 
 }

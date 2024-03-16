@@ -23,4 +23,12 @@
 		DELETE FROM category
 		WHERE ca_num = #{ca_num}
 	</delete>
+	<select id="selectCategory" resultType="kr.kh.team3.app.model.vo.CategoryVO">
+		SELECT * FROM category WHERE ca_num = #{ca_num}
+	</select>
+	<update id="updateCategory">
+		UPDATE category SET
+		ca_name = #{cat.ca_name}
+		WHERE ca_num = #{cat.ca_num}
+	</update>
 </mapper>

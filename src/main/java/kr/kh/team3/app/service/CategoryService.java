@@ -17,4 +17,6 @@ public interface CategoryService {
 
 	boolean deleteCategory(int num);
 
+	boolean updateCategory(CategoryVO category);
+
 }

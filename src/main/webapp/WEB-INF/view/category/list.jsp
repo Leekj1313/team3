@@ -40,7 +40,7 @@
 				<td class="col-2">카테고리 번호</td>
 				<td class="col-7">카테고리 이름</td>
 				<td class="col-3">
-					<div class="btn-group">
+					<div class="btn-category-group">
 						<button class="btn btn-outline-warning">수정</button>
 						<button class="btn btn-outline-danger">삭제</button>
 					</div>
@@ -95,9 +95,9 @@ function displayCategory(categoryList){
 		str += `
 		<tr class="box-category">
 			<td class="col-2">\${category.ca_num}</td>
-			<td class="col-7">\${category.ca_name}</td>
+			<td class="col-7 ca_name">\${category.ca_name}</td>
 			<td class="col-3">
-				<div class="btn-group">
+				<div class="btn-category-group">
 					<button class="btn btn-outline-warning btn-category-update" data-num="\${category.ca_num}">수정</button>
 					<button class="btn btn-outline-danger btn-category-delete" data-num="\${category.ca_num}">삭제</button>
 				</div>
@@ -224,6 +224,94 @@ $(document).on("click",".btn-category-delete", function(){
 			
 		}
 	})
+});
+</script>
+<!-- 카테고리 수정 구현 -->
+<script type="text/javascript">
+$(document).on("click", ".btn-category-update", function(){
+	//로그인 체크
+	if(!${user.me_authority eq 'ADMIN' }){
+		if(confirm("관리자 기능입니다. 로그인 화면으로 이동하시겠습니까?")){
+			location.href = "<c:url value='/login'/>";
+			return;
+		}
+		//취소 누르면 현재 페이지에서 추천/비추천 동작을 안 함
+		else{
+			location.href = "<c:url value='/'/>";
+			return;
+		}
+	}
+	
+	initCategory();
+	//현재 댓글 보여주는 창이 textarea 태그로 변경
+	//기존 댓글창을 감춤
+	$(this).parents(".box-category").find(".ca_name").hide();
+	let comment = $(this).parents(".box-category").find(".ca_name").text();
+	let textarea = 
+	`
+	<textarea class="form-control cat-input">\${comment}</textarea>
+	`;
+	$(this).parents(".box-category").find(".ca_name").after(textarea);
+	
+	//수정 삭제 버튼 대신 수정 완료 버튼으로 변경
+	$(this).parent().hide();
+	let num = $(this).data("num");
+	let btn = 
+	`
+	<button class="btn btn-outline-success btn-complete" data-num="\${num}">수정완료</button>
+	`;
+	$(this).parent().after(btn);
+}); //click end
+
+function initCategory(){
+	//감추었던 카테고리 이름을 보여줌
+	$(".ca_name").show();
+	//감추었던 수정, 삭제 버튼을 보여줌
+	$(".btn-category-group").show();
+	//추가했던 textarea 태그를 삭제함
+	$(".cat-input").remove();
+	//추가했던 수정완료 버튼을 삭제함
+	$(".btn-complete").remove();
+}
+
+//수정 완료 버튼 클릭 이벤트 등록
+$(document).on("click", ".btn-complete", function(){
+	//로그인 체크
+	if(!${user.me_authority eq 'ADMIN' }){
+		if(confirm("관리자 기능입니다. 로그인 화면으로 이동하시겠습니까?")){
+			location.href = "<c:url value='/login'/>";
+			return;
+		}
+		//취소 누르면 현재 페이지에서 추천/비추천 동작을 안 함
+		else{
+			location.href = "<c:url value='/'/>";
+			return;
+		}
+	}
+	
+	//수정하기 위해 필요한 정보를 가져옴 : 수정된 댓글 내용, 댓글 번호
+	let num = $(this).data("num");
+	let name = $(".cat-input").val();
+	//alert(num + ":" + content);
+	$.ajax({
+		url : '<c:url value="/category/update"/>',
+		method : 'post',
+		data : {
+			num,
+			name
+		},
+		success : function(data){
+			if(data == "ok"){
+				alert("카테고리를 수정했습니다.");
+				displayCategoryAndPagination(cri);
+			}else{
+				alert("카테고리를 수정하지 못했습니다.")
+			}
+		},
+		error : function(xhr, status, error){
+			
+		}
+	});
 });
 </script>
 </body>

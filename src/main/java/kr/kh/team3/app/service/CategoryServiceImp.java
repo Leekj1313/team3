@@ -74,4 +74,20 @@ public class CategoryServiceImp implements CategoryService {
 				
 		return categoryDao.deleteCategory(num);
 	}
+
+	@Override
+	public boolean updateCategory(CategoryVO category) {
+		if(category == null ||
+			!checkString(category.getCa_name())){
+			return false;
+		}
+		
+		CategoryVO dbCategory = categoryDao.selectCategory(category.getCa_num());
+		
+		if(dbCategory == null) {
+			return false;
+		}
+		
+		return categoryDao.updateCategory(category);
+	}
 }
