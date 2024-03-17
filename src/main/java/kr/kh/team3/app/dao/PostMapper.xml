@@ -125,4 +125,10 @@
 	<select id="selectFileByPo_num" resultType="kr.kh.team3.app.model.vo.FileVO">
 		select * from file where fi_po_num = #{num} 
 	</select>
+	<delete id="deleteFile">
+		delete from file where fi_num = #{fi_num}
+	</delete>
+	<delete id="deletePost">
+		delete from post where po_num = #{num}
+	</delete>
 </mapper>

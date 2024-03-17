@@ -21,7 +21,7 @@ import kr.kh.team3.app.pagination.Criteria;
 public class PostServiceImp implements PostService {
 	
 	private PostDAO postDao;
-	
+	private String uploadPath = "D:\\uploads";
 	public PostServiceImp() {
 		String resource = "kr/kh/team3/app/config/mybatis-config.xml";
 		

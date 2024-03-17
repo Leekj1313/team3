@@ -48,5 +48,9 @@ public interface PostDAO {
 
 	ArrayList<FileVO> selectFileByPo_num(@Param("num")int num);
 
+	void deleteFile(@Param("fi_num")int fi_num);
+
+	boolean deletePost(@Param("num")int num);
+
 
 }
