@@ -122,4 +122,7 @@
 		order by po_up desc
 		limit 5;
 	</select>
+	<select id="selectFileByPo_num" resultType="kr.kh.team3.app.model.vo.FileVO">
+		select * from file where fi_po_num = #{num} 
+	</select>
 </mapper>

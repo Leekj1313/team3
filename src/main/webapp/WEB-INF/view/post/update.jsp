@@ -32,18 +32,18 @@
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="container">
-	<form action="<c:url value="/post/insert" />" method="post" enctype="multipart/form-data">
+	<form action="<c:url value="/post/update"/>" method="post" enctype="multipart/form-data">
 		<div class="mb-3 mt-3">
-		    <label for="community" class="form-label">게시판:</label>
-		    <select class="form-control" id="community" name="community">
-		    	<c:forEach items="${list}" var="community">
-		    		<option value="${community.co_num }">${community.co_name}</option>
+		    <label for="board" class="form-label">게시판:</label>
+		    <select class="form-control" id="board" name="board">
+		    	<c:forEach items="${list}" var="board">
+		    		<option value="${board.bo_num}">${board.bo_name}</option>
 		    	</c:forEach>
 		    </select>
 	  	</div>
 		<div class="mb-3 mt-3">
 		    <label for="title" class="form-label">제목:</label>
-		    <input type="text" class="form-control" id="title" placeholder="제목" name="title">
+		    <input type="text" class="form-control" id="title" placeholder="제목" name="title" value="${post.po_title}">
 	  	</div>
 	  	<div class="btn-temp">
 		  	<button type ="button" id ="temSaveBtn" class="btn btn-success">임시글 저장</button>
@@ -51,7 +51,7 @@
 		</div>
 
 	  	<div class="mb-3 mt-3">
-		    <textarea rows="10" class="form-control" id="content" name="content" placeholder="내용"></textarea>
+		    <textarea rows="10" class="form-control" id="content" name="content" placeholder="내용">${post.po_content}</textarea>
 	  	</div>
 	  	<div class="mb-3 mt-3">
 		    <label for="content" class="form-label">첨부파일:</label>

@@ -46,5 +46,7 @@ public interface PostDAO {
 
 	ArrayList<PostVO> selectPostHotList();
 
+	ArrayList<FileVO> selectFileByPo_num(@Param("num")int num);
+
 
 }
