@@ -11,8 +11,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 	.profile {
-		width: 200px; height: 200px;
-		background-color: #dcdcdc;
+		width: 200px; height: 210px;
+		background-color: white;
 	
 	}
 	.menus {
@@ -27,6 +27,15 @@
 		float: left;
 		margin-top: 50px; margin-left: 60px;
 		box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+	}
+	.logout-btn {
+		border: 2px solid #dcdcdc;
+		font-size: 12px;
+		width: 60px;
+		background-color: #dcdcdc;
+		text-align: center;
+		margin-left: 70px;
+		margin-top: 3px;
 	}
 </style>
 </head>
@@ -44,7 +53,17 @@
 		</div>
 	</c:if>
 	<c:if test="${user.me_authority eq 'ADMIN' }">
-		<div class="profile">
+		<div class="profile" style="text-align: center">
+			<img
+				src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+				alt="profile image"
+				width="100" height="100"
+				style="margin-top: 20px; border-radius: 10px" />
+			<div class="profile_me_id" style="font-weight: bold; margin-top: 10px">${user.me_id}</div>
+			<div class="profile_me_name" style="color: gray; font-size: 12px">관리자</div>
+			<div class="logout-btn">		
+				<a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
+			</div>
 		</div>
 		<div class="admin-menus">
 			<a href="<c:url value="/category/list"/>" class="btn btn-secondary profile-btn">카테고리 관리</a>
@@ -53,7 +72,17 @@
 		</div>
 	</c:if>
 	<c:if test="${user.me_authority eq 'USER' }">
-		<div class="profile">
+		<div class="profile" style="text-align: center">
+			<img
+				src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+				alt="profile image"
+				width="100" height="100"
+				style="margin-top: 20px; border-radius: 10px" />
+			<div class="profile_me_id" style="font-weight: bold; margin-top: 10px">${user.me_id}</div>
+			<div class="profile_me_name" style="color: gray; font-size: 12px">${user.me_name}</div>
+			<div class="logout-btn">		
+				<a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
+			</div>
 		</div>
 		<div class="user-menus">
 			<a href="<c:url value=""/>" class="btn btn-secondary profile-btn">내가 쓴 글</a>
