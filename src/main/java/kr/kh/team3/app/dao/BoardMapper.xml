@@ -30,4 +30,8 @@
 	<select id="selectCate" resultType="kr.kh.team3.app.model.vo.CategoryVO">
 	select * category where ca_num = #{caNum}
 	</select>
+	
+	<delete id = "deleteBoard">
+		delete from board where bo_num =#{boNum}
+	</delete>
 </mapper>

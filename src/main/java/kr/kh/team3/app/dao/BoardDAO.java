@@ -18,4 +18,6 @@ public interface BoardDAO {
 
 	BoardVO selectBoard(@Param("boNum")int boNum);
 
+	boolean deleteBoard(@Param("boNum")int num);
+
 }

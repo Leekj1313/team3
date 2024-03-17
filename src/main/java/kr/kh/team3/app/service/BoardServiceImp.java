@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import kr.kh.team3.app.dao.BoardDAO;
 import kr.kh.team3.app.model.vo.BoardVO;
 import kr.kh.team3.app.model.vo.CategoryVO;
+import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.pagination.Criteria;
 
 public class BoardServiceImp implements BoardService{
@@ -65,6 +66,23 @@ public class BoardServiceImp implements BoardService{
 	@Override
 	public BoardVO getBorad(int boNum) {
 		return boardDao.selectBoard(boNum);
+	}
+
+	@Override
+	public int deleteBoard(int num, MemberVO user) {
+		
+		
+		if(user==null||
+			!checkString(user.getMe_id())||
+		    !user.getMe_authority().equals("ADMIN")) {
+			return -2;
+		}
+		
+		if(boardDao.deleteBoard(num)) {
+			return 1;
+		}
+		return -1;
+		
 	}
 
 }
