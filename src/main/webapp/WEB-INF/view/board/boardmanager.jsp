@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -55,13 +55,13 @@ function getBoard(){
             let str = '';
             for(category of data.categoryList){
                 str += `<div class="board-list">`;
-                str += `<div class="col-6 category">\${category.ca_name}</div>`;
+                str += `<div class="col-6 category-name">\${category.ca_name}</div>`;
                 str += `<br>`;
                 for(board of data.boardList){
                     if(board.bo_ca_num === category.ca_num){
                     	//방금 가져온 board 의 bo_num
                         let boNum = board.bo_num;
-                        str += `<div class="col-3 board">\${board.bo_name}</div>`;
+                        str += `<div class="col-3 board-name">\${board.bo_name}</div>`;
                         str += `<div class="btn-boardManger-group">`;
                       	//bo_num을 버튼안에 값으로 넣어줌
                         str += `<button class="btn btn-outline-warning btn-board-update" data-num="\${boNum}">수정</button>`;
@@ -89,13 +89,19 @@ function getBoard(){
 				num
 			},
 			success : function(data) {
-				if(data == '1'){
+				switch(data){
+				case "1":
 					alert("게시판을 삭제했습니다.");
-					getBoard();
-				}else if(data=='-1'){
+					break;
+				case "-1":
 					alert("게시판을 삭제하지 못했습니다.");
-				}else if(data=='-2'){
+					break;
+				case "-2":
 					alert("게시판 삭제 권한이 없습니다.")
+					break;
+				default :
+					alert("게시판을 삭제하지 못했습니다.");
+					break;
 				}
 			},
 			error : function(a, b, c) {
@@ -103,6 +109,71 @@ function getBoard(){
 			}
 		});
 	})
+</script>
+
+<!-- 게시판 수정 -->
+<script type="text/javascript">
+	//수정 버튼을 누르면, 수정받을 값을 입력받는 창과 기존의 수정/삭제 버튼을 감춤
+	$(document).on("click",".btn-board-update",function(){
+		 initBoard();
+		 $(this).parent().prev('.board-name').hide();
+		 let boardName = $(this).parent().prev('.board-name').text();
+		 let input = 
+		 `
+		 <input type="text" class="form-control board-input" id="bo_name" placeholder="수정할 게시판 이름" name="bo_name" value="\${boardName}"></input>
+		 `;
+		 $(this).parent().prev('.board-name').after(input);
+		 $(this).parent().hide();
+		 let num = $(this).data("num");
+		 let btn = 
+			`
+			<button class="btn btn-outline-success btn-board-complete" data-num="\${num}">수정완료</button>
+			`;
+		 $(this).parent().after(btn);
+	})
+
+	//수정창 초기화
+	function initBoard(){
+	    //게시판 이름 보여주기
+	    $(".board-name").show();
+	    //감추었던 수정/삭제 버튼을 보여줌
+	    $(".btn-boardManger-group").show();
+	    //게시판 입력창 삭제
+	    $(".board-input").remove();
+	    //추가된 버튼 삭제
+	    $(".btn-board-complete").remove();
+	};
+	
+	//ajax , 수정 실행
+	$(document).on("click",".btn-board-complete",function(){
+		let num = $(this).data("num");
+		let boName = $('.board-input').val();
+		let btnComplete = $(this);
+		$.ajax({
+			url : '<c:url value="/board/update"/>',
+			method :'post',
+			data :{
+				num,
+				boName
+			},
+			success : function(data){
+				switch(data){
+				case "1" :
+					alert("게시판 수정 성공");
+					break;
+				case "-1":
+					alert("게시판 수정 실패(게시판 이름을 지정하지 않았거나 중복된 게시판 이름)");
+					break;
+				case "-2":
+					alert("잘못된 권한 접근");
+					break;
+				default : alert("게시글 수정 실패"); break;
+				}
+			}
+		})
+	});
+	
+	
 </script>
 </body>
 </html>

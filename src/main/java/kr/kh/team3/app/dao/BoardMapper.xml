@@ -34,4 +34,10 @@
 	<delete id = "deleteBoard">
 		delete from board where bo_num =#{boNum}
 	</delete>
+	
+	<update id="updateBoard">
+		update board
+		set bo_name = #{bo_name}
+		where bo_num = #{boNum}
+	</update>
 </mapper>

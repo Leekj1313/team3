@@ -85,4 +85,32 @@ public class BoardServiceImp implements BoardService{
 		
 	}
 
+	@Override
+	public int updateBoard(int bo_num, String bo_name, MemberVO user) {
+		BoardVO board = boardDao.selectBoard(bo_num);
+		String ori_bo_name = board.getBo_name();
+		
+		if(!checkString(bo_name) || ori_bo_name.equals(bo_name) ) {
+			return -1;
+		}
+		if( user==null||
+			!user.getMe_authority().equals("ADMIN")) {
+			return -2;
+		}
+		
+		ArrayList<BoardVO> boardList = boardDao.selectBoardList();
+		
+		for(BoardVO item : boardList) {
+			if(item.getBo_name().equals(bo_name)) {
+				return -1;
+			}
+		}
+		
+		if(boardDao.updateBoard(bo_num,bo_name)) {
+			return 1;
+		}
+		return -1;
+		
+	}
+
 }

@@ -19,5 +19,7 @@ public interface BoardService {
 	BoardVO getBorad(int boNum);
 
 	int deleteBoard(int num, MemberVO user);
+
+	int updateBoard(int bo_num, String bo_name, MemberVO user);
 	
 }
