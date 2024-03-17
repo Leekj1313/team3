@@ -18,7 +18,7 @@
 	.menus {
 		
 	}
-	.admin-btn {
+	.profile-btn {
 		width: 100%;
 		margin: 2px 0;
 	}
@@ -32,20 +32,33 @@
 </head>
 <body>
 <div class="side-box">
-	<div class="profile">
-	</div>
+	<c:if test="${user == null}">
+		<div class="sign-container">
+			<a href="<c:url value="/login"/>" class="btn btn-basic profile-btn">로그인</a>
+			<a href="<c:url value="/signup"/>" class="btn btn-secondary profile-btn">회원가입</a>
+			<div class="" style="text-align: center">
+				<a href="<c:url value=""/>" class="profile-btn" style="font-size: 8pt; color: gray; display: inline;">아이디 찾기</a>
+				<span style="color: gray; opacity: 60%">|</span>
+				<a href="<c:url value=""/>" class="profile-btn" style="font-size: 8pt; color: gray; display: inline;">비밀번호 찾기</a>
+			</div>
+		</div>
+	</c:if>
 	<c:if test="${user.me_authority eq 'ADMIN' }">
+		<div class="profile">
+		</div>
 		<div class="admin-menus">
-			<a href="<c:url value="/category/list"/>" class="btn btn-secondary admin-btn">카테고리 관리</a>
-			<a href="<c:url value=""/>" class="btn btn-secondary admin-btn">게시판 관리</a>
-			<a href="<c:url value=""/>" class="btn btn-secondary admin-btn">회원 관리</a>
+			<a href="<c:url value="/category/list"/>" class="btn btn-secondary profile-btn">카테고리 관리</a>
+			<a href="<c:url value=""/>" class="btn btn-secondary profile-btn">게시판 관리</a>
+			<a href="<c:url value=""/>" class="btn btn-secondary profile-btn">회원 관리</a>
 		</div>
 	</c:if>
 	<c:if test="${user.me_authority eq 'USER' }">
+		<div class="profile">
+		</div>
 		<div class="user-menus">
-			<a href="<c:url value=""/>" class="btn btn-secondary admin-btn">내가 쓴 글</a>
-			<a href="<c:url value=""/>" class="btn btn-secondary admin-btn">댓글 단 글</a>
-			<a href="<c:url value=""/>" class="btn btn-secondary admin-btn">정보 수정</a>
+			<a href="<c:url value=""/>" class="btn btn-secondary profile-btn">내가 쓴 글</a>
+			<a href="<c:url value=""/>" class="btn btn-secondary profile-btn">댓글 단 글</a>
+			<a href="<c:url value=""/>" class="btn btn-secondary profile-btn">정보 수정</a>
 		</div>
 	</c:if>
 </div>
