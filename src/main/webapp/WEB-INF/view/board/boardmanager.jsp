@@ -169,6 +169,7 @@ function getBoard(){
 					break;
 				default : alert("게시글 수정 실패"); break;
 				}
+				getBoard();
 			}
 		})
 	});
