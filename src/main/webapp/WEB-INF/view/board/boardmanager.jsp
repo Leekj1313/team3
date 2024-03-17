@@ -12,30 +12,41 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
-<h2>현재 게시판</h2>
+<div class="container">
+	<h1>게시판 관리</h1>
+	<br>
+	<form action="<c:url value="/board/manager"/>" method="post">
+		<h5>게시판 등록</h5>
+		<div class="mb-3 mt-3">
+			<label for="category" class="form-label">카테고리</label>
+			<select class="form-control" name="category" id="category">
+				<c:forEach items="${caList}" var="category">
+					<option value="${category.ca_num}">${category.ca_name}</option>
+				</c:forEach>
+			</select>
+		</div>
+		<div class="mb-3 mt-3">
+			<label for="title" class="form-label">게시판명</label>
+			<input type="text" class="form-control" id="title" placeholder="게시판명" name="title">
+		</div>
+		<button type="submit" class="btn btn-outline-success col-12">등록하기</button>
+	</form>
+	<br>
+	<h5>현재 게시판</h5>
 	<div class="mb-3 mt-3 board-manager">
 		<div class="mb-3 mt-3 board-set">
 		<!-- 외부 반복, div 시작태그와 카테고리 이름 -->
 			<div class="board-list">
-				<div class="col-6 category">[카테고리1]</div>
-				<br>
-				<!-- 내부반복 게시판 이름과 수정/삭제 버튼 -->
-				<div class="col-3 board">게시판1</div>
-				<div class="btn-boardManger-group">
-					<button class="btn btn-outline-warning btn-board-update">수정</button>
-					<button class="btn btn-outline-danger btn-board-delete">삭제</button>
-				</div>
+				<!-- 내부반복, 게시판이름 -->
 				<!-- 내부반복 종료 -->
 			</div>
-			<hr>
-			<!-- 외부 반복 종료 -->
+				<!-- 외부 반복 종료 -->
 		</div>
 	</div>
-</body>
+</div>
+<!-- 게시판 리스트 출력 -->
 <script type="text/javascript">
 getBoard();
-
-//현재 게시판과 카테고리 출력
 function getBoard(){
     $.ajax({
         url : '<c:url value="/board/list"/>',
@@ -67,6 +78,7 @@ function getBoard(){
 }
 </script>
 
+<!-- 게시판 삭제 -->
 <script type="text/javascript">
 	$(document).on("click",".btn-board-delete", function() {
 		let num = $(this).data("num");
@@ -92,5 +104,5 @@ function getBoard(){
 		});
 	})
 </script>
-
+</body>
 </html>
