@@ -2,6 +2,7 @@ package kr.kh.team3.app.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -76,4 +77,14 @@ private MemberDAO memberDao;
 		MemberVO member = memberDao.selectMember(id);
 		return member == null;
 	}
+
+	@Override
+	public MemberVO getMember(String name, String phone) {
+		if(name == null || phone == null) {
+			return null;
+		}
+		return memberDao.selectMemberId(name, phone);
+	}
+
+
 }
