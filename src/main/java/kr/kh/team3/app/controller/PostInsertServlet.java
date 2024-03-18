@@ -51,12 +51,13 @@ public class PostInsertServlet extends HttpServlet {
 		String writer = user.getMe_id();
 		
 		PostVO post = new PostVO(bo_num,title,content,writer);
-		
 		boolean res = postService.insertPost(post,partList);
 		
 		if(res) {
 			request.setAttribute("msg", "게시글 등록 완료");
 			request.setAttribute("url", "post/detail?num="+post.getPo_num());
+			request.getSession().removeAttribute("po_num");
+			System.out.println(request.getSession().getAttribute("po_num"));
 		}else {
 			request.setAttribute("msg", "게시글 등록 실패");
 			request.setAttribute("url","post/list?boNum="+bo_num);

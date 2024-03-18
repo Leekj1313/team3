@@ -46,7 +46,7 @@
 		    <input type="text" class="form-control" id="title" placeholder="제목" name="title">
 	  	</div>
 	  	<div class="btn-temp">
-		  	<button type ="button" id ="temSaveBtn" class="btn btn-success btn-temSave" data-count="0">임시글 저장</button>
+		  	<button type ="button" id ="temSaveBtn" class="btn btn-success btn-temSave">임시글 저장</button>
 		  	<button type ="button" id ="temLoadBtn" class="btn btn-success btn-temLoad">임시글 불러오기</button>
 		</div>
 
@@ -70,8 +70,8 @@ $('[name=content]').summernote({
   });
 </script>
 <script type="text/javascript">
+let count = 0;
 $(".btn-temSave").click(function(){
-	let count = $('#temSaveBtn').data('count');
 	let title = $("#title").val();
 	let content = $("#content").val();
 	let boNum = $('#board').val();
@@ -85,8 +85,23 @@ $(".btn-temSave").click(function(){
 			content,
 		},
 		success : function(data){
+			if(data=="OK"){
+				count = 1;
+				alert("게시글 임시저장 완료.")
+			}else{
+				alert("게시글을 임시저장 하지 못했습니다.")
+			}
 		}
 	});	
 });
 
+$(".btn-temLoad").click(function(){
+	$.ajax({
+		url : '<c:url value="/post/temp"/>',
+		method : 'get',
+		success : function(data){
+			
+		}
+	})
+})
 </script>

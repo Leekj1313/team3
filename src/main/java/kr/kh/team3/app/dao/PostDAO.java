@@ -56,5 +56,9 @@ public interface PostDAO {
 
 	void insertFile(@Param("file")FileVO fileVo);
 
+	int insertTmpPost(@Param("post")PostVO tmpPost);
+
+	boolean updateTmpPost(@Param("post")PostVO tmpPost, @Param("po_num")int po_num);
+
 
 }

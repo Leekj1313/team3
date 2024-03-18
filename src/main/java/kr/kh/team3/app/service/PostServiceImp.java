@@ -265,14 +265,41 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public boolean insertTempPost(PostVO tmpPost) {
+	public int insertTmpPost(PostVO tmpPost) {
+		if(tmpPost == null) {
+			return -1;
+		}
+		
 		if(!checkString(tmpPost.getPo_title())) {
 			tmpPost.setPo_title("[제목없음]");
 		}
-	
-//		postDao.insertTempPost(tmpPost);
-		return false;
 		
+		if(postDao.insertTmpPost(tmpPost)!= 1) {
+			return -1;
+		}
+		
+		int po_num = tmpPost.getPo_num();
+		
+		if(po_num >0) {
+			return po_num;
+		}
+		return -1;
+		
+	}
+
+	@Override
+	public boolean updateTmpPost(PostVO tmpPost, int po_num) {
+		if(tmpPost ==null) {
+			return false;
+		}
+		
+		if(!checkString(tmpPost.getPo_title())) {
+			tmpPost.setPo_title("[제목없음]");
+		}
+		
+		boolean res = postDao.updateTmpPost(tmpPost,po_num);
+		
+		return res;
 		
 		
 	}

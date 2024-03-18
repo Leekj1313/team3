@@ -141,4 +141,20 @@
 	<delete id="deletePost">
 		delete from post where po_num = #{num}
 	</delete>
+	
+	<insert id ="insertTmpPost" useGeneratedKeys="true" keyProperty="post.po_num">
+		insert into post(po_bo_num,po_title,po_content,po_me_id,po_temp) 
+		values(#{post.po_bo_num},#{post.po_title},#{post.po_content},#{post.po_me_id},#{post.po_temp})
+	</insert>
+	
+	<update id="updateTmpPost">
+		update post 
+		set
+		po_bo_num = #{post.po_bo_num},
+		po_title = #{post.po_title},
+		po_content = #{post.po_content}
+		where
+		po_num = #{po_num} and po_me_id = #{post.po_me_id}
+	</update>
+	
 </mapper>
