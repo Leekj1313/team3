@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내가 쓴 글 페이지</title>
+<title>댓글 단 글 페이지</title>
 <!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -29,7 +29,7 @@
 <jsp:include page="/WEB-INF/view/profile.jsp"/>
 
 <div class="container mt-3 col-6 card-1">
-	<h2 style="font-weight: bold">내가 쓴 글</h2>
+	<h2 style="font-weight: bold">댓글 단 글</h2>
 	<form action="<c:url value="/mypage/mypost"/>" class="mb-3 mt-3">
 		<div class="input-group">
 			<select name="type" class="form-select">
