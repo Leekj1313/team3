@@ -103,6 +103,7 @@ function getBoard(){
 					alert("게시판을 삭제하지 못했습니다.");
 					break;
 				}
+				getBoard();
 			},
 			error : function(a, b, c) {
 				

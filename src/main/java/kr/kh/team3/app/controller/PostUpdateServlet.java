@@ -31,18 +31,13 @@ public class PostUpdateServlet extends HttpServlet {
 		}catch(Exception e) {
 			num = 0;
 		}
-		//서비스에게 게시글 번호를 주면서 게시글을 가져오라고 시킴 : 이미 구현 
 		PostVO post = postService.getPost(num);
-		//가져온 게시글을 화면에 전송
 		request.setAttribute("post", post);
 		
 		//작성자가 맞는지 확인
-		//세션에서 회원 정보를 가져옴
 		MemberVO user = (MemberVO)request.getSession().getAttribute("user");
-		//게시글 작성자와 회원아이디가 같은지 확인
-		//다르면 게시글 상세로 보내고, 작성자가 아닙니다라고 메시세지를 띄움
+		
 		if( post == null || 
-			//user == null || 
 			!post.getPo_me_id().equals(user.getMe_id())) {
 			request.setAttribute("msg", "작성자가 아닙니다");
 			request.setAttribute("url", "board/detail?num="+num);
@@ -50,14 +45,11 @@ public class PostUpdateServlet extends HttpServlet {
 			return;
 		}
 		
-		ArrayList<FileVO> fileList = boardService.getFile(num);
+		/*ArrayList<FileVO> fileList = boardService.getFile(num);
 		request.setAttribute("fileList", fileList);
-		//같으면		
-		//게시판을 가져와서 화면에 전달
-		//서비스에게 게시판 리스트를 가져오라고 시킴
+
 		ArrayList<PostVO> list = postService.getPostList();
-		//게시판 리스트를 화면에 전송
-		request.setAttribute("list", list);
+		request.setAttribute("list", list);*/
 		request.getRequestDispatcher("/WEB-INF/view/post/update.jsp").forward(request, response);
 	}
 
@@ -94,15 +86,14 @@ public class PostUpdateServlet extends HttpServlet {
 				}
 			}
 		}
-		//서비스에게 게시글과 회원정보를 주면서 게시글 수정하라고 요청
-		boolean res = postService.updatePost(post, user, nums, fileList);
+		/*boolean res = postService.updatePost(post, user, nums, fileList);
 		if(res) {
 			request.setAttribute("msg", "게시글을 수정했습니다.");	
 		}
 		else {
 			request.setAttribute("msg", "게시글을 수정하지 못했습니다.");
 		}
-		request.setAttribute("url", "post/detail?num="+num);
+		request.setAttribute("url", "post/detail?num="+num);*/
 		request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 	}
 

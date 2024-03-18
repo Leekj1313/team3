@@ -71,7 +71,7 @@
 		SELECT 
 			post.*, 
 			SUM(CASE WHEN rc_state = 1 THEN 1 ELSE 0 END) AS po_up
-		FROM post join
+		FROM post left join
 			recommend on rc_po_num = po_num
 		where po_bo_num = #{cri.boNum}
 		<if test='cri.type=="all"'>
@@ -89,7 +89,8 @@
 	</select>
 	<select id="selectTotalCount" resultType="int">
 		SELECT count(*)
-		FROM post
+		FROM post left join
+			recommend on rc_po_num = po_num
 		where po_bo_num = #{cri.boNum}
 		<if test='cri.type=="all"'>
 			and po_title like concat('%', #{cri.search},'%') 

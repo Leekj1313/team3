@@ -54,10 +54,16 @@
 		    <textarea rows="10" class="form-control" id="content" name="content" placeholder="내용">${post.po_content}</textarea>
 	  	</div>
 	  	<div class="mb-3 mt-3">
-		    <label for="content" class="form-label">첨부파일:</label>
-		    <input type="file" class="form-control" name="file">
-		    <input type="file" class="form-control" name="file">
-		    <input type="file" class="form-control" name="file">
+		    <label>첨부파일:</label>
+	  		<c:forEach items="${fileList}" var="file">
+				<div class="form-control">
+					<span>${file.fi_ori_name}</span>
+					<a href="javascript:void(0);">&times;</a>
+				</div>
+			</c:forEach>
+		   	<c:forEach begin="1" end="${3 - fileList.size()}">
+				<input type="file" class="form-control" name="file">
+			</c:forEach>
 	  	</div>
 	  	<button class="btn btn-success col-12">수정하기</button>
 	</form>
