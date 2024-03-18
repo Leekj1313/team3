@@ -33,31 +33,31 @@ public class BoardManagerServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//카테고리 번호 저장
-				int ca_num = 0;
-				try {
-					ca_num = Integer.parseInt(request.getParameter("category"));
-				}catch (Exception e) {
-					e.printStackTrace();
-				}
-				System.out.println(ca_num);
-				//화면에서 보낸 제목을 가져옴
-				String title = request.getParameter("title");
-				//게시판명, 카테고리 번호를 이용하여 게시판 객체를 생성
-				BoardVO board = new BoardVO(ca_num, title);
-				//서비스에게 게시판 객체를 주면서 등록하라고 시킴
-				boolean res = boardService.insertBoard(board);
-				//등록을 하면 화면에 msg로 게시판을 등록했습니다라고 전송
-				if(res) {
-					request.setAttribute("msg", "게시판을 등록했습니다.");
-				}
-				//등록하지 못하면 화면에 msg로 게시판을 등록하지 못했습니다라고 전송
-				else {
-					request.setAttribute("msg", "게시판을 등록하지 못했습니다.");
-				}
-				//화면에 url로 메인으로를 전송
-				request.setAttribute("url", "/board/manager");
-				//message.jsp를 전송
-				request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
+		int ca_num = 0;
+		try {
+			ca_num = Integer.parseInt(request.getParameter("category"));
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(ca_num);
+		//화면에서 보낸 제목을 가져옴
+		String title = request.getParameter("title");
+		//게시판명, 카테고리 번호를 이용하여 게시판 객체를 생성
+		BoardVO board = new BoardVO(ca_num, title);
+		//서비스에게 게시판 객체를 주면서 등록하라고 시킴
+		boolean res = boardService.insertBoard(board);
+		//등록을 하면 화면에 msg로 게시판을 등록했습니다라고 전송
+		if(res) {
+			request.setAttribute("msg", "게시판을 등록했습니다.");
+		}
+		//등록하지 못하면 화면에 msg로 게시판을 등록하지 못했습니다라고 전송
+		else {
+			request.setAttribute("msg", "게시판을 등록하지 못했습니다.");
+		}
+		//화면에 url로 메인으로를 전송
+		request.setAttribute("url", "/board/manager");
+		//message.jsp를 전송
+		request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 		
 		
 	}

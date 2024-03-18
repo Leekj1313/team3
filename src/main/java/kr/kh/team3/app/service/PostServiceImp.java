@@ -1,5 +1,6 @@
 package kr.kh.team3.app.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -15,13 +16,12 @@ import kr.kh.team3.app.model.vo.FileVO;
 import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
-import kr.kh.team3.app.pagination.CommentCriteria;
 import kr.kh.team3.app.pagination.Criteria;
 
 public class PostServiceImp implements PostService {
 	
 	private PostDAO postDao;
-	
+	private String uploadPath = "D:\\uploads";
 	public PostServiceImp() {
 		String resource = "kr/kh/team3/app/config/mybatis-config.xml";
 		
@@ -184,6 +184,41 @@ public class PostServiceImp implements PostService {
 	@Override
 	public ArrayList<PostVO> getPostHotList() {
 		return postDao.selectPostHotList();
+	}
+
+	@Override
+	public boolean deletePost(int num, MemberVO user) {
+		if(user == null) {
+			return false;
+		}
+		//다오에게 게시글 번호를 주면서 게시글을 가져오라고 시킴
+		PostVO post = postDao.selectPost(num);
+		//게시글이 없거나 게시글 작성자와 회원 아이디가 다르면 false 반환
+		if(post == null || !post.getPo_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		
+		//게시글의 첨부파일을 서버 폴더에서 삭제(실제 파일)
+		//게시글의 첨부파일을 DB에서 삭제
+		//게시글에 있는 첨부파일 정보을 가져옴
+		ArrayList<FileVO> fileList = postDao.selectFileByPo_num(num);
+		
+		for(FileVO file : fileList) {
+			deleteFile(file);
+		}
+		return postDao.deletePost(num);
+	}
+
+	private void deleteFile(FileVO fileVo) {
+		if(fileVo == null) {
+			return;
+		}
+		File file = new File(uploadPath
+				+ fileVo.getFi_name().replace('/', File.separatorChar));
+		if(file.exists()) {
+			file.delete();
+		}
+		postDao.deleteFile(fileVo.getFi_num());
 	}
 
 

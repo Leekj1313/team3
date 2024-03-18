@@ -52,6 +52,5 @@ public class PostListServlet extends HttpServlet {
 		request.setAttribute("list", list);//화면에 전송
 		request.getRequestDispatcher("/WEB-INF/view/post/list.jsp").forward(request, response);
 		
-		
 	}
 }

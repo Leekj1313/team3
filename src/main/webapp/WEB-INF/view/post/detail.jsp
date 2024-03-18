@@ -60,8 +60,8 @@
 		  	</c:if>
 		  	<a href="<c:url value="/post/list?boNum=${post.board.bo_num}"/>" class="btn btn-outline-primary">목록으로</a>
 		  	<c:if test="${post.po_me_id == user.me_id }">
-		  		<a href="<c:url value="/post/delete"/>" class="btn btn-outline-danger">삭제</a>
-		  		<a href="<c:url value="/post/update"/>" class="btn btn-outline-warning">수정</a>
+		  		<a href="<c:url value="/post/delete?num=${post.po_num}"/>" class="btn btn-outline-danger">삭제</a>
+		  		<a href="<c:url value="/post/update?num=${post.po_num}"/>" class="btn btn-outline-warning">수정</a>
 		  	</c:if>
 	  		<a href="<c:url value="/post/report"/>" class="btn btn-outline-dark">신고</a>
 		 		<hr>

@@ -20,4 +20,11 @@ public class PostVO {
 	private int po_notice;
 	private BoardVO board;
 	private int po_up;
+	
+	public PostVO(int num, String title, String content, int boNum) {
+		this.po_num = num;
+		this.po_title = title;
+		this.po_content = content;
+		this.po_bo_num = boNum;
+	}
 }
