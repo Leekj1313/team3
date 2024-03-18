@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.team3.app.model.vo.MemberVO;
-import kr.kh.team3.app.model.vo.PostVO;
+import kr.kh.team3.app.model.vo.MyCommentVO;
 import kr.kh.team3.app.pagination.Criteria;
 import kr.kh.team3.app.pagination.PageMaker;
 import kr.kh.team3.app.service.PostService;
@@ -35,15 +35,28 @@ public class MypageMycommentServlet extends HttpServlet {
 		
 		Criteria cri = new Criteria(page, 2, type, search, user.getMe_id());
 		System.out.println(cri);
+		System.out.println(cri.getPageStart() + ", " + cri.getPerPageNum());
 		//검색어, 검색타입에 맞는 전체 게시글 개수를 가져옴
-		int totalCount = postService.getMyPostTotalCount(cri);
-		System.out.println("totalcaount : " + totalCount);
+		int totalCount = postService.getMyCommentPostTotalCount(cri);
+		System.out.println("totalcount : " + totalCount);
 		PageMaker pm = new PageMaker(5, cri, totalCount);
 		System.out.println(pm.getStartPage());
 		request.setAttribute("pm", pm);
 		//현재 페이지 정보에 맞는 게시글 리스트를 가져옴
-		ArrayList<PostVO> list = postService.getMyPostList(cri);
+		ArrayList<MyCommentVO> list = postService.getMyCommentPostList(cri);
+		System.out.println(list);
+		//중복된 게시글 걸러내기..인데
+		//중복 제거되면 한 페이지에 두개 보여져야 하는데 하나만 보여지는 문제
+//		ArrayList<MyCommentVO> list = new ArrayList<MyCommentVO>();
+//		ArrayList<Integer> commentIds = new ArrayList<>();
+//		for(MyCommentVO comment:comments) {
+//			if(!commentIds.contains(comment.getPo_num())) {
+//				list.add(comment);
+//				commentIds.add(comment.getPo_num());
+//			}
+//		}
 		request.setAttribute("list", list);//화면에 전송
+
 		request.getRequestDispatcher("/WEB-INF/view/mypage/mycomment.jsp").forward(request, response);
 	}
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import kr.kh.team3.app.model.vo.CommentVO;
 import kr.kh.team3.app.model.vo.FileVO;
 import kr.kh.team3.app.model.vo.MemberVO;
+import kr.kh.team3.app.model.vo.MyCommentVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
 import kr.kh.team3.app.pagination.CommentCriteria;
@@ -44,5 +45,14 @@ public interface PostService {
 	ArrayList<PostVO> getMyPostList(Criteria cri);
 
 	int getMyPostTotalCount(Criteria cri);
+
+
+	//ArrayList<CommentVO> getMyCommentList(String me_id);
+
+
+	ArrayList<MyCommentVO> getMyCommentPostList(Criteria cri);
+
+
+	int getMyCommentPostTotalCount(Criteria cri);
 
 }

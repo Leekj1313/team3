@@ -41,6 +41,7 @@
 		    <button class="btn btn-secondary">검색</button>
 		</div>
 	</form>
+	${list}
 	<table class="table table-hover">
 	    <thead>
 			<tr>

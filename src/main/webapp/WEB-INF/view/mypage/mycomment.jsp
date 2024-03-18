@@ -30,7 +30,7 @@
 
 <div class="container mt-3 col-6 card-1">
 	<h2 style="font-weight: bold">댓글 단 글</h2>
-	<form action="<c:url value="/mypage/mypost"/>" class="mb-3 mt-3">
+	<form action="<c:url value="/mypage/mycomment"/>" class="mb-3 mt-3">
 		<div class="input-group">
 			<select name="type" class="form-select">
 				<option value="all" <c:if test='${pm.cri.type == "all"}'>selected</c:if>>전체</option>
@@ -47,6 +47,7 @@
 				<th>번호</th>
 				<th>게시판</th>
 				<th>제목</th>
+				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
@@ -55,18 +56,19 @@
 	    	<c:forEach items="${list}" var="post">
 			<tr>
 				<td>${post.po_num}</td>
-				<td>${post.board.bo_name}</td>
+				<td>${post.bo_name}</td>
 				<td>
 					<c:url var="url" value="/post/detail">
 						<c:param name="num" value="${post.po_num}"/>
 					</c:url>
 					<a href="${url}">${post.po_title}</a>
 				</td>
+				<td>${post.po_me_id}</td>
 				<td><fmt:formatDate pattern="yy/MM/dd hh:mm" value="${post.po_date}"/></td>
 				<td>${post.po_view}</td>
 			</tr>
 			</c:forEach>
-			<c:if test="${list.size() == 0 }">
+			<c:if test="${list.size() == 0}">
 				<tr>
 					<th colspan="5">
 						<h3 class="text-center">등록된 게시글이 없습니다.</h3>
@@ -78,7 +80,7 @@
 	<ul class="pagination justify-content-center">
 		<c:if test="${pm.prev}">
 			<li class="page-item">
-				<c:url var="prevUrl" value="/mypage/mypost">
+				<c:url var="prevUrl" value="/mypage/mycomment">
 					<c:param name="type" value="${pm.cri.type}"/>
 					<c:param name="search" value="${pm.cri.search}"/>
 					<c:param name="page" value="${pm.startPage - 1}"/>
@@ -90,7 +92,7 @@
 		</c:if>
 		<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
 			<li class="page-item <c:if test="${pm.cri.page == i}">active</c:if>">
-				<c:url var="page" value="/mypage/mypost">
+				<c:url var="page" value="/mypage/mycomment">
 					<c:param name="type" value="${pm.cri.type}"/>
 					<c:param name="search" value="${pm.cri.search}"/>
 					<c:param name="page" value="${i}"/>
@@ -100,7 +102,7 @@
 		</c:forEach>
 		<c:if test="${pm.next }">
 			<li class="page-item">
-				<c:url var="nextUrl" value="/mypage/mypost">
+				<c:url var="nextUrl" value="/mypage/mycomment">
 					<c:param name="type" value="${pm.cri.type}"/>
 					<c:param name="search" value="${pm.cri.search}"/>
 					<c:param name="page" value="${pm.endPage + 1}"/>
