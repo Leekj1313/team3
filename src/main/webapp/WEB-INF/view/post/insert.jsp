@@ -59,7 +59,7 @@
 	  	<div class="btn-temp">
 		  	<button type ="button" id ="temSaveBtn" class="btn btn-success btn-temSave">임시글 저장</button>
 		  	<button type ="button" id ="temLoadBtn" class="btn btn-success btn-temLoad">임시글 불러오기</button>
-		  	<div id="popupElement" style="display: none; border: 1px solid black; padding: 10px; background: white;"></div>
+		  	<div id="tmp-post-list" style="display: none; border: 1px solid black; padding: 10px; background: white;"></div>
 		</div>
 
 	  	<div class="mb-3 mt-3">
@@ -124,7 +124,7 @@ $(".btn-temLoad").click(function(){
 					<button type="button" class="btn-tmpPost-select" data-num="\${item.po_num}" data-boNum="\${item.po_bo_num}" data-poTitle="\${item.po_title}" data-poContent="\${item.po_content}">\${item.po_title}</button>		
 					`
 				}
-				$('#popupElement').html(str).show();
+				$('#tmp-post-list').html(str).show();
 			}
 		}
 	})
