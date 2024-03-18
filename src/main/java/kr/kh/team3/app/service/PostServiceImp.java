@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import javax.servlet.http.Part;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -17,6 +19,7 @@ import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
 import kr.kh.team3.app.pagination.Criteria;
+import kr.kh.team3.app.utils.FileUploadUtils;
 
 public class PostServiceImp implements PostService {
 	
@@ -219,6 +222,46 @@ public class PostServiceImp implements PostService {
 			file.delete();
 		}
 		postDao.deleteFile(fileVo.getFi_num());
+	}
+
+	@Override
+	public boolean insertPost(PostVO post, ArrayList<Part> partList) {
+		if(post==null||
+		   !checkString(post.getPo_title())||
+		   !checkString(post.getPo_me_id())) {
+			return false;
+		}
+		
+		
+		boolean res = postDao.insertPost(post);
+		if(!res) {
+			return false;
+		}
+		
+		if(partList==null||partList.size()==0) {
+			return true;
+		}
+		for(Part part : partList) {
+			uploadFile(part,post.getPo_num());
+		}
+		return true;
+	}
+
+	private void uploadFile(Part part, int po_num) {
+		if(part == null || po_num == 0) {
+			return;
+		}
+		
+		String fileOriginalName = FileUploadUtils.getFileName(part);
+		if(!checkString(fileOriginalName)) {
+			return;
+		}
+		String fileName = FileUploadUtils.upload(uploadPath, part);
+		FileVO fileVo =new FileVO(po_num, fileName, fileOriginalName);
+		
+		postDao.insertFile(fileVo);
+		
+		
 	}
 
 

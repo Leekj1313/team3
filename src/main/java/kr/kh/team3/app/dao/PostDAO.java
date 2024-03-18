@@ -52,5 +52,9 @@ public interface PostDAO {
 
 	boolean deletePost(@Param("num")int num);
 
+	boolean insertPost(@Param("post")PostVO post);
+
+	void insertFile(@Param("file")FileVO fileVo);
+
 
 }

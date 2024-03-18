@@ -34,10 +34,10 @@
 <div class="container">
 	<form action="<c:url value="/post/insert" />" method="post" enctype="multipart/form-data">
 		<div class="mb-3 mt-3">
-		    <label for="community" class="form-label">게시판:</label>
-		    <select class="form-control" id="community" name="community">
-		    	<c:forEach items="${list}" var="community">
-		    		<option value="${community.co_num }">${community.co_name}</option>
+		    <label for="board" class="form-label">게시판:</label>
+		    <select class="form-control" id="board" name="board">
+		    	<c:forEach items="${boardList}" var="board">
+		    		<option value="${board.bo_num }">${board.bo_name}</option>
 		    	</c:forEach>
 		    </select>
 	  	</div>

@@ -48,5 +48,7 @@ public interface PostService {
 
 	boolean deletePost(int num, MemberVO user);
 
+	boolean insertPost(PostVO post, ArrayList<Part> partList);
+
 
 }
