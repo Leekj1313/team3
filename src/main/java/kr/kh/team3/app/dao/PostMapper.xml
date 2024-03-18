@@ -107,4 +107,38 @@
 		ORDER BY po_date DESC
 		LIMIT 5;
 	</select>
+	
+	<select id="selectMyPostList" resultMap="PostMap">
+		SELECT * 
+		FROM post
+		WHERE po_me_id = #{cri.me_id}
+		<if test='cri.type=="all"'>
+			and po_title like concat('%', #{cri.search},'%') 
+				or po_content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test='cri.type=="title"'>
+			and po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="content"'>
+			and po_content like concat('%', #{cri.search}, '%')
+		</if>
+		ORDER BY po_num DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="selectMyPostTotalCount" resultType="int">
+		SELECT count(*)
+		FROM post
+		WHERE po_me_id = #{cri.me_id}
+		<if test='cri.type=="all"'>
+			and po_title like concat('%', #{cri.search},'%') 
+				or po_content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test='cri.type=="title"'>
+			and po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="content"'>
+			and po_content like concat('%', #{cri.search}, '%')
+		</if>
+	</select>
 </mapper>

@@ -44,5 +44,9 @@ public interface PostDAO {
 
 	ArrayList<PostVO> selectRecentNotice();
 
+	ArrayList<PostVO> selectMyPostList(@Param("cri")Criteria cri);
+
+	int selectMyPostTotalCount(@Param("cri")Criteria cri);
+
 
 }

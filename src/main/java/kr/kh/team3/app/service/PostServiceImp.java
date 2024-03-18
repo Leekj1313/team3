@@ -181,5 +181,21 @@ public class PostServiceImp implements PostService {
 		
 	}
 
+	@Override
+	public ArrayList<PostVO> getMyPostList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectMyPostList(cri);
+	}
+
+	@Override
+	public int getMyPostTotalCount(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectMyPostTotalCount(cri);
+	}
+
 
 }
