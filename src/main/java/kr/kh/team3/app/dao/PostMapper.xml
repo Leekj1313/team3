@@ -27,7 +27,7 @@
 		select 
 			post.*,
 			sum(case when rc_state = 1 then 1 else 0 end) as po_up
-		from post join
+		from post left join
 			recommend on rc_po_num = po_num
 			where po_num = #{num}
 	</select>
@@ -117,7 +117,7 @@
 		SELECT 
 			post.*, 
 			SUM(CASE WHEN rc_state = 1 THEN 1 ELSE 0 END) AS po_up
-		FROM post join
+		FROM post left join
 			recommend on rc_po_num = po_num
 		where po_num
 		group by po_num
