@@ -44,8 +44,8 @@
 	<c:if test="${user.me_authority eq 'USER' }">
 		<div class="user-menus">
 			<a href="<c:url value=""/>" class="btn btn-secondary admin-btn">내가 쓴 글</a>
-			<a href="<c:url value=""/>" class="btn btn-secondary admin-btn">댓글 단 글</a>
-			<a href="<c:url value=""/>" class="btn btn-secondary admin-btn">정보 수정</a>
+			<a href="<c:url value="/mypage/mycomment"/>" class="btn btn-secondary admin-btn">댓글 단 글</a>
+			<a href="<c:url value="/signup/update"/>" class="btn btn-secondary admin-btn">정보 수정</a>
 		</div>
 	</c:if>
 </div>
