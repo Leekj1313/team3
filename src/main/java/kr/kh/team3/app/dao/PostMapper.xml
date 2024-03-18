@@ -157,4 +157,7 @@
 		po_num = #{po_num} and po_me_id = #{post.po_me_id}
 	</update>
 	
+	<select id="selectTmpPostList" resultType="kr.kh.team3.app.model.vo.PostVO">
+		select * from post where po_me_id = #{user.me_id} and po_temp = 1
+	</select>
 </mapper>

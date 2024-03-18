@@ -304,5 +304,11 @@ public class PostServiceImp implements PostService {
 		
 	}
 
+	@Override
+	public ArrayList<PostVO> getTmpPostList(MemberVO user) {
+		return postDao.selectTmpPostList(user);
+		
+	}
+
 
 }

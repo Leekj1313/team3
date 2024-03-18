@@ -24,6 +24,17 @@
   .btn-temp .btn {
     margin-left: 5px;
   }
+  
+  .btn-tmpPost-select {
+    display: block; /
+    width: 100%; 
+    margin-bottom: 5px; 
+  }
+  
+  .btn-tmpPost-select:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
 
 </style>
 
@@ -48,6 +59,7 @@
 	  	<div class="btn-temp">
 		  	<button type ="button" id ="temSaveBtn" class="btn btn-success btn-temSave">임시글 저장</button>
 		  	<button type ="button" id ="temLoadBtn" class="btn btn-success btn-temLoad">임시글 불러오기</button>
+		  	<div id="popupElement" style="display: none; border: 1px solid black; padding: 10px; background: white;"></div>
 		</div>
 
 	  	<div class="mb-3 mt-3">
@@ -71,6 +83,7 @@ $('[name=content]').summernote({
 </script>
 <script type="text/javascript">
 let count = 0;
+let po_num = 0;
 $(".btn-temSave").click(function(){
 	let title = $("#title").val();
 	let content = $("#content").val();
@@ -79,13 +92,15 @@ $(".btn-temSave").click(function(){
 		url : '<c:url value="/post/temp"/>',
 		method : 'post',
 		data : {
+			po_num,
 			count,
 			boNum,
 			title,
-			content,
+			content
 		},
 		success : function(data){
-			if(data=="OK"){
+			if(data.res=="OK"){
+				po_num = data.po_num;
 				count = 1;
 				alert("게시글 임시저장 완료.")
 			}else{
@@ -100,8 +115,33 @@ $(".btn-temLoad").click(function(){
 		url : '<c:url value="/post/temp"/>',
 		method : 'get',
 		success : function(data){
-			
+			let str ='';
+			if(data.tmpList.length !=0){
+				
+				for(item of data.tmpList){
+					str += 
+					`
+					<button type="button" class="btn-tmpPost-select" data-num="\${item.po_num}" data-boNum="\${item.po_bo_num}" data-poTitle="\${item.po_title}" data-poContent="\${item.po_content}">\${item.po_title}</button>		
+					`
+				}
+				$('#popupElement').html(str).show();
+			}
 		}
 	})
+})
+
+$(document).on("click",".btn-tmpPost-select",function(){
+	
+	if(confirm("임시 저장된 게시글을 불러올 시 기존 게시글 정보가 사라집니다. 진행하시겠습니까?")){
+		let po_num = $(this).data("num");
+		let po_bo_num = $(this).data("bonum");
+		let po_title = $(this).data("potitle");
+		let po_content = $(this).data("pocontent");
+		console.log(po_num,po_bo_num,po_title,po_content);
+		$('#board').val(po_bo_num);
+		$('#title').val(po_title);
+		$('#content').val(po_content);
+	}
+	
 })
 </script>

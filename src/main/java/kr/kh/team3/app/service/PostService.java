@@ -57,5 +57,8 @@ public interface PostService {
 	boolean updateTmpPost(PostVO tmpPost, int po_num);
 
 
+	ArrayList<PostVO> getTmpPostList(MemberVO user);
+
+
 
 }

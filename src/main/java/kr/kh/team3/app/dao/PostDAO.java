@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.kh.team3.app.model.vo.CommentVO;
 import kr.kh.team3.app.model.vo.FileVO;
+import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
 import kr.kh.team3.app.pagination.Criteria;
@@ -59,6 +60,8 @@ public interface PostDAO {
 	int insertTmpPost(@Param("post")PostVO tmpPost);
 
 	boolean updateTmpPost(@Param("post")PostVO tmpPost, @Param("po_num")int po_num);
+
+	ArrayList<PostVO> selectTmpPostList(@Param("user")MemberVO user);
 
 
 }
