@@ -67,11 +67,11 @@
 let cri = {
 	page : 1,
 }
-//댓글을 불러와서 화면에 출력하는 함수 : 현재 댓글 페이지 정보
+//카테고리를 불러와서 화면에 출력하는 함수 : 현재 카테고리 페이지 정보
 displayCategoryAndPagination(cri);
 function displayCategoryAndPagination(cri){
-	//ajax를 이용해서 서버에 현재 댓글 페이지 정보를 보내고,
-	//서버에서 보낸 댓글 리스트와 페이지네이션 정보를 받아와서 화면에 출력
+	//ajax를 이용해서 서버에 현재 카테고리 페이지 정보를 보내고,
+	//서버에서 보낸 카테고리 리스트와 페이지네이션 정보를 받아와서 화면에 출력
 	$.ajax({
 		url : '<c:url value="/category/list"/>',
 		method : 'post',
@@ -83,11 +83,11 @@ function displayCategoryAndPagination(cri){
 	});
 }
 
-//댓글이 주어지면 댓글을 화면에 출력하는 함수
+//카테고리가 주어지면 카테고리를 화면에 출력하는 함수
 function displayCategory(categoryList){
 	let str = '';
 	if(categoryList.length == 0){
-		$(".box-category-list").html('<h3>등록된 댓글이 없습니다.</h3>')
+		$(".box-category-list").html('<h3>등록된 카테고리가 없습니다.</h3>')
 		return;
 	}
 	
@@ -197,7 +197,6 @@ $(document).on("click",".btn-category-delete", function(){
 			location.href = "<c:url value='/login'/>";
 			return;
 		}
-		//취소 누르면 현재 페이지에서 추천/비추천 동작을 안 함
 		else{
 			location.href = "<c:url value='/'/>";
 			return;
@@ -235,7 +234,6 @@ $(document).on("click", ".btn-category-update", function(){
 			location.href = "<c:url value='/login'/>";
 			return;
 		}
-		//취소 누르면 현재 페이지에서 추천/비추천 동작을 안 함
 		else{
 			location.href = "<c:url value='/'/>";
 			return;
@@ -243,15 +241,15 @@ $(document).on("click", ".btn-category-update", function(){
 	}
 	
 	initCategory();
-	//현재 댓글 보여주는 창이 textarea 태그로 변경
-	//기존 댓글창을 감춤
+	//현재 카테고리 보여주는 창이 textarea 태그로 변경
+	//기존 창을 감춤
 	$(this).parents(".box-category").find(".ca_name").hide();
 	let comment = $(this).parents(".box-category").find(".ca_name").text();
-	let textarea = 
+	let input = 
 	`
-	<textarea class="form-control cat-input">\${comment}</textarea>
+	<input type="text" class="form-control cat-input" value="\${comment}" style="height: 54px">
 	`;
-	$(this).parents(".box-category").find(".ca_name").after(textarea);
+	$(this).parents(".box-category").find(".ca_name").after(input);
 	
 	//수정 삭제 버튼 대신 수정 완료 버튼으로 변경
 	$(this).parent().hide();
