@@ -94,4 +94,25 @@ private MemberDAO memberDao;
 		return memberDao.selectMemberPw(id, phone);
 	}
 
+	@Override
+	public MemberVO getMember(String id) {
+		if(id == null) {
+			return null;
+		}
+		return memberDao.selectMember(id);
+	}
+
+	@Override
+	public boolean updatePassword(String pw, String id) {
+		if(pw == null || id == null) {
+			return false;
+		}
+		
+		MemberVO user = memberDao.selectMember(id);
+		if(user == null) {
+			return false;
+		}
+		return memberDao.updatePassword(pw, user);
+	}
+
 }

@@ -28,7 +28,7 @@ public class FindPasswordServlet extends HttpServlet {
 		
 		if(user != null) {
 			request.setAttribute("msg", "비밀번호 찾기에 성공했습니다.");
-			request.setAttribute("url", "/password/update");
+			request.setAttribute("url", "/password/update?id="+user.getMe_id());
 		}else {
 			request.setAttribute("msg", "비밀번호 찾기에 실패했습니다.");
 			request.setAttribute("url", "/find/password");

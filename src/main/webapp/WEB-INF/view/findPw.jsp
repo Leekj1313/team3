@@ -56,10 +56,7 @@
 	            <label for="phone" class="form-label">전화번호</label>
 	            <input type="text" placeholder="전화번호" class="phone" id="phone" name="phone" required>
         	</div>
-        	<form action="<c:url value="/password/update"/>" class="mb-3 mt-3">
-        		<input type="hidden" id="id" name="id" value="${user.me_id}"/>
-            	<a href="<c:url value="/password/update?id=${user.me_id}"/>" class="btn btn-outline-primary col-12">비밀번호 찾기</a>
-        	</form>
+            <input type="submit" id="btn" value="비밀번호 찾기"><br>
         </form>
     </div>
 </body>

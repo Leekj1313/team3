@@ -17,4 +17,8 @@ public interface MemberService {
 
 	MemberVO getMemberPw(String id, String phone);
 
+	MemberVO getMember(String id);
+
+	boolean updatePassword(String pw, String id);
+
 }

@@ -16,4 +16,6 @@ public interface MemberDAO {
 
 	MemberVO selectMemberPw(@Param("me_id")String id, @Param("me_phone")String phone);
 
+	boolean updatePassword(@Param("me_pw")String pw, @Param("user")MemberVO user);
+
 }

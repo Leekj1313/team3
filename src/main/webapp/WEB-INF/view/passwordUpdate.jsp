@@ -35,6 +35,7 @@
 <div class="card card-1 container col-5 p-5">
 <h3>새 비밀번호</h3>
 <form action="<c:url value="/password/update"/>" class="was-validated" method="post">
+	<input type="hidden" id="id" name="id" value="${user.me_id}">
 	<div class="mb-3 mt-3">
 		<label for="pw" class="form-label">새 비밀번호</label>
 		<input type="password" class="form-control" id="pw" placeholder="Enter password" name="pw" required>
