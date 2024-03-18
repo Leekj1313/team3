@@ -14,5 +14,7 @@ public interface CategoryDAO {
 
 	int selectTotalCountCategory(@Param("cri")Criteria cri);
 
+	ArrayList<CategoryVO> selectCategory();
+
 
 }
