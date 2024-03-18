@@ -51,4 +51,7 @@ public interface PostService {
 	boolean insertPost(PostVO post, ArrayList<Part> partList);
 
 
+	boolean insertTempPost(PostVO tmpPost);
+
+
 }

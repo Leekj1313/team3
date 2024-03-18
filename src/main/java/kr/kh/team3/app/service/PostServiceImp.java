@@ -264,5 +264,18 @@ public class PostServiceImp implements PostService {
 		
 	}
 
+	@Override
+	public boolean insertTempPost(PostVO tmpPost) {
+		if(!checkString(tmpPost.getPo_title())) {
+			tmpPost.setPo_title("[제목없음]");
+		}
+	
+//		postDao.insertTempPost(tmpPost);
+		return false;
+		
+		
+		
+	}
+
 
 }

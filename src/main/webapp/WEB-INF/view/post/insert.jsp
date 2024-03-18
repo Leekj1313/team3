@@ -46,8 +46,8 @@
 		    <input type="text" class="form-control" id="title" placeholder="제목" name="title">
 	  	</div>
 	  	<div class="btn-temp">
-		  	<button type ="button" id ="temSaveBtn" class="btn btn-success">임시글 저장</button>
-		  	<button type ="button" id ="temLoadBtn" class="btn btn-success">임시글 불러오기</button>
+		  	<button type ="button" id ="temSaveBtn" class="btn btn-success btn-temSave" data-count="0">임시글 저장</button>
+		  	<button type ="button" id ="temLoadBtn" class="btn btn-success btn-temLoad">임시글 불러오기</button>
 		</div>
 
 	  	<div class="mb-3 mt-3">
@@ -68,4 +68,25 @@ $('[name=content]').summernote({
     tabsize: 2,
     height: 400
   });
+</script>
+<script type="text/javascript">
+$(".btn-temSave").click(function(){
+	let count = $('#temSaveBtn').data('count');
+	let title = $("#title").val();
+	let content = $("#content").val();
+	let boNum = $('#board').val();
+	$.ajax({
+		url : '<c:url value="/post/temp"/>',
+		method : 'post',
+		data : {
+			count,
+			boNum,
+			title,
+			content,
+		},
+		success : function(data){
+		}
+	});	
+});
+
 </script>
