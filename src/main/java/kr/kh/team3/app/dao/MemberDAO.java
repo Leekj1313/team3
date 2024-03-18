@@ -14,4 +14,6 @@ public interface MemberDAO {
 
 	MemberVO selectMemberId(@Param("me_name")String name, @Param("me_phone")String phone);
 
+	MemberVO selectMemberPw(@Param("me_id")String id, @Param("me_phone")String phone);
+
 }

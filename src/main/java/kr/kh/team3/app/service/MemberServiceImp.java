@@ -79,12 +79,19 @@ private MemberDAO memberDao;
 	}
 
 	@Override
-	public MemberVO getMember(String name, String phone) {
+	public MemberVO getMemberId(String name, String phone) {
 		if(name == null || phone == null) {
 			return null;
 		}
 		return memberDao.selectMemberId(name, phone);
 	}
-
+	
+	@Override
+	public MemberVO getMemberPw(String id, String phone) {
+		if(id == null || phone == null) {
+			return null;
+		}
+		return memberDao.selectMemberPw(id, phone);
+	}
 
 }

@@ -1,7 +1,6 @@
 package kr.kh.team3.app.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,27 +12,26 @@ import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.service.MemberService;
 import kr.kh.team3.app.service.MemberServiceImp;
 
-@WebServlet("/find/id")
-public class FindIdServlet extends HttpServlet {
+@WebServlet("/find/password")
+public class FindPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	private MemberService memberService = new MemberServiceImp();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/findId.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/findPw.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
+		String id = request.getParameter("id");
 		String phone = request.getParameter("phone");
-		MemberVO user = memberService.getMemberId(name, phone);
+		MemberVO user = memberService.getMemberPw(id, phone);
 		request.setAttribute("user", user);
 		
 		if(user != null) {
-			request.setAttribute("msg", "해당 회원의 아이디는 " + user.getMe_id() + " 입니다.");
-			request.setAttribute("url", "/login");
+			request.setAttribute("msg", "비밀번호 찾기에 성공했습니다.");
+			request.setAttribute("url", "/password/update");
 		}else {
-			request.setAttribute("msg", "아이디 찾기에 실패했습니다.");
-			request.setAttribute("url", "/find/id");
+			request.setAttribute("msg", "비밀번호 찾기에 실패했습니다.");
+			request.setAttribute("url", "/find/password");
 		}
 		request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 	}

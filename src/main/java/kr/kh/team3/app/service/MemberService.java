@@ -13,6 +13,8 @@ public interface MemberService {
 
 	MemberVO login(LoginDTO loginDTO);
 
-	MemberVO getMember(String name, String phone);
+	MemberVO getMemberId(String name, String phone);
+
+	MemberVO getMemberPw(String id, String phone);
 
 }

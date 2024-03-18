@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디 찾기</title>
+<title>비밀번호 찾기</title>
 <script src="//code.jquery.com/jquery-3.4.1.js"></script>
 <style type="text/css">
  body {
@@ -46,17 +46,20 @@
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="login-box">
-        <form action="<c:url value="/find/id"/>" method="post">
-        	<h1>아이디 찾기</h1>
+        <form action="<c:url value="/find/password"/>" method="post">
+        	<h1>비밀번호 찾기</h1>
         	<div class="input-group">
-	        	<label for="name" class="form-label">이름</label>
-	            <input type="text" placeholder="이름" class="name" id="name" name="name" required>
+	        	<label for="id" class="form-label">아이디</label>
+	            <input type="text" placeholder="아이디" class="id" id="id" name="id" required>
         	</div>
         	<div class="input-group">
 	            <label for="phone" class="form-label">전화번호</label>
 	            <input type="text" placeholder="전화번호" class="phone" id="phone" name="phone" required>
         	</div>
-            <input type="submit" id="btn" class="btn-id" value="아이디 찾기"><br>
+        	<form action="<c:url value="/password/update"/>" class="mb-3 mt-3">
+        		<input type="hidden" id="id" name="id" value="${user.me_id}"/>
+            	<a href="<c:url value="/password/update?id=${user.me_id}"/>" class="btn btn-outline-primary col-12">비밀번호 찾기</a>
+        	</form>
         </form>
     </div>
 </body>
