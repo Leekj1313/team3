@@ -30,7 +30,10 @@
 					<tr>
 						<td>${post.po_num}</td>
 						<td>
-							<a href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title}</a>
+							<c:url var="url" value="/post/detail">
+							<c:param name="num" value="${post.po_num}" />
+						</c:url>
+						<a href="${url}">${post.po_title}</a>
 						</td>
 						<td>
 							<c:url var="page" value="/post/list?boNum=${board.bo_num}">
