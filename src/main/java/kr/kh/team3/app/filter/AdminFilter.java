@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import kr.kh.team3.app.model.vo.MemberVO;
 
 //로그인 한 회원만 접근할 수 있는 URL에서 동작하는 필터
-@WebFilter({"/post/insert","/post/update","/post/delete", "/recommend", "/mypage/mypost"})
-public class MemberFilter extends HttpFilter implements Filter {
+@WebFilter({"/category/list"})
+public class AdminFilter extends HttpFilter implements Filter {
 	
 	private static final long serialVersionUID = -5262224032098686359L;
 
@@ -23,8 +23,8 @@ public class MemberFilter extends HttpFilter implements Filter {
 		//회원 정보를 가져옴
 		MemberVO user = (MemberVO)((HttpServletRequest)request).getSession().getAttribute("user");
 		//회원 정보가 없으면 로그인이 필요한 서비스입니다 라고 알림 후 로그인페이지로 이동
-		if(user == null) {
-			request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
+		if(user == null || user.getMe_authority() == "USER") {
+			request.setAttribute("msg", "관리자 전용 서비스입니다.");
 			request.setAttribute("url", "login");
 			request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 			return;
