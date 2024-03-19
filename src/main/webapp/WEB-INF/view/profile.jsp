@@ -86,7 +86,7 @@
 		</div>
 		<div class="user-menus">
 			<a href="<c:url value="/mypage/mypost"/>" class="btn btn-secondary profile-btn">내가 쓴 글</a>
-			<a href="<c:url value="/mypage/mycomment"/>" class="btn btn-secondary profile-btn">댓글 단 글</a>
+			<a href="<c:url value="/mypage/mycomment"/>" class="btn btn-secondary profile-btn">내가 쓴 댓글</a>
 			<a href="<c:url value=""/>" class="btn btn-secondary profile-btn">정보 수정</a>
 		</div>
 	</c:if>

@@ -29,13 +29,13 @@
 <jsp:include page="/WEB-INF/view/profile.jsp"/>
 
 <div class="container mt-3 col-6 card-1">
-	<h2 style="font-weight: bold">댓글 단 글</h2>
+	<h2 style="font-weight: bold">내가 쓴 댓글</h2>
 	<form action="<c:url value="/mypage/mycomment"/>" class="mb-3 mt-3">
 		<div class="input-group">
 			<select name="type" class="form-select">
 				<option value="all" <c:if test='${pm.cri.type == "all"}'>selected</c:if>>전체</option>
-				<option value="title" <c:if test='${pm.cri.type == "title"}'>selected</c:if>>제목</option>
-				<option value="content" <c:if test='${pm.cri.type == "content"}'>selected</c:if>>내용</option>
+				<option value="potitle" <c:if test='${pm.cri.type == "potitle"}'>selected</c:if>>게시글 제목</option>
+				<option value="cmcontent" <c:if test='${pm.cri.type == "cmcontent"}'>selected</c:if>>댓글 내용</option>
 			</select>
 		    <input type="text" class="form-control" placeholder="검색어" name="search" value="${pm.cri.search}">
 		    <button class="btn btn-secondary">검색</button>
@@ -45,33 +45,29 @@
 	    <thead>
 			<tr>
 				<th>번호</th>
-				<th>게시판</th>
-				<th>제목</th>
+				<th>게시글 제목</th>
 				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
+				<th>댓글 내용</th>
 			</tr>
 	    </thead>
 	    <tbody>
-	    	<c:forEach items="${list}" var="post">
+	    	<c:forEach items="${list}" var="comment">
 			<tr>
-				<td>${post.po_num}</td>
-				<td>${post.bo_name}</td>
+				<td>${comment.cm_po_num}</td>
 				<td>
 					<c:url var="url" value="/post/detail">
-						<c:param name="num" value="${post.po_num}"/>
+						<c:param name="num" value="${comment.post.po_num}"/>
 					</c:url>
-					<a href="${url}">${post.po_title}</a>
+					<a href="${url}">${comment.post.po_title}</a>
 				</td>
-				<td>${post.po_me_id}</td>
-				<td><fmt:formatDate pattern="yy/MM/dd hh:mm" value="${post.po_date}"/></td>
-				<td>${post.po_view}</td>
+				<td>${comment.post.po_me_id}</td>
+				<td>${comment.cm_content}</td>
 			</tr>
 			</c:forEach>
 			<c:if test="${list.size() == 0}">
 				<tr>
 					<th colspan="5">
-						<h3 class="text-center">등록된 게시글이 없습니다.</h3>
+						<h3 class="text-center">등록된 댓글이 없습니다.</h3>
 					</th>
 				</tr>
 			</c:if>
