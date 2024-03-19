@@ -32,42 +32,57 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
-<div class="card card-1 container col-5 p-5">
-<h3>새 비밀번호</h3>
-<form action="<c:url value="/password/update"/>" class="was-validated" method="post">
-	<input type="hidden" id="id" name="id" value="${user.me_id}">
-	<div class="mb-3 mt-3">
-		<label for="pw" class="form-label">새 비밀번호</label>
-		<input type="password" class="form-control" id="pw" placeholder="Enter password" name="pw" required>
-		<div class="valid-feedback"></div>
-		<div class="invalid-feedback">필수 입력 정보입니다.</div>
-	</div>
-	<div class="mb-3">
-		<label for="pw2" class="form-label">새 비밀번호 확인</label>
-		<input type="password" class="form-control" id="pw2" placeholder="Enter password check" name="pw2" required>
-		<div class="valid-feedback-pw"></div>
-		<div class="invalid-feedback">필수 입력 정보입니다.</div>
-	</div>
-	<button type="submit" class="btn btn-outline-dark col-12">비밀번호 변경</button>
-</form>
+<div class="card card-1 container col-5 p-5" style="padding: 50px;">
+<div class="container">
+	<form action="<c:url value="/password/update"/>" method="post">
+		<h2 style="margin-bottom: 50px">새 비밀번호 변경</h2>
+		<input type="hidden" name="id" value="${user.me_id}">
+		<div class="form-group" style="margin-bottom: 10px">
+		  <input type="password" class="form-control" id="pw" name="pw" placeholder="비밀번호">
+		  <label id="pw-error" class="error text-danger" for="pw"></label>
+		</div>
+		<div class="form-group" style="margin-bottom: 10px">
+		  <input type="password" class="form-control" id="pw2" name="pw2" placeholder="비밀번호 확인">
+		  <label id="pw2-error" class="error text-danger" for="pw2"></label>
+		</div>
+		<button class="btn btn-outline-success col-12" style="margin-top: 40px">비밀번호 변경</button>
+	</form>
 </div>
-<script src="//code.jquery.com/jquery-3.4.1.js"></script>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 <script type="text/javascript">
-$('#pw2').keyup(function(){
-	let pw1 = document.getElementById('pw').value;
-	let pw2 = document.getElementById('pw2').value;
-	
-	if(pw1 != "" || pw2 != ""){
-		if(pw1 == pw2){
-			$(".valid-feedback-pw").html('비밀번호가 일치합니다.');
-			//$(".valid-feedback-pw").show();
-			
-		}else{
-			$(".valid-feedback-pw").html('비밀번호가 일치하지 않습니다.');
-			//$(".valid-feedback-pw").show();
+$("form").validate({
+	rules : {
+		pw : {
+			required : true,
+			regex : /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$])[A-Za-z\d!@#%^&*]{6,15}$/
+		},
+		pw2 : {
+			equalTo : pw
+		}
+	},
+	messages : {
+		pw : {
+			required : "필수 항목입니다.",
+			regex : "영문 대문자, 소문자, 숫자, 특수문자(!@#$) 각각 1개 이상을 포함한 6~15글자 비밀번호를 입력하세요."
+		},
+		pw2 : {
+			equalTo : "비밀번호가 일치하지 않습니다."
 		}
 	}
-})
+});
+
+$.validator.addMethod(
+	"regex",
+	function (value, element, regexp){
+		var re = new RegExp(regexp);
+		return this.optional(element) || re.test(value);
+	}, 
+)
 </script>
 </body>
 </html>
