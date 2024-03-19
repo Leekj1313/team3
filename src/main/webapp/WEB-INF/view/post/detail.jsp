@@ -231,7 +231,6 @@
 						</div>
 						`
 					}
-					
 					str +=
 					`
 					<div class="input-group mb-3 box-comment">
@@ -307,7 +306,7 @@
 				
 			}
 		});
-	})
+	});
 </script>
 <!-- 댓글 수정 구현 -->
 <script type="text/javascript">
