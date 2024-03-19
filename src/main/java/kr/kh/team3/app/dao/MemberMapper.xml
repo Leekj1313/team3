@@ -25,4 +25,8 @@
 		WHERE
 		    me_name  = #{member.me_name}
 	</update>
+	
+	<delete id="deleteMember">
+		DELETE FROM MEMBER WHERE me_id = #{me_id}
+	</delete>
 </mapper>

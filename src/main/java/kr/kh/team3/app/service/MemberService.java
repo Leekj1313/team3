@@ -17,4 +17,6 @@ public interface MemberService {
 
 	boolean updateMember(MemberVO member);
 
+	boolean deleteMember(String me_id);
+
 }

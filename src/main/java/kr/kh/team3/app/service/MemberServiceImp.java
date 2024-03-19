@@ -2,7 +2,6 @@ package kr.kh.team3.app.service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 
 import org.apache.ibatis.io.Resources;
@@ -88,5 +87,11 @@ private MemberDAO memberDao;
 	public boolean updateMember(MemberVO member) {
 		MemberVO dbMember = memberDao.selectMember(member.getMe_name());
 		return memberDao.updateMember(member);
+	}
+
+	@Override
+	public boolean deleteMember(String me_id) {
+		MemberVO user = memberDao.selectMember(me_id);
+		return memberDao.deleteMember(me_id);
 	}
 }

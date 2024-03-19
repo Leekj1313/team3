@@ -15,7 +15,7 @@ import kr.kh.team3.app.service.MemberServiceImp;
 
 
 @WebServlet("/signup/update")
-public class signupUpdateServlet extends HttpServlet {
+public class SignupUpdateServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = -5859656804856142498L;
 	private MemberService memberService = new MemberServiceImp();
@@ -46,7 +46,7 @@ public class signupUpdateServlet extends HttpServlet {
 		}else {
 			request.setAttribute("msg", "회원 정보 수정에 실패했습니다.");
 		}
-		request.setAttribute("url", "");
+		request.setAttribute("url", "/");
 		request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 	}
 
