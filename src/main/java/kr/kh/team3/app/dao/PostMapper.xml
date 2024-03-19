@@ -90,8 +90,7 @@
 	</select>
 	<select id="selectTotalCount" resultType="int">
 		SELECT count(*)
-		FROM post left join
-			recommend on rc_po_num = po_num
+		FROM post
 		where po_bo_num = #{cri.boNum}
 		<if test='cri.type=="all"'>
 			and (po_title like concat('%', #{cri.search},'%') 
