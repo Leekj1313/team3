@@ -63,5 +63,7 @@ public interface PostDAO {
 
 	ArrayList<PostVO> selectTmpPostList(@Param("user")MemberVO user);
 
+	boolean submitTmpPost(@Param("post")PostVO post, @Param("po_num")int po_num);
+
 
 }

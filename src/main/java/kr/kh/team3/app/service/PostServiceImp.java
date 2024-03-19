@@ -310,5 +310,31 @@ public class PostServiceImp implements PostService {
 		
 	}
 
+	@Override
+	public boolean submitTmpPost(PostVO post, int po_num, ArrayList<Part> partList) {
+		if(post ==null||
+		   !checkString(post.getPo_title())||
+		   !checkString(post.getPo_content())) {
+			return false;
+		}
+		
+		boolean res = postDao.submitTmpPost(post,po_num);
+		
+		if(!res) {
+			return false;
+		}
+		
+		if(partList==null||partList.size()==0) {
+			return true;
+		}
+		
+		for(Part part : partList) {
+			uploadFile(part,po_num);
+		}
+		
+		return true;
+
+	}
+
 
 }

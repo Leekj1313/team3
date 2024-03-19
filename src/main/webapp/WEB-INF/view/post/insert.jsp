@@ -72,6 +72,8 @@
 		    <input type="file" class="form-control" name="file">
 	  	</div>
 	  	<button class="btn btn-success col-12">글 등록</button>
+	  	<input type="hidden" id="isTemp" name="isTemp" value="false">
+	  	<input type="hidden" id="po_num_temp" name="po_num_temp" value="">
 	</form>
 </div>
 <script type="text/javascript">
@@ -141,6 +143,8 @@ $(document).on("click",".btn-tmpPost-select",function(){
 		$('#board').val(po_bo_num);
 		$('#title').val(po_title);
 		$('#content').val(po_content);
+		$("#isTemp").val("true");
+		$("#po_num_temp").val(po_num);
 	}
 	
 })

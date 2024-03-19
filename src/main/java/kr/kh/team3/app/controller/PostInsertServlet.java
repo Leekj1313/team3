@@ -46,25 +46,41 @@ public class PostInsertServlet extends HttpServlet {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String writer = user.getMe_id();
 		
 		PostVO post = new PostVO(bo_num,title,content,writer);
-		boolean res = postService.insertPost(post,partList);
+		boolean res = false;
+		//임시저장 글을 불러온채로 등록하는지에 대한 여부
+		boolean isTemp = Boolean.parseBoolean(request.getParameter("isTemp"));
+		if(isTemp) {
+			int po_num =0;
+			try {
+				po_num = Integer.parseInt(request.getParameter("po_num_temp"));
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			res = postService.submitTmpPost(post,po_num,partList);
+			post.setPo_num(po_num);
+		}else {
+			res = postService.insertPost(post, partList);
+		}
 		
 		if(res) {
 			request.setAttribute("msg", "게시글 등록 완료");
 			request.setAttribute("url", "post/detail?num="+post.getPo_num());
-			request.getSession().removeAttribute("po_num");
-			System.out.println(request.getSession().getAttribute("po_num"));
 		}else {
 			request.setAttribute("msg", "게시글 등록 실패");
 			request.setAttribute("url","post/list?boNum="+bo_num);
 		}
 		request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 		
-
+		
+		
+		
+		
 		
 	}
 

@@ -73,7 +73,7 @@
 			SUM(CASE WHEN rc_state = 1 THEN 1 ELSE 0 END) AS po_up
 		FROM post left join
 			recommend on rc_po_num = po_num
-		where po_bo_num = #{cri.boNum}
+		where po_bo_num = #{cri.boNum} and po_temp != 1
 		<if test='cri.type=="all"'>
 				and (po_title like concat('%', #{cri.search},'%') 
 				or po_me_id = #{cri.search})
@@ -160,4 +160,15 @@
 	<select id="selectTmpPostList" resultType="kr.kh.team3.app.model.vo.PostVO">
 		select * from post where po_me_id = #{user.me_id} and po_temp = 1
 	</select>
+	
+	<update id="submitTmpPost">
+		update post
+		set
+		po_bo_num = #{post.po_bo_num},
+		po_title = #{post.po_title},
+		po_content = #{post.po_content},
+		po_me_id = #{post.po_me_id},
+		po_temp = 0
+		where po_num = #{po_num}
+	</update>
 </mapper>

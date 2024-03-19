@@ -60,5 +60,8 @@ public interface PostService {
 	ArrayList<PostVO> getTmpPostList(MemberVO user);
 
 
+	boolean submitTmpPost(PostVO post, int po_num, ArrayList<Part> partList);
+
+
 
 }
