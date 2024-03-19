@@ -28,7 +28,7 @@
 <jsp:include page="/WEB-INF/view/profile.jsp"/>
 
 <div class="container mt-3 col-6 card-1">
-	<h2>카테고리 관리</h2>
+	<h2>회원 관리</h2>
 	<div class="input-group mb-3 mt-3">
 		<input type="text" class="form-control category-content" placeholder="새로 등록할 카테고리 이름을 입력하세요.">
 		<button class="btn btn-outline-secondary btn-category-insert" type="button">등록</button>
@@ -37,11 +37,12 @@
 	<table class="table table-hover category-list-table">
 		<tbody class="box-category-list">
 			<tr class="box-category">
-				<td class="col-2">카테고리 번호</td>
-				<td class="col-7">카테고리 이름</td>
+				<td class="col-3">회원 아이디</td>
+				<td class="col-3">권한</td>
+				<td class="col-3">회원 상태</td>
 				<td class="col-3">
 					<div class="btn-category-group">
-						<button class="btn btn-outline-warning">수정</button>
+						<button class="btn btn-outline-warning">가입승인</button>
 						<button class="btn btn-outline-danger">삭제</button>
 					</div>
 				</td>
@@ -71,9 +72,9 @@ let cri = {
 displayCategoryAndPagination(cri);
 function displayCategoryAndPagination(cri){
 	//ajax를 이용해서 서버에 현재 카테고리 페이지 정보를 보내고,
-	//서버에서 보낸 카테고리 리스트와 페이지네이션 정보를 받아와서 화면에 출력
+	//서버에서 보낸 회원 리스트와 페이지네이션 정보를 받아와서 화면에 출력
 	$.ajax({
-		url : '<c:url value="/category/list"/>',
+		url : '<c:url value="/admin/membermanager"/>',
 		method : 'post',
 		data : cri,
 		success : function(data){
@@ -87,19 +88,20 @@ function displayCategoryAndPagination(cri){
 function displayCategory(categoryList){
 	let str = '';
 	if(categoryList.length == 0){
-		$(".box-category-list").html('<h3>등록된 카테고리가 없습니다.</h3>')
+		$(".box-category-list").html('<h3>등록된 회원이 없습니다.</h3>')
 		return;
 	}
 	
 	for(category of categoryList){
 		str += `
 		<tr class="box-category">
-			<td class="col-2">\${category.ca_num}</td>
-			<td class="col-7 ca_name">\${category.ca_name}</td>
+			<td class="col-3">\${category.me_id}</td>
+			<td class="col-3">\${category.me_authority}</td>
+			<td class="col-3 ca_name">\${category.me_ms_state}</td>
 			<td class="col-3">
 				<div class="btn-category-group">
-					<button class="btn btn-outline-warning btn-category-update" data-num="\${category.ca_num}">수정</button>
-					<button class="btn btn-outline-danger btn-category-delete" data-num="\${category.ca_num}">삭제</button>
+					<button class="btn btn-outline-warning btn-category-update" data-id="\${category.me_id}">가입승인</button>
+					<button class="btn btn-outline-danger btn-category-delete" data-id="\${category.me_id}">삭제</button>
 				</div>
 			</td>
 		</tr>`;
@@ -188,7 +190,7 @@ $(".btn-category-insert").click(function(){
 }); //click end
 
 </script>
-<!-- 카테고리 삭제 -->
+<!-- 회원 삭제 -->
 <script type="text/javascript">
 $(document).on("click",".btn-category-delete", function(){
 	//로그인 체크
@@ -203,20 +205,20 @@ $(document).on("click",".btn-category-delete", function(){
 		}
 	}
 	
-	let num = $(this).data("num");
+	let me_id = $(this).data("id");
 	$.ajax({
-		url : '<c:url value="/category/delete"/>',
+		url : '<c:url value="/admin/memberdelete"/>',
 		method : "post",
 		data : {
-			num
+			me_id
 		},
 		success : function(data){
 			console.log(data);
 			if(data == "ok"){
-				alert("카테고리를 삭제했습니다.");
+				alert("회원을 삭제했습니다.");
 				displayCategoryAndPagination(cri);
 			}else{
-				alert("카테고리를 삭제하지 못했습니다.");
+				alert("회원을 삭제하지 못했습니다.");
 			}
 		},
 		error : function(a, b, c){

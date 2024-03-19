@@ -68,7 +68,7 @@
 		<div class="admin-menus">
 			<a href="<c:url value="/category/list"/>" class="btn btn-secondary profile-btn">카테고리 관리</a>
 			<a href="<c:url value=""/>" class="btn btn-secondary profile-btn">게시판 관리</a>
-			<a href="<c:url value="/admin/manager"/>" class="btn btn-secondary profile-btn">회원 관리</a>
+			<a href="<c:url value="/admin/membermanager"/>" class="btn btn-secondary profile-btn">회원 관리</a>
 		</div>
 	</c:if>
 	<c:if test="${user.me_authority eq 'USER' }">
