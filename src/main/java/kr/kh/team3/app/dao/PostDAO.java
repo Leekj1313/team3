@@ -45,6 +45,17 @@ public interface PostDAO {
 
 	ArrayList<PostVO> selectRecentNotice();
 
+
+	ArrayList<PostVO> selectPostHotList();
+
+	ArrayList<FileVO> selectFileByPo_num(@Param("num")int num);
+
+	void deleteFile(@Param("fi_num")int fi_num);
+
+	boolean deletePost(@Param("num")int num);
+
+  
+  
 	ArrayList<PostVO> selectMyPostList(@Param("cri")Criteria cri);
 
 	int selectMyPostTotalCount(@Param("cri")Criteria cri);

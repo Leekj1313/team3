@@ -20,7 +20,9 @@
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
+				<th>작성일</th>
 				<th>조회수</th>
+				<th>추천수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,7 +30,10 @@
 					<tr>
 						<td>${post.po_num}</td>
 						<td>
-							<a href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title}</a>
+							<c:url var="url" value="/post/detail">
+							<c:param name="num" value="${post.po_num}" />
+						</c:url>
+						<a href="${url}">${post.po_title}</a>
 						</td>
 						<td>
 							<c:url var="page" value="/post/list?boNum=${board.bo_num}">
@@ -40,6 +45,7 @@
 						</td>
 						<td><fmt:formatDate pattern="yy/MM/dd hh:mm" value="${post.po_date}"/></td>
 						<td>${post.po_view}</td>
+						<td>${post.po_up}</td>
 					</tr>
 			</c:forEach>
 			<c:if test="${list.size() == 0}">

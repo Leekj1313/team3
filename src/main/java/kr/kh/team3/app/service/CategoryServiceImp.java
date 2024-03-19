@@ -46,6 +46,15 @@ public class CategoryServiceImp implements CategoryService {
 	}
 
 	@Override
+  public ArrayList<CategoryVO> getCategory() {
+    return categoryDao.selectCategory();
+  }
+    
+  
+  
+  
+  
+  @Override
 	public boolean checkCat(String category) {
 		CategoryVO cat = categoryDao.selectCategoryCheck(category);
 		System.out.println(category);

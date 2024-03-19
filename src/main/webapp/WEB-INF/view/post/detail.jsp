@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,10 +15,11 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="container">
 	<c:choose>
 		<c:when test="${post != null }">
-			<h1>게시글 상세</h1>
+			<h2>게시글 상세</h2>
 			<div class="mb-3 mt-3">
 			    <label for="board" class="form-label">게시판:</label>
 			    <a href="<c:url value="/post/list?boNum=${post.board.bo_num}"/>">${post.board.bo_name}</a>
@@ -32,11 +34,15 @@
 		  	</div>
 		  	<div class="mb-3 mt-3">
 			    <label for="date" class="form-label">작성일:</label>
-			    <input type="text" class="form-control" id="date" name="date" readonly value="${post.po_date}">
+			    <input type="text" class="form-control" id="date" name="date" readonly value="<fmt:formatDate pattern="yy/MM/dd hh:mm" value="${post.po_date}"/>">
 		  	</div>
 		  	<div class="mb-3 mt-3">
 			    <label for="view" class="form-label">조회수:</label>
 			    <input type="text" class="form-control" id="view" name="view" readonly value="${post.po_view}">
+		  	</div>
+		  	<div class="mb-3 mt-3">
+			    <label for="reCount" class="form-label">추천수:</label>
+			    <input type="text" class="form-control" id="reCount" name="reCount" readonly value="${post.po_up}">
 		  	</div>
 		  	<div class="mb-3 mt-3 clearfix">
 		  		<button type="button" id="btnUp" data-state="1" class="btn btn-outline-danger col-5 float-start">추천</button>
@@ -52,10 +58,10 @@
 				    <a href="<c:url value="/download?filename=${file.fi_name}"/>" class="form-control" download="${file.fi_ori_name}">${file.fi_ori_name}</a>
 			  	</div>
 		  	</c:if>
-		  	<a href="<c:url value="/post/list"/>" class="btn btn-outline-primary">목록으로</a>
+		  	<a href="<c:url value="/post/list?boNum=${post.board.bo_num}"/>" class="btn btn-outline-primary">목록으로</a>
 		  	<c:if test="${post.po_me_id == user.me_id }">
-		  		<a href="<c:url value="/post/delete"/>" class="btn btn-outline-danger">삭제</a>
-		  		<a href="<c:url value="/post/update"/>" class="btn btn-outline-warning">수정</a>
+		  		<a href="<c:url value="/post/delete?num=${post.po_num}"/>" class="btn btn-outline-danger">삭제</a>
+		  		<a href="<c:url value="/post/update?num=${post.po_num}"/>" class="btn btn-outline-warning">수정</a>
 		  	</c:if>
 	  		<a href="<c:url value="/post/report"/>" class="btn btn-outline-dark">신고</a>
 		 		<hr>
@@ -280,9 +286,6 @@
 </script>
 <!-- 댓글 삭제 구현 -->
 <script type="text/javascript">
-	//이벤트를 등록할 때 요소가 있으면 해당 요소에 이벤트를 등록. 요소가 나중에 추가되면 동작을 하지 않음
-	$("선택자").click(function() {})
-	//document 객체에 이벤트를 등록하기 때문에 요소가 나중에 추가되도 동작
 	$(document).on("click",".btn-comment-delete", function() {
 		let num = $(this).data("num");
 		$.ajax({

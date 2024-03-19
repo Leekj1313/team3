@@ -13,7 +13,11 @@ public interface CategoryDAO {
 	ArrayList<CategoryVO> selectCategoryList(@Param("cri")Criteria cri);
 
 	int selectTotalCountCategory(@Param("cri")Criteria cri);
+  
+  ArrayList<CategoryVO> selectCategory();
 
+  
+  
 	CategoryVO selectCategoryCheck(@Param("cat")String category);
 
 	boolean insertCategory(@Param("cat")String category);

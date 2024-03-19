@@ -2,6 +2,8 @@ package kr.kh.team3.app.service;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.Part;
+
 import kr.kh.team3.app.model.vo.CommentVO;
 import kr.kh.team3.app.model.vo.FileVO;
 import kr.kh.team3.app.model.vo.MemberVO;
@@ -41,7 +43,16 @@ public interface PostService {
 	ArrayList<PostVO> getPostList(Criteria cri);
 	
 	ArrayList<PostVO> getRecentNotice();
+  
+  
+  ArrayList<PostVO> getPostHotList();
 
+	boolean deletePost(int num, MemberVO user);
+  
+  
+  
+
+  
 	ArrayList<PostVO> getMyPostList(Criteria cri);
 
 	int getMyPostTotalCount(Criteria cri);
@@ -54,5 +65,6 @@ public interface PostService {
 
 
 	int getMyCommentPostTotalCount(Criteria cri);
+
 
 }
