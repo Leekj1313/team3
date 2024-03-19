@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.kh.team3.app.model.vo.CommentVO;
 import kr.kh.team3.app.model.vo.FileVO;
+import kr.kh.team3.app.model.vo.MyCommentVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
 import kr.kh.team3.app.pagination.Criteria;
@@ -44,6 +45,7 @@ public interface PostDAO {
 
 	ArrayList<PostVO> selectRecentNotice();
 
+
 	ArrayList<PostVO> selectPostHotList();
 
 	ArrayList<FileVO> selectFileByPo_num(@Param("num")int num);
@@ -52,5 +54,16 @@ public interface PostDAO {
 
 	boolean deletePost(@Param("num")int num);
 
+  
+  
+	ArrayList<PostVO> selectMyPostList(@Param("cri")Criteria cri);
+
+	int selectMyPostTotalCount(@Param("cri")Criteria cri);
+
+	//ArrayList<CommentVO> selectMyCommentList(@Param("me_id")String me_id);
+	
+	ArrayList<MyCommentVO> selectMyCommentPostList(@Param("cri")Criteria cri);
+
+	int selectMyCommentPostTotalCount(@Param("cri")Criteria cri);
 
 }
