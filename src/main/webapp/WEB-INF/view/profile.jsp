@@ -46,9 +46,9 @@
 			<a href="<c:url value="/login"/>" class="btn btn-basic profile-btn">로그인</a>
 			<a href="<c:url value="/signup"/>" class="btn btn-secondary profile-btn">회원가입</a>
 			<div class="" style="text-align: center">
-				<a href="<c:url value=""/>" class="profile-btn" style="font-size: 8pt; color: gray; display: inline;">아이디 찾기</a>
+				<a href="<c:url value="/find/id"/>" class="profile-btn" style="font-size: 8pt; color: gray; display: inline;">아이디 찾기</a>
 				<span style="color: gray; opacity: 60%">|</span>
-				<a href="<c:url value=""/>" class="profile-btn" style="font-size: 8pt; color: gray; display: inline;">비밀번호 찾기</a>
+				<a href="<c:url value="/find/password"/>" class="profile-btn" style="font-size: 8pt; color: gray; display: inline;">비밀번호 찾기</a>
 			</div>
 		</div>
 	</c:if>
