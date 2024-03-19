@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/view/header.jsp"/>
 
 <div class="mt-3 mb-3 comment-box">
 	<h3>댓글 단 글</h3>

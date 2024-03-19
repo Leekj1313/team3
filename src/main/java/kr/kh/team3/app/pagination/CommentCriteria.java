@@ -9,7 +9,7 @@ public class CommentCriteria extends Criteria{
 	
 	private int poNum;
 	
-	private String me_id;
+	private String meId;
 
 	public CommentCriteria(int page, int perPageNum, int poNum) {	
 		super(page, perPageNum);

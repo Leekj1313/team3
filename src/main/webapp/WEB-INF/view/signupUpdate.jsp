@@ -9,10 +9,6 @@
 <!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<!-- <script type="text/javascript">
-import { Ripple, initMDB, Input } from "mdb-ui-kit";
-initMDB({ Ripple, Input });
-</script> -->
 <style type="text/css">
 	.card {
 		background: #fff;
@@ -36,14 +32,11 @@ initMDB({ Ripple, Input });
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="card card-1 container col-5 p-5">
-<h3>회원가입</h3>
+<h3>회원정보 수정</h3>
 <form action="<%=request.getContextPath()%>/signup/update" class="was-validated" method="post">
-	<h1>회원정보 수정</h1>
 	<div class="mb-3 mt-3">
 		<label for="uname" class="form-label">이름(실명)</label>
-		<input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
-		<div class="valid-feedback"></div>
-		<div class="invalid-feedback">필수 입력 정보입니다.</div>
+		<input type="text" class="form-control" id="uname" name="uname" readonly value="${member.me_name}">
 	</div>
 	<label for="id" class="form-label">아이디</label>
 	<div class="input-group">

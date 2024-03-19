@@ -32,7 +32,7 @@ public class MypageMyCommentServlet extends HttpServlet {
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
 			poNum = Integer.parseInt(request.getParameter("boNum"));
-			poNum = Integer.parseInt(request.getParameter("meId"));
+			poNum = Integer.parseInt(request.getParameter("Me_id"));
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
