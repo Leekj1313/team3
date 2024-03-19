@@ -91,7 +91,7 @@ public class CategoryServiceImp implements CategoryService {
 			return false;
 		}
 		
-		CategoryVO dbCategory = categoryDao.selectCategory(category.getCa_num());
+		CategoryVO dbCategory = categoryDao.selectdbCategory(category.getCa_num());
 		
 		if(dbCategory == null) {
 			return false;
