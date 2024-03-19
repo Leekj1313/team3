@@ -24,11 +24,11 @@ public class SignupServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String uname = request.getParameter("uname");
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
+		String uname = request.getParameter("me_name");
+		String id = request.getParameter("me_id");
+		String pw = request.getParameter("me_pw");
+		String email = request.getParameter("me_email");
+		String phone = request.getParameter("me_phone");
 		
 		if(memberService.signup(new MemberVO(uname, id, pw, email, phone))) {
 			//회원가입 성공 후 메인 페이지로 이동
