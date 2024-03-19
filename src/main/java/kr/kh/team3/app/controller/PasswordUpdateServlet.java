@@ -27,8 +27,6 @@ public class PasswordUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-		MemberVO user = memberService.getMember(id);
-		System.out.println(user);
 		
 		boolean res = memberService.updatePassword(pw, id);
 		if(res) {
