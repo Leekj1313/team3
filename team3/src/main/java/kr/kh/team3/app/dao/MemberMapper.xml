@@ -11,4 +11,22 @@
 	<select id="selectMember" resultType="kr.kh.team3.app.model.vo.MemberVO">
 		SELECT * FROM MEMBER WHERE me_id = #{me_id}
 	</select>
+	
+	<select id="selectMemberList" resultType="kr.kh.team3.app.model.vo.MemberVO">
+		SELECT * FROM MEMBER 
+	</select>
+	
+	<update id="updateMember">
+		UPDATE MEMBER SET 
+			me_id 	 = #{member.me_id},
+			me_pw 	 = #{member.me_pw},
+			me_email = #{member.me_email},
+			me_phone = #{member.me_phone}
+		WHERE
+		    me_name  = #{member.me_name}
+	</update>
+	
+	<delete id="deleteMember">
+		DELETE FROM MEMBER WHERE me_id = #{me_id}
+	</delete>
 </mapper>

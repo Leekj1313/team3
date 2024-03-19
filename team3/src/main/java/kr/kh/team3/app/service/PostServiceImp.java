@@ -5,31 +5,30 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import javax.servlet.http.Part;
-
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.team3.app.dao.PostDAO;
+import kr.kh.team3.app.model.vo.CommentVO;
 import kr.kh.team3.app.model.vo.FileVO;
+import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.model.vo.PostVO;
-import kr.kh.team3.app.utils.FileUploadUtils;
+import kr.kh.team3.app.model.vo.RecommendVO;
+import kr.kh.team3.app.pagination.Criteria;
 
-public class PostServiceImp implements PostService{
+public class PostServiceImp implements PostService {
 	
-	private static final String uploadPath = null;
 	private PostDAO postDao;
-	
+	private String uploadPath = "D:\\uploads";
 	public PostServiceImp() {
 		String resource = "kr/kh/team3/app/config/mybatis-config.xml";
-		InputStream inputStream;
-		SqlSession session;
+		
 		try {
-			inputStream = Resources.getResourceAsStream(resource);
+			InputStream inputStream = Resources.getResourceAsStream(resource);
 			SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			session = sessionFactory.openSession(true);
+			SqlSession session = sessionFactory.openSession(true);
 			postDao = session.getMapper(PostDAO.class);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -37,170 +36,190 @@ public class PostServiceImp implements PostService{
 	}
 
 	@Override
-	public ArrayList<PostVO> getPostList() {
-		return postDao.selectPostList();
-	}
-	
-	@Override
-	public ArrayList<PostVO> getBoardList() {
-		return postDao.selectBoardList();
-	}
-
-	@Override
-	public boolean insertPost(PostVO post, ArrayList<Part> partList) {
-		
-		//게시글 null 체크
-		if( post == null ||
-			!checkString(post.getPo_title()) ||
-			!checkString(post.getPo_content())) {
-			return false;
-		}
-		//첨부파일이 없을 때
-		if(partList == null || partList.size() == 0) {
-			return true;
-		}
-		//회원 null 체크
-		/*
+	public int recommend(int po_num, int state, MemberVO user) {
 		if(user == null) {
-			return false;
-		}*/
-		return postDao.insertPost(post);
+			throw new RuntimeException();
+		}
+		//게시글 번호와 아이디를 주면서 추천 정보를 가져오라고 함
+		RecommendVO recommend = postDao.selectRecommend(user.getMe_id(), po_num);
+		//없으면 추가
+		if(recommend == null) {
+			recommend = new RecommendVO(user.getMe_id(), po_num, state);
+			postDao.insertRecommend(recommend);
+			return state;
+		}
+		//있으면 수정
+		else {
+			//기존 추천 상태와 state가 같으면 취소(0으로 변경)
+			if(state == recommend.getRc_state()) {
+				recommend.setRc_state(0);
+			}
+			//다르면 state로 변경
+			else {
+				recommend.setRc_state(state);
+			}
+			postDao.updateRecommend(recommend);
+			return recommend.getRc_state();
+		}	}
+
+
+
+	@Override
+	public boolean updateView(int num) {
+		return postDao.updateView(num);
 	}
 
-	private boolean checkString(String str) {
-		//게시글을 작성할 때 제목과 내용이 빈 내용일 때 
-		if(str == null || str.length() == 0) {
-			return false;
-		}
-		return true;
-	}
-	
 	@Override
 	public PostVO getPost(int num) {
 		return postDao.selectPost(num);
 	}
 
 	@Override
-	public ArrayList<FileVO> getFileList(int num) {
-		// TODO Auto-generated method stub
-		return postDao.selectFileList(num);
+	public ArrayList<FileVO> getFile(int num) {
+		return postDao.selectFileByBo_num(num);
 	}
 
 	@Override
-	public boolean updatePost(PostVO post, String[] nums, ArrayList<Part> partList) {
-		//게시글 null 체크
-		if( post == null || 
-			!checkString(post.getPo_title()) || 
-			!checkString(post.getPo_content())) {
-			return false;
+	public RecommendVO getRecommend(MemberVO user, int num) {
+		if(user == null) {
+			return null;
 		}
-		//게시글 번호를 이용하여 게시글을 가져옴 
-		PostVO dbPost = postDao.selectPost(post.getPo_num());
-		//게시글이 없거나 게시글 작성자가 회원이 아니면 false를 리턴
-	
-		/*if(dbPost == null || !dbPost.getPo_me_id().equals(user.getMe_id())) {
-			return false;
-		}*/
-		if(dbPost == null) {
-		if(nums != null) {
-			//삭제할 첨부파일 삭제
-			for(String numStr : nums) {
-				try {
-					int num = Integer.parseInt(numStr);
-					FileVO fileVo = postDao.selectFile(num);
-					deleteFile(fileVo);
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
+		return postDao.selectRecommend(user.getMe_id(), num);
+	}
+
+	@Override
+	public boolean insertComment(CommentVO comment) {
+		if( comment == null || 
+				!checkString(comment.getCm_content())) {
+				return false;
 			}
-		}
-		//추가할 첨부파일 추가
-		for(Part part : partList) {
-			uploadFile(part, post.getPo_num());
-		}
-		
-		//서비스에게 게시글을 주면서 수정하라고 요청
-		return postDao.updatePost(post);
-		}
+			return postDao.insertComment(comment);
 	}
 
-	private void uploadFile(Part part, int po_num) {
-		//첨부파일이 null이거나 게시글 번호가 null이면
-		if(part == null || po_num == 0) {
-			return;
+	private boolean checkString(String str) {
+		if(str == null || str.length() == 0) {
+			return false;
 		}
-		//서버에 업로드
-		String fileOriginalName = FileUploadUtils.getFileName(part);
-		if(!checkString(fileOriginalName)) {
-			return;
-		}
-		String fileName = FileUploadUtils.upload(uploadPath, part);
-		//DB에 추가
-		FileVO fileVo =new FileVO(po_num, fileName, fileOriginalName);
-		postDao.insertFile(fileVo);
-	}
-	
-	private void deleteFile(FileVO file) {
-		if(file == null) {
-			return;
-		}
-		String fileName = uploadPath + 
-				file.getFi_name().replace('/', File.separatorChar);
-		//서버에서 실제 파일을 삭제
-		FileUploadUtils.deleteFile(fileName);
-		postDao.deleteFile(file.getFi_num());
-		
+		return true;
 	}
 
 	@Override
-	public boolean deletePost(int num) {
-		/*
+	public ArrayList<CommentVO> getCommentList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria(1,2);
+		}
+		return postDao.selectCommentList(cri);
+	}
+
+	@Override
+	public int getTotalCountComment(Criteria cri) {
+		if(cri == null) {
+			return 0;
+		}
+		return postDao.selectTotalCountComment(cri);
+	}
+
+	@Override
+	public boolean updateComment(CommentVO comment) {
+		if( comment == null ||
+				!checkString(comment.getCm_content()) || 
+				!checkString(comment.getCm_me_id())) {
+				return false;
+			}
+			
+			CommentVO dbComment = postDao.selectComment(comment.getCm_num());
+			
+			if( dbComment == null || 
+				!dbComment.getCm_me_id().equals(comment.getCm_me_id())) {
+				return false;
+			}
+			
+			return postDao.updateComment(comment);
+	}
+
+	@Override
+	public boolean deleteComment(int num, MemberVO user) {
 		if(user == null) {
 			return false;
-		}*/
-		//게시글을 가져옴
+		}
+		//댓글 번호와 일치하는 댓글을 가져옴
+		CommentVO comment = postDao.selectComment(num);
+		//댓글 작성자가 회원인지 확인하여 아니면 false 리턴
+		if( comment == null || 
+			!comment.getCm_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		//맞으면 삭제 요청
+		
+		return postDao.deleteComment(num);
+	}
+
+	@Override
+	public ArrayList<PostVO> getPostList(int boNum) {
+		return postDao.selectPostList(boNum);
+	}
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectTotalCount(cri);
+	}
+
+	@Override
+	public ArrayList<PostVO> getPostList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectPostList(cri);
+	}
+	
+	@Override
+	public ArrayList<PostVO> getRecentNotice() {
+		return postDao.selectRecentNotice();
+		
+	}
+
+	@Override
+	public ArrayList<PostVO> getPostHotList() {
+		return postDao.selectPostHotList();
+	}
+
+	@Override
+	public boolean deletePost(int num, MemberVO user) {
+		if(user == null) {
+			return false;
+		}
+		//다오에게 게시글 번호를 주면서 게시글을 가져오라고 시킴
 		PostVO post = postDao.selectPost(num);
-		//게시글이 없거나 작성자가 아니면 false를 리턴
-		/*
+		//게시글이 없거나 게시글 작성자와 회원 아이디가 다르면 false 반환
 		if(post == null || !post.getPo_me_id().equals(user.getMe_id())) {
 			return false;
-		}*/
-		if(post == null) {
-			return false;
 		}
-		//첨부파일을 삭제if(user == null) {
-			return false;
-		}
-		//게시글을 가져옴
-		//PostVO post = postDao.selectPost(num);
-		//게시글이 없거나 작성자가 아니면 false를 리턴
-		/*
-		if(post == null || !post.getBo_me_id().equals(user.getMe_id())) {
-			return false;
-		}*/
-		/*
-		//첨부파일을 삭제
-		//게시글 번호에 맞는 첨부파일을 가져오라고 시킴
-		ArrayList<FileVO> fileList = postDao.selectFileList(num);
+		
+		//게시글의 첨부파일을 서버 폴더에서 삭제(실제 파일)
+		//게시글의 첨부파일을 DB에서 삭제
+		//게시글에 있는 첨부파일 정보을 가져옴
+		ArrayList<FileVO> fileList = postDao.selectFileByPo_num(num);
+		
 		for(FileVO file : fileList) {
 			deleteFile(file);
 		}
-		
-		//게시글을 삭제 요청
-		return boardDao.deleteBoard(num);
-		}
-		//게시글 번호에 맞는 첨부파일을 가져오라고 시킴
-		ArrayList<FileVO> fileList = postDao.selectFileList(num);
-		for(FileVO file : fileList) {
-			deleteFile(file);
-		}
-		
-		//게시글을 삭제 요청
 		return postDao.deletePost(num);
-	}*/
-		@Override
-		public boolean updateView(int num) {
-			//조회수 추가
-			return postDao.updateView(num);
+	}
+
+	private void deleteFile(FileVO fileVo) {
+		if(fileVo == null) {
+			return;
 		}
+		File file = new File(uploadPath
+				+ fileVo.getFi_name().replace('/', File.separatorChar));
+		if(file.exists()) {
+			file.delete();
+		}
+		postDao.deleteFile(fileVo.getFi_num());
+	}
+
+
 }
