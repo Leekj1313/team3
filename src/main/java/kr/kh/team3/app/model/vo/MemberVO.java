@@ -26,4 +26,9 @@ public class MemberVO {
 		me_email = email;
 		me_phone = phone;
 	}
+
+	public MemberVO(String name, String phone) {
+		this.me_name = name;
+		this.me_phone = phone;
+	}
 }
