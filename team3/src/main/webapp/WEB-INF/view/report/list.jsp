@@ -86,8 +86,11 @@
 	    	</li>
     	</c:if>
   	</ul>
-  
+	<a href="<c:url value="/report/insert"/>" class="btn btn-outline-success">신고</a>
+  	<a href="<c:url value="/report/detail"/>" class="btn btn-outline-success">신고상세</a>
 	<a href="<c:url value="/post/delete"/>" class="btn btn-outline-success">신고처리</a>
+	<a href="<c:url value="/"/>" class="btn btn-outline-success">뒤로가기</a>
+	
 </div>
 </body>
 </html>

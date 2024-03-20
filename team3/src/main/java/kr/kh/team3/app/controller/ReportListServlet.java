@@ -22,29 +22,7 @@ public class ReportListServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		String type = request.getParameter("type");
-		String search = request.getParameter("search");
 		
-
-		int page;
-		try {
-			page = Integer.parseInt(request.getParameter("page"));
-		}catch(Exception e) {
-			e.printStackTrace();
-			page = 1;
-		}
-
-		Criteria cri = new Criteria(page, 2, type, search);
-		
-
-		int totalCount = reportService.getTotalCount(cri);
-	
-		PageMaker pm = new PageMaker(5, cri, totalCount);
-		request.setAttribute("pm", pm);
-	
-		ArrayList<ReportVO> list = reportService.getReportList(cri);
-
-		request.setAttribute("reportList", list);
 		request.getRequestDispatcher("/WEB-INF/view/report/list.jsp").forward(request, response);
 	}
 }

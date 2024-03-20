@@ -17,12 +17,17 @@ public class SignupDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberServiceImp();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		MemberVO member = (MemberVO)request.getSession().getAttribute("user");
-		
-		boolean res = memberService.deleteMember(member.getMe_id());
-		if(res) {
+		String me_id = null;
+		try {
+            me_id = request.getParameter("num"); // me_id를 문자열로 받습니다.
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	    MemberVO user = (MemberVO)request.getSession().getAttribute("user");
+	    boolean res = memberService.deleteMember(user); 
+	    if(res) {
 			request.setAttribute("msg", "회원탈퇴 하였습니다.");
 			request.setAttribute("url", "/");
 		}else {

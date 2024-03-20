@@ -18,12 +18,10 @@
 	
 	<update id="updateMember">
 		UPDATE MEMBER SET 
-			me_id 	 = #{member.me_id},
-			me_pw 	 = #{member.me_pw},
 			me_email = #{member.me_email},
 			me_phone = #{member.me_phone}
 		WHERE
-		    me_name  = #{member.me_name}
+		    me_id = #{member.me_id}
 	</update>
 	
 	<delete id="deleteMember">

@@ -15,13 +15,9 @@ public class ReportVO {
 	private String re_state;
 	private int re_po_num;
 	
-	public ReportVO(String reportType, String reportTitle, String reportContent, String writer, int po_num, String reportState) {
+	public ReportVO(String reportType, String reportContent, int po_num) {
 		this.re_rt_name = reportType;
-		this.re_title = reportTitle;
 		this.re_content = reportContent;
-		this.re_me_id = writer;
 		this.re_po_num = po_num;
-		this.re_state = reportState;
 	}
-	
 }

@@ -42,18 +42,13 @@ public class ReportServiceImp implements ReportService{
 	@Override
 	public boolean insertReport(ReportVO report) {
 		if( report == null ||
-			!checkString(report.getRe_title()) ||
+			!checkString(report.getRe_rt_name()) ||
 			!checkString(report.getRe_content())) {
 			return false;
 		}
-		boolean res = reportDao.insertReport(report);
-		
-		if(!res) {
-			return false;
-		}
-		return true;
+		return reportDao.insertReport(report);
 	}
-
+	
 	public boolean checkString(String str) {
 		if(str == null || str.length() == 0) {
 			return false;
@@ -73,6 +68,4 @@ public class ReportServiceImp implements ReportService{
 	public ReportVO getReport(int num) {
 		return reportDao.selectReport(num);
 	}
-	
-
 }

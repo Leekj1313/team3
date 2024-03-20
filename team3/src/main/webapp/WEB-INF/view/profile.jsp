@@ -47,6 +47,7 @@
 			<a href="<c:url value="/mypage/mycomment"/>" class="btn btn-secondary admin-btn">댓글 단 글</a>
 			<a href="<c:url value="/signup/update"/>" class="btn btn-secondary admin-btn">정보 수정</a>
 			<a href="<c:url value="/signup/delete"/>" class="btn btn-secondary admin-btn">회원 탈퇴</a>
+			<a href="<c:url value="/report/list"/>" class="btn btn-secondary admin-btn">게시글 신고</a>
 		</div>
 	</c:if>
 </div>

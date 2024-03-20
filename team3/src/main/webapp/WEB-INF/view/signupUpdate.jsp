@@ -40,82 +40,33 @@
 	</div>
 	<label for="id" class="form-label">아이디</label>
 	<div class="input-group">
-		<input type="text" class="form-control" id="id" placeholder="Enter id" name="id" required>
-		<button class="btn btn-outline-dark" type="button" id="idCheck">중복 확인</button>
-		<div class="valid-feedback"></div>
-		<div class="invalid-feedback">필수 입력 정보입니다.</div>
+		<input type="text" class="form-control" id="id" name="id" readonly value="${member.me_id}">
 	</div>
 	<div class="mb-3 mt-3">
 		<label for="pw" class="form-label">비밀번호</label>
-		<input type="password" class="form-control" id="pw" placeholder="Enter password" name="pw" required>
-		<div class="valid-feedback"></div>
-		<div class="invalid-feedback">필수 입력 정보입니다.</div>
+			<a href="<c:url value="/"/>" class="btn btn-outline-dark col-12">수정하기</a>		
 	</div>
-	<div class="mb-3">
-		<label for="pw2" class="form-label">비밀번호 확인</label>
-		<input type="password" class="form-control" id="pw2" placeholder="Enter password check" name="pw2" required>
-		<div class="valid-feedback-pw"></div>
-		<div class="invalid-feedback">필수 입력 정보입니다.</div>
-	</div>
+	
 	<div class="mb-3 mt-3">
 		<label for="email" class="form-label">이메일</label>
-		<input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
-		<div class="valid-feedback"></div>
+		<input type="email" class="form-control" id="email" name="email" value="${member.me_email}">
+		<!-- 
+		<input type="email" class="form-control" id="email" value="${member.me_email}" name="email" required>
+		 <div class="valid-feedback"></div>
 		<div class="invalid-feedback">필수 입력 정보입니다.</div>
+		 -->
 	</div>
 	<div class="mb-5 mt-3">
 		<label for="phone" class="form-label">전화번호</label>
-		<input type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone" required>
-		<div class="valid-feedback"></div>
-		<div class="invalid-feedback">필수 입력 정보입니다.</div>
+		<input type="text" class="form-control" id="phone" name="phone" value="${member.me_phone}">
+		<!--
+		<input type="text" class="form-control" id="phone" value="${member.me_phone}" name="phone" required>
+		 <div class="valid-feedback"></div>
+		<div class="invalid-feedback">필수 입력 정보입니다.</div>  
+		-->
 	</div>
 	<button type="submit" class="btn btn-outline-dark col-12">저장하기</button>
 </form>
 </div>
-<script src="//code.jquery.com/jquery-3.4.1.js"></script>
-<script type="text/javascript">
-let flag = false;
-$("#idCheck").click(function(){
-	let id = $("[name=id]").val();
-	fetch(`<c:url value="/id/check"/>?id=\${id}`)
-	.then(response=>response.text())
-	.then(data => {
-		if(data == "true"){
-			alert("사용 가능한 아이디입니다.");
-			flag = true;
-		}else{
-			alert("이미 사용중인 아이디입니다.");
-		}
-	})
-	.catch(error => console.error("Error : ", error));
-});
-$("[name=id]").change(function(){
-	flag = false;
-});
-$("form").submit(function(){
-	//정규표현식을 구현
-	
-	if(!flag){
-		alert("아이디 중복 확인을 하세요.");
-		return false;
-	}
-});
-
-$('#pw2').keyup(function(){
-	let pw1 = document.getElementById('pw').value;
-	let pw2 = document.getElementById('pw2').value;
-	
-	if(pw1 != "" || pw2 != ""){
-		if(pw1 == pw2){
-			$(".valid-feedback-pw").html('비밀번호가 일치합니다.');
-			//$(".valid-feedback-pw").show();
-			
-		}else{
-			$(".valid-feedback-pw").html('비밀번호가 일치하지 않습니다.');
-			//$(".valid-feedback-pw").show();
-		}
-	}
-})
-</script>
 </body>
 </html>

@@ -12,13 +12,13 @@ public interface MemberDAO {
 
 	MemberVO selectMember(@Param("me_id")String id);
 
-	ArrayList<MemberVO> selectMemberList();
-
 	boolean updateMember(@Param("member")MemberVO user);
 
 	boolean deleteMember(@Param("me_id")String me_id);
-	
-	MemberVO selectMember(MemberVO user);
+
+	boolean deleteMember(@Param("member")MemberVO user);
+
+	ArrayList<MemberVO> selectMemberList();
 
 
 }

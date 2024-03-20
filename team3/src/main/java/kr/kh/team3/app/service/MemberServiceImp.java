@@ -85,13 +85,23 @@ private MemberDAO memberDao;
 
 	@Override
 	public boolean updateMember(MemberVO member) {
-		MemberVO dbMember = memberDao.selectMember(member.getMe_name());
-		return memberDao.updateMember(member);
+		if( member == null ||
+			!checkString(member.getMe_email()) || 
+			!checkString(member.getMe_phone())) {
+			return false;
+		}
+		return memberDao.updateMember(member);	
+	}
+	
+	public boolean checkString(String str) {
+		if(str == null || str.length() == 0) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
-	public boolean deleteMember(String me_id) {
-		MemberVO user = memberDao.selectMember(me_id);
-		return memberDao.deleteMember(me_id);
+	public boolean deleteMember(MemberVO user) {
+		return memberDao.deleteMember(user);
 	}
 }
