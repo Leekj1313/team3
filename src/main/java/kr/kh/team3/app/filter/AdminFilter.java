@@ -17,7 +17,7 @@ import kr.kh.team3.app.model.vo.MemberVO;
 /**
  * Servlet Filter implementation class AdminFilter
  */
-@WebFilter({"/board/manager","/board/insert","/board/delete", "/board/update", "/category/list"})
+@WebFilter({"/board/manager","/board/insert","/board/delete", "/board/update", "/category/list", "/report/list"})
 
 public class AdminFilter extends HttpFilter implements Filter {
 	
