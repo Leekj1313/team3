@@ -101,7 +101,7 @@ private MemberDAO memberDao;
 	}
 
 	@Override
-	public boolean deleteMember(MemberVO user) {
-		return memberDao.deleteMember(user);
+	public boolean deleteMember(String me_id, String me_pw) {
+		return memberDao.deleteMember(me_id);
 	}
 }

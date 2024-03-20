@@ -16,9 +16,10 @@ public interface MemberDAO {
 
 	boolean deleteMember(@Param("me_id")String me_id);
 
-	boolean deleteMember(@Param("member")MemberVO user);
+	boolean deleteMember(@Param("me_id")String me_id);
 
 	ArrayList<MemberVO> selectMemberList();
+
 
 
 }
