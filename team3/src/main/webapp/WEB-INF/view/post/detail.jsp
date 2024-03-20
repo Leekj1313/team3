@@ -63,7 +63,7 @@
 		  		<a href="<c:url value="/post/delete?num=${post.po_num}"/>" class="btn btn-outline-danger">삭제</a>
 		  		<a href="<c:url value="/post/update?num=${post.po_num}"/>" class="btn btn-outline-warning">수정</a>
 		  	</c:if>
-	  		<a href="<c:url value="/post/report"/>" class="btn btn-outline-dark">신고</a>
+	  		<a href="<c:url value="/report/insert"/>" class="btn btn-outline-dark">신고</a>
 		 		<hr>
 		  	<div class="mt-3 mb-3 comment-box">
 		  		<h3>댓글</h3>

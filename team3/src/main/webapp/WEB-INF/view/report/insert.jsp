@@ -36,7 +36,7 @@
 <form action="<%=request.getContextPath()%>/report/insert" class="was-validated" method="post">
 
 	<div class="mb-3 mt-3">
-		<label for="report_type" class="form-label">신고타입</label>
+		<label for="report_type" class="form-label">신고종류</label>
 		    <select class="form-control" id="report_type" name="report_type">
 		    	<c:forEach items="${list}" var="report_type">
 		    		<option value="${report_type.rt_name}">${report_type.rt_name}</option>
@@ -45,17 +45,19 @@
 	</div>
 	
 	<label for="report_name" class="form-label">신고사유</label>
-	<div class="input-group">
-		<div class="mb-3 mt-3">
-		    <label for="title" class="form-label">신고사유</label>
-		    <input type="text" class="form-control" id="title" placeholder="신고사유 name="report_name">
-	  	</div>
-	</div>
 	
-	<label for="report_content" class="form-label">신고내용</label>
-	<div class="mb-3 mt-3">
-	    <textarea rows="10" class="form-control" id="report_content" name="report_content" placeholder="신고내용"></textarea>
-	</div>
+		<div class="input-group">
+			<div class="mb-3 mt-3">
+			    <label for="title" class="form-label">신고사유</label>
+			    <input type="text" class="form-control" id="re_title" placeholder="신고사유 name="re_title">
+		  	</div>
+		</div>
+	
+		<label for="report_content" class="form-label">신고내용</label>
+		<div class="mb-3 mt-3">
+		    <textarea rows="10" class="form-control" id="report_content" name="report_content" placeholder="신고내용"></textarea>
+		</div>
+	
 	
 	<button type="submit" class="btn btn-outline-dark col-12">신고접수</button>
 	

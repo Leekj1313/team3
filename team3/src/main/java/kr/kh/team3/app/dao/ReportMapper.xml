@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.team3.app.dao.ReportDAO">
+	<resultMap type="kr.kh.team3.app.model.vo.ReportVO" id="ReportMap">
+		<id property="re_num" column="re_num"/>
+		<result property="re_po_num"  column="re_po_num"/>
+		<result property="re_me_id"   column="re_me_id"/>
+		<result property="re_rt_name" column="re_rt_name"/>
+		<result property="re_title"   column="re_title"/>
+		<result property="re_content" column="re_content"/>
+		<result property="re_state"   column="re_state"/>
+		<collection property="post" ofType="kr.kh.team3.app.model.vo.PostVO"
+		 	column="re_po_num" select="selectPost"/>
+	</resultMap>
+	
+	<select id="selectReportList" resultMap="ReportMap">
+		select * from report
+	</select>
+	
+	<insert id="insertReport">
+		<!-- 신고 종류, 신고 제목, 신고 내용, 신고자를 입력 -->
+		insert into report(re_rt_name, re_title, re_content, re_me_id) 
+		values(#{re_po_num},#{re_rt_name},#{re_title},#{re_content},#{re_me_id})
+	</insert> 
+	
+	<select id="selectTotalReportCount" resultType="int">
+		select count(*) from report where re_num = #{cri.seaech}
+	</select>
+	
+	<select id="selectReport" resultMap="ReportMap">
+		select * from report where re_num = #{num}
+	</select>
+	
+</mapper>
