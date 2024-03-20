@@ -18,7 +18,7 @@
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="container">
 	<c:choose>
-		<c:when test="${post != null }">
+		<c:when test="${post != null}">
 			<h2>게시글 상세</h2>
 			<div class="mb-3 mt-3">
 			    <label for="board" class="form-label">게시판:</label>
@@ -233,7 +233,6 @@
 						</div>
 						`
 					}
-					
 					str +=
 					`
 					<div class="input-group mb-3 box-comment">
@@ -309,7 +308,7 @@
 				
 			}
 		});
-	})
+	});
 </script>
 <!-- 댓글 수정 구현 -->
 <script type="text/javascript">

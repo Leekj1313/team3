@@ -10,7 +10,17 @@ public interface CategoryService {
 	ArrayList<CategoryVO> getCategoryList(Criteria cri);
 
 	int getTotalCountCategory(Criteria cri);
+  
+  ArrayList<CategoryVO> getCategory();
 
-	ArrayList<CategoryVO> getCategory();
+
+  
+	boolean checkCat(String category);
+
+	boolean insertCategory(String category);
+
+	boolean deleteCategory(int num);
+
+	boolean updateCategory(CategoryVO category);
 
 }

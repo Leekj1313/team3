@@ -16,8 +16,22 @@
 	<collection property="board" ofType="kr.kh.team3.app.model.vo.BoardVO"
 		column="po_bo_num" select="selectBoard"/>
 	</resultMap>
+	
+	<resultMap type="kr.kh.team3.app.model.vo.CommentVO" id="CommentMap">
+	<id property="cm_num" column="cm_num"/>
+	<result property="cm_po_num" column="cm_po_num"/>
+	<result property="cm_me_id" column="cm_me_id"/>
+	<result property="cm_content" column="cm_content"/>
+	<collection property="post" ofType="kr.kh.team3.app.model.vo.BoardVO"
+		column="cm_po_num" select="selectPost2"/>
+	</resultMap>
+	
 	<select id="selectBoard" resultType="kr.kh.team3.app.model.vo.BoardVO">
 		select * from board where bo_num = #{po_bo_num}
+	</select>
+	
+	<select id="selectPost2" resultType="kr.kh.team3.app.model.vo.PostVO">
+		select * from post where po_num = #{cm_po_num}
 	</select>
 	
 	<update id="updateView">
@@ -90,8 +104,7 @@
 	</select>
 	<select id="selectTotalCount" resultType="int">
 		SELECT count(*)
-		FROM post left join
-			recommend on rc_po_num = po_num
+		FROM post
 		where po_bo_num = #{cri.boNum}
 		<if test='cri.type=="all"'>
 			and (po_title like concat('%', #{cri.search},'%') 
@@ -113,6 +126,7 @@
 		LIMIT 5;
 	</select>
 	
+
 	<select id="selectPostHotList" resultMap="PostMap">
 		SELECT 
 			post.*, 
@@ -141,7 +155,7 @@
 	<delete id="deletePost">
 		delete from post where po_num = #{num}
 	</delete>
-	
+  
 	<insert id ="insertTmpPost" useGeneratedKeys="true" keyProperty="post.po_num">
 		insert into post(po_bo_num,po_title,po_content,po_me_id,po_temp) 
 		values(#{post.po_bo_num},#{post.po_title},#{post.po_content},#{post.po_me_id},#{post.po_temp})
@@ -183,4 +197,117 @@
 		where
 			po_num = #{post.po_num}
 	</update>
+  
+	<select id="selectMyPostList" resultMap="PostMap">
+		SELECT * 
+		FROM post
+		WHERE po_me_id = #{cri.me_id}
+		<if test='cri.type=="all"'>
+			and po_title like concat('%', #{cri.search},'%') 
+				or po_content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test='cri.type=="title"'>
+			and po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="content"'>
+			and po_content like concat('%', #{cri.search}, '%')
+		</if>
+		ORDER BY po_num DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="selectMyPostTotalCount" resultType="int">
+		SELECT count(*)
+		FROM post
+		WHERE po_me_id = #{cri.me_id}
+		<if test='cri.type=="all"'>
+			and po_title like concat('%', #{cri.search},'%') 
+				or po_content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test='cri.type=="title"'>
+			and po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="content"'>
+			and po_content like concat('%', #{cri.search}, '%')
+		</if>
+	</select>
+	
+	<select id="selectMyCommentPostList" resultMap="CommentMap">
+		SELECT 
+			*
+		FROM comment left join
+			post on cm_po_num = po_num
+		WHERE cm_me_id = #{cri.me_id}
+		<if test='cri.type=="all"'>
+			and po_title like concat('%', #{cri.search},'%') 
+				or cm_content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test='cri.type=="potitle"'>
+			and po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="cmcontent"'>
+			and cm_content like concat('%', #{cri.search}, '%')
+		</if>
+		ORDER BY po_num DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="selectMyCommentPostTotalCount" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM comment left join
+			post on cm_po_num = po_num
+		WHERE cm_me_id = #{cri.me_id}
+		<if test='cri.type=="all"'>
+			and po_title like concat('%', #{cri.search},'%') 
+				or cm_content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test='cri.type=="potitle"'>
+			and po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="cmcontent"'>
+			and cm_content like concat('%', #{cri.search}, '%')
+		</if>
+	</select>
+	
+	
+<!-- 	<select id="selectMyCommentList" resultType="kr.kh.team3.app.model.vo.CommentVO">
+		SELECT * FROM comment
+		WHERE cm_me_id = #{me_id}
+	</select> -->
+	
+<!-- 	<select id="selectMyCommentPostList" resultType="kr.kh.team3.app.model.vo.MyCommentVO">
+		SELECT * FROM comment JOIN post ON po_num = cm_po_num
+		JOIN board on bo_num = po_bo_num
+		WHERE cm_me_id = #{cri.me_id}
+		<if test='cri.type=="all"'>
+			and po_title like concat('%', #{cri.search},'%') 
+				or po_content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test='cri.type=="title"'>
+			and po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="content"'>
+			and po_content like concat('%', #{cri.search}, '%')
+		</if>
+		ORDER BY po_num DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="selectMyCommentPostTotalCount" resultType="int">
+		SELECT COUNT(*) FROM comment JOIN post ON po_num = cm_po_num
+		JOIN board on bo_num = po_bo_num
+		WHERE cm_me_id = #{cri.me_id}
+		<if test='cri.type=="all"'>
+			and po_title like concat('%', #{cri.search},'%') 
+				or po_content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test='cri.type=="title"'>
+			and po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="content"'>
+			and po_content like concat('%', #{cri.search}, '%')
+		</if>
+	</select> -->
+
 </mapper>

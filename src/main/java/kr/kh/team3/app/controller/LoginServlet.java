@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		MemberVO user = memberService.login(new LoginDTO(id,pw));
-
+		
 		//성공하면 세션에 회원 정보를 저장하고 메인페이지로 이동
 		if(user != null) {
 			request.setAttribute("msg", "로그인에 성공했습니다.");

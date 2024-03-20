@@ -16,6 +16,7 @@ import kr.kh.team3.app.dao.PostDAO;
 import kr.kh.team3.app.model.vo.CommentVO;
 import kr.kh.team3.app.model.vo.FileVO;
 import kr.kh.team3.app.model.vo.MemberVO;
+import kr.kh.team3.app.model.vo.MyCommentVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
 import kr.kh.team3.app.pagination.Criteria;
@@ -184,8 +185,10 @@ public class PostServiceImp implements PostService {
 		
 	}
 
+  
+  
 	@Override
-	public ArrayList<PostVO> getPostHotList() {
+  public ArrayList<PostVO> getPostHotList() {
 		return postDao.selectPostHotList();
 	}
 
@@ -223,6 +226,52 @@ public class PostServiceImp implements PostService {
 		}
 		postDao.deleteFile(fileVo.getFi_num());
 	}
+  
+  
+  
+  
+  
+  
+  
+
+	public ArrayList<PostVO> getMyPostList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectMyPostList(cri);
+	}
+
+	@Override
+	public int getMyPostTotalCount(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectMyPostTotalCount(cri);
+	}
+
+	@Override
+	public ArrayList<MyCommentVO> getMyCommentPostList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectMyCommentPostList(cri);
+	}
+
+	@Override
+	public int getMyCommentPostTotalCount(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectMyCommentPostTotalCount(cri);
+	}
+
+//	@Override
+//	public ArrayList<CommentVO> getMyCommentList(String me_id) {
+//		if(me_id == null) {
+//			return null;
+//		}
+//		return postDao.selectMyCommentList(me_id);
+//	}
 
 	@Override
 	public boolean insertPost(PostVO post, ArrayList<Part> partList) {
