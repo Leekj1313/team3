@@ -17,6 +17,7 @@ import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.model.vo.MyCommentVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
+import kr.kh.team3.app.model.vo.ReportVO;
 import kr.kh.team3.app.pagination.Criteria;
 
 public class PostServiceImp implements PostService {
@@ -197,7 +198,7 @@ public class PostServiceImp implements PostService {
 		//다오에게 게시글 번호를 주면서 게시글을 가져오라고 시킴
 		PostVO post = postDao.selectPost(num);
 		//게시글이 없거나 게시글 작성자와 회원 아이디가 다르면 false 반환
-		if(post == null || !post.getPo_me_id().equals(user.getMe_id())) {
+		if(post == null) {
 			return false;
 		}
 		
@@ -260,6 +261,36 @@ public class PostServiceImp implements PostService {
 			cri = new Criteria();
 		}
 		return postDao.selectMyCommentPostTotalCount(cri);
+	}
+
+	@Override
+	public ArrayList<ReportVO> getReportPostList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectReportPostList(cri);
+	}
+
+	@Override
+	public int getTotalCountReport(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectReportTotalCount(cri);
+	}
+
+	@Override
+	public boolean deleteReportPost(int num, MemberVO user) {
+		if(user == null) {
+			return false;
+		}
+		ReportVO report = postDao.selectReportPost(num);
+		
+		if(report == null) {
+			return false;
+		}
+		
+		return postDao.deleteReportPost(num);
 	}
 
 //	@Override

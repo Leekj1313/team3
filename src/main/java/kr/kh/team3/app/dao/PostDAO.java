@@ -9,6 +9,7 @@ import kr.kh.team3.app.model.vo.FileVO;
 import kr.kh.team3.app.model.vo.MyCommentVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
+import kr.kh.team3.app.model.vo.ReportVO;
 import kr.kh.team3.app.pagination.Criteria;
 
 public interface PostDAO {
@@ -65,5 +66,13 @@ public interface PostDAO {
 	ArrayList<MyCommentVO> selectMyCommentPostList(@Param("cri")Criteria cri);
 
 	int selectMyCommentPostTotalCount(@Param("cri")Criteria cri);
+
+	ArrayList<ReportVO> selectReportPostList(@Param("cri")Criteria cri);
+
+	int selectReportTotalCount(@Param("cri")Criteria cri);
+
+	ReportVO selectReportPost(@Param("num")int num);
+
+	boolean deleteReportPost(@Param("num")int num);
 
 }
