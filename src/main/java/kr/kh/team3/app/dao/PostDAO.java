@@ -65,5 +65,9 @@ public interface PostDAO {
 
 	boolean submitTmpPost(@Param("post")PostVO post, @Param("po_num")int po_num);
 
+	FileVO selectFile(@Param("fi_num")int num);
+
+	boolean updatePost(@Param("post")PostVO post);
+
 
 }

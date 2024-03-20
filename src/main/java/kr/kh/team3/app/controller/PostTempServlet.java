@@ -57,8 +57,6 @@ public class PostTempServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		String writer = user.getMe_id();
-		System.out.println(title+content+","+bo_num);
-		System.out.println(count);
 		PostVO tmpPost = new PostVO(bo_num,title,content,writer);
 		//임시게시글 : 1 일반 게시글 : 0
 		tmpPost.setPo_temp(1);
@@ -88,9 +86,7 @@ public class PostTempServlet extends HttpServlet {
 		JSONObject jobj = new JSONObject();
 		jobj.put("po_num", po_num);
 		jobj.put("res", res?"OK":"");
-		
-		System.out.println(po_num);
-		
+	
 		response.setContentType("application/json; charset=utf-8");
 		response.getWriter().print(jobj);
 		

@@ -336,5 +336,38 @@ public class PostServiceImp implements PostService {
 
 	}
 
+	@Override
+	public boolean updatePost(PostVO post, MemberVO user, ArrayList<Integer> nums, ArrayList<Part> fileList) {
+		
+		if( post == null || 
+			!checkString(post.getPo_title()) || 
+			!checkString(post.getPo_content())) {
+			return false;
+		}
+		
+		if(user == null) {
+			return false;
+		}
+
+		PostVO dbPost = postDao.selectPost(post.getPo_num());
+		
+		if(dbPost == null || !dbPost.getPo_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		
+		if(nums.size()!=0) {
+			for(int num : nums) {
+				FileVO fileVo = postDao.selectFile(num);
+				deleteFile(fileVo);
+			}
+		}
+		
+		for(Part part : fileList) {
+			uploadFile(part, post.getPo_num());
+		}
+		
+		return postDao.updatePost(post);
+	}
+
 
 }
