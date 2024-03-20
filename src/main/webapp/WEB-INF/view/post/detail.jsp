@@ -55,13 +55,15 @@
 		  	<c:if test="${fileList != null && fileList.size() != 0}">
 			  	<div class="mb-3 mt-3">
 				    <label for="content" class="form-label">첨부파일:</label>
-				    <a href="<c:url value="/download?filename=${file.fi_name}"/>" class="form-control" download="${file.fi_ori_name}">${file.fi_ori_name}</a>
+				    <c:forEach items="${fileList}" var="file">
+						<a href="<c:url value="/download?filename=${file.fi_name}"/>" download="${file.fi_ori_name}" class="form-control">${file.fi_ori_name}</a>
+					</c:forEach>
 			  	</div>
 		  	</c:if>
 		  	<a href="<c:url value="/post/list?boNum=${post.board.bo_num}"/>" class="btn btn-outline-primary">목록으로</a>
 		  	<c:if test="${post.po_me_id == user.me_id }">
-		  		<a href="<c:url value="/post/delete?num=${post.po_num}"/>" class="btn btn-outline-danger">삭제</a>
-		  		<a href="<c:url value="/post/update?num=${post.po_num}"/>" class="btn btn-outline-warning">수정</a>
+		  		<a href="<c:url value="/post/delete?num=${post.po_num}"/>" class="btn btn-outline-danger btn-delete-post">삭제</a>
+		  		<a href="<c:url value="/post/update?num=${post.po_num}"/>" class="btn btn-outline-warning btn-update-post">수정</a>
 		  	</c:if>
 	  		<a href="<c:url value="/post/report"/>" class="btn btn-outline-dark">신고</a>
 		 		<hr>
@@ -369,5 +371,6 @@ $(document).on("click",".btn-complete", function(){
 	});
 });
 </script>
+
 </body>
 </html>
