@@ -23,7 +23,7 @@ public interface MemberService {
 
 	boolean updatePassword(String pw, String id);
 
-	ArrayList<CategoryVO> getMemberList(Criteria cri);
+	ArrayList<MemberVO> getMemberList(Criteria cri);
 
 	int getTotalCountMember(Criteria cri);
 

@@ -118,7 +118,7 @@ private MemberDAO memberDao;
 	}
 
 	@Override
-	public ArrayList<CategoryVO> getMemberList(Criteria cri) {
+	public ArrayList<MemberVO> getMemberList(Criteria cri) {
 		if(cri == null) {
 			cri = new Criteria(1, 2);
 		}

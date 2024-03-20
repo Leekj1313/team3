@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>카테고리 관리</title>
+<title>회원 관리 페이지</title>
 <!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -28,291 +29,146 @@
 <jsp:include page="/WEB-INF/view/profile.jsp"/>
 
 <div class="container mt-3 col-6 card-1">
-	<h2>회원 관리</h2>
-	<div class="input-group mb-3 mt-3">
-		<input type="text" class="form-control category-content" placeholder="새로 등록할 카테고리 이름을 입력하세요.">
-		<button class="btn btn-outline-secondary btn-category-insert" type="button">등록</button>
-	</div>
-
-	<table class="table table-hover category-list-table">
-		<tbody class="box-category-list">
-			<tr class="box-category">
-				<td class="col-3">회원 아이디</td>
-				<td class="col-3">권한</td>
-				<td class="col-3">회원 상태</td>
+	<h2 style="font-weight: bold">회원 관리</h2>
+	<form action="<c:url value="/admin/membermanager"/>" class="mb-3 mt-3">
+		<div class="input-group">
+			<select name="type" class="form-select">
+				<option value="meId" <c:if test='${pm.cri.type == "meId"}'>selected</c:if>>아이디</option>
+				<option value="meAuthority" <c:if test='${pm.cri.type == "meAuthority"}'>selected</c:if>>권한</option>
+				<option value="meMsState" <c:if test='${pm.cri.type == "meMsState"}'>selected</c:if>>상태</option>
+			</select>
+		    <input type="text" class="form-control" placeholder="검색어" name="search" value="${pm.cri.search}">
+		    <button class="btn btn-secondary">검색</button>
+		</div>
+	</form>
+	<table class="table table-hover">
+	    <thead>
+			<tr>
+				<th>회원 아이디</th>
+				<th>권한</th>
+				<th>회원 상태</th>
+				<th></th>
+			</tr>
+	    </thead>
+	    <tbody>
+	    	<c:forEach items="${list}" var="post">
+			<tr>
+				<td class="col-3">${post.me_id}</td>
+				<td class="col-3">${post.me_authority}</td>
+				<td class="col-3">${post.me_ms_state}</td>
 				<td class="col-3">
-					<div class="btn-category-group">
-						<button class="btn btn-outline-warning">가입승인</button>
-						<button class="btn btn-outline-danger">삭제</button>
-					</div>
+				   <div class="btn-category-group">
+				      <button class="btn btn-outline-warning btn-category-update" data-id="\${post.me_id}">가입승인</button>
+				      <button class="btn btn-outline-danger btn-category-delete" data-id="${post.me_id}">삭제</button>
+				   </div>
 				</td>
 			</tr>
-		</tbody>
+			</c:forEach>
+			<c:if test="${list.size() == 0 }">
+				<tr>
+					<th colspan="5">
+						<h3 class="text-center">등록된 게시글이 없습니다.</h3>
+					</th>
+				</tr>
+			</c:if>
+	    </tbody>
 	</table>
-	<!-- 페이지네이션 박스 -->
-	<div class="box-category-pagination">
-		<ul class="pagination justify-content-center">
+	<ul class="pagination justify-content-center">
+		<c:if test="${pm.prev}">
 			<li class="page-item">
-				<a class="page-link" href="javascript:void(0);">이전</a>
+				<c:url var="prevUrl" value="/admin/membermanager">
+					<c:param name="type" value="${pm.cri.type}"/>
+					<c:param name="search" value="${pm.cri.search}"/>
+					<c:param name="page" value="${pm.startPage - 1}"/>
+				</c:url>
+				<a class="page-link" href="${prevUrl}">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
 			</li>
-			<li class="page-item active">
-				<a class="page-link" href="javascript:void(0);">1</a>
+		</c:if>
+		<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
+			<li class="page-item <c:if test="${pm.cri.page == i}">active</c:if>">
+				<c:url var="page" value="/admin/membermanager">
+					<c:param name="type" value="${pm.cri.type}"/>
+					<c:param name="search" value="${pm.cri.search}"/>
+					<c:param name="page" value="${i}"/>
+				</c:url>
+				<a class="page-link" href="${page}">${i}</a>
 			</li>
+		</c:forEach>
+		<c:if test="${pm.next }">
 			<li class="page-item">
-				<a class="page-link" href="javascript:void(0);">다음</a>
+				<c:url var="nextUrl" value="/admin/membermanager">
+					<c:param name="type" value="${pm.cri.type}"/>
+					<c:param name="search" value="${pm.cri.search}"/>
+					<c:param name="page" value="${pm.endPage + 1}"/>
+				</c:url>
+				<a class="page-link" href="${nextUrl}">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
 			</li>
-		</ul>
-	</div>
+		</c:if>
+	</ul>
 </div>
-<script type="text/javascript">
-let cri = {
-	page : 1,
-}
-//카테고리를 불러와서 화면에 출력하는 함수 : 현재 카테고리 페이지 정보
-displayCategoryAndPagination(cri);
-function displayCategoryAndPagination(cri){
-	//ajax를 이용해서 서버에 현재 카테고리 페이지 정보를 보내고,
-	//서버에서 보낸 회원 리스트와 페이지네이션 정보를 받아와서 화면에 출력
-	$.ajax({
-		url : '<c:url value="/admin/membermanager"/>',
-		method : 'post',
-		data : cri,
-		success : function(data){
-			displayCategory(data.list);
-			displayCategoryPagination(JSON.parse(data.pm));
-		}
-	});
-}
-
-//카테고리가 주어지면 카테고리를 화면에 출력하는 함수
-function displayCategory(categoryList){
-	let str = '';
-	if(categoryList.length == 0){
-		$(".box-category-list").html('<h3>등록된 회원이 없습니다.</h3>')
-		return;
-	}
-	
-	for(category of categoryList){
-		str += `
-		<tr class="box-category">
-			<td class="col-3">\${category.me_id}</td>
-			<td class="col-3">\${category.me_authority}</td>
-			<td class="col-3 ca_name">\${category.me_ms_state}</td>
-			<td class="col-3">
-				<div class="btn-category-group">
-					<button class="btn btn-outline-warning btn-category-update" data-id="\${category.me_id}">가입승인</button>
-					<button class="btn btn-outline-danger btn-category-delete" data-id="\${category.me_id}">삭제</button>
-				</div>
-			</td>
-		</tr>`;
-	}
-	$(".box-category-list").html(str);
-}
-
-//페이지네이션이 주어지면 페이지네이션을 화면에 출력하는 함수
-function displayCategoryPagination(pm){
-	let str = '';
-	//이전 버튼 활성화
-	if(pm.prev){
-		str += `
-		<li class="page-item">
-			<a class="page-link" href="javascript:void(0);" data-page="\${pm.startPage-1}">이전</a>
-		</li>
-		`;
-	}
-	
-	for(i = pm.startPage; i <= pm.endPage; i++){
-		let active = pm.cri.page == i ? "active" : "";
-		str += `
-		<li class="page-item \${active}">
-			<a class="page-link" href="javascript:void(0);" data-page="\${i}">\${i}</a>
-		</li>
-		`;
-	}
-	
-	if(pm.next){
-		str += `
-		<li class="page-item">
-			<a class="page-link" href="javascript:void(0);" data-page="\${pm.endPage+1}">다음</a>
-		</li>
-		`;
-	}
-	
-	$(".box-category-pagination>ul").html(str);
-}
-//페이지 클릭 이벤트
-$(document).on("click", ".box-category-pagination .page-link", function(){
-	cri.page = $(this).data("page");
-	displayCategoryAndPagination(cri);
-});
-</script>
-<!-- 카테고리 등록 -->
-<script type="text/javascript">
-$(".btn-category-insert").click(function(){
-	//로그인 체크
-	if(!${user.me_authority eq 'ADMIN' }){
-		if(confirm("관리자 기능입니다. 로그인 화면으로 이동하시겠습니까?")){
-			location.href = "<c:url value='/login'/>";
-			return;
-		}
-		//취소 누르면 현재 페이지에서 추천/비추천 동작을 안 함
-		else{
-			location.href = "<c:url value='/'/>";
-			return;
-		}
-	}
-	
-	let category = $(".category-content").val();
-	
-	$.ajax({
-		url : '<c:url value="/category/insert"/>',
-		method : "post",
-		data : {
-			category
-		},
-		success : function(data){
-			if(data == "ok"){
-				alert("카테고리를 등록했숩니다.");
-				cri.page = 1;
-				displayCategoryAndPagination(cri);
-				$(".category-content").val("");
-			}else if(data == "dup"){
-				alert("중복된 카테고리입니다.")
-			}else{
-				alert("카테고리를 등록하지 못했습니다.");
-			}
-		},
-		error : function(a, b, c){
-			
-		}
-	})
-	
-}); //click end
-
-</script>
 <!-- 회원 삭제 -->
 <script type="text/javascript">
+/* $(document).on("click",".btn-category-delete", function(){
+	alert("삭제에 성공했습니다.");
+}); */
 $(document).on("click",".btn-category-delete", function(){
-	//로그인 체크
-	if(!${user.me_authority eq 'ADMIN' }){
-		if(confirm("관리자 기능입니다. 로그인 화면으로 이동하시겠습니까?")){
-			location.href = "<c:url value='/login'/>";
-			return;
-		}
-		else{
-			location.href = "<c:url value='/'/>";
-			return;
-		}
-	}
-	
-	let me_id = $(this).data("id");
-	$.ajax({
-		url : '<c:url value="/admin/memberdelete"/>',
-		method : "post",
-		data : {
-			me_id
-		},
-		success : function(data){
-			console.log(data);
-			if(data == "ok"){
-				alert("회원을 삭제했습니다.");
-				displayCategoryAndPagination(cri);
-			}else{
-				alert("회원을 삭제하지 못했습니다.");
-			}
-		},
-		error : function(a, b, c){
-			
-		}
-	})
+   //로그인 체크
+   if(!${user.me_authority eq 'ADMIN' }){
+      if(confirm("관리자 기능입니다. 로그인 화면으로 이동하시겠습니까?")){
+         location.href = "<c:url value='/login'/>";
+         return;
+      }
+      else{
+         location.href = "<c:url value='/'/>";
+         return;
+      }
+   }
+   
+   if(!confirm("회원을 삭제하시겠습니까?")){
+	   return;
+   }
+   
+   let me_id = $(this).data("id");
+   $.ajax({
+      url : '<c:url value="/admin/memberdelete"/>',
+      method : "post",
+      data : {
+         me_id
+      },
+      success : function(data){
+         console.log(data);
+         if(data == "ok"){
+            alert("회원을 삭제했습니다.");
+            //displayCategoryAndPagination(cri);
+            refresh();
+         }else{
+            alert("회원을 삭제하지 못했습니다.");
+         }
+      },
+      error : function(a, b, c){
+         
+      }
+   })
 });
-</script>
-<!-- 카테고리 수정 구현 -->
-<script type="text/javascript">
-$(document).on("click", ".btn-category-update", function(){
-	//로그인 체크
-	if(!${user.me_authority eq 'ADMIN' }){
-		if(confirm("관리자 기능입니다. 로그인 화면으로 이동하시겠습니까?")){
-			location.href = "<c:url value='/login'/>";
-			return;
-		}
-		else{
-			location.href = "<c:url value='/'/>";
-			return;
-		}
-	}
-	
-	initCategory();
-	//현재 카테고리 보여주는 창이 textarea 태그로 변경
-	//기존 창을 감춤
-	$(this).parents(".box-category").find(".ca_name").hide();
-	let comment = $(this).parents(".box-category").find(".ca_name").text();
-	let input = 
-	`
-	<input type="text" class="form-control cat-input" value="\${comment}" style="height: 54px">
-	`;
-	$(this).parents(".box-category").find(".ca_name").after(input);
-	
-	//수정 삭제 버튼 대신 수정 완료 버튼으로 변경
-	$(this).parent().hide();
-	let num = $(this).data("num");
-	let btn = 
-	`
-	<button class="btn btn-outline-success btn-complete" data-num="\${num}">수정완료</button>
-	`;
-	$(this).parent().after(btn);
-}); //click end
 
-function initCategory(){
-	//감추었던 카테고리 이름을 보여줌
-	$(".ca_name").show();
-	//감추었던 수정, 삭제 버튼을 보여줌
-	$(".btn-category-group").show();
-	//추가했던 textarea 태그를 삭제함
-	$(".cat-input").remove();
-	//추가했던 수정완료 버튼을 삭제함
-	$(".btn-complete").remove();
-}
-
-//수정 완료 버튼 클릭 이벤트 등록
-$(document).on("click", ".btn-complete", function(){
-	//로그인 체크
-	if(!${user.me_authority eq 'ADMIN' }){
-		if(confirm("관리자 기능입니다. 로그인 화면으로 이동하시겠습니까?")){
-			location.href = "<c:url value='/login'/>";
-			return;
-		}
-		//취소 누르면 현재 페이지에서 추천/비추천 동작을 안 함
-		else{
-			location.href = "<c:url value='/'/>";
-			return;
-		}
-	}
-	
-	//수정하기 위해 필요한 정보를 가져옴 : 수정된 댓글 내용, 댓글 번호
-	let num = $(this).data("num");
-	let name = $(".cat-input").val();
-	//alert(num + ":" + content);
+function refresh(){
+	let cri = {
+		
+	};
 	$.ajax({
-		url : '<c:url value="/category/update"/>',
-		method : 'post',
-		data : {
-			num,
-			name
-		},
-		success : function(data){
-			if(data == "ok"){
-				alert("카테고리를 수정했습니다.");
-				displayCategoryAndPagination(cri);
-			}else{
-				alert("카테고리를 수정하지 못했습니다.")
-			}
-		},
-		error : function(xhr, status, error){
-			
-		}
+	   url : '<c:url value="/admin/membermanager"/>',
+	   method : 'get',
+	   data : cri,
+	   success : function(data){
+	      alert(1);
+	   }
 	});
-});
+
+}
 </script>
 </body>
 </html>

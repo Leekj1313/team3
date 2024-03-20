@@ -20,7 +20,7 @@ public interface MemberDAO {
 
 	boolean updatePassword(@Param("me_pw")String pw, @Param("user")MemberVO user);
 
-	ArrayList<CategoryVO> selectMemberList(@Param("cri")Criteria cri);
+	ArrayList<MemberVO> selectMemberList(@Param("cri")Criteria cri);
 
 	int selectTotalCountMember(@Param("cri")Criteria cri);
 

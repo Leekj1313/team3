@@ -24,12 +24,12 @@ import kr.kh.team3.app.service.MemberServiceImp;
 @WebServlet("/admin/memberdelete")
 public class MemberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CategoryService categoryService = new CategoryServiceImp();
 	private MemberService memberService = new MemberServiceImp();
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//삭제할 회원 아이디를 가져옴
 		String me_id = request.getParameter("me_id");
+		System.out.println(me_id);
 		boolean res = memberService.deleteMember(me_id);
 		response.getWriter().write(res ? "ok" : "");
 	}
