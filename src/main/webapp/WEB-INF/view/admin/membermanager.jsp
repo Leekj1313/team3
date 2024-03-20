@@ -22,6 +22,10 @@
 	.category-list-table {
 		margin-top: 20px
 	}
+	
+	td{
+		line-height: 60px;
+	}
 </style>
 </head>
 <body>
@@ -41,25 +45,37 @@
 		    <button class="btn btn-secondary">검색</button>
 		</div>
 	</form>
-	<table class="table table-hover">
+	<table class="table table-hover" style="text-align: center">
 	    <thead>
 			<tr>
-				<th>회원 아이디</th>
+				<th>아이디</th>
 				<th>권한</th>
-				<th>회원 상태</th>
+				<th>상태</th>	
 				<th></th>
 			</tr>
 	    </thead>
 	    <tbody>
 	    	<c:forEach items="${list}" var="post">
 			<tr>
-				<td class="col-3">${post.me_id}</td>
-				<td class="col-3">${post.me_authority}</td>
-				<td class="col-3">${post.me_ms_state}</td>
+				<td class="col-3" style="font-weight: bold; <c:if test='${post.me_authority == "ADMIN"}'>color: red;</c:if>">${post.me_id}</td>
 				<td class="col-3">
-				   <div class="btn-category-group">
-				      <button class="btn btn-outline-warning btn-category-update" data-id="\${post.me_id}">가입승인</button>
-				      <button class="btn btn-outline-danger btn-category-delete" data-id="${post.me_id}">삭제</button>
+					<form action="<c:url value="/admin/memberauth?id=${post.me_id}"/>" class="mb-3 mt-3" method="post">
+						<div class="input-group">
+							<select class="form-select" name="authority">
+								<option value="ADMIN" <c:if test='${post.me_authority == "ADMIN"}'>selected</c:if>>관리자</option>
+								<option value="USER" <c:if test='${post.me_authority == "USER"}'>selected</c:if>>회원</option>
+								<option value="nUSER" <c:if test='${post.me_authority == "USER" && post.me_ms_state == "가입대기"}'>selected</c:if>>대기회원</option>
+							</select>
+							<button class="btn btn-secondary">변경</button>
+						</div>
+					</form>
+				</td>
+				<td class="col-2">${post.me_ms_state}</td>
+				<td class="col-2">
+				   <div class="btn-manager-group">
+				      <%-- <a href="<c:url value="/admin/memberdelete?id=${post.me_id}"/>" class="btn btn-outline-warning">가입승인</a> --%>
+				      <!-- <button class="btn btn-outline-warning btn-category-update" data-id="\${post.me_id}">가입승인</button> -->
+				      <a href="<c:url value="/admin/memberdelete?id=${post.me_id}"/>" class="btn btn-outline-danger">삭제</a>
 				   </div>
 				</td>
 			</tr>
@@ -110,65 +126,5 @@
 		</c:if>
 	</ul>
 </div>
-<!-- 회원 삭제 -->
-<script type="text/javascript">
-/* $(document).on("click",".btn-category-delete", function(){
-	alert("삭제에 성공했습니다.");
-}); */
-$(document).on("click",".btn-category-delete", function(){
-   //로그인 체크
-   if(!${user.me_authority eq 'ADMIN' }){
-      if(confirm("관리자 기능입니다. 로그인 화면으로 이동하시겠습니까?")){
-         location.href = "<c:url value='/login'/>";
-         return;
-      }
-      else{
-         location.href = "<c:url value='/'/>";
-         return;
-      }
-   }
-   
-   if(!confirm("회원을 삭제하시겠습니까?")){
-	   return;
-   }
-   
-   let me_id = $(this).data("id");
-   $.ajax({
-      url : '<c:url value="/admin/memberdelete"/>',
-      method : "post",
-      data : {
-         me_id
-      },
-      success : function(data){
-         console.log(data);
-         if(data == "ok"){
-            alert("회원을 삭제했습니다.");
-            //displayCategoryAndPagination(cri);
-            refresh();
-         }else{
-            alert("회원을 삭제하지 못했습니다.");
-         }
-      },
-      error : function(a, b, c){
-         
-      }
-   })
-});
-
-function refresh(){
-	let cri = {
-		
-	};
-	$.ajax({
-	   url : '<c:url value="/admin/membermanager"/>',
-	   method : 'get',
-	   data : cri,
-	   success : function(data){
-	      alert(1);
-	   }
-	});
-
-}
-</script>
 </body>
 </html>

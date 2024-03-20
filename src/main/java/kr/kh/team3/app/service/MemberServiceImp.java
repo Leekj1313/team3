@@ -138,4 +138,12 @@ private MemberDAO memberDao;
 		return memberDao.deleteMember(me_id);
 	}
 
+	@Override
+	public boolean updateMemberAuthority(MemberVO user) {
+		if(user == null) {
+			return false;
+		}
+		return memberDao.updateMemberAuthority(user);
+	}
+
 }

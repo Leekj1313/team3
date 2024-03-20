@@ -39,7 +39,7 @@ public class MemberManagerServlet extends HttpServlet {
 		
 		MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 		
-		Criteria cri = new Criteria(page, 2, type, search, user.getMe_id());
+		Criteria cri = new Criteria(page, 2, type, search, user.getMe_id(), user.getMe_authority());
 		System.out.println(cri);
 		//검색어, 검색타입에 맞는 전체 회원수를 가져옴
 		int totalCount = memberService.getTotalCountMember(cri);

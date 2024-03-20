@@ -29,4 +29,6 @@ public interface MemberService {
 
 	boolean deleteMember(String me_id);
 
+	boolean updateMemberAuthority(MemberVO user);
+
 }

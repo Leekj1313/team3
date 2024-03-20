@@ -26,4 +26,6 @@ public interface MemberDAO {
 
 	boolean deleteMember(@Param("me_id")String me_id);
 
+	boolean updateMemberAuthority(@Param("user")MemberVO user);
+
 }
