@@ -31,11 +31,11 @@ public class ReportPostUpdateServlet extends HttpServlet {
 		boolean res = postService.deleteReportPost(num, user);
 		
 		if(res) {
-			request.setAttribute("msg", "신고글을 삭제했습니다.");
+			request.setAttribute("msg", "신고글을 취소했습니다.");
 			request.setAttribute("url", "/report/list");
 		}
 		else {
-			request.setAttribute("msg", "신고글을 삭제하지 못했습니다.");
+			request.setAttribute("msg", "신고글을 취소하지 못했습니다.");
 			request.setAttribute("url", "/report/list");
 		}
 		request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);

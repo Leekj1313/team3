@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import kr.kh.team3.app.model.vo.MemberVO;
 
 
-@WebFilter({"/find/password", "/find/id", "/login", "/signup"})
+@WebFilter({"/find/password", "/login", "/signup", "/find/id"})
 public class GuestFilter extends HttpFilter implements Filter {
 
 	private static final long serialVersionUID = 1L;

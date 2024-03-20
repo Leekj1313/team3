@@ -38,7 +38,7 @@
 							<td>${report.re_me_id}</td>
 							<td>
 								<a href="<c:url value="/report/delete?num=${report.re_po_num}"/>" class="btn btn-outline-danger">삭제</a>
-								<a href="<c:url value="/report/update?num=${report.re_po_num}"/>" class="btn btn-outline-primary">패스</a>
+								<a href="<c:url value="/report/update?num=${report.re_num}"/>" class="btn btn-outline-primary">취소</a>
 							</td>
 						</tr>
 				</c:if>
