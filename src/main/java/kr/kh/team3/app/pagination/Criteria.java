@@ -11,6 +11,7 @@ public class Criteria {
 	private int page = 1;//현재 페이지 : 기본값 - 1
 	private int perPageNum = 10;//한 페이지에서 컨텐츠 개수 : 기본값 - 10
 	private int boNum;
+	private int poNum;
 	private String me_id;
 	private String me_authority;
 	private MemberVO user;
@@ -40,6 +41,7 @@ public class Criteria {
 		this.search = search == null ? "" : search;
 		this.boNum = boNum;
 	}
+	
 	public Criteria(int page, int perPageNum, String type, String search, String user) {
 		this(page, perPageNum);
 		this.type = type == null ? "" : type;
