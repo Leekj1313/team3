@@ -115,4 +115,14 @@ private MemberDAO memberDao;
 		return memberDao.updatePassword(pw, user);
 	}
 
+	@Override
+	public void failCountUp(MemberVO failUser, int failCount) {
+		memberDao.updateFailCount(failUser.getMe_id(), failCount);
+	}
+
+	@Override
+	public void updateMemberState(MemberVO failUser, String state) {
+		memberDao.updateMemberState(failUser.getMe_id(), state);
+	}
+
 }

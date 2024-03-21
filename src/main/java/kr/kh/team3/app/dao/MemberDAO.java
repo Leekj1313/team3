@@ -18,4 +18,8 @@ public interface MemberDAO {
 
 	boolean updatePassword(@Param("me_pw")String pw, @Param("user")MemberVO user);
 
+	void updateFailCount(@Param("me_id")String me_id, @Param("me_fail_count")int failCount);
+
+	void updateMemberState(@Param("me_id")String me_id, @Param("state")String state);
+
 }

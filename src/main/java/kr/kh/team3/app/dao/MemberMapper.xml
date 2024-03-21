@@ -24,4 +24,16 @@
 		update member set me_pw = #{me_pw}
 		where me_id = #{user.me_id}
 	</update>
+	
+	<update id="updateFailCount">
+		update member set
+			me_fail_count = #{me_fail_count}
+		where me_id = #{me_id}
+	</update>
+	
+	<update id="updateMemberState">
+		update member set
+			me_ms_state = #{state}
+		where me_id = #{me_id}
+	</update>
 </mapper>

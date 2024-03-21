@@ -27,9 +27,12 @@ public class PasswordUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
+		MemberVO user = memberService.getMember(id);
 		
-		boolean res = memberService.updatePassword(pw, id);
+		boolean res = memberService.updatePassword(pw, user.getMe_id());
 		if(res) {
+			String state = "이용중";
+			memberService.updateMemberState(user, state);
 			request.setAttribute("msg", "비밀번호 변경에 성공했습니다.");
 			request.setAttribute("url", "/login");
 		}else {

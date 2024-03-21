@@ -28,10 +28,12 @@ public class PostDeleteServlet extends HttpServlet {
 			num = 0;
 		}
 		boolean res = postService.deletePost(num, user);
+
 		//삭제에 성공하면
 		if(res) {
 			request.setAttribute("msg", "게시글을 삭제했습니다.");
 			request.setAttribute("url", "/");
+			request.getSession().removeAttribute("prevUrl");
 		}
 		//실패하면
 		else {

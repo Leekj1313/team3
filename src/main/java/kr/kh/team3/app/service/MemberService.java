@@ -21,4 +21,8 @@ public interface MemberService {
 
 	boolean updatePassword(String pw, String id);
 
+	void failCountUp(MemberVO failUser, int failCount);
+
+	void updateMemberState(MemberVO failUser, String state);
+
 }
