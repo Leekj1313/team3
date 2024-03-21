@@ -133,8 +133,8 @@
 			SUM(CASE WHEN rc_state = 1 THEN 1 ELSE 0 END) AS po_up
 		FROM post left join
 			recommend on rc_po_num = po_num
-		where po_num
 		group by po_num
+		having po_up > 4
 		order by po_up desc
 		limit 5;
 	</select>
