@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -14,10 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import kr.kh.team3.app.model.vo.MemberVO;
 
-/**
- * Servlet Filter implementation class AdminFilter
- */
-@WebFilter({"/board/manager","/board/insert","/board/delete", "/board/update", "/category/list", "/report/list", "/report/update", "report/delete", "/category/delete", "/category/insert", "/category/update", "/admin/membermanager"})
+@WebFilter({"/board/manager","/board/insert","/board/delete", "/board/update", "/category/list", "/report/list", "/report/update", "/report/delete", "/category/delete", "/category/insert", "/category/update", "/admin/membermanager"})
 
 public class AdminFilter extends HttpFilter implements Filter {
 	
