@@ -36,11 +36,12 @@
 <form action="<%=request.getContextPath()%>/signup/update" class="was-validated" method="post">
 	<div class="mb-3 mt-3">
 		<label for="uname" class="form-label">이름(실명)</label>
-		<input type="text" class="form-control" id="uname" name="uname" readonly value="${member.me_name}">
+		<input type="text" class="form-control" id="uname" readonly value="${member.me_name}">
 	</div>
 	<label for="id" class="form-label">아이디</label>
 	<div class="input-group">
-		<input type="text" class="form-control" id="id" name="id" readonly value="${member.me_id}">
+		<input type="text" class="form-control" id="id" readonly value="${member.me_id}">
+		<!-- <input type="text" class="form-control" id="id" name="id" value="${member.me_email}"> -->
 	</div>
 	<div class="mb-3 mt-3">
 		<label for="pw" class="form-label">비밀번호</label>

@@ -101,7 +101,21 @@ private MemberDAO memberDao;
 	}
 
 	@Override
-	public boolean deleteMember(String me_id, String me_pw) {
-		return memberDao.deleteMember(me_id);
+	public boolean deleteMember(String me_id,String me_pw, MemberVO user) {
+		if(user == null) {
+			return false;			
+		}
+		if(!user.getMe_id().equals(me_id)||!user.getMe_pw().equals(me_pw)) {
+			return false;
+		}
+		
+		MemberVO member = memberDao.selectMember(user.getMe_id());
+		
+		if( member == null ||
+			!member.getMe_id().equals(user.getMe_id())) {
+			return false;
+		}
+		
+		return memberDao.deleteMember(member.getMe_id());
 	}
 }

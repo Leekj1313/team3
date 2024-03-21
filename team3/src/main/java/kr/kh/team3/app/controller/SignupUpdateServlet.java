@@ -33,9 +33,9 @@ public class SignupUpdateServlet extends HttpServlet {
 	   }
 	   String email = request.getParameter("email");
 	   String phone = request.getParameter("phone");
-	   
+	   //session에 저장되어 있는 회원 정보를 가져옴
 	   MemberVO user = (MemberVO)request.getSession().getAttribute("user");
-	   
+	   //새로운 정보를 저장함 => 이메일, 전화
 	   MemberVO member = new MemberVO(email, phone, user.getMe_id());
         
        boolean res = memberService.updateMember(member);
