@@ -49,7 +49,10 @@ initMDB({ Ripple, Input });
 		  <label id="name-error" class="error text-danger" for="name"></label>
 		</div>
 		<div class="form-group" style="margin-bottom: 10px">
-		  <input type="text" class="form-control" id="id" name="me_id" placeholder="아이디">
+		  <div class="input-group">
+			  <input type="text" class="form-control" id="id" name="me_id" placeholder="아이디">
+			  <button class="btn btn-secondary" id="idCheck" type="button">중복 확인</button>
+		  </div>
 		  <label id="id-error" class="error text-danger" for="id"></label>
 		</div>
 		<div class="form-group" style="margin-bottom: 10px">
@@ -68,7 +71,7 @@ initMDB({ Ripple, Input });
 		  <input type="text" class="form-control" id="phone" name="me_phone" placeholder="전화번호">
 		  <label id="phone-error" class="error text-danger" for="phone"></label>
 		</div>
-		<button class="btn btn-outline-success col-12" style="margin-top: 40px">회원가입</button>
+		<button class="btn btn-outline-success col-12 btn-submit" style="margin-top: 40px">회원가입</button>
 	</form>
 </div>
 </div>
@@ -138,6 +141,33 @@ $.validator.addMethod(
 		return this.optional(element) || re.test(value);
 	}, 
 )
+
+let flag = false;
+$("#idCheck").click(function(){
+	let id = $("[name=me_id]").val();
+	fetch(`<c:url value="/id/check"/>?id=\${id}`)
+	.then(response=>response.text())
+	.then(data => {
+		if(data == "true"){
+			alert("사용 가능한 아이디입니다.");
+			flag = true;
+		}else{
+			alert("이미 사용중인 아이디입니다.");
+		}
+	})
+	.catch(error => console.error("Error : ", error));
+});
+$("[name=me_id]").change(function(){
+	flag = false;
+});
+$(".btn-submit").click(function(){
+	//정규표현식을 구현
+	
+	if(!flag){
+		alert("아이디 중복 확인을 하세요.");
+		return false;
+	}
+});
 </script>
 </body>
 </html>
