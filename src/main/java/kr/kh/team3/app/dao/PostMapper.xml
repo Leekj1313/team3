@@ -17,8 +17,21 @@
 		column="po_bo_num" select="selectBoard"/>
 	</resultMap>
 	
+	<resultMap type="kr.kh.team3.app.model.vo.CommentVO" id="CommentMap">
+	<id property="cm_num" column="cm_num"/>
+	<result property="cm_po_num" column="cm_po_num"/>
+	<result property="cm_me_id" column="cm_me_id"/>
+	<result property="cm_content" column="cm_content"/>
+	<collection property="post" ofType="kr.kh.team3.app.model.vo.BoardVO"
+		column="cm_po_num" select="selectPost2"/>
+	</resultMap>
+	
 	<select id="selectBoard" resultType="kr.kh.team3.app.model.vo.BoardVO">
 		select * from board where bo_num = #{po_bo_num}
+	</select>
+	
+	<select id="selectPost2" resultType="kr.kh.team3.app.model.vo.PostVO">
+		select * from post where po_num = #{cm_po_num}
 	</select>
 	
 	<update id="updateView">
@@ -74,7 +87,7 @@
 			SUM(CASE WHEN rc_state = 1 THEN 1 ELSE 0 END) AS po_up
 		FROM post left join
 			recommend on rc_po_num = po_num
-		where po_bo_num = #{cri.boNum}
+		where po_bo_num = #{cri.boNum} and po_temp != 1
 		<if test='cri.type=="all"'>
 				and (po_title like concat('%', #{cri.search},'%') 
 				or po_me_id = #{cri.search})
@@ -128,6 +141,14 @@
 	<select id="selectFileByPo_num" resultType="kr.kh.team3.app.model.vo.FileVO">
 		select * from file where fi_po_num = #{num} 
 	</select>
+	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.po_num">
+		insert into post(po_bo_num,po_title,po_content,po_me_id) 
+		values(#{post.po_bo_num},#{post.po_title},#{post.po_content},#{post.po_me_id})
+	</insert>
+	<insert id="insertFile">
+		insert into file(fi_po_num, fi_name, fi_ori_name)
+		values(#{file.fi_po_num},#{file.fi_name},#{file.fi_ori_name})
+	</insert>
 	<delete id="deleteFile">
 		delete from file where fi_num = #{fi_num}
 	</delete>
@@ -135,7 +156,47 @@
 		delete from post where po_num = #{num}
 	</delete>
   
-  
+	<insert id ="insertTmpPost" useGeneratedKeys="true" keyProperty="post.po_num">
+		insert into post(po_bo_num,po_title,po_content,po_me_id,po_temp) 
+		values(#{post.po_bo_num},#{post.po_title},#{post.po_content},#{post.po_me_id},#{post.po_temp})
+	</insert>
+	
+	<update id="updateTmpPost">
+		update post 
+		set
+		po_bo_num = #{post.po_bo_num},
+		po_title = #{post.po_title},
+		po_content = #{post.po_content}
+		where
+		po_num = #{po_num} and po_me_id = #{post.po_me_id}
+	</update>
+	
+	<select id="selectTmpPostList" resultType="kr.kh.team3.app.model.vo.PostVO">
+		select * from post where po_me_id = #{user.me_id} and po_temp = 1
+	</select>
+	
+	<update id="submitTmpPost">
+		update post
+		set
+		po_bo_num = #{post.po_bo_num},
+		po_title = #{post.po_title},
+		po_content = #{post.po_content},
+		po_me_id = #{post.po_me_id},
+		po_temp = 0
+		where po_num = #{po_num}
+	</update>
+	<select id="selectFile" resultType="kr.kh.team3.app.model.vo.FileVO">
+		select * from file where fi_num = #{fi_num}
+	</select>
+	
+	<update id="updatePost">
+		update post set
+			po_title = #{post.po_title},
+			po_content = #{post.po_content},
+			po_bo_num = #{post.po_bo_num}
+		where
+			po_num = #{post.po_num}
+	</update>
   
 	<select id="selectMyPostList" resultMap="PostMap">
 		SELECT * 
@@ -171,12 +232,51 @@
 		</if>
 	</select>
 	
+	<select id="selectMyCommentPostList" resultMap="CommentMap">
+		SELECT 
+			*
+		FROM comment left join
+			post on cm_po_num = po_num
+		WHERE cm_me_id = #{cri.me_id}
+		<if test='cri.type=="all"'>
+			and po_title like concat('%', #{cri.search},'%') 
+				or cm_content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test='cri.type=="potitle"'>
+			and po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="cmcontent"'>
+			and cm_content like concat('%', #{cri.search}, '%')
+		</if>
+		ORDER BY po_num DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="selectMyCommentPostTotalCount" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM comment left join
+			post on cm_po_num = po_num
+		WHERE cm_me_id = #{cri.me_id}
+		<if test='cri.type=="all"'>
+			and po_title like concat('%', #{cri.search},'%') 
+				or cm_content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test='cri.type=="potitle"'>
+			and po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="cmcontent"'>
+			and cm_content like concat('%', #{cri.search}, '%')
+		</if>
+	</select>
+	
+	
 <!-- 	<select id="selectMyCommentList" resultType="kr.kh.team3.app.model.vo.CommentVO">
 		SELECT * FROM comment
 		WHERE cm_me_id = #{me_id}
 	</select> -->
 	
-	<select id="selectMyCommentPostList" resultType="kr.kh.team3.app.model.vo.MyCommentVO">
+<!-- 	<select id="selectMyCommentPostList" resultType="kr.kh.team3.app.model.vo.MyCommentVO">
 		SELECT * FROM comment JOIN post ON po_num = cm_po_num
 		JOIN board on bo_num = po_bo_num
 		WHERE cm_me_id = #{cri.me_id}

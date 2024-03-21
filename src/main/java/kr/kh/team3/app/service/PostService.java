@@ -67,6 +67,24 @@ public interface PostService {
 
 	int getMyCommentPostTotalCount(Criteria cri);
 
+	boolean insertPost(PostVO post, ArrayList<Part> partList);
+
+
+	int insertTmpPost(PostVO tmpPost);
+
+
+	boolean updateTmpPost(PostVO tmpPost, int po_num);
+
+
+	ArrayList<PostVO> getTmpPostList(MemberVO user);
+
+
+	boolean submitTmpPost(PostVO post, int po_num, ArrayList<Part> partList);
+
+
+	boolean updatePost(PostVO post, MemberVO user, ArrayList<Integer> nums, ArrayList<Part> fileList);
+
+
 
 	ArrayList<ReportVO> getReportPostList(Criteria cri);
 
