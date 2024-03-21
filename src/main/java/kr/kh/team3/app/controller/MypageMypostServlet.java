@@ -34,12 +34,9 @@ public class MypageMypostServlet extends HttpServlet {
 		MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 		
 		Criteria cri = new Criteria(page, 2, type, search, user.getMe_id());
-		System.out.println(cri);
 		//검색어, 검색타입에 맞는 전체 게시글 개수를 가져옴
 		int totalCount = postService.getMyPostTotalCount(cri);
-		System.out.println("totalcaount : " + totalCount);
 		PageMaker pm = new PageMaker(5, cri, totalCount);
-		System.out.println(pm.getStartPage());
 		request.setAttribute("pm", pm);
 		//현재 페이지 정보에 맞는 게시글 리스트를 가져옴
 		ArrayList<PostVO> list = postService.getMyPostList(cri);
