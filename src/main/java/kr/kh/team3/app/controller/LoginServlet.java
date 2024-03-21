@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 				return;
 			}
-
+			
 			memberService.failCountUp(user, 0);
 			request.setAttribute("msg", "로그인에 성공했습니다.");
 			request.setAttribute("url", "");
