@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 			
 			if(!user.getMe_ms_state().equals("이용중")) {
 				request.setAttribute("msg", "현재 계정이 " + user.getMe_ms_state() + " 상태라 로그인이 불가능합니다.");
-				request.setAttribute("url", "user/login");
+				request.setAttribute("url", "/login");
 				request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 				return;
 			}
@@ -52,12 +52,15 @@ public class LoginServlet extends HttpServlet {
 		else{
 			MemberVO failUser = memberService.getMember(id);
 			int failCount;
+			
 			if(failUser != null) {
 				failCount = failUser.getMe_fail_count() + 1;
 				memberService.failCountUp(failUser, failCount);
 				request.setAttribute("msg", "로그인에 실패했습니다. 현재 실패횟수는 " + failCount + "번 입니다.");
+				request.setAttribute("url", "/login");
 			}else {
 				request.setAttribute("msg", "로그인에 실패했습니다.");
+				request.setAttribute("url", "/login");
 				request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 			}
 			
@@ -65,8 +68,8 @@ public class LoginServlet extends HttpServlet {
 				String state = "정지";
 				memberService.updateMemberState(failUser, state);
 				request.setAttribute("msg", "로그인 5회 초과 실패하여 계정이 정지됩니다. 비밀번호 찾기를 통해 풀고 다시 시도하세요.");
+				request.setAttribute("url", "/login");
 			}
-			request.setAttribute("url", "login");
 		}
 		request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 	}
