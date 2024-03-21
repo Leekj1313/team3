@@ -49,7 +49,7 @@
 		  <thead>
 		    <tr>
 		      <th>
-		      	<a href="<c:url value="#"/>" class="boardname">HOT게시판</a>
+		      	<a href="<c:url value="/post/hotlist"/>" class="boardname">HOT게시판</a>
 		      </th>
 		    </tr>
 		  </thead>

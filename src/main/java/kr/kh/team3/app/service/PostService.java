@@ -46,7 +46,7 @@ public interface PostService {
 	ArrayList<PostVO> getRecentNotice();
   
   
-  ArrayList<PostVO> getPostHotList();
+	ArrayList<PostVO> getPostHotList();
 
 	boolean deletePost(int num, MemberVO user);
   
