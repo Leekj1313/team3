@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 				return;
 			}
+			
 			memberService.failCountUp(user, 0);
 			request.setAttribute("msg", "로그인에 성공했습니다.");
 			request.setAttribute("url", "");
@@ -57,6 +58,7 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("msg", "로그인에 실패했습니다. 현재 실패횟수는 " + failCount + "번 입니다.");
 			}else {
 				request.setAttribute("msg", "로그인에 실패했습니다.");
+				request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 			}
 			
 			if(failUser.getMe_fail_count() >= 5){
