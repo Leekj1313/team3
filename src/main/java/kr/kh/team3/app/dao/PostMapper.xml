@@ -308,7 +308,7 @@
 		<if test='cri.type=="content"'>
 			and po_content like concat('%', #{cri.search}, '%')
 		</if>
-	</select>
+	</select> -->
 	
 	<select id="selectReportPostList" resultType="kr.kh.team3.app.model.vo.ReportVO">
 		SELECT report.*,po_title as re_title FROM report join post on po_num = re_po_num
