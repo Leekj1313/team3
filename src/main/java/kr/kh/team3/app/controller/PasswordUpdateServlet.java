@@ -33,6 +33,7 @@ public class PasswordUpdateServlet extends HttpServlet {
 		if(res) {
 			String state = "이용중";
 			memberService.updateMemberState(user, state);
+			memberService.failCountUp(user, 0);
 			request.setAttribute("msg", "비밀번호 변경에 성공했습니다.");
 			request.setAttribute("url", "/login");
 		}else {
