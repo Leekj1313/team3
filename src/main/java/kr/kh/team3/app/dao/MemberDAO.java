@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.kh.team3.app.model.vo.CategoryVO;
 import kr.kh.team3.app.model.vo.MemberVO;
+import kr.kh.team3.app.pagination.Criteria;
 
 public interface MemberDAO {
 
@@ -21,5 +23,13 @@ public interface MemberDAO {
 	void updateFailCount(@Param("me_id")String me_id, @Param("me_fail_count")int failCount);
 
 	void updateMemberState(@Param("me_id")String me_id, @Param("state")String state);
+	
+	ArrayList<MemberVO> selectMemberList(@Param("cri")Criteria cri);
+
+	int selectTotalCountMember(@Param("cri")Criteria cri);
+
+	boolean deleteMember(@Param("me_id")String me_id);
+
+	boolean updateMemberAuthority(@Param("user")MemberVO user);
 
 }
