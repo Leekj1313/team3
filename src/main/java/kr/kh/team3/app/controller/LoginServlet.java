@@ -34,7 +34,11 @@ public class LoginServlet extends HttpServlet {
 		
 		
 		//성공하면 세션에 회원 정보를 저장하고 메인페이지로 이동
-		if(user != null && !user.getMe_authority().equals("WUSER")) {
+		if(user == null) {
+			request.setAttribute("msg", "로그인에 실패했습니다.");
+			request.setAttribute("url", "login");
+		}
+		else if(user != null && !user.getMe_authority().equals("WUSER")) {
 			
 			if(!user.getMe_ms_state().equals("이용중")) {
 				request.setAttribute("msg", "현재 계정이 " + user.getMe_ms_state() + " 상태라 로그인이 불가능합니다.");
@@ -42,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 				return;
 			}
-			
+
 			memberService.failCountUp(user, 0);
 			request.setAttribute("msg", "로그인에 성공했습니다.");
 			request.setAttribute("url", "");
