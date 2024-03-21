@@ -32,12 +32,6 @@ public class SignupDeleteServlet extends HttpServlet {
         }
 		String me_pw = request.getParameter("pw");
 		
-		
-		System.out.println(me_id);
-		System.out.println(me_pw);
-		
-//		System.out.println(res);
-		
 		boolean res = memberService.deleteMember(me_id,me_pw,user); 
 	    if(res) {
 			request.setAttribute("msg", "회원탈퇴를 하였습니다.");

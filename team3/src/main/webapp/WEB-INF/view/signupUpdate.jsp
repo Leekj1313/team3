@@ -41,30 +41,18 @@
 	<label for="id" class="form-label">아이디</label>
 	<div class="input-group">
 		<input type="text" class="form-control" id="id" readonly value="${member.me_id}">
-		<!-- <input type="text" class="form-control" id="id" name="id" value="${member.me_email}"> -->
 	</div>
 	<div class="mb-3 mt-3">
 		<label for="pw" class="form-label">비밀번호</label>
 			<a href="<c:url value="/"/>" class="btn btn-outline-dark col-12">수정하기</a>		
 	</div>
-	
 	<div class="mb-3 mt-3">
 		<label for="email" class="form-label">이메일</label>
 		<input type="email" class="form-control" id="email" name="email" value="${member.me_email}">
-		<!-- 
-		<input type="email" class="form-control" id="email" value="${member.me_email}" name="email" required>
-		 <div class="valid-feedback"></div>
-		<div class="invalid-feedback">필수 입력 정보입니다.</div>
-		 -->
 	</div>
 	<div class="mb-5 mt-3">
 		<label for="phone" class="form-label">전화번호</label>
 		<input type="text" class="form-control" id="phone" name="phone" value="${member.me_phone}">
-		<!--
-		<input type="text" class="form-control" id="phone" value="${member.me_phone}" name="phone" required>
-		 <div class="valid-feedback"></div>
-		<div class="invalid-feedback">필수 입력 정보입니다.</div>  
-		-->
 	</div>
 	<button type="submit" class="btn btn-outline-dark col-12">저장하기</button>
 </form>

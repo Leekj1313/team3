@@ -44,7 +44,6 @@
 		</div>
 		<br>
 			<button type='button' class="btn btn-outline-dark col-12 del-mem">탈퇴하기</button>		
-			
 	</form>
 </div>
 <script src="//code.jquery.com/jquery-3.6.1.js"></script>
@@ -53,11 +52,8 @@ $('.del-mem').click(function(){
 	if(!confirm('정말 회원탈퇴를 진행하시겠습니까?')){
 		return;
 	}
-	
 	$("form").submit();
-	
 });
-
 </script>
 </body>
 </html>

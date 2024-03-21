@@ -38,7 +38,6 @@ public class ReportInsertServlet extends HttpServlet {
     	PostVO post = (PostVO)request.getSession().getAttribute("post");
     	
     	if (post == null) {
-	        // post 객체가 null인 경우 처리
 	        request.setAttribute("msg", "게시글을 가져올 수 없습니다.");
 	        request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 	        return;
