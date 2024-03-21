@@ -32,7 +32,11 @@ public class LoginServlet extends HttpServlet {
 		MemberVO user = memberService.login(new LoginDTO(id,pw));
 		
 		//성공하면 세션에 회원 정보를 저장하고 메인페이지로 이동
-		if(user != null && !user.getMe_authority().equals("WUSER")) {
+		if(user == null) {
+			request.setAttribute("msg", "로그인에 실패했습니다.");
+			request.setAttribute("url", "login");
+		}
+		else if(user != null && !user.getMe_authority().equals("WUSER")) {
 			request.setAttribute("msg", "로그인에 성공했습니다.");
 			request.setAttribute("url", "");
 			request.getSession().setAttribute("user", user);
