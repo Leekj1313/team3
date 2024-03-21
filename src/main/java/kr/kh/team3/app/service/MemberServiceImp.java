@@ -118,6 +118,15 @@ private MemberDAO memberDao;
 	}
 
 	@Override
+	public void failCountUp(MemberVO failUser, int failCount) {
+		memberDao.updateFailCount(failUser.getMe_id(), failCount);
+	}
+
+	@Override
+	public void updateMemberState(MemberVO failUser, String state) {
+		memberDao.updateMemberState(failUser.getMe_id(), state);
+	}
+	
 	public ArrayList<MemberVO> getMemberList(Criteria cri) {
 		if(cri == null) {
 			cri = new Criteria(1, 2);

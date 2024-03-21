@@ -61,9 +61,11 @@
 			  	</div>
 		  	</c:if>
 		  	<a href="<c:url value="/post/list?boNum=${post.board.bo_num}"/>" class="btn btn-outline-primary">목록으로</a>
-		  	<c:if test="${post.po_me_id == user.me_id }">
-		  		<a href="<c:url value="/post/delete?num=${post.po_num}"/>" class="btn btn-outline-danger btn-delete-post">삭제</a>
-		  		<a href="<c:url value="/post/update?num=${post.po_num}"/>" class="btn btn-outline-warning btn-update-post">수정</a>
+		  	<c:if test="${post.po_me_id == user.me_id or user.me_authority eq 'ADMIN'}">
+		  		<a href="<c:url value="/post/delete?num=${post.po_num}"/>" class="btn btn-outline-danger">삭제</a>
+		  	</c:if>
+		  	<c:if test="${post.po_me_id == user.me_id}">
+		  		<a href="<c:url value="/post/update?num=${post.po_num}"/>" class="btn btn-outline-warning">수정</a>
 		  	</c:if>
 	  		<a href="<c:url value="/post/report"/>" class="btn btn-outline-dark">신고</a>
 		 		<hr>
@@ -126,8 +128,8 @@
 		.then(response => response.text())
 		.then(data =>{
 			let str = state == 1 ? '추천' : '비추천';
-			intiRecommendBtn(btnUp);
-			intiRecommendBtn(btnDown);
+			initRecommendBtn(btnUp);
+			initRecommendBtn(btnDown);
 			switch(data){
 				case "1":	
 					alert('게시글을 추천했습니다.'); 
@@ -146,7 +148,7 @@
 		.catch(error => console.error(error));
 	}
 	//추천/비추천 버튼을 기본으로 돌리는 함수
-	function intiRecommendBtn(btn) {
+	function initRecommendBtn(btn) {
 		btn.classList.remove('btn-danger');
 		btn.classList.add('btn-outline-danger');
 	}

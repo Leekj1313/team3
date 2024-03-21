@@ -142,8 +142,8 @@
 		select * from file where fi_po_num = #{num} 
 	</select>
 	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.po_num">
-		insert into post(po_bo_num,po_title,po_content,po_me_id) 
-		values(#{post.po_bo_num},#{post.po_title},#{post.po_content},#{post.po_me_id})
+		insert into post(po_bo_num,po_title,po_content,po_me_id,po_date) 
+		values(#{post.po_bo_num},#{post.po_title},#{post.po_content},#{post.po_me_id},now())
 	</insert>
 	<insert id="insertFile">
 		insert into file(fi_po_num, fi_name, fi_ori_name)
@@ -309,5 +309,44 @@
 			and po_content like concat('%', #{cri.search}, '%')
 		</if>
 	</select> -->
-
+	
+	<select id="selectReportPostList" resultType="kr.kh.team3.app.model.vo.ReportVO">
+		SELECT report.*,po_title as re_title FROM report join post on po_num = re_po_num
+		WHERE re_po_num = #{cri.poNum}
+		<if test='cri.type=="all"'>
+			and re_rt_name like concat('%', #{cri.search},'%') 
+				or re_content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test='cri.type=="title"'>
+			and re_rt_name like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="content"'>
+			and re_content like concat('%', #{cri.search}, '%')
+		</if>
+		ORDER BY re_num DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="selectReportTotalCount" resultType="int">
+		select count(*) from report join post on po_num = re_po_num
+		WHERE re_po_num = #{cri.poNum}
+		<if test='cri.type=="all"'>
+			and re_rt_name like concat('%', #{cri.search},'%') 
+				or re_content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test='cri.type=="title"'>
+			and re_rt_name like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="content"'>
+			and re_content like concat('%', #{cri.search}, '%')
+		</if>
+	</select>
+	
+	<select id="selectReportPost" resultType="kr.kh.team3.app.model.vo.ReportVO">
+		select * from report where re_num = #{num}
+	</select>
+	
+	<delete id="deleteReportPost">
+		delete from report where re_num = #{num}
+	</delete>
 </mapper>

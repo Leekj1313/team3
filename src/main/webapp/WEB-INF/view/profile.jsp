@@ -69,6 +69,7 @@
 			<a href="<c:url value="/category/list"/>" class="btn btn-secondary profile-btn">카테고리 관리</a>
 			<a href="<c:url value="/board/manager"/>" class="btn btn-secondary profile-btn">게시판 관리</a>
 			<a href="<c:url value="/admin/membermanager"/>" class="btn btn-secondary profile-btn">회원 관리</a>
+			<a href="<c:url value="/report/list"/>" class="btn btn-secondary profile-btn">신고된 글</a>
 		</div>
 	</c:if>
 	<c:if test="${user.me_authority eq 'USER' }">
