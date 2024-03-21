@@ -66,7 +66,7 @@
 			   		</tr>
 		   		</c:if>
 		  	</c:forEach>
-		  	<c:if test="#">
+		  	<c:if test="${postHotList.size() == 0}">
 				<tr>
 					<td>등록된 게시글이 없습니다.</td>
 				</tr>
