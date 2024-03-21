@@ -11,4 +11,9 @@ public class FileVO {
 	private String fi_name; 
 	private String fi_ori_name;
 	
+	public FileVO(int po_num, String fileName, String fileOriginalName) {
+		this.fi_po_num = po_num;
+		this.fi_name = fileName;
+		this.fi_ori_name = fileOriginalName;
+	}
 }

@@ -27,4 +27,11 @@ public class PostVO {
 		this.po_content = content;
 		this.po_bo_num = boNum;
 	}
+
+	public PostVO(int bo_num, String title, String content, String writer) {
+		this.po_bo_num = bo_num;
+		this.po_title = title;
+		this.po_content = content;
+		this.po_me_id = writer;
+	}
 }

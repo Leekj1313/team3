@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import kr.kh.team3.app.model.vo.BoardVO;
 import kr.kh.team3.app.model.vo.FileVO;
 import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.model.vo.PostVO;
@@ -18,7 +20,11 @@ import kr.kh.team3.app.service.BoardServiceImp;
 import kr.kh.team3.app.service.PostService;
 import kr.kh.team3.app.service.PostServiceImp;
 
-
+@MultipartConfig(
+		maxFileSize = 1024 * 1024 * 10, //10Mb
+		maxRequestSize = 1024 * 1024 * 10 * 3, //10Mb 최대 3개
+		fileSizeThreshold = 1024 * 1024 //1Mb : 파일 업로드 시 메모리에 저장되는 임시 파일 크기
+	)
 @WebServlet("/post/update")
 public class PostUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -45,11 +51,11 @@ public class PostUpdateServlet extends HttpServlet {
 			return;
 		}
 		
-		/*ArrayList<FileVO> fileList = boardService.getFile(num);
+		ArrayList<FileVO> fileList = postService.getFile(num);
 		request.setAttribute("fileList", fileList);
 
-		ArrayList<PostVO> list = postService.getPostList();
-		request.setAttribute("list", list);*/
+		ArrayList<BoardVO> boardList = boardService.getBoardList();
+		request.setAttribute("boardList", boardList);
 		request.getRequestDispatcher("/WEB-INF/view/post/update.jsp").forward(request, response);
 	}
 
@@ -61,7 +67,7 @@ public class PostUpdateServlet extends HttpServlet {
 		int num , boNum;
 		try {
 			num = Integer.parseInt(request.getParameter("num"));
-			boNum = Integer.parseInt(request.getParameter("boNum"));
+			boNum = Integer.parseInt(request.getParameter("board"));
 		}catch(Exception e) {
 			num = 0;
 			boNum = 0;
@@ -86,14 +92,16 @@ public class PostUpdateServlet extends HttpServlet {
 				}
 			}
 		}
-		/*boolean res = postService.updatePost(post, user, nums, fileList);
+		
+		boolean res = postService.updatePost(post, user, nums, fileList);
 		if(res) {
 			request.setAttribute("msg", "게시글을 수정했습니다.");	
 		}
 		else {
 			request.setAttribute("msg", "게시글을 수정하지 못했습니다.");
 		}
-		request.setAttribute("url", "post/detail?num="+num);*/
+		
+		request.setAttribute("url", "post/detail?num="+num);
 		request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 	}
 
