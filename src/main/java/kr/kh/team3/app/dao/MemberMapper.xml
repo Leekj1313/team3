@@ -31,7 +31,7 @@
 			where me_id like concat('%', #{cri.search},'%')
 		</if>
 		<if test='cri.type=="meAuthority"'>
-			where me_authority like concat('%', <if test='cri.search == "관리자"'>'ADMIN'</if><if test='cri.search == "회원" or cri.search == "대기회원"'>'USER'</if>,'%') 
+			where me_authority = <if test='cri.search == "관리자"'>'ADMIN'</if><if test='cri.search == "회원"'>'USER'</if><if test='cri.search == "대기회원"'>'WUSER'</if> 
 		</if>
 		<if test='cri.type=="meMsState"'>
 			where me_ms_state like concat('%', #{cri.search}, '%')
@@ -46,7 +46,7 @@
 			where me_id like concat('%', #{cri.search},'%')
 		</if>
 		<if test='cri.type=="meAuthority"'>
-			where me_authority like concat('%', <if test='cri.search == "관리자"'>'ADMIN'</if><if test='cri.search == "회원" or cri.search == "대기회원"'>'USER'</if>,'%') 
+			where me_authority = <if test='cri.search == "관리자"'>'ADMIN'</if><if test='cri.search == "회원"'>'USER'</if><if test='cri.search == "대기회원"'>'WUSER'</if>  
 		</if>
 		<if test='cri.type=="meMsState"'>
 			where me_ms_state like concat('%', #{cri.search}, '%')

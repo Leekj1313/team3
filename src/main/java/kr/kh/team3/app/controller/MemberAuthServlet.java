@@ -40,9 +40,8 @@ public class MemberAuthServlet extends HttpServlet {
 		int res;
 		//user.me_authority와 전송된 me_authority값이 같으면 res = -2
 		//msg : 이미 부여된 권한입니다.
-		if(user.getMe_authority().equals(me_authority) && !(me_authority.equals("USER") && user.getMe_ms_state().equals("가입대기")) || (me_authority.equals("nUSER") && user.getMe_ms_state().equals("가입대기"))){
+		if(user.getMe_authority().equals(me_authority)){
 			res = -2;
-			System.out.println(res);
 		}
 		
 		//관리자가 자신의 권한을 변경하려 할 때
@@ -51,18 +50,18 @@ public class MemberAuthServlet extends HttpServlet {
 		}
 		
 		//user.me_ms_state 값이 가입대기이면 user.me_ms_state 이용중으로 변경. res = -1
-		//msg : 가입이 승인되었습니다.
-		else if(user.getMe_ms_state().equals("가입대기")) {			
+		//msg : 가입 승인 및 권한이 변경되었습니다.
+		else if(user.getMe_authority().equals("WUSER")) {			
 			user.setMe_authority(me_authority);
 			user.setMe_ms_state("이용중");
 			boolean result1 = memberService.updateMemberAuthority(user);
 			res = -1;
 		}
 		
-		//user.me_authority 값이 nUSER(가입대기) 이면 res = 2
-		//msg : 가입 승인 및 권한이 변경되었습니다.
-		else if(me_authority.equals("nUSER")) {
-			user.setMe_authority("USER");
+		//me_authority 값이 WUSER(가입대기) 이면 res = 2
+		//msg : 권한이 변경되었습니다.
+		else if(me_authority.equals("WUSER")) {
+			user.setMe_authority("WUSER");
 			user.setMe_ms_state("가입대기");
 			boolean result2 = memberService.updateMemberAuthority(user);
 			res = 2;
@@ -86,7 +85,7 @@ public class MemberAuthServlet extends HttpServlet {
 			request.setAttribute("url", "admin/membermanager");
 		}
 		else if(res == -1) {
-			request.setAttribute("msg", "가입이 승인되었습니다.");
+			request.setAttribute("msg", "가입 승인 및 권한이 변경되었습니다.");
 			request.setAttribute("url", "admin/membermanager");
 		}
 		else if(res == 1) {

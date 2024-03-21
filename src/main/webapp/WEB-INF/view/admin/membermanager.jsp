@@ -64,7 +64,7 @@
 							<select class="form-select" name="authority">
 								<option value="ADMIN" <c:if test='${post.me_authority == "ADMIN"}'>selected</c:if>>관리자</option>
 								<option value="USER" <c:if test='${post.me_authority == "USER"}'>selected</c:if>>회원</option>
-								<option value="nUSER" <c:if test='${post.me_authority == "USER" && post.me_ms_state == "가입대기"}'>selected</c:if>>대기회원</option>
+								<option value="WUSER" <c:if test='${post.me_authority == "WUSER"}'>selected</c:if>>대기회원</option>
 							</select>
 							<button class="btn btn-secondary">변경</button>
 						</div>
@@ -73,8 +73,6 @@
 				<td class="col-2">${post.me_ms_state}</td>
 				<td class="col-2">
 				   <div class="btn-manager-group">
-				      <%-- <a href="<c:url value="/admin/memberdelete?id=${post.me_id}"/>" class="btn btn-outline-warning">가입승인</a> --%>
-				      <!-- <button class="btn btn-outline-warning btn-category-update" data-id="\${post.me_id}">가입승인</button> -->
 				      <a href="<c:url value="/admin/memberdelete?id=${post.me_id}"/>" class="btn btn-outline-danger">삭제</a>
 				   </div>
 				</td>

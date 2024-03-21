@@ -32,10 +32,14 @@ public class LoginServlet extends HttpServlet {
 		MemberVO user = memberService.login(new LoginDTO(id,pw));
 		
 		//성공하면 세션에 회원 정보를 저장하고 메인페이지로 이동
-		if(user != null) {
+		if(user != null && !user.getMe_authority().equals("WUSER")) {
 			request.setAttribute("msg", "로그인에 성공했습니다.");
 			request.setAttribute("url", "");
 			request.getSession().setAttribute("user", user);
+		}
+		else if(user.getMe_authority().equals("WUSER")) {
+			request.setAttribute("msg", "가입 대기 상태이므로 로그인할 수 없습니다.");
+			request.setAttribute("url", "");
 		}
 		//실패하면 로그인 페이지로 이동
 		else{
