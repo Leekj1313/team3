@@ -3,7 +3,9 @@ package kr.kh.team3.app.service;
 import java.util.ArrayList;
 
 import kr.kh.team3.app.model.dto.LoginDTO;
+import kr.kh.team3.app.model.vo.CategoryVO;
 import kr.kh.team3.app.model.vo.MemberVO;
+import kr.kh.team3.app.pagination.Criteria;
 
 public interface MemberService {
 
@@ -20,5 +22,13 @@ public interface MemberService {
 	MemberVO getMember(String id);
 
 	boolean updatePassword(String pw, String id);
+
+	ArrayList<MemberVO> getMemberList(Criteria cri);
+
+	int getTotalCountMember(Criteria cri);
+
+	boolean deleteMember(String me_id);
+
+	boolean updateMemberAuthority(MemberVO user);
 
 }

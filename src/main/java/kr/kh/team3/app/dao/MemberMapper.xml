@@ -5,7 +5,7 @@
 <mapper namespace="kr.kh.team3.app.dao.MemberDAO">
 	<insert id="insertMember">
 		INSERT INTO MEMBER(me_name, me_id, me_pw, me_email, me_phone, me_ms_state)
-		VALUES(#{member.me_name},#{member.me_id},#{member.me_pw},#{member.me_email},#{member.me_phone},"이용중")
+		VALUES(#{member.me_name},#{member.me_id},#{member.me_pw},#{member.me_email},#{member.me_phone},"가입대기")
 	</insert>
 	
 	<select id="selectMember" resultType="kr.kh.team3.app.model.vo.MemberVO">
@@ -22,6 +22,46 @@
 	
 	<update id="updatePassword">
 		update member set me_pw = #{me_pw}
+		where me_id = #{user.me_id}
+	</update>
+	
+	<select id="selectMemberList" resultType="kr.kh.team3.app.model.vo.MemberVO">
+		SELECT * FROM member
+		<if test='cri.type=="meId"'>
+			where me_id like concat('%', #{cri.search},'%')
+		</if>
+		<if test='cri.type=="meAuthority"'>
+			where me_authority = <if test='cri.search == "관리자"'>'ADMIN'</if><if test='cri.search == "회원"'>'USER'</if><if test='cri.search == "대기회원"'>'WUSER'</if> 
+		</if>
+		<if test='cri.type=="meMsState"'>
+			where me_ms_state like concat('%', #{cri.search}, '%')
+		</if>
+		ORDER BY me_id
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="selectTotalCountMember" resultType="int">
+		SELECT COUNT(*) FROM member
+		<if test='cri.type=="meId"'>
+			where me_id like concat('%', #{cri.search},'%')
+		</if>
+		<if test='cri.type=="meAuthority"'>
+			where me_authority = <if test='cri.search == "관리자"'>'ADMIN'</if><if test='cri.search == "회원"'>'USER'</if><if test='cri.search == "대기회원"'>'WUSER'</if>  
+		</if>
+		<if test='cri.type=="meMsState"'>
+			where me_ms_state like concat('%', #{cri.search}, '%')
+		</if>
+	</select>
+	
+	<delete id="deleteMember">
+		DELETE FROM member
+		WHERE me_id = #{me_id}
+	</delete>
+	
+	<update id="updateMemberAuthority">
+		UPDATE member SET
+		me_authority = #{user.me_authority},
+		me_ms_state = #{user.me_ms_state}
 		where me_id = #{user.me_id}
 	</update>
 </mapper>

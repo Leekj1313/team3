@@ -11,7 +11,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.team3.app.dao.MemberDAO;
 import kr.kh.team3.app.model.dto.LoginDTO;
+import kr.kh.team3.app.model.vo.CategoryVO;
 import kr.kh.team3.app.model.vo.MemberVO;
+import kr.kh.team3.app.pagination.Criteria;
 
 public class MemberServiceImp implements MemberService {
 
@@ -113,6 +115,35 @@ private MemberDAO memberDao;
 			return false;
 		}
 		return memberDao.updatePassword(pw, user);
+	}
+
+	@Override
+	public ArrayList<MemberVO> getMemberList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria(1, 2);
+		}
+		return memberDao.selectMemberList(cri);
+	}
+
+	@Override
+	public int getTotalCountMember(Criteria cri) {
+		if(cri == null) {
+			return 0;
+		}
+		return memberDao.selectTotalCountMember(cri);
+	}
+
+	@Override
+	public boolean deleteMember(String me_id) {
+		return memberDao.deleteMember(me_id);
+	}
+
+	@Override
+	public boolean updateMemberAuthority(MemberVO user) {
+		if(user == null) {
+			return false;
+		}
+		return memberDao.updateMemberAuthority(user);
 	}
 
 }
