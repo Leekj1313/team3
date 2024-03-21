@@ -6,12 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- 부트스트랩5 css/js -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <style type="text/css">
 .nav-item {
 	padding: 0.5rem 0xp;
@@ -22,7 +16,6 @@
 }
 
 .dropdown-hover>.dropdown-toggle:active {
-	/*Without this, clicking will make it sticky*/
 	pointer-events: none;
 }
 </style>
@@ -80,8 +73,7 @@
 		</div>
 		<!-- Container wrapper -->
 	</nav>
-	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-	<script type="text/javascript">
+<script type="text/javascript">
 getBoard();
 function getBoard(){
 	$.ajax({
@@ -109,8 +101,6 @@ function getBoard(){
 	})
 
 }
-
-
 </script>
 </body>
 </html>
