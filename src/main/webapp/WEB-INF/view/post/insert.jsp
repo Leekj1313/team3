@@ -52,19 +52,20 @@
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <jsp:include page="/WEB-INF/view/profile.jsp"/>
 <div class="container mt-3 col-7 card-1">
-   <form action="<c:url value="/post/insert" />" method="post" enctype="multipart/form-data">
-      <div class="mb-3 mt-3">
-          <label for="board" class="form-label">게시판:</label>
-          <select class="form-control" id="board" name="board">
-             <c:forEach items="${boardList}" var="board">
-                <option value="${board.bo_num }">${board.bo_name}</option>
-             </c:forEach>
-          </select>
-        </div>
-      <div class="mb-3 mt-3">
-          <label for="title" class="form-label">제목:</label>
-          <input type="text" class="form-control" id="title" placeholder="제목" name="title">
-        </div>
+	<h2 style="font-weight: bold; margin-bottom: 50px">글쓰기</h2>
+   	<form action="<c:url value="/post/insert" />" method="post" enctype="multipart/form-data">
+		<div class="mb-3 mt-3">
+	        <button class="btn btn-success" style="float: right; margin-bottom: 10px">등록 <i class="bi bi-pencil-fill" style="font-size:small;"></i></button>
+		    <label for="board" class="form-label">게시판을 선택해주세요.</label>
+		    <select class="form-select" id="board" name="board">
+		       <c:forEach items="${boardList}" var="board">
+		        <option value="${board.bo_num}" <c:if test="${bNum == board.bo_num}">selected</c:if>>${board.bo_name}</option>
+		     </c:forEach>
+		  </select>
+		</div>
+		<div class="mb-3 mt-3">
+		    <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요." name="title">
+		</div>
         <div class="btn-temp">
           <button type ="button" id ="temSaveBtn" class="btn btn-success btn-temSave">임시글 저장</button>
           <div class="dropdown">
@@ -78,12 +79,11 @@
           <textarea rows="10" class="form-control" id="content" name="content" placeholder="내용" style="margin-top: 100px"></textarea>
         </div>
         <div class="mb-3 mt-3">
-          <label for="content" class="form-label">첨부파일:</label>
+          <label for="file" class="form-label" style="font-weight: bold">첨부파일</label>
           <input type="file" class="form-control" name="file">
           <input type="file" class="form-control" name="file">
           <input type="file" class="form-control" name="file">
         </div>
-        <button class="btn btn-success col-12">글 등록</button>
         <input type="hidden" id="isTemp" name="isTemp" value="false">
         <input type="hidden" id="po_num_temp" name="po_num_temp" value="">
    </form>

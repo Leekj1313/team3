@@ -115,7 +115,7 @@
 	  	</div>
 	</form>
   	<br>
-	<a href="<c:url value="/post/insert"/>" class="btn btn-outline-success">글등록</a>
+	<a href="<c:url value="/post/insert?bNum=${board.bo_num}"/>" class="btn btn-outline-success">글등록</a>
 </div>
 <jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>
