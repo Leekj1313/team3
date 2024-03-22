@@ -5,14 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- 부트스트랩5 css/js -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<title>footer</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <style type="text/css">
 	footer {

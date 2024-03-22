@@ -9,6 +9,7 @@
 <!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style type="text/css">
 	.card-1 {
 		padding: 30px;
@@ -28,10 +29,10 @@
 <jsp:include page="/WEB-INF/view/profile.jsp"/>
 
 <div class="container mt-3 col-6 card-1">
-	<h2>카테고리 관리</h2>
+	<h2 style="font-weight: bold">카테고리 관리</h2>
 	<div class="input-group mb-3 mt-3">
 		<input type="text" class="form-control category-content" placeholder="새로 등록할 카테고리 이름을 입력하세요.">
-		<button class="btn btn-outline-secondary btn-category-insert" type="button">등록</button>
+		<button class="btn btn-secondary btn-category-insert" type="button">등록</button>
 	</div>
 
 	<table class="table table-hover category-list-table">
@@ -185,7 +186,7 @@ $(".btn-category-insert").click(function(){
 		}
 	})
 	
-}); //click end
+});
 
 </script>
 <!-- 카테고리 삭제 -->
@@ -259,7 +260,7 @@ $(document).on("click", ".btn-category-update", function(){
 	<button class="btn btn-outline-success btn-complete" data-num="\${num}">수정완료</button>
 	`;
 	$(this).parent().after(btn);
-}); //click end
+});
 
 function initCategory(){
 	//감추었던 카테고리 이름을 보여줌
@@ -280,14 +281,12 @@ $(document).on("click", ".btn-complete", function(){
 			location.href = "<c:url value='/login'/>";
 			return;
 		}
-		//취소 누르면 현재 페이지에서 추천/비추천 동작을 안 함
 		else{
 			location.href = "<c:url value='/'/>";
 			return;
 		}
 	}
 	
-	//수정하기 위해 필요한 정보를 가져옴 : 수정된 댓글 내용, 댓글 번호
 	let num = $(this).data("num");
 	let name = $(".cat-input").val();
 	//alert(num + ":" + content);
@@ -312,5 +311,6 @@ $(document).on("click", ".btn-complete", function(){
 	});
 });
 </script>
+<jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>
 </html>

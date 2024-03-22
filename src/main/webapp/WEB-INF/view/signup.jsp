@@ -5,24 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입 페이지</title>
 <!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+
 <!-- <script type="text/javascript">
 import { Ripple, initMDB, Input } from "mdb-ui-kit";
 initMDB({ Ripple, Input });
 </script> -->
 <style type="text/css">
-   .card {
-      background: #fff;
-      border-radius: 2px;
-      display: inline-block;
-      height: 1000px;
-      margin: 1rem;
-      position: relative;
-      width: 1000px;
-   }
+
    .card-1 {
       box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
       transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -40,10 +34,10 @@ initMDB({ Ripple, Input });
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
-<div class="card card-1 container col-5 p-5" style="padding: 50px;">
-<div class="container">
+<jsp:include page="/WEB-INF/view/profile.jsp"/>
+<div class="container col-5 p-5 mt-3 card-1" style="padding: 50px;">
 	<form action="<c:url value="/signup"/>" method="post">
-		<h2 style="margin-bottom: 50px">회원가입</h2>
+		<h2 style="margin-bottom: 50px; font-weight: bold">회원가입</h2>
 		<div class="form-group" style="margin-bottom: 10px">
 		  <input type="text" class="form-control" id="name" name="me_name" placeholder="이름(실명)">
 		  <label id="name-error" class="error text-danger" for="name"></label>
@@ -73,7 +67,6 @@ initMDB({ Ripple, Input });
 		</div>
 		<button class="btn btn-outline-success col-12 btn-submit" style="margin-top: 40px">회원가입</button>
 	</form>
-</div>
 </div>
 
 
@@ -169,98 +162,6 @@ $(".btn-submit").click(function(){
 	}
 });
 </script>
+<jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>
 </html>
-<!--  -->
-<!-- 
-<div class="card card-1 container col-5 p-5">
-    <h3>회원가입</h3>
-    <form action="<%=request.getContextPath()%>/signup" class="was-validated" method="post">
-        <div class="mb-3 mt-3">
-            <label for="uname" class="form-label">이름(실명)</label>
-            <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" pattern="[가-힣]{2,4}" required>
-            <div class="valid-feedback"></div>
-            <div class="invalid-feedback">한글로 이루어진 2~4글자 이름을 입력하세요.</div>
-        </div>
-        <label for="id" class="form-label">아이디</label>
-        <div class="input-group">
-            <input type="text" class="form-control" id="id" placeholder="Enter id" name="id" pattern="(?=.*[0-9]+)[a-zA-Z][a-zA-Z0-9]{6,13}" required>
-            <button class="btn btn-dark" type="button" id="idCheck" style="border-radius: 0 8px 8px 0">중복 확인</button>
-            <div class="valid-feedback"></div>
-            <div class="invalid-feedback">영문으로 시작하고, 영문자와 숫자 조합의 6~13길이 아이디를 입력하세요.</div>
-        </div>
-        <div class="mb-3 mt-3">
-            <label for="pw" class="form-label">비밀번호</label>
-            <input type="password" class="form-control" id="pw" placeholder="Enter password" name="pw" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$])[A-Za-z\d!@#%^&*]{8,15}" required>
-            <div class="valid-feedback"></div>
-            <div class="invalid-feedback">영문 대문자, 소문자, 숫자, 특수문자(!@#$) 각각 1개 이상을 포함한 6~15글자 비밀번호를 입력하세요.</div>
-        </div>
-        <div class="mb-3">
-            <label for="pw2" class="form-label">비밀번호 확인</label>
-            <input  type="password" class="form-control" id="pw2" placeholder="Enter password check" name="pw2" required>
-            <div class="valid-feedback pw-valid-feedback"></div>
-            <div class="invalid-feedback pw-invalid-feedback"></div>
-        </div>
-        <div class="mb-3 mt-3">
-            <label for="email" class="form-label">이메일</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
-            <div class="valid-feedback"></div>
-            <div class="invalid-feedback">필수 입력 정보입니다.</div>
-        </div>
-        <div class="mb-5 mt-3">
-            <label for="phone" class="form-label">전화번호</label>
-            <input type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone" required>
-            <div class="valid-feedback"></div>
-            <div class="invalid-feedback">필수 입력 정보입니다.</div>
-        </div>
-        <button type="submit" class="btn btn-outline-dark col-12">가입하기</button>
-    </form>
-</div>
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script>
-<script src="//code.jquery.com/jquery-3.4.1.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        let flag = false;
-        $("#idCheck").click(function() {
-            let id = $("#id").val();
-            fetch("/id/check?id=" + id)
-                .then(response => response.text())
-                .then(data => {
-                    if (data === "true") {
-                        alert("사용 가능한 아이디입니다.");
-                        flag = true;
-                    } else {
-                        alert("이미 사용중인 아이디입니다.");
-                    }
-                })
-                .catch(error => console.error("Error: ", error));
-        });
-        
-        $("#id").change(function() {
-            flag = false;
-        });
-        
-        $("form").submit(function() {
-            if (!flag) {
-                alert("아이디 중복 확인을 하세요.");
-                return false;
-            }
-        });
-        
-        $("#pw2").focusout(function() {
-            let pw1 = $("#pw").val();
-            let pw2 = $("#pw2").val();
-            if (pw1 !== "" || pw2 !== "") {
-                if (pw1 === pw2) {
-                    $(".pw-valid-feedback").html('비밀번호가 일치합니다.');
-                    $("[name=pw2]").attr('required', false);
-                } else {
-                    $(".pw-invalid-feedback").html('비밀번호가 일치하지 않습니다.');
-                    $("[name=pw2]").attr('required', false);
-                }
-            }
-        });
-    });
-</script>
- -->

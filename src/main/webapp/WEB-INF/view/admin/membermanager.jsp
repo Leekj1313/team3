@@ -10,6 +10,7 @@
 <!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style type="text/css">
 	.card-1 {
 		padding: 30px;
@@ -55,25 +56,25 @@
 			</tr>
 	    </thead>
 	    <tbody>
-	    	<c:forEach items="${list}" var="post">
+	    	<c:forEach items="${list}" var="member">
 			<tr>
-				<td class="col-3" style="font-weight: bold; <c:if test='${post.me_authority == "ADMIN"}'>color: red;</c:if>">${post.me_id}</td>
+				<td class="col-3" style="font-weight: bold; <c:if test='${member.me_authority == "ADMIN"}'>color: red;</c:if>">${member.me_id}</td>
 				<td class="col-3">
-					<form action="<c:url value="/admin/memberauth?id=${post.me_id}"/>" class="mb-3 mt-3" method="post">
+					<form action="<c:url value="/admin/memberauth?id=${member.me_id}"/>" class="mb-3 mt-3" method="post">
 						<div class="input-group">
 							<select class="form-select" name="authority">
-								<option value="ADMIN" <c:if test='${post.me_authority == "ADMIN"}'>selected</c:if>>관리자</option>
-								<option value="USER" <c:if test='${post.me_authority == "USER"}'>selected</c:if>>회원</option>
-								<option value="WUSER" <c:if test='${post.me_authority == "WUSER"}'>selected</c:if>>대기회원</option>
+								<option value="ADMIN" <c:if test='${member.me_authority == "ADMIN"}'>selected</c:if>>관리자</option>
+								<option value="USER" <c:if test='${member.me_authority == "USER"}'>selected</c:if>>회원</option>
+								<option value="WUSER" <c:if test='${member.me_authority == "WUSER"}'>selected</c:if>>대기회원</option>
 							</select>
 							<button class="btn btn-secondary">변경</button>
 						</div>
 					</form>
 				</td>
-				<td class="col-2">${post.me_ms_state}</td>
+				<td class="col-2">${member.me_ms_state}</td>
 				<td class="col-2">
 				   <div class="btn-manager-group">
-				      <a href="<c:url value="/admin/memberdelete?id=${post.me_id}"/>" class="btn btn-outline-danger">삭제</a>
+				      <a href="<c:url value="/admin/memberdelete?id=${member.me_id}"/>" class="btn btn-outline-danger">삭제</a>
 				   </div>
 				</td>
 			</tr>
@@ -124,5 +125,6 @@
 		</c:if>
 	</ul>
 </div>
+<jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>
 </html>
