@@ -28,7 +28,6 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${list}" var="post">
-				<c:if test="${post.po_up >= 5}">
 					<tr>
 						<td>${post.po_num}</td>
 						<td>${post.board.bo_name}</td>
@@ -50,7 +49,6 @@
 						<td>${post.po_view}</td>
 						<td>${post.po_up}</td>
 					</tr>
-				</c:if>
 			</c:forEach>
 			<c:if test="${list.size() == 0}">
 				<tr>
