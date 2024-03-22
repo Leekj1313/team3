@@ -31,6 +31,15 @@
 	.card-1:hover {
 	  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	}
+	
+	.ca-name {
+		background: #F2F2F2;
+		padding: 10px;
+		font-weight: bold;
+		color: 	#787878;
+		border-radius: 10px;
+		margin-left: 5px
+	}
 </style>
 </head>
 <body>
@@ -61,7 +70,7 @@
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-mdb-toggle="dropdown" aria-expanded="false">
 							CATEGORY </a> <!-- Dropdown menu -->
-						<div class="dropdown-menu col-11 mt-0 card-1"
+						<div class="dropdown-menu col-10 mt-0 card-1"
 							aria-labelledby="navbarDropdown"
 							style="border-top-left-radius: 0; border-top-right-radius: 0;">
 							<div class="container">
@@ -100,9 +109,9 @@ function getBoard(){
 			let str = '';
 			var url = '<c:url value="/post/list"/>';
 			for (category of data.categoryList){
-				str += '<div class="col-md-6 col-lg-2 mb-3 mb-lg-0" style="border-right: solid 1px gray;">';
+				str += '<div class="col-md-6 col-lg-2 mb-3 mb-lg-0" style="border-right: solid 2px #E6E6E6;">';
 				str += '<div class="list-group list-group-flush">';
-				str += '<div style="font-weight: bold; margin-bottom: 20px;">' + category.ca_name + '</div>'; // 카테고리 이름 출력
+				str += '<div class="ca-name" style="margin-bottom: 15px">' + category.ca_name + '</div>'; // 카테고리 이름 출력
 			for (board of data.boardList){
 				if (board.bo_ca_num === category.ca_num){
 					str += '<a href="' + url + '?boNum=' + board.bo_num + '" class="list-group-item list-group-item-action">' + board.bo_name + '</a>'; // 해당 카테고리에 속하는 보드 출력

@@ -23,6 +23,7 @@
 		float: left;
 		margin-top: 50px; margin-left: 60px;
 		box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+		background: white
 	}
 	.logout-btn {
 		border: 2px solid #dcdcdc;
@@ -65,10 +66,10 @@
 					alt="profile image"
 					width="100" height="100"
 					style="margin-top: 20px; border-radius: 10px" />
-				<div class="profile_me_id" style="font-weight: bold; margin-top: 10px">${user.me_id}</div>
-				<div class="profile_me_name" style="color: gray; font-size: 12px">관리자</div>
+				<div class="profile_me_id" style="font-weight: bold; margin-top: 10px"><span class="badge bg-danger" style="margin-right: 5px;">관리자</span>${user.me_id}</div>
+				<div class="profile_me_name" style="color: gray; font-size: 12px">${user.me_name}</div>
 				<div class="logout-btn">		
-					<a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
+					<a class="nav-link btn" href="<c:url value="/logout"/>" data-bs-toggle="tooltip" title="Hooray!">로그아웃</a>
 				</div>
 			</div>
 			<div class="admin-menus">
@@ -85,13 +86,14 @@
 					alt="profile image"
 					width="100" height="100"
 					style="margin-top: 20px; border-radius: 10px" />
-				<div class="profile_me_id" style="font-weight: bold; margin-top: 10px">${user.me_id}</div>
+				<div class="profile_me_id" style="font-weight: bold; margin-top: 10px"><span class="badge bg-success" style="margin-right: 5px;">회원</span>${user.me_id}</div>
 				<div class="profile_me_name" style="color: gray; font-size: 12px">${user.me_name}</div>
 				<div class="logout-btn">		
 					<a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
 				</div>
 			</div>
 			<div class="user-menus">
+				<!-- <div class="profile_me_name btn btn-secondary" style="font-size: 10px;">회원</div> -->
 				<a href="<c:url value="/mypage/mypost"/>" class="btn btn-secondary profile-btn">내가 쓴 글</a>
 				<a href="<c:url value="/mypage/mycomment"/>" class="btn btn-secondary profile-btn">내가 쓴 댓글</a>
 				<a href="<c:url value=""/>" class="btn btn-secondary profile-btn">정보 수정</a>
