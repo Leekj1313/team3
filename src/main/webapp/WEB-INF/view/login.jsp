@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인 페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -50,15 +50,19 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
+<jsp:include page="/WEB-INF/view/profile.jsp"/>
+
 <div class="login-box">
-        <form action="<%=request.getContextPath()%>/login" method="post">
-        	<h1>로그인</h1>
-            <input type="text" placeholder="아이디" class="in" id="id" name="id">
-            <input type="password" placeholder="비밀번호" class="in" id="pw" name="pw">
-            <input type="submit" id="btn" value="로그인"><br>
-        </form>
-        <a href="<c:url value="/find/id"/>">아이디찾기</a>
-        <a href="<c:url value="/find/password"/>">비밀번호찾기</a>
-    </div>
+    <form action="<%=request.getContextPath()%>/login" method="post">
+    	<h1>로그인</h1>
+        <input type="text" placeholder="아이디" class="in" id="id" name="id">
+        <input type="password" placeholder="비밀번호" class="in" id="pw" name="pw">
+        <input type="submit" id="btn" value="로그인"><br>
+    </form>
+    <a href="<c:url value="/find/id"/>">아이디찾기</a>
+    <span style="color: gray; opacity: 60%">|</span>
+    <a href="<c:url value="/find/password"/>">비밀번호찾기</a>
+</div>
+<jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>
 </html>

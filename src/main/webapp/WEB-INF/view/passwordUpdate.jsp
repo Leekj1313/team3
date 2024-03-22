@@ -5,21 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>새 비밀번호<title>
+<title>새 비밀번호</title>
 <!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 
 <style type="text/css">
-	.card {
-		background: #fff;
-		border-radius: 2px;
-		display: inline-block;
-		height: 1000px;
-		margin: 1rem;
-		position: relative;
-		width: 1000px;
-	}
+
 	.card-1 {
 		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 		transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -32,7 +25,8 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
-<div class="card card-1 container col-5 p-5" style="padding: 50px;">
+<jsp:include page="/WEB-INF/view/profile.jsp"/>
+<div class="card-1 container col-5 p-5 mt-3" style="padding: 50px;">
 <div class="container">
 	<form action="<c:url value="/password/update"/>" method="post">
 		<h2 style="margin-bottom: 50px">새 비밀번호 변경</h2>
@@ -84,5 +78,6 @@ $.validator.addMethod(
 	}, 
 )
 </script>
+<jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>
 </html>
