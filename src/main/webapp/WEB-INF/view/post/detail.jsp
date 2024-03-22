@@ -57,8 +57,8 @@
 			    <input type="text" class="form-control" id="reCount" name="reCount" readonly value="${post.po_up}">
 		  	</div>
 		  	<div class="mb-3 mt-3 clearfix">
-		  		<button type="button" id="btnUp" data-state="1" class="btn btn-outline-danger col-5 float-start">추천</button>
-		  		<button type="button" id="btnDown" data-state="-1"  class="btn btn-outline-danger col-5 float-end">비추천</button>
+		  		<button type="button" id="btnUp" data-state="1" class="btn btn-outline-danger col-5 float-start">추천<i class="bi bi-caret-up-fill"></i></button>
+		  		<button type="button" id="btnDown" data-state="-1"  class="btn btn-outline-danger col-5 float-end">비추천<i class="bi bi-caret-down-fill"></i></button>
 		  	</div>
 		  	<div class="mb-3 mt-3">
 			    <label for="content" class="form-label">내용:</label>

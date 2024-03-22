@@ -21,7 +21,7 @@
 		position: fixed;
 		padding: 10px; width: 220px; height: auto;
 		float: left;
-		margin-top: 50px; margin-left: 60px;
+		margin-top: 30px; margin-left: 60px;
 		box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 		background: white
 	}

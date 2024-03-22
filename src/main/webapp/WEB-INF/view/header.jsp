@@ -34,7 +34,7 @@
 	
 	.ca-name {
 		background: #F2F2F2;
-		padding: 10px;
+		padding: 0 10px;
 		font-weight: bold;
 		color: 	#787878;
 		border-radius: 10px;
@@ -89,7 +89,7 @@
 					</c:if>
 					<c:if test="${user != null}">
 			        	<li class="nav-item">
-				          	<a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
+				          	<a class="nav-link btn btn-light" href="<c:url value="/logout"/>">Sign out</a>
 				        </li>
 			        </c:if>
 				</ul>
