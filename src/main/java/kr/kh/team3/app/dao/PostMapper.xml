@@ -133,6 +133,16 @@
 			SUM(CASE WHEN rc_state = 1 THEN 1 ELSE 0 END) AS po_up
 		FROM post left join
 			recommend on rc_po_num = po_num
+			<if test='cri.type=="all"'>
+			where (po_title like concat('%', #{cri.search},'%') 
+				or po_me_id = #{cri.search})
+			</if>
+			<if test='cri.type=="title"'>
+				where po_title like concat('%', #{cri.search},'%') 
+			</if>
+			<if test='cri.type=="writer"'>
+				where po_me_id = #{cri.search}
+			</if>
 		group by po_num
 		having po_up > 4
 		order by po_up desc
@@ -349,4 +359,16 @@
 	<delete id="deleteReportPost">
 		delete from report where re_num = #{num}
 	</delete>
+	
+	<select id="selectPostHotMainList" resultMap="PostMap">
+		SELECT 
+			post.*, 
+			SUM(CASE WHEN rc_state = 1 THEN 1 ELSE 0 END) AS po_up
+		FROM post left join
+			recommend on rc_po_num = po_num
+		group by po_num
+		having po_up > 4
+		order by po_up desc
+		limit 5;
+	</select>
 </mapper>

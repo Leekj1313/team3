@@ -46,7 +46,7 @@ public interface PostService {
 	ArrayList<PostVO> getRecentNotice();
   
   
-	ArrayList<PostVO> getPostHotList();
+	ArrayList<PostVO> getPostHotList(Criteria cri);
 
 	boolean deletePost(int num, MemberVO user);
   
@@ -85,11 +85,13 @@ public interface PostService {
 	boolean updatePost(PostVO post, MemberVO user, ArrayList<Integer> nums, ArrayList<Part> fileList);
 
 
-
 	ArrayList<ReportVO> getReportPostList(Criteria cri);
 
 	int getTotalCountReport(Criteria cri);
 
 	boolean deleteReportPost(int num, MemberVO user);
+
+
+	ArrayList<PostVO> getPostHotMainList();
 
 }

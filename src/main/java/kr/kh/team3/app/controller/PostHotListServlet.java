@@ -24,12 +24,15 @@ public class PostHotListServlet extends HttpServlet {
 	private PostService postService = new PostServiceImp();
 	private BoardService boardService = new BoardServiceImp();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int boNum = 0;
+		int boNum;
 		try {
 			boNum = Integer.parseInt(request.getParameter("boNum"));
 		}catch (Exception e) {
-			e.printStackTrace();
+			boNum = 0;
 		}
+		ArrayList<BoardVO> boardList = boardService.getBoardList();
+		request.setAttribute("boardList", boardList);
+		//검색어와 검색 타입을 가져옴. 현재 페이지 정보도 가져옴
 		String search = request.getParameter("search");
 		String type = request.getParameter("type");
 		int page;
@@ -38,16 +41,12 @@ public class PostHotListServlet extends HttpServlet {
 		}catch(Exception e) {
 			page = 1;
 		}
-		ArrayList<BoardVO> boardList = boardService.getBoardList();
-		request.setAttribute("boardList", boardList);
-		Criteria cri = new Criteria(page, 2, type, search, boNum);
-		//검색어, 검색타입에 맞는 전체 게시글 개수를 가져옴 
+		Criteria cri = new Criteria(page, 2, type, search);
 		int totalCount = postService.getTotalCount(cri);
 		PageMaker pm = new PageMaker(5, cri, totalCount);
 		request.setAttribute("pm", pm);
-		//현재 페이지 정보에 맞는 게시글 리스트를 가져옴
-		ArrayList<PostVO> list = postService.getPostList(cri);
-		request.setAttribute("list", list);//화면에 전송
+		ArrayList<PostVO> list = postService.getPostHotList(cri);
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/view/post/hotlist.jsp").forward(request, response);
 	}
 

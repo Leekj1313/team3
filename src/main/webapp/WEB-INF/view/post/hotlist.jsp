@@ -38,7 +38,7 @@
 						<a href="${url}">${post.po_title}</a>
 						</td>
 						<td>
-							<c:url var="page" value="/post/list?boNum=${board.bo_num}">
+							<c:url var="page" value="/post/hotlist?boNum=${board.bo_num}">
 								<c:param name="type" value="writer"/>
 		    					<c:param name="search" value="${post.po_me_id}"/>
 		    					<c:param name="page" value="1"/>
@@ -62,7 +62,7 @@
 	<ul class="pagination justify-content-center">
 		<c:if test="${pm.prev}">
 	    	<li class="page-item">
-	    		<c:url var="prevUrl" value="/post/list?boNum=${board.bo_num}">
+	    		<c:url var="prevUrl" value="/post/hotlist?boNum=${board.bo_num}">
 	    			<c:param name="type" value="${pm.cri.type}"/>
 	    			<c:param name="search" value="${pm.cri.search}"/>
 	    			<c:param name="page" value="${pm.startPage-1}"/>
@@ -72,7 +72,7 @@
 		</c:if>
 		<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
 	    	<li class="page-item <c:if test="${pm.cri.page == i}">active</c:if>">
-	    		<c:url var="page" value="/post/list?boNum=${board.bo_num}">
+	    		<c:url var="page" value="/post/hotlist?boNum=${board.bo_num}">
 	    			<c:param name="type" value="${pm.cri.type}"/>
 	    			<c:param name="search" value="${pm.cri.search}"/>
 	    			<c:param name="page" value="${i}"/>
@@ -82,7 +82,7 @@
 		</c:forEach>
     	<c:if test="${pm.next}">
 	    	<li class="page-item">
-	    		<c:url var="nextUrl" value="/post/list?boNum=${board.bo_num}">
+	    		<c:url var="nextUrl" value="/post/hotlist?boNum=${board.bo_num}">
 	    			<c:param name="type" value="${pm.cri.type}"/>
 	    			<c:param name="search" value="${pm.cri.search}"/>
 	    			<c:param name="page" value="${pm.endPage+1}"/>
@@ -92,7 +92,7 @@
     	</c:if>
   	</ul>
   	<hr>
-  	<form action="<c:url value="/post/list"/>" class="mb-3 mt-3">
+  	<form action="<c:url value="/post/hotlist"/>" class="mb-3 mt-3">
   		<input type="hidden" id="boNum" name="boNum" value="${board.bo_num}"/>
 		<div class="input-group">
 			<select name="type" class="form-control">

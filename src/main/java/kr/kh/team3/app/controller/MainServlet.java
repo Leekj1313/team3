@@ -26,7 +26,7 @@ public class MainServlet extends HttpServlet {
 		request.setAttribute("postList", postList);
 		
 		
-		ArrayList<PostVO> postHotList = postService.getPostHotList();
+		ArrayList<PostVO> postHotList = postService.getPostHotMainList();
 		request.setAttribute("postHotList", postHotList);
 		
 		

@@ -189,8 +189,11 @@ public class PostServiceImp implements PostService {
   
   
 	@Override
-  public ArrayList<PostVO> getPostHotList() {
-		return postDao.selectPostHotList();
+  public ArrayList<PostVO> getPostHotList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectPostHotList(cri);
 	}
 
 	@Override
@@ -447,6 +450,11 @@ public class PostServiceImp implements PostService {
 		}
 		
 		return postDao.updatePost(post);
+	}
+
+	@Override
+	public ArrayList<PostVO> getPostHotMainList() {
+		return postDao.selectPostHotMainList();
 	}
 
 
