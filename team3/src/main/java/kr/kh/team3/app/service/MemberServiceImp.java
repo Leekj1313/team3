@@ -2,6 +2,7 @@ package kr.kh.team3.app.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -75,5 +76,46 @@ private MemberDAO memberDao;
 	public boolean checkId(String id) {
 		MemberVO member = memberDao.selectMember(id);
 		return member == null;
+	}
+
+	@Override
+	public ArrayList<MemberVO> getMemberList() {
+		return memberDao.selectMemberList();
+	}
+
+	@Override
+	public boolean updateMember(MemberVO member) {
+		if( member == null ||
+			!checkString(member.getMe_email()) || 
+			!checkString(member.getMe_phone())) {
+			return false;
+		}
+		return memberDao.updateMember(member);	
+	}
+	
+	public boolean checkString(String str) {
+		if(str == null || str.length() == 0) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean deleteMember(String me_id,String me_pw, MemberVO user) {
+		if(user == null) {
+			return false;			
+		}
+		if(!user.getMe_id().equals(me_id)||!user.getMe_pw().equals(me_pw)) {
+			return false;
+		}
+		
+		MemberVO member = memberDao.selectMember(user.getMe_id());
+		
+		if( member == null ||
+			!member.getMe_id().equals(user.getMe_id())) {
+			return false;
+		}
+		
+		return memberDao.deleteMember(member.getMe_id());
 	}
 }

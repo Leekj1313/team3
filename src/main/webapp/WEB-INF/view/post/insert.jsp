@@ -49,7 +49,6 @@
 </style>
 </head>
 <body>
-<jsp:include page="/WEB-INF/view/header.jsp"/>
 <jsp:include page="/WEB-INF/view/profile.jsp"/>
 <div class="container mt-3 col-7 card-1">
    <form action="<c:url value="/post/insert" />" method="post" enctype="multipart/form-data">
@@ -70,7 +69,6 @@
           <div class="dropdown">
           	<button type ="button" id ="temLoadBtn" class="btn btn-success btn-temLoad dropdown-toggle" data-bs-toggle="dropdown">임시글 불러오기</button>
           	<ul class="dropdown-menu temp-dropdown">
-
 			</ul>
           </div>
       	</div>

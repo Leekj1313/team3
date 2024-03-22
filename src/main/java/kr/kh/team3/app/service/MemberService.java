@@ -35,4 +35,6 @@ public interface MemberService {
 
 	boolean updateMemberAuthority(MemberVO user);
 
+	boolean updateMember(MemberVO member);
+
 }

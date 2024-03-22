@@ -31,7 +31,7 @@ public class HeaderServlet extends HttpServlet {
 		JSONObject jobj = new JSONObject();
 		jobj.put("categoryList", categoryList);
 		jobj.put("boardList", boardList);
-		
+	
 		response.setContentType("application/json; charset=utf-8");
 		response.getWriter().print(jobj);
 		

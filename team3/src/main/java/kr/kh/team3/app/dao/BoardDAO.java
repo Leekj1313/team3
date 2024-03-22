@@ -18,8 +18,8 @@ public interface BoardDAO {
 
 	BoardVO selectBoard(@Param("boNum")int boNum);
 
-	int selectTotalCount(@Param("cri")Criteria cri);
+	boolean deleteBoard(@Param("boNum")int num);
 
-	ArrayList<BoardVO> selectBoList(@Param("cri")Criteria cri);
+	boolean updateBoard(@Param("boNum")int bo_num, @Param("bo_name")String bo_name);
 
 }

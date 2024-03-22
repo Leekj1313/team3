@@ -144,7 +144,14 @@ private MemberDAO memberDao;
 
 	@Override
 	public boolean deleteMember(String me_id) {
+		MemberVO user = memberDao.selectMember(me_id);
 		return memberDao.deleteMember(me_id);
+	}
+	
+	@Override
+	public boolean updateMember(MemberVO member) {
+		MemberVO dbMember = memberDao.selectMember(member.getMe_name());
+		return memberDao.updateMember(member);
 	}
 
 	@Override
@@ -154,5 +161,4 @@ private MemberDAO memberDao;
 		}
 		return memberDao.updateMemberAuthority(user);
 	}
-
 }

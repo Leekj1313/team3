@@ -4,27 +4,53 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.kh.team3.app.model.vo.CommentVO;
 import kr.kh.team3.app.model.vo.FileVO;
 import kr.kh.team3.app.model.vo.PostVO;
+import kr.kh.team3.app.model.vo.RecommendVO;
+import kr.kh.team3.app.pagination.Criteria;
 
 public interface PostDAO {
-	//게시글 리스트 불러오기
-	ArrayList<PostVO> selectPostList();
-	//게시글 작성
-	boolean insertPost(@Param("post")PostVO post);
-	//게시판 리스트 불러오기
-	ArrayList<PostVO> selectBoardList();
-	//게시글 번호를 통해 게시글 불러옴
-	PostVO selectPost(@Param("num") int po_num);
-	//첨부파일 번호를 통해 파일 가져오기
-	ArrayList<FileVO> selectFileList(int num);
-	FileVO selectFile(int num);
-	boolean updatePost(PostVO post);
-	void deleteFile(int fi_num);
-	void insertFile(FileVO fileVo);
-	boolean updateView(int num);
-	
-	
+
+	RecommendVO selectRecommend(@Param("me_id")String me_id, @Param("po_num") int po_num);
+
+	void insertRecommend(@Param("re")RecommendVO recommend);
+
+	void updateRecommend(@Param("re")RecommendVO recommend);
+
+	boolean updateView(@Param("num")int num);
+
+	PostVO selectPost(@Param("num")int num);
+
+	ArrayList<FileVO> selectFileByBo_num(@Param("num")int num);
+
+	boolean insertComment(@Param("co")CommentVO comment);
+
+	ArrayList<CommentVO> selectCommentList(@Param("cri")Criteria cri);
+
+	int selectTotalCountComment(@Param("cri")Criteria cri);
+
+	CommentVO selectComment(@Param("cm_num")int cm_num);
+
+	boolean updateComment(@Param("co")CommentVO comment);
+
+	boolean deleteComment(@Param("cm_num")int num);
+
+	ArrayList<PostVO> selectPostList(@Param("boNum")int boNum);
+
+	int selectTotalCount(@Param("cri")Criteria cri);
+
+	ArrayList<PostVO> selectPostList(@Param("cri")Criteria cri);
+
+	ArrayList<PostVO> selectRecentNotice();
+
+	ArrayList<PostVO> selectPostHotList();
+
+	ArrayList<FileVO> selectFileByPo_num(@Param("num")int num);
+
+	void deleteFile(@Param("fi_num")int fi_num);
+
+	boolean deletePost(@Param("num")int num);
 
 
 }

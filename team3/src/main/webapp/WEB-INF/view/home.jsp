@@ -29,7 +29,7 @@
 		  <thead>
 		    <tr>
 		      <th>
-		      	<a href="<c:url value="/post/list"/>" class="boardname">공지게시판</a>
+		      	<a href="<c:url value="#"/>" class="boardname">공지게시판</a>
 		      </th>
 		    </tr>
 		  </thead>
@@ -50,23 +50,28 @@
 		  <thead>
 		    <tr>
 		      <th>
-		      	<a href="<c:url value="/post/list"/>" class="boardname">HOT게시판</a>
+		      	<a href="<c:url value="#"/>" class="boardname">HOT게시판</a>
 		      </th>
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr>
-		      <td>John</td>
-		    </tr>
-		    <tr>
-		      <td>Mary</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
+		   	<c:forEach items="${postHotList}" var="post">
+		   		<c:if test="${post.po_up >= 5}">
+			   		<tr>
+			   			<td>
+			   				<a href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title}</a>
+			   				${post.po_me_id} 
+			   				${post.po_view} 
+			   				${post.po_up}
+			   			</td>
+			   		</tr>
+		   		</c:if>
+		  	</c:forEach>
+		  	<c:if test="#">
+				<tr>
+					<td>등록된 게시글이 없습니다.</td>
+				</tr>
+			</c:if>
 		  </tbody>
 		</table>
       <hr class="d-sm-none">
@@ -104,7 +109,7 @@
 		  <thead>
 		    <tr>
 		      <th>
-		      	<a href="<c:url value="/post/list"/>" class="boardname">취미게시판</a>
+		      	<a href="<c:url value="#"/>" class="boardname">취미게시판</a>
 		      </th>
 		    </tr>
 		  </thead>
@@ -132,7 +137,7 @@
 		  <thead>
 		    <tr>
 		      <th>
-		      	<a href="<c:url value="/post/list"/>" class="boardname">정보게시판</a>
+		      	<a href="<c:url value="#"/>" class="boardname">정보게시판</a>
 		      </th>
 		    </tr>
 		  </thead>
@@ -158,7 +163,7 @@
 		  <thead>
 		    <tr>
 		      <th>
-		      	<a href="<c:url value="/post/list"/>" class="boardname">축구게시판</a>
+		      	<a href="<c:url value="#"/>" class="boardname">축구게시판</a>
 		      </th>
 		    </tr>
 		  </thead>
