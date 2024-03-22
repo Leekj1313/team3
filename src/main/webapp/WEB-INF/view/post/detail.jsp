@@ -13,13 +13,25 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
+<style type="text/css">
+	.card-1 {
+	  padding: 30px;
+	  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	}
+	
+	.card-1:hover {
+	  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
+</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
-<div class="container">
+<jsp:include page="/WEB-INF/view/profile.jsp"/>
+<div class="container mt-3 col-6 card-1">
 	<c:choose>
-		<c:when test="${post != null }">
-			<h2>게시글 상세</h2>
+		<c:when test="${post != null}">
+			<h2 style="font-weight: bold">게시글 상세</h2>
 			<div class="mb-3 mt-3">
 			    <label for="board" class="form-label">게시판:</label>
 			    <a href="<c:url value="/post/list?boNum=${post.board.bo_num}"/>">${post.board.bo_name}</a>
@@ -55,12 +67,16 @@
 		  	<c:if test="${fileList != null && fileList.size() != 0}">
 			  	<div class="mb-3 mt-3">
 				    <label for="content" class="form-label">첨부파일:</label>
-				    <a href="<c:url value="/download?filename=${file.fi_name}"/>" class="form-control" download="${file.fi_ori_name}">${file.fi_ori_name}</a>
+				    <c:forEach items="${fileList}" var="file">
+						<a href="<c:url value="/download?filename=${file.fi_name}"/>" download="${file.fi_ori_name}" class="form-control">${file.fi_ori_name}</a>
+					</c:forEach>
 			  	</div>
 		  	</c:if>
 		  	<a href="<c:url value="/post/list?boNum=${post.board.bo_num}"/>" class="btn btn-outline-primary">목록으로</a>
-		  	<c:if test="${post.po_me_id == user.me_id }">
+		  	<c:if test="${post.po_me_id == user.me_id or user.me_authority eq 'ADMIN'}">
 		  		<a href="<c:url value="/post/delete?num=${post.po_num}"/>" class="btn btn-outline-danger">삭제</a>
+		  	</c:if>
+		  	<c:if test="${post.po_me_id == user.me_id}">
 		  		<a href="<c:url value="/post/update?num=${post.po_num}"/>" class="btn btn-outline-warning">수정</a>
 		  	</c:if>
 	  		<a href="<c:url value="/post/report"/>" class="btn btn-outline-dark">신고</a>
@@ -124,8 +140,8 @@
 		.then(response => response.text())
 		.then(data =>{
 			let str = state == 1 ? '추천' : '비추천';
-			intiRecommendBtn(btnUp);
-			intiRecommendBtn(btnDown);
+			initRecommendBtn(btnUp);
+			initRecommendBtn(btnDown);
 			switch(data){
 				case "1":	
 					alert('게시글을 추천했습니다.'); 
@@ -144,7 +160,7 @@
 		.catch(error => console.error(error));
 	}
 	//추천/비추천 버튼을 기본으로 돌리는 함수
-	function intiRecommendBtn(btn) {
+	function initRecommendBtn(btn) {
 		btn.classList.remove('btn-danger');
 		btn.classList.add('btn-outline-danger');
 	}
@@ -231,7 +247,6 @@
 						</div>
 						`
 					}
-					
 					str +=
 					`
 					<div class="input-group mb-3 box-comment">
@@ -307,7 +322,7 @@
 				
 			}
 		});
-	})
+	});
 </script>
 <!-- 댓글 수정 구현 -->
 <script type="text/javascript">
@@ -370,5 +385,6 @@ $(document).on("click",".btn-complete", function(){
 	});
 });
 </script>
+<jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>
 </html>

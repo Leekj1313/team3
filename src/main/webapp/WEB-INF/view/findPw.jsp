@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 페이지</title>
+<title>비밀번호 찾기</title>
+<!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style type="text/css">
 	.login-box {
@@ -40,12 +40,6 @@
 	    margin-bottom: 30px;
 	    color: white;
 	}
-	
-	.login-box a {
-	    text-decoration: none;
-	    color: #9B9B9B;
-	    font-size: 12px;
-	}
 </style>
 </head>
 <body>
@@ -53,15 +47,18 @@
 <jsp:include page="/WEB-INF/view/profile.jsp"/>
 
 <div class="login-box">
-    <form action="<%=request.getContextPath()%>/login" method="post">
-    	<h1>로그인</h1>
-        <input type="text" placeholder="아이디" class="in" id="id" name="id">
-        <input type="password" placeholder="비밀번호" class="in" id="pw" name="pw">
-        <input type="submit" id="btn" value="로그인"><br>
+    <form action="<c:url value="/find/password"/>" method="post">
+    	<h2 style="font-weight: bold">비밀번호 찾기</h2>
+    	<div class="input-group">
+     		<label for="id" class="form-label">아이디</label>
+        	<input type="text" placeholder="아이디" class="id" id="id" name="id" required>
+    	</div>
+    	<div class="input-group">
+        	<label for="phone" class="form-label">전화번호</label>
+        	<input type="text" placeholder="전화번호" class="phone" id="phone" name="phone" required>
+    	</div>
+        <input type="submit" id="btn" value="비밀번호 찾기"><br>
     </form>
-    <a href="<c:url value="/find/id"/>">아이디찾기</a>
-    <span style="color: gray; opacity: 60%">|</span>
-    <a href="<c:url value="/find/password"/>">비밀번호찾기</a>
 </div>
 <jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>

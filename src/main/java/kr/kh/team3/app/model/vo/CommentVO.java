@@ -10,6 +10,7 @@ public class CommentVO {
 	private int cm_po_num; 
 	private String cm_me_id; 
 	private String cm_content;
+	private PostVO post;
 
 	public CommentVO(int po_num, String content, String meId) {
 		cm_po_num = po_num;

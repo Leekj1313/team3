@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -67,7 +66,7 @@
 			   		</tr>
 		   		</c:if>
 		  	</c:forEach>
-		  	<c:if test="#">
+		  	<c:if test="${postHotList.size() == 0}">
 				<tr>
 					<td>등록된 게시글이 없습니다.</td>
 				</tr>
@@ -77,7 +76,7 @@
       <hr class="d-sm-none">
     </div>
   </div>
-  <div class="row justify-content-center">
+  <%-- <div class="row justify-content-center">
     <div class="col-sm-4">
 		<table class="table table-hover table-bordered">
 		  <thead>
@@ -184,7 +183,8 @@
 		</table>
       <hr class="d-sm-none">
     </div>
-  </div>
+  </div> --%>
 </div>
+<jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>
 </html>

@@ -39,7 +39,6 @@ public class BoardManagerServlet extends HttpServlet {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(ca_num);
 		//화면에서 보낸 제목을 가져옴
 		String title = request.getParameter("title");
 		//게시판명, 카테고리 번호를 이용하여 게시판 객체를 생성

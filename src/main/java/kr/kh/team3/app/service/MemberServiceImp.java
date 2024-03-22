@@ -11,7 +11,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.team3.app.dao.MemberDAO;
 import kr.kh.team3.app.model.dto.LoginDTO;
+import kr.kh.team3.app.model.vo.CategoryVO;
 import kr.kh.team3.app.model.vo.MemberVO;
+import kr.kh.team3.app.pagination.Criteria;
 
 public class MemberServiceImp implements MemberService {
 
@@ -79,10 +81,73 @@ private MemberDAO memberDao;
 	}
 
 	@Override
-	public ArrayList<MemberVO> getMemberList() {
-		return memberDao.selectMemberList();
+	public MemberVO getMemberId(String name, String phone) {
+		if(name == null || phone == null) {
+			return null;
+		}
+		return memberDao.selectMemberId(name, phone);
+	}
+	
+	@Override
+	public MemberVO getMemberPw(String id, String phone) {
+		if(id == null || phone == null) {
+			return null;
+		}
+		return memberDao.selectMemberPw(id, phone);
 	}
 
+	@Override
+	public MemberVO getMember(String id) {
+		if(id == null) {
+			return null;
+		}
+		return memberDao.selectMember(id);
+	}
+
+	@Override
+	public boolean updatePassword(String pw, String id) {
+		if(pw == null || id == null) {
+			return false;
+		}
+		
+		MemberVO user = memberDao.selectMember(id);
+		if(user == null) {
+			return false;
+		}
+		return memberDao.updatePassword(pw, user);
+	}
+
+	@Override
+	public void failCountUp(MemberVO failUser, int failCount) {
+		memberDao.updateFailCount(failUser.getMe_id(), failCount);
+	}
+
+	@Override
+	public void updateMemberState(MemberVO failUser, String state) {
+		memberDao.updateMemberState(failUser.getMe_id(), state);
+	}
+	
+	public ArrayList<MemberVO> getMemberList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria(1, 2);
+		}
+		return memberDao.selectMemberList(cri);
+	}
+
+	@Override
+	public int getTotalCountMember(Criteria cri) {
+		if(cri == null) {
+			return 0;
+		}
+		return memberDao.selectTotalCountMember(cri);
+	}
+
+	@Override
+	public boolean deleteMember(String me_id) {
+		MemberVO user = memberDao.selectMember(me_id);
+		return memberDao.deleteMember(me_id);
+	}
+	
 	@Override
 	public boolean updateMember(MemberVO member) {
 		MemberVO dbMember = memberDao.selectMember(member.getMe_name());
@@ -90,8 +155,10 @@ private MemberDAO memberDao;
 	}
 
 	@Override
-	public boolean deleteMember(String me_id) {
-		MemberVO user = memberDao.selectMember(me_id);
-		return memberDao.deleteMember(me_id);
+	public boolean updateMemberAuthority(MemberVO user) {
+		if(user == null) {
+			return false;
+		}
+		return memberDao.updateMemberAuthority(user);
 	}
 }

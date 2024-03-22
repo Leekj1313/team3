@@ -5,26 +5,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- 부트스트랩5 css/js -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<title>header</title>
 <style type="text/css">
-.nav-item {
-	padding: 0.5rem 0xp;
-}
+	.nav-item {
+		padding: 0.5rem 0xp;
+	}
+	
+	.dropdown-hover:hover>.dropdown-menu {
+		display: inline-block;
+	}
+	
+	.dropdown-hover>.dropdown-toggle:active {
+		pointer-events: none;
+	}
+	
 
-.dropdown-hover:hover>.dropdown-menu {
-	display: inline-block;
-}
-
-.dropdown-hover>.dropdown-toggle:active {
-	/*Without this, clicking will make it sticky*/
-	pointer-events: none;
-}
+	.card-1 {
+	  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	}
+	
+	.card-1:hover {
+	  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
 </style>
 </head>
 <body>
@@ -51,7 +54,7 @@
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-mdb-toggle="dropdown" aria-expanded="false">
 							Category </a> <!-- Dropdown menu -->
-						<div class="dropdown-menu col-11 mt-0"
+						<div class="dropdown-menu col-11 mt-0 card-1"
 							aria-labelledby="navbarDropdown"
 							style="border-top-left-radius: 0; border-top-right-radius: 0;">
 							<div class="container">
@@ -80,8 +83,7 @@
 		</div>
 		<!-- Container wrapper -->
 	</nav>
-	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-	<script type="text/javascript">
+<script type="text/javascript">
 getBoard();
 function getBoard(){
 	$.ajax({
@@ -109,8 +111,6 @@ function getBoard(){
 	})
 
 }
-
-
 </script>
 </body>
 </html>

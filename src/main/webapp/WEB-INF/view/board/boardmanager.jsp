@@ -5,18 +5,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시판 관리</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<style type="text/css">
+	.card-1 {
+	  padding: 30px;
+	  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	}
+	.card-1:hover {
+	  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
+	.category-list-table {
+	  margin-top: 20px;
+	}
+</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
-<div class="container">
-	<h1>게시판 관리</h1>
+<jsp:include page="/WEB-INF/view/profile.jsp"/>
+<div class="container mt-3 col-6 card-1">
+	<h2 style="font-weight: bold">게시판 관리</h2>
 	<br>
 	<form action="<c:url value="/board/manager"/>" method="post">
-		<h5>게시판 등록</h5>
+		<h4 style="font-weight: bold">게시판 등록</h4>
 		<div class="mb-3 mt-3">
 			<label for="category" class="form-label">카테고리</label>
 			<select class="form-control" name="category" id="category">
@@ -29,10 +43,10 @@
 			<label for="title" class="form-label">게시판명</label>
 			<input type="text" class="form-control" id="title" placeholder="게시판명" name="title">
 		</div>
-		<button type="submit" class="btn btn-outline-success col-12">등록하기</button>
+		<button type="submit" class="btn btn-success col-12">등록하기</button>
 	</form>
-	<br>
-	<h5>현재 게시판</h5>
+	<hr style="border: 2px solid gray; margin: 50px 0">
+	<h4 style="font-weight: bold">현재 게시판</h4>
 	<div class="mb-3 mt-3 board-manager">
 		<div class="mb-3 mt-3 board-set">
 		<!-- 외부 반복, div 시작태그와 카테고리 이름 -->
@@ -55,18 +69,18 @@ function getBoard(){
             let str = '';
             for(category of data.categoryList){
                 str += `<div class="board-list">`;
-                str += `<div class="col-6 category-name">\${category.ca_name}</div>`;
+                str += `<div class="col-6 category-name" style="font-weight: bold; color: #787878;">\${category.ca_name}</div>`;
                 str += `<br>`;
                 for(board of data.boardList){
                     if(board.bo_ca_num === category.ca_num){
                     	//방금 가져온 board 의 bo_num
                         let boNum = board.bo_num;
-                        str += `<div class="col-3 board-name">\${board.bo_name}</div>`;
-                        str += `<div class="btn-boardManger-group">`;
+                        str += `<span class="col-3 board-name">\${board.bo_name}</span>`;
+                        str += `<div class="btn-boardManger-group btn-group" style="margin-left: 20px; margin-bottom: 10px">`;
                       	//bo_num을 버튼안에 값으로 넣어줌
                         str += `<button class="btn btn-outline-warning btn-board-update" data-num="\${boNum}">수정</button>`;
                         str += `<button class="btn btn-outline-danger btn-board-delete" data-num="\${boNum}">삭제</button>`;
-                        str += `</div>`;
+                        str += `</div><br>`;
                     }
                 }
                 str+= `</div>`;
@@ -177,5 +191,6 @@ function getBoard(){
 	
 	
 </script>
+<jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>
 </html>

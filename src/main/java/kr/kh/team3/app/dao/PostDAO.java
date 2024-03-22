@@ -6,9 +6,11 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.kh.team3.app.model.vo.CommentVO;
 import kr.kh.team3.app.model.vo.FileVO;
+import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.model.vo.MyCommentVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
+import kr.kh.team3.app.model.vo.ReportVO;
 import kr.kh.team3.app.pagination.Criteria;
 
 public interface PostDAO {
@@ -54,8 +56,22 @@ public interface PostDAO {
 
 	boolean deletePost(@Param("num")int num);
 
-  
-  
+	boolean insertPost(@Param("post")PostVO post);
+
+	void insertFile(@Param("file")FileVO fileVo);
+
+	int insertTmpPost(@Param("post")PostVO tmpPost);
+
+	boolean updateTmpPost(@Param("post")PostVO tmpPost, @Param("po_num")int po_num);
+
+	ArrayList<PostVO> selectTmpPostList(@Param("user")MemberVO user);
+
+	boolean submitTmpPost(@Param("post")PostVO post, @Param("po_num")int po_num);
+
+	FileVO selectFile(@Param("fi_num")int num);
+
+	boolean updatePost(@Param("post")PostVO post);
+
 	ArrayList<PostVO> selectMyPostList(@Param("cri")Criteria cri);
 
 	int selectMyPostTotalCount(@Param("cri")Criteria cri);
@@ -65,5 +81,13 @@ public interface PostDAO {
 	ArrayList<MyCommentVO> selectMyCommentPostList(@Param("cri")Criteria cri);
 
 	int selectMyCommentPostTotalCount(@Param("cri")Criteria cri);
+
+	ArrayList<ReportVO> selectReportPostList(@Param("cri")Criteria cri);
+
+	int selectReportTotalCount(@Param("cri")Criteria cri);
+
+	ReportVO selectReportPost(@Param("num")int num);
+
+	boolean deleteReportPost(@Param("num")int num);
 
 }

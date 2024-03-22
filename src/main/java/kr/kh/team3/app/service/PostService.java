@@ -10,6 +10,7 @@ import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.model.vo.MyCommentVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
+import kr.kh.team3.app.model.vo.ReportVO;
 import kr.kh.team3.app.pagination.CommentCriteria;
 import kr.kh.team3.app.pagination.Criteria;
 
@@ -66,5 +67,29 @@ public interface PostService {
 
 	int getMyCommentPostTotalCount(Criteria cri);
 
+	boolean insertPost(PostVO post, ArrayList<Part> partList);
+
+
+	int insertTmpPost(PostVO tmpPost);
+
+
+	boolean updateTmpPost(PostVO tmpPost, int po_num);
+
+
+	ArrayList<PostVO> getTmpPostList(MemberVO user);
+
+
+	boolean submitTmpPost(PostVO post, int po_num, ArrayList<Part> partList);
+
+
+	boolean updatePost(PostVO post, MemberVO user, ArrayList<Integer> nums, ArrayList<Part> fileList);
+
+
+
+	ArrayList<ReportVO> getReportPostList(Criteria cri);
+
+	int getTotalCountReport(Criteria cri);
+
+	boolean deleteReportPost(int num, MemberVO user);
 
 }

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내가 쓴 글 페이지</title>
+<title>회원 관리 페이지</title>
 <!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -23,6 +23,10 @@
 	.category-list-table {
 		margin-top: 20px
 	}
+	
+	td{
+		line-height: 60px;
+	}
 </style>
 </head>
 <body>
@@ -30,41 +34,49 @@
 <jsp:include page="/WEB-INF/view/profile.jsp"/>
 
 <div class="container mt-3 col-6 card-1">
-	<h2 style="font-weight: bold">내가 쓴 글</h2>
-	<form action="<c:url value="/mypage/mypost"/>" class="mb-3 mt-3">
+	<h2 style="font-weight: bold">회원 관리</h2>
+	<form action="<c:url value="/admin/membermanager"/>" class="mb-3 mt-3">
 		<div class="input-group">
 			<select name="type" class="form-select">
-				<option value="all" <c:if test='${pm.cri.type == "all"}'>selected</c:if>>전체</option>
-				<option value="title" <c:if test='${pm.cri.type == "title"}'>selected</c:if>>제목</option>
-				<option value="content" <c:if test='${pm.cri.type == "content"}'>selected</c:if>>내용</option>
+				<option value="meId" <c:if test='${pm.cri.type == "meId"}'>selected</c:if>>아이디</option>
+				<option value="meAuthority" <c:if test='${pm.cri.type == "meAuthority"}'>selected</c:if>>권한</option>
+				<option value="meMsState" <c:if test='${pm.cri.type == "meMsState"}'>selected</c:if>>상태</option>
 			</select>
 		    <input type="text" class="form-control" placeholder="검색어" name="search" value="${pm.cri.search}">
 		    <button class="btn btn-secondary">검색</button>
 		</div>
 	</form>
-	<table class="table table-hover">
+	<table class="table table-hover" style="text-align: center">
 	    <thead>
 			<tr>
-				<th>번호</th>
-				<th>게시판</th>
-				<th>제목</th>
-				<th>작성일</th>
-				<th>조회수</th>
+				<th>아이디</th>
+				<th>권한</th>
+				<th>상태</th>	
+				<th></th>
 			</tr>
 	    </thead>
 	    <tbody>
-	    	<c:forEach items="${list}" var="post">
+	    	<c:forEach items="${list}" var="member">
 			<tr>
-				<td>${post.po_num}</td>
-				<td>${post.board.bo_name}</td>
-				<td>
-					<c:url var="url" value="/post/detail">
-						<c:param name="num" value="${post.po_num}"/>
-					</c:url>
-					<a href="${url}">${post.po_title}</a>
+				<td class="col-3" style="font-weight: bold; <c:if test='${member.me_authority == "ADMIN"}'>color: red;</c:if>">${member.me_id}</td>
+				<td class="col-3">
+					<form action="<c:url value="/admin/memberauth?id=${member.me_id}"/>" class="mb-3 mt-3" method="post">
+						<div class="input-group">
+							<select class="form-select" name="authority">
+								<option value="ADMIN" <c:if test='${member.me_authority == "ADMIN"}'>selected</c:if>>관리자</option>
+								<option value="USER" <c:if test='${member.me_authority == "USER"}'>selected</c:if>>회원</option>
+								<option value="WUSER" <c:if test='${member.me_authority == "WUSER"}'>selected</c:if>>대기회원</option>
+							</select>
+							<button class="btn btn-secondary">변경</button>
+						</div>
+					</form>
 				</td>
-				<td><fmt:formatDate pattern="yy/MM/dd hh:mm" value="${post.po_date}"/></td>
-				<td>${post.po_view}</td>
+				<td class="col-2">${member.me_ms_state}</td>
+				<td class="col-2">
+				   <div class="btn-manager-group">
+				      <a href="<c:url value="/admin/memberdelete?id=${member.me_id}"/>" class="btn btn-outline-danger">삭제</a>
+				   </div>
+				</td>
 			</tr>
 			</c:forEach>
 			<c:if test="${list.size() == 0 }">
@@ -79,7 +91,7 @@
 	<ul class="pagination justify-content-center">
 		<c:if test="${pm.prev}">
 			<li class="page-item">
-				<c:url var="prevUrl" value="/mypage/mypost">
+				<c:url var="prevUrl" value="/admin/membermanager">
 					<c:param name="type" value="${pm.cri.type}"/>
 					<c:param name="search" value="${pm.cri.search}"/>
 					<c:param name="page" value="${pm.startPage - 1}"/>
@@ -91,7 +103,7 @@
 		</c:if>
 		<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
 			<li class="page-item <c:if test="${pm.cri.page == i}">active</c:if>">
-				<c:url var="page" value="/mypage/mypost">
+				<c:url var="page" value="/admin/membermanager">
 					<c:param name="type" value="${pm.cri.type}"/>
 					<c:param name="search" value="${pm.cri.search}"/>
 					<c:param name="page" value="${i}"/>
@@ -101,7 +113,7 @@
 		</c:forEach>
 		<c:if test="${pm.next }">
 			<li class="page-item">
-				<c:url var="nextUrl" value="/mypage/mypost">
+				<c:url var="nextUrl" value="/admin/membermanager">
 					<c:param name="type" value="${pm.cri.type}"/>
 					<c:param name="search" value="${pm.cri.search}"/>
 					<c:param name="page" value="${pm.endPage + 1}"/>
