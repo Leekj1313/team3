@@ -91,7 +91,8 @@ public interface PostService {
 
 	boolean deleteReportPost(int num, MemberVO user);
 
-
 	ArrayList<PostVO> getPostHotMainList();
+
+	int getTotalHotCount(Criteria cri);
 
 }

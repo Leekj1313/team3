@@ -457,5 +457,13 @@ public class PostServiceImp implements PostService {
 		return postDao.selectPostHotMainList();
 	}
 
+	@Override
+	public int getTotalHotCount(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectTotalHotCount(cri);
+	}
+
 
 }

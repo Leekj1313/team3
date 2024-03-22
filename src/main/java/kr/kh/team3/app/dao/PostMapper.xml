@@ -371,4 +371,19 @@
 		order by po_up desc
 		limit 5;
 	</select>
+	
+	<select id="selectTotalHotCount" resultType="int">
+		SELECT count(*)
+		FROM post
+		<if test='cri.type=="all"'>
+			where po_title like concat('%', #{cri.search},'%') 
+				or po_me_id = #{cri.search}
+		</if>
+		<if test='cri.type=="title"'>
+			where po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="writer"'>
+			where po_me_id = #{cri.search}
+		</if>
+	</select>
 </mapper>

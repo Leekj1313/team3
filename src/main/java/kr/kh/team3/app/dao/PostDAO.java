@@ -92,4 +92,6 @@ public interface PostDAO {
 
 	ArrayList<PostVO> selectPostHotMainList();
 
+	int selectTotalHotCount(@Param("cri")Criteria cri);
+
 }
