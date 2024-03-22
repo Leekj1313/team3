@@ -58,15 +58,13 @@
           <input type="text" class="form-control" id="title" placeholder="제목" name="title">
         </div>
         <div class="btn-temp">
-           <div class="">
-              <button type ="button" id ="temSaveBtn" class="btn btn-success btn-temSave">임시글 저장</button>
-              <div class="dropdown">
-              	<button type ="button" id ="temLoadBtn" class="btn btn-success btn-temLoad dropdown-toggle" data-bs-toggle="dropdown">임시글 불러오기</button>
-              	<ul class="dropdown-menu temp-dropdown">
+          <button type ="button" id ="temSaveBtn" class="btn btn-success btn-temSave">임시글 저장</button>
+          <div class="dropdown">
+          	<button type ="button" id ="temLoadBtn" class="btn btn-success btn-temLoad dropdown-toggle" data-bs-toggle="dropdown">임시글 불러오기</button>
+          	<ul class="dropdown-menu temp-dropdown">
 
-				</ul>
-              </div>
-           </div>
+			</ul>
+          </div>
       	</div>
         <div class="mb-3 mt-3">
           <textarea rows="10" class="form-control" id="content" name="content" placeholder="내용" style="margin-top: 100px"></textarea>
