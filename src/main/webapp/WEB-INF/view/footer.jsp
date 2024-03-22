@@ -27,22 +27,22 @@
     <!-- Right -->
     <div>
       <a class="me-4 text-reset" style="text-decoration: none">
-        <i class="bi bi-facebook"></i>
+        <i class="bi bi-facebook" style="font-size: large; color: gray;"></i>
       </a>
       <a href="" class="me-4 text-reset" style="text-decoration: none">
-        <i class="bi bi-twitter"></i>
+        <i class="bi bi-twitter" style="font-size: large; color: gray;"></i>
       </a>
       <a href="" class="me-4 text-reset" style="text-decoration: none">
-        <i class="bi bi-google"></i>
+        <i class="bi bi-google" style="font-size: large; color: gray;"></i>
       </a>
       <a href="" class="me-4 text-reset" style="text-decoration: none">
-        <i class="bi bi-instagram"></i>
+        <i class="bi bi-instagram" style="font-size: large; color: gray;"></i>
       </a>
       <a href="" class="me-4 text-reset" style="text-decoration: none">
-        <i class="bi bi-linkedin"></i>
+        <i class="bi bi-linkedin" style="font-size: large; color: gray;"></i>
       </a>
       <a href="" class="me-4 text-reset" style="text-decoration: none">
-        <i class="bi bi-github"></i>
+        <i class="bi bi-github" style="font-size: large; color: gray;"></i>
       </a>
     </div>
     <!-- Right -->
@@ -58,7 +58,10 @@
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
           <!-- Content -->
           <h3 class="text-uppercase fw-bold mb-4">
-            <i class="bi bi-building-fill"></i>KH.TEAM3
+            <a class="nav-link" href="<c:url value="/"/>">
+				<span style="font-weight: bold">TEAM3</span>
+				<i class="bi bi-chat-quote-fill" style="font-size: larger;"></i>
+			</a>
           </h3>
           <p>
             Here you can use rows and columns to organize your footer content. Lorem ipsum

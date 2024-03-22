@@ -6,9 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>header</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
 <style type="text/css">
 	.nav-item {
 		padding: 0.5rem 0xp;
+		display: inline-block;
 	}
 	
 	.dropdown-hover:hover>.dropdown-menu {
@@ -46,14 +49,18 @@
 			<!-- Collapsible wrapper -->
 			<div class="collapse navbar-collapse" id="navbarExampleOnHover">
 				<!-- Left links -->
-				<ul class="navbar-nav me-auto ps-lg-0" style="padding-left: 0.15rem">
-					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/"/>">HOME</a></li>
+				<ul class="navbar-nav me-auto ps-lg-0" style="padding-left: 0.15rem; margin-left: 20px">
+					<li class="nav-item">
+						<a class="nav-link" href="<c:url value="/"/>">
+							<span style="font-weight: bold">TEAM3</span>
+							<i class="bi bi-chat-quote-fill" style="font-size: x-large;"></i>
+						</a>
+					</li>
 					<!-- Navbar dropdown -->
-					<li class="nav-item dropdown dropdown-hover position-static">
+					<li class="nav-item dropdown dropdown-hover position-static" style="margin-left: 20px; line-height: 45px">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-							Category </a> <!-- Dropdown menu -->
+							CATEGORY </a> <!-- Dropdown menu -->
 						<div class="dropdown-menu col-11 mt-0 card-1"
 							aria-labelledby="navbarDropdown"
 							style="border-top-left-radius: 0; border-top-right-radius: 0;">
@@ -66,10 +73,10 @@
 				<ul class="navbar-nav ms-auto ps-lg-0"
 					style="padding-right: 0.15rem">
 					<c:if test="${user == null}">
-						<li class="nav-item"><a class="nav-link"
-							href="<c:url value="/signup"/>">회원가입</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="<c:url value="/login"/>">로그인</a></li>
+						<li class="nav-item"><a class="nav-link btn btn-light"
+							href="<c:url value="/login"/>">Sign in</a></li>
+						<li class="nav-item"><a class="nav-link btn btn-light" style="margin-left: 7px"
+							href="<c:url value="/signup"/>">Sign up</a></li>
 					</c:if>
 					<c:if test="${user != null}">
 			        	<li class="nav-item">
