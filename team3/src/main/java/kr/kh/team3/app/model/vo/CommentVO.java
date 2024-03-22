@@ -11,9 +11,9 @@ public class CommentVO {
 	private String cm_me_id; 
 	private String cm_content;
 
-	public CommentVO(int po_num, String content, String me_id) {
+	public CommentVO(int po_num, String content, String meId) {
 		cm_po_num = po_num;
 		cm_content = content;
-		cm_me_id = me_id;
+		cm_me_id = meId;
 	}
 }

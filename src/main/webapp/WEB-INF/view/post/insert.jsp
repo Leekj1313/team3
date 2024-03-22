@@ -15,35 +15,42 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 <style type="text/css">
 
-   .btn-temp {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
-  }
-
-  .btn-temp .btn {
-    margin-left: 5px;
-  }
+	 .btn-temp {
+	  display: flex;
+	  justify-content: flex-end;
+	  margin-top: 10px;
+	}
+	
+	.btn-temp .btn {
+	  margin-left: 5px;
+	}
+	
+	.btn-tmpPost-select {
+	  display: inline; 
+	  width: 100%; 
+	  margin-bottom: 5px;
+	  border: 0;
+	}
+	
+	.btn-tmpPost-select:hover {
+	  background-color: #e0e0e0;
+	  cursor: pointer;
+	}
   
-  .btn-tmpPost-select {
-    display: inline; 
-    width: 100%; 
-    margin-bottom: 5px;
-    border: 0;
-  }
-  
-  .btn-tmpPost-select:hover {
-    background-color: #e0e0e0;
-    cursor: pointer;
-}
+  	.card-1 {
+		padding: 30px;
+	  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	}
+	.card-1:hover {
+	  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
 
 </style>
-
-
 </head>
 <body>
-<jsp:include page="/WEB-INF/view/header.jsp"/>
-<div class="container">
+<jsp:include page="/WEB-INF/view/profile.jsp"/>
+<div class="container mt-3 col-7 card-1">
    <form action="<c:url value="/post/insert" />" method="post" enctype="multipart/form-data">
       <div class="mb-3 mt-3">
           <label for="board" class="form-label">게시판:</label>
@@ -62,7 +69,6 @@
           <div class="dropdown">
           	<button type ="button" id ="temLoadBtn" class="btn btn-success btn-temLoad dropdown-toggle" data-bs-toggle="dropdown">임시글 불러오기</button>
           	<ul class="dropdown-menu temp-dropdown">
-
 			</ul>
           </div>
       	</div>
@@ -160,3 +166,6 @@ $(document).on("click",".btn-tmpPost-select",function(){
    
 })
 </script>
+<jsp:include page="/WEB-INF/view/footer.jsp"/>
+</body>
+</html>

@@ -9,11 +9,23 @@
 <title>게시글 리스트</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<style type="text/css">
+	.card-1 {
+		padding: 30px;
+	  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	}
+	.card-1:hover {
+	  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
+</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
-<div class="container">
-	<h2>${board.bo_name}</h2>
+<jsp:include page="/WEB-INF/view/profile.jsp"/>
+<div class="container mt-3 col-7 card-1">
+	<h2 style="font-weight: bold">${board.bo_name}</h2>
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -105,5 +117,6 @@
   	<br>
 	<a href="<c:url value="/post/insert"/>" class="btn btn-outline-success">글등록</a>
 </div>
+<jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>
 </html>

@@ -5,25 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인</title>
-<!-- 부트스트랩5 css/js -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<style>
+<title>profile</title>
+<style type="text/css">
 	.profile {
 		width: 200px; height: 210px;
 		background-color: white;
-	
-	}
-	.menus {
 		
 	}
+
 	.profile-btn {
 		width: 100%;
 		margin: 2px 0;
 	}
 	.side-box { 
-		padding: 10px; width: 220px; height: 100%;
+		position: fixed;
+		padding: 10px; width: 220px; height: 355px;
 		float: left;
 		margin-top: 50px; margin-left: 60px;
 		box-shadow: 0 3px 3px rgba(0,0,0,0.2);
@@ -37,10 +33,19 @@
 		margin-left: 70px;
 		margin-top: 3px;
 	}
+
+	.card-1 {
+	  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	}
+	
+	.card-1:hover {
+	  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
 </style>
 </head>
 <body>
-<div class="side-box">
+<div class="side-box card-1">
 	<c:if test="${user == null}">
 		<div class="sign-container">
 			<a href="<c:url value="/login"/>" class="btn btn-basic profile-btn">로그인</a>
