@@ -17,7 +17,7 @@ import kr.kh.team3.app.service.PostService;
 import kr.kh.team3.app.service.PostServiceImp;
 
 @WebServlet("/mypage/mycomment")
-public class MypageMycommentServlet extends HttpServlet {
+public class MypageMycommentServlet  extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PostService postService = new PostServiceImp();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
