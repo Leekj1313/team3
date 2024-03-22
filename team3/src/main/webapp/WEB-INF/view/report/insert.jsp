@@ -33,7 +33,7 @@
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <div class="card card-1 container col-5 p-5">
 <h3>게시글 신고</h3>
-<form action="<%=request.getContextPath()%>/report/insert" class="was-validated" method="post">
+<form action= "<c:url value="/report/insert"/>" method="post" enctype="multipart/form-data">
 	<div class="mb-3 mt-3">
 		<label for="report_type" class="form-label">신고종류</label>
 		    <select class="form-control" id="report_type" name="report_type">
@@ -46,7 +46,7 @@
 		<div class="mb-3 mt-3">
 		    <textarea rows="10" class="form-control" id="report_content" name="report_content" placeholder="신고내용"></textarea>
 		</div>
-	<button type="submit" class="btn btn-outline-dark col-12 btn-report-insert">신고접수</button>
+	<button class="btn btn-outline-dark col-12 btn-report-insert">신고접수</button>
 </form>
 </div>
 </body>

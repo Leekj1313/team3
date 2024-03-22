@@ -20,10 +20,10 @@
 	  </environment>
 	</environments>
   <mappers>
-    <!-- <mapper resource="kr/kh/app/dao/MemberMapper.xml"/> -->
     <mapper resource="kr/kh/team3/app/dao/MemberMapper.xml"/>
     <mapper resource="kr/kh/team3/app/dao/BoardMapper.xml"/>
     <mapper resource="kr/kh/team3/app/dao/CategoryMapper.xml"/>
     <mapper resource="kr/kh/team3/app/dao/PostMapper.xml"/>
+    <mapper resource="kr/kh/team3/app/dao/ReportMapper.xml"/>
   </mappers>
 </configuration>

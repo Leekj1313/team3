@@ -20,7 +20,6 @@ public class ReportInsertServlet extends HttpServlet {
 	private ReportService reportService = new ReportServiceImp();
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
     	request.getRequestDispatcher("/WEB-INF/view/report/insert.jsp").forward(request, response);
 	}
 
@@ -36,7 +35,6 @@ public class ReportInsertServlet extends HttpServlet {
     	}
 		//신고하는 게시글을 가져옴
     	PostVO post = (PostVO)request.getSession().getAttribute("post");
-    	
     	if (post == null) {
 	        request.setAttribute("msg", "게시글을 가져올 수 없습니다.");
 	        request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
@@ -46,7 +44,6 @@ public class ReportInsertServlet extends HttpServlet {
     	ReportVO report = new ReportVO(reportType, reportContent, post.getPo_num());
 		
 		boolean res = reportService.insertReport(report);
-		
 		if(res) {
 			request.setAttribute("msg", "게시글을 신고했습니다.");
 		}else {
