@@ -37,4 +37,6 @@ public interface MemberService {
 
 	boolean updateMember(MemberVO member);
 
+	ArrayList<MemberVO> getMemberList();
+
 }
