@@ -40,6 +40,30 @@
 		border-radius: 10px;
 		margin-left: 5px
 	}
+	
+	.title-text{
+		display:block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		min-width: 100px;
+		max-width: 100px;
+	
+	}
+	
+	table tr th,table tr td {
+		text-align: center;
+	
+	}
+	
+	.aTag {
+		text-decoration: none; color: black;
+	}
+	
+	.aTag:hover {
+		text-decoration: underline;
+		color: #848484;
+	}
 </style>
 </head>
 <body>

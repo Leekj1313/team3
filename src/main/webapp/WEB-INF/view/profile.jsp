@@ -43,6 +43,15 @@
 	.card-1:hover {
 	  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	}
+	.find-btn {
+	text-decoration: none;
+	}
+	.find-btn:hover {
+		text-decoration: underline;
+	}
+	.login-btn:hover {
+	color:#848484; 
+	}
 </style>
 </head>
 <body>
@@ -50,12 +59,12 @@
 	<div class="side-box card-1">
 		<c:if test="${user == null}">
 			<div class="sign-container">
-				<a href="<c:url value="/login"/>" class="btn btn-basic profile-btn">로그인</a>
+				<a href="<c:url value="/login"/>" class="btn btn-basic profile-btn login-btn">로그인</a>
 				<a href="<c:url value="/signup"/>" class="btn btn-secondary profile-btn">회원가입</a>
 				<div class="" style="text-align: center">
-					<a href="<c:url value="/find/id"/>" class="profile-btn" style="font-size: 8pt; color: gray; display: inline;">아이디 찾기</a>
+					<a href="<c:url value="/find/id"/>" class="profile-btn find-btn" style="font-size: 8pt; color: gray; display: inline;">아이디 찾기</a>
 					<span style="color: gray; opacity: 60%">|</span>
-					<a href="<c:url value="/find/password"/>" class="profile-btn" style="font-size: 8pt; color: gray; display: inline;">비밀번호 찾기</a>
+					<a href="<c:url value="/find/password"/>" class="profile-btn find-btn" style="font-size: 8pt; color: gray; display: inline;">비밀번호 찾기</a>
 				</div>
 			</div>
 		</c:if>
