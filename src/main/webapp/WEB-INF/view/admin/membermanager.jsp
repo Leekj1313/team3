@@ -82,7 +82,7 @@
 			<c:if test="${list.size() == 0 }">
 				<tr>
 					<th colspan="5">
-						<h3 class="text-center">등록된 게시글이 없습니다.</h3>
+						<h3 class="text-center">등록된 회원이 없습니다.</h3>
 					</th>
 				</tr>
 			</c:if>

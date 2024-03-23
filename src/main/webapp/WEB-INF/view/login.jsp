@@ -46,15 +46,24 @@
 	    color: #9B9B9B;
 	    font-size: 12px;
 	}
+	
+	.card-1 {
+		padding: 30px;
+	  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	}
+	.card-1:hover {
+	  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
 </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <jsp:include page="/WEB-INF/view/profile.jsp"/>
 
-<div class="login-box">
+<div class="login-box card-1">
     <form action="<%=request.getContextPath()%>/login" method="post">
-    	<h1>로그인</h1>
+    	<h2 style="font-weight: bold; margin-bottom: 30px">로그인</h2>
         <input type="text" placeholder="아이디" class="in" id="id" name="id">
         <input type="password" placeholder="비밀번호" class="in" id="pw" name="pw">
         <input type="submit" id="btn" value="로그인"><br>
