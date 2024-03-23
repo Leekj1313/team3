@@ -6,9 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>header</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
 <style type="text/css">
 	.nav-item {
 		padding: 0.5rem 0xp;
+		display: inline-block;
 	}
 	
 	.dropdown-hover:hover>.dropdown-menu {
@@ -28,6 +31,39 @@
 	.card-1:hover {
 	  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	}
+	
+	.ca-name {
+		background: #F2F2F2;
+		padding: 0 10px;
+		font-weight: bold;
+		color: 	#787878;
+		border-radius: 10px;
+		margin-left: 5px
+	}
+	
+	.title-text{
+		display:block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		min-width: 100px;
+		max-width: 100px;
+	
+	}
+	
+	table tr th,table tr td {
+		text-align: center;
+	
+	}
+	
+	.aTag {
+		text-decoration: none; color: black;
+	}
+	
+	.aTag:hover {
+		text-decoration: underline;
+		color: #848484;
+	}
 </style>
 </head>
 <body>
@@ -46,15 +82,19 @@
 			<!-- Collapsible wrapper -->
 			<div class="collapse navbar-collapse" id="navbarExampleOnHover">
 				<!-- Left links -->
-				<ul class="navbar-nav me-auto ps-lg-0" style="padding-left: 0.15rem">
-					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/"/>">HOME</a></li>
+				<ul class="navbar-nav me-auto ps-lg-0" style="padding-left: 0.15rem; margin-left: 20px">
+					<li class="nav-item">
+						<a class="nav-link" href="<c:url value="/"/>">
+							<span style="font-weight: bold">TEAM3</span>
+							<i class="bi bi-chat-quote-fill" style="font-size: x-large;"></i>
+						</a>
+					</li>
 					<!-- Navbar dropdown -->
-					<li class="nav-item dropdown dropdown-hover position-static">
+					<li class="nav-item dropdown dropdown-hover position-static" style="margin-left: 20px; line-height: 45px">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-							Category </a> <!-- Dropdown menu -->
-						<div class="dropdown-menu col-11 mt-0 card-1"
+							CATEGORY </a> <!-- Dropdown menu -->
+						<div class="dropdown-menu col-10 mt-0 card-1"
 							aria-labelledby="navbarDropdown"
 							style="border-top-left-radius: 0; border-top-right-radius: 0;">
 							<div class="container">
@@ -66,14 +106,14 @@
 				<ul class="navbar-nav ms-auto ps-lg-0"
 					style="padding-right: 0.15rem">
 					<c:if test="${user == null}">
-						<li class="nav-item"><a class="nav-link"
-							href="<c:url value="/signup"/>">회원가입</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="<c:url value="/login"/>">로그인</a></li>
+						<li class="nav-item"><a class="nav-link btn btn-light"
+							href="<c:url value="/login"/>">Sign in</a></li>
+						<li class="nav-item"><a class="nav-link btn btn-light" style="margin-left: 7px"
+							href="<c:url value="/signup"/>">Sign up</a></li>
 					</c:if>
 					<c:if test="${user != null}">
 			        	<li class="nav-item">
-				          	<a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
+				          	<a class="nav-link btn btn-light" href="<c:url value="/logout"/>">Sign out</a>
 				        </li>
 			        </c:if>
 				</ul>
@@ -93,9 +133,9 @@ function getBoard(){
 			let str = '';
 			var url = '<c:url value="/post/list"/>';
 			for (category of data.categoryList){
-				str += '<div class="col-md-6 col-lg-2 mb-3 mb-lg-0" style="border-right: solid 1px gray;">';
+				str += '<div class="col-md-6 col-lg-2 mb-3 mb-lg-0" style="border-right: solid 2px #E6E6E6;">';
 				str += '<div class="list-group list-group-flush">';
-				str += '<div style="font-weight: bold; margin-bottom: 20px;">' + category.ca_name + '</div>'; // 카테고리 이름 출력
+				str += '<div class="ca-name" style="margin-bottom: 15px">' + category.ca_name + '</div>'; // 카테고리 이름 출력
 			for (board of data.boardList){
 				if (board.bo_ca_num === category.ca_num){
 					str += '<a href="' + url + '?boNum=' + board.bo_num + '" class="list-group-item list-group-item-action">' + board.bo_name + '</a>'; // 해당 카테고리에 속하는 보드 출력

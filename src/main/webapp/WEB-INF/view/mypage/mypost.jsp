@@ -61,7 +61,7 @@
 					<c:url var="url" value="/post/detail">
 						<c:param name="num" value="${post.po_num}"/>
 					</c:url>
-					<a href="${url}">${post.po_title}</a>
+					<a class="title-text aTag" href="${url}">${post.po_title}</a>
 				</td>
 				<td><fmt:formatDate pattern="yy/MM/dd hh:mm" value="${post.po_date}"/></td>
 				<td>${post.po_view}</td>

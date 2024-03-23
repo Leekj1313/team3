@@ -31,8 +31,11 @@ public class PostInsertServlet extends HttpServlet {
     private BoardService boardService = new BoardServiceImp();
     private PostService postService = new PostServiceImp();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int bNum = Integer.parseInt(request.getParameter("bNum"));
 		ArrayList<BoardVO> boardList = boardService.getBoardList();
+		
 		request.setAttribute("boardList", boardList);
+		request.setAttribute("bNum", bNum);
 		request.getRequestDispatcher("/WEB-INF/view/post/insert.jsp").forward(request, response);
 	}
 
