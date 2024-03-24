@@ -16,30 +16,16 @@ import kr.kh.team3.app.service.MemberServiceImp;
 public class SignupDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberServiceImp();
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/meDropPage.jsp").forward(request, response);
-	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
-		String me_id = null;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		try {
-            me_id = request.getParameter("id");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-		String me_pw = request.getParameter("pw");
+		MemberVO member = (MemberVO)request.getSession().getAttribute("user");
 		
-		boolean res = memberService.deleteMember(me_id,me_pw,user); 
-	    if(res) {
-			request.setAttribute("msg", "회원탈퇴를 하였습니다.");
+		boolean res = memberService.deleteMember(member.getMe_id());
+		if(res) {
+			request.setAttribute("msg", "회원탈퇴 하였습니다.");
 			request.setAttribute("url", "/");
-			request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 		}else {
-			request.setAttribute("msg", "회원탈퇴를 실패하였습니다.");
-			request.setAttribute("url", "/signup/delete");
 			request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 		}
 	}

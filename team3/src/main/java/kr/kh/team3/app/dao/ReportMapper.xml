@@ -3,9 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.team3.app.dao.ReportDAO">
+	<resultMap id="ReportMap" type="your.package.ReportClass">
+		<result property="re_rt_name" column="reportType"/>
+		<result property="re_content" column="reportContent"/>
+		<result property="re_po_num" column="po_num"/>
+	</resultMap>
 	
 	<select id="selectReportList" resultMap="ReportMap">
-	select * from report
+		select * from report
 	</select>
 	
 	<insert id="insertReport">

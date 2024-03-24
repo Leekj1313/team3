@@ -34,27 +34,51 @@
 <div class="card card-1 container col-5 p-5">
 <h3>회원정보 수정</h3>
 <form action="<%=request.getContextPath()%>/signup/update" class="was-validated" method="post">
-	<div class="mb-3 mt-3">
-		<label for="uname" class="form-label">이름(실명)</label>
-		<input type="text" class="form-control" id="uname" readonly value="${member.me_name}">
-	</div>
-	<label for="id" class="form-label">아이디</label>
-	<div class="input-group">
-		<input type="text" class="form-control" id="id" readonly value="${member.me_id}">
-	</div>
-	<div class="mb-3 mt-3">
-		<label for="pw" class="form-label">비밀번호</label>
-			<a href="<c:url value="/"/>" class="btn btn-outline-dark col-12">수정하기</a>		
-	</div>
-	<div class="mb-3 mt-3">
-		<label for="email" class="form-label">이메일</label>
-		<input type="email" class="form-control" id="email" name="email" value="${member.me_email}">
-	</div>
-	<div class="mb-5 mt-3">
-		<label for="phone" class="form-label">전화번호</label>
-		<input type="text" class="form-control" id="phone" name="phone" value="${member.me_phone}">
-	</div>
-	<button type="submit" class="btn btn-outline-dark col-12">저장하기</button>
+
+<div class="container mt-3">
+<h2>내 프로필</h2>
+<p>회원 프로필 정보 입니다.</p>            
+	<table class="table table-hover">
+		<label for="id" class="form-label">이름(실명)</label>
+	  		<div class="input-group">
+	  			<input type="text" class="form-control" id="uname" readonly value="${member.me_name}"></input>
+	    		<button type="button" class="btn btn-outline-dark btn-insert">수정</button>
+			</div>
+			<br>
+	   	<label for="pw" class="form-label">아이디</label>
+	    <div class="input-group">
+	   		<input type="text" class="form-control" id="uname" readonly value="${member.me_name}"></input>
+	   		<button type="button" class="btn btn-outline-dark btn-insert">수정</button>
+		</div>
+		<br>
+	   	<label for="pw" class="form-label">이메일</label>
+	     	<div class="input-group">
+	   			<input type="text" class="form-control" id="uname" readonly value="${member.me_name}"></input>
+	    		<button type="button" class="btn btn-outline-dark btn-insert">수정</button>
+			</div>
+			<br>
+	</table>
+</div>
+
+<div class="container mt-3">
+<h2>보안설정</h2>
+<p>회원 보안 정보 입니다.</p>            
+	<table class="table table-hover">
+		<label for="pw" class="form-label">패스워드</label>
+			<div class="input-group">
+				<input type="text" class="form-control" id="uname" readonly value="${member.me_name}"></input>
+				<button type="button" class="btn btn-outline-dark btn-insert">수정</button>
+			</div>
+			<br>
+		<label for="pw" class="form-label">전화번호</label>
+			<div class="input-group">
+				<input type="text" class="form-control" id="uname" readonly value="${member.me_name}"></input>
+				<button type="button" class="btn btn-outline-dark btn-insert">수정</button>
+			</div>
+			<br>
+	</table>
+</div>
+
 </form>
 </div>
 </body>

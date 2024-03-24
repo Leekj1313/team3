@@ -1,3 +1,4 @@
+
 package kr.kh.team3.app.controller;
 
 import java.io.IOException;
@@ -16,9 +17,6 @@ import kr.kh.team3.app.service.BoardServiceImp;
 import kr.kh.team3.app.service.CategoryService;
 import kr.kh.team3.app.service.CategoryServiceImp;
 
-/**
- * Servlet implementation class BoardManagerServlet
- */
 @WebServlet("/board/manager")
 public class BoardManagerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -39,7 +37,6 @@ public class BoardManagerServlet extends HttpServlet {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(ca_num);
 		//화면에서 보낸 제목을 가져옴
 		String title = request.getParameter("title");
 		//게시판명, 카테고리 번호를 이용하여 게시판 객체를 생성

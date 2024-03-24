@@ -1,24 +1,25 @@
 package kr.kh.team3.app.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.kh.team3.app.service.CategoryService;
+import kr.kh.team3.app.service.CategoryServiceImp;
 
-@WebServlet("/g")
-public class ServletHere extends HttpServlet {
+@WebServlet("/category/insert")
+public class CategoryInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
-	}
-
+	private CategoryService categoryService = new CategoryServiceImp();
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String category = request.getParameter("category");
+		
+		boolean res = categoryService.insertCategory(category);
+    	response.getWriter().write(res?"ok":"");
 	}
 
 }

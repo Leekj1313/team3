@@ -18,9 +18,6 @@ import kr.kh.team3.app.service.BoardServiceImp;
 import kr.kh.team3.app.service.CategoryService;
 import kr.kh.team3.app.service.CategoryServiceImp;
 
-/**
- * Servlet implementation class BoardListServlet
- */
 @WebServlet("/board/list")
 public class BoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -39,9 +36,6 @@ public class BoardListServlet extends HttpServlet {
 		response.getWriter().print(jobj);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

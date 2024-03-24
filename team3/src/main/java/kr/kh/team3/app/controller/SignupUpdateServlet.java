@@ -37,7 +37,7 @@ public class SignupUpdateServlet extends HttpServlet {
 	   MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 	   MemberVO member = new MemberVO(email, phone, user.getMe_id());
         
-       boolean res = memberService.updateMember(member);
+	   boolean res = memberService.updateMemberData(member);
        if(res) {
 			request.setAttribute("msg", "회원 정보를 수정했습니다.");
 		}else {

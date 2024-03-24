@@ -16,9 +16,6 @@ import kr.kh.team3.app.model.vo.CategoryVO;
 import kr.kh.team3.app.service.BoardService;
 import kr.kh.team3.app.service.BoardServiceImp;
 
-/**
- * Servlet implementation class HeaderServlet
- */
 @WebServlet("/header")
 public class HeaderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -34,10 +31,5 @@ public class HeaderServlet extends HttpServlet {
 	
 		response.setContentType("application/json; charset=utf-8");
 		response.getWriter().print(jobj);
-		
-		
 	}
-
-
-
 }
