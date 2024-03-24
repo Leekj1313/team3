@@ -102,7 +102,6 @@
 				</div>
 			</div>
 			<div class="user-menus">
-				<!-- <div class="profile_me_name btn btn-secondary" style="font-size: 10px;">회원</div> -->
 				<a href="<c:url value="/mypage/mypost"/>" class="btn btn-secondary profile-btn">내가 쓴 글</a>
 				<a href="<c:url value="/mypage/mycomment"/>" class="btn btn-secondary profile-btn">내가 쓴 댓글</a>
 				<a href="<c:url value=""/>" class="btn btn-secondary profile-btn">정보 수정</a>

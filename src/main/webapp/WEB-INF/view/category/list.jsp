@@ -49,7 +49,6 @@
 			</tr>
 		</tbody>
 	</table>
-	<!-- 페이지네이션 박스 -->
 	<div class="box-category-pagination">
 		<ul class="pagination justify-content-center">
 			<li class="page-item">
@@ -154,7 +153,6 @@ $(".btn-category-insert").click(function(){
 			location.href = "<c:url value='/login'/>";
 			return;
 		}
-		//취소 누르면 현재 페이지에서 추천/비추천 동작을 안 함
 		else{
 			location.href = "<c:url value='/'/>";
 			return;
@@ -242,8 +240,7 @@ $(document).on("click", ".btn-category-update", function(){
 	}
 	
 	initCategory();
-	//현재 카테고리 보여주는 창이 textarea 태그로 변경
-	//기존 창을 감춤
+
 	$(this).parents(".box-category").find(".ca_name").hide();
 	let comment = $(this).parents(".box-category").find(".ca_name").text();
 	let input = 
@@ -289,7 +286,7 @@ $(document).on("click", ".btn-complete", function(){
 	
 	let num = $(this).data("num");
 	let name = $(".cat-input").val();
-	//alert(num + ":" + content);
+	
 	$.ajax({
 		url : '<c:url value="/category/update"/>',
 		method : 'post',

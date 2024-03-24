@@ -7,17 +7,14 @@ import javax.servlet.http.Part;
 import kr.kh.team3.app.model.vo.CommentVO;
 import kr.kh.team3.app.model.vo.FileVO;
 import kr.kh.team3.app.model.vo.MemberVO;
-import kr.kh.team3.app.model.vo.MyCommentVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
 import kr.kh.team3.app.model.vo.ReportVO;
-import kr.kh.team3.app.pagination.CommentCriteria;
 import kr.kh.team3.app.pagination.Criteria;
 
 public interface PostService {
 
 	int recommend(int po_num, int state, MemberVO user);
-
 
 	boolean updateView(int num);
 
@@ -50,25 +47,15 @@ public interface PostService {
 
 	boolean deletePost(int num, MemberVO user);
   
-  
-  
-
-  
 	ArrayList<PostVO> getMyPostList(Criteria cri);
 
 	int getMyPostTotalCount(Criteria cri);
 
-
-	//ArrayList<CommentVO> getMyCommentList(String me_id);
-
-
-	ArrayList<MyCommentVO> getMyCommentPostList(Criteria cri);
-
+	ArrayList<CommentVO> getMyCommentPostList(Criteria cri);
 
 	int getMyCommentPostTotalCount(Criteria cri);
 
 	boolean insertPost(PostVO post, ArrayList<Part> partList);
-
 
 	int insertTmpPost(PostVO tmpPost);
 

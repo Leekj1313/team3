@@ -27,7 +27,7 @@
 		<table class="table table-hover table-bordered">
 		  <thead>
 		    <tr>
-		      <th>
+		      <th style="text-align: left;">
 		      	<a href="<c:url value="#"/>" class="boardname">공지게시판</a>
 		      </th>
 		    </tr>
@@ -35,7 +35,7 @@
 		  <tbody>
 		  <c:forEach items="${postList}" var="post">
 		   		<tr>
-		   			<td>
+		   			<td style="text-align: left;">
 		   				<a href="">${post.po_title} ${post.po_me_id} ${post.po_view}</a>
 		   			</td>
 		   		</tr>
@@ -57,7 +57,7 @@
 		   	<c:forEach items="${postHotList}" var="post">
 		   		<c:if test="${post.po_up >= 5}">
 			   		<tr>
-			   			<td>
+			   			<td style="text-align: left;">
 			   				<a href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title}</a>
 			   				${post.po_me_id} 
 			   				${post.po_view} 
@@ -77,114 +77,6 @@
       <hr class="d-sm-none">
     </div>
   </div>
-  <%-- <div class="row justify-content-center">
-    <div class="col-sm-4">
-		<table class="table table-hover table-bordered">
-		  <thead>
-		    <tr>
-		      <th>
-		      	<a href="<c:url value="/post/list"/>" class="boardname">자유게시판</a>
-		      </th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <td>John</td>
-		    </tr>
-		    <tr>
-		      <td>Mary</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
-		  </tbody>
-		</table>
-      <hr class="d-sm-none">
-    </div>
-    <div class="col-sm-4">
-		<table class="table table-hover table-bordered">
-		  <thead>
-		    <tr>
-		      <th>
-		      	<a href="<c:url value="#"/>" class="boardname">취미게시판</a>
-		      </th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <td>John</td>
-		    </tr>
-		    <tr>
-		      <td>Mary</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
-		  </tbody>
-		</table>
-      <hr class="d-sm-none">
-    </div>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-sm-4">
-		<table class="table table-hover table-bordered">
-		  <thead>
-		    <tr>
-		      <th>
-		      	<a href="<c:url value="#"/>" class="boardname">정보게시판</a>
-		      </th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <td>John</td>
-		    </tr>
-		    <tr>
-		      <td>Mary</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
-		  </tbody>
-		</table>
-      <hr class="d-sm-none">
-    </div>
-    <div class="col-sm-4">
-		<table class="table table-hover table-bordered">
-		  <thead>
-		    <tr>
-		      <th>
-		      	<a href="<c:url value="#"/>" class="boardname">축구게시판</a>
-		      </th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <td>John</td>
-		    </tr>
-		    <tr>
-		      <td>Mary</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
-		    <tr>
-		      <td>July</td>
-		    </tr>
-		  </tbody>
-		</table>
-      <hr class="d-sm-none">
-    </div>
-  </div> --%>
 </div>
 <jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>

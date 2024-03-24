@@ -16,7 +16,6 @@ import kr.kh.team3.app.dao.PostDAO;
 import kr.kh.team3.app.model.vo.CommentVO;
 import kr.kh.team3.app.model.vo.FileVO;
 import kr.kh.team3.app.model.vo.MemberVO;
-import kr.kh.team3.app.model.vo.MyCommentVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
 import kr.kh.team3.app.model.vo.ReportVO;
@@ -254,7 +253,7 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public ArrayList<MyCommentVO> getMyCommentPostList(Criteria cri) {
+	public ArrayList<CommentVO> getMyCommentPostList(Criteria cri) {
 		if(cri == null) {
 			cri = new Criteria();
 		}
@@ -299,13 +298,6 @@ public class PostServiceImp implements PostService {
 		return postDao.deleteReportPost(num);
 	}
 
-//	@Override
-//	public ArrayList<CommentVO> getMyCommentList(String me_id) {
-//		if(me_id == null) {
-//			return null;
-//		}
-//		return postDao.selectMyCommentList(me_id);
-//	}
 
 	@Override
 	public boolean insertPost(PostVO post, ArrayList<Part> partList) {

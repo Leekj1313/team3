@@ -18,12 +18,6 @@ public class CategoryInsertServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String category = request.getParameter("category");
 		
-//		//중복이면
-//		boolean checkCat = categoryService.checkCat(category);
-//		if(!checkCat) {
-//			response.getWriter().write("dup");
-//		}
-		
 		boolean res = categoryService.insertCategory(category);
     	response.getWriter().write(res?"ok":"");
 	}

@@ -21,7 +21,6 @@ public class MainServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		ArrayList<PostVO> postList = postService.getRecentNotice();
 		request.setAttribute("postList", postList);
 		
@@ -29,12 +28,10 @@ public class MainServlet extends HttpServlet {
 		ArrayList<PostVO> postHotList = postService.getPostHotMainList();
 		request.setAttribute("postHotList", postHotList);
 		
-		
 		request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
