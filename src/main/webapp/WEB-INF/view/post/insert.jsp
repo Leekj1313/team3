@@ -87,11 +87,14 @@
    </form>
 </div>
 <script type="text/javascript">
+makeSummerNote();
+function makeSummerNote(){
 $('[name=content]').summernote({
     placeholder: '내용',
     tabsize: 2,
     height: 400
-  });
+  })
+ };
 </script>
 <script type="text/javascript">
 let count = 0;
@@ -150,6 +153,7 @@ $(".btn-temLoad").click(function(){
 $(document).on("click",".btn-tmpPost-select",function(){
    
    if(confirm("임시 저장된 게시글을 불러올 시 기존 게시글 정보가 사라집니다. 진행하시겠습니까?")){
+	
       let po_num = $(this).data("num");
       let po_bo_num = $(this).data("bonum");
       let po_title = $(this).data("potitle");
@@ -157,7 +161,8 @@ $(document).on("click",".btn-tmpPost-select",function(){
       console.log(po_num,po_bo_num,po_title,po_content);
       $('#board').val(po_bo_num);
       $('#title').val(po_title);
-      $('#content').val(po_content);
+      //$('#content').val(po_content);
+      $('#content').summernote('code', po_content);
       $("#isTemp").val("true");
       $("#po_num_temp").val(po_num);
       $('.temp-dropdown').hide();
