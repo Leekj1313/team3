@@ -26,11 +26,10 @@ public class CategoryUpdateServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		String name = request.getParameter("name");
-		
-		//댓글 객체를 댓글 번호, 내용, 작성자를 이용하여 생성
+
 		CategoryVO category = new CategoryVO(0, name);
 		category.setCa_num(num);
-		//댓글을 수정하라고 시키고 결과를 boolean으로 받아옴
+		
 		System.out.println(category);
 		boolean res = categoryService.updateCategory(category);
 		response.getWriter().write(res ? "ok" : "");

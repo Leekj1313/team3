@@ -43,12 +43,10 @@ public class MemberAuthServlet extends HttpServlet {
 		if(user.getMe_authority().equals(me_authority)){
 			res = -2;
 		}
-		
 		//관리자가 자신의 권한을 변경하려 할 때
 		else if(nowUser.getMe_id().equals(me_id)) {
 			res = -3;
 		}
-		
 		//user.me_ms_state 값이 가입대기이면 user.me_ms_state 이용중으로 변경. res = -1
 		//msg : 가입 승인 및 권한이 변경되었습니다.
 		else if(user.getMe_authority().equals("WUSER")) {			
@@ -57,7 +55,6 @@ public class MemberAuthServlet extends HttpServlet {
 			boolean result1 = memberService.updateMemberAuthority(user);
 			res = -1;
 		}
-		
 		//me_authority 값이 WUSER(가입대기) 이면 res = 2
 		//msg : 권한이 변경되었습니다.
 		else if(me_authority.equals("WUSER")) {
@@ -75,7 +72,6 @@ public class MemberAuthServlet extends HttpServlet {
 			boolean result3 = memberService.updateMemberAuthority(user);
 			res = 1;
 		}
-		
 		if(res == -2) {
 			request.setAttribute("msg", "이미 부여된 권한입니다.");
 			request.setAttribute("url", "admin/membermanager");
@@ -96,25 +92,8 @@ public class MemberAuthServlet extends HttpServlet {
 			request.setAttribute("msg", "권한이 변경되었습니다.");
 			request.setAttribute("url", "admin/membermanager");
 		}
-		
+
 		request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
-		
-		
-		/*
-		 * boolean res; //관리자 자신인지 확인 MemberVO user = (MemberVO)
-		 * request.getSession().getAttribute("user"); if(user.getMe_id().equals(me_id))
-		 * { res = false; System.out.println(user.getMe_id()); }else { res =
-		 * memberService.deleteMember(me_id); }
-		 * 
-		 * 
-		 * //삭제했으면 삭제했다고 알리고 회원 관리로 이동 if(res) { request.setAttribute("msg",
-		 * "삭제되었습니다."); request.setAttribute("url", "admin/membermanager"); } //실패했으면
-		 * 실패했다고 알리고 게시글 상세로 이동 else { request.setAttribute("msg", "삭제를 실패했습니다.");
-		 * request.setAttribute("url", "admin/membermanager"); }
-		 * 
-		 * request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request,
-		 * response);
-		 */
 	}
 
 }

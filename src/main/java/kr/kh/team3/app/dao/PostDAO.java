@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 import kr.kh.team3.app.model.vo.CommentVO;
 import kr.kh.team3.app.model.vo.FileVO;
 import kr.kh.team3.app.model.vo.MemberVO;
-import kr.kh.team3.app.model.vo.MyCommentVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
 import kr.kh.team3.app.model.vo.ReportVO;
@@ -75,10 +74,8 @@ public interface PostDAO {
 	ArrayList<PostVO> selectMyPostList(@Param("cri")Criteria cri);
 
 	int selectMyPostTotalCount(@Param("cri")Criteria cri);
-
-	//ArrayList<CommentVO> selectMyCommentList(@Param("me_id")String me_id);
 	
-	ArrayList<MyCommentVO> selectMyCommentPostList(@Param("cri")Criteria cri);
+	ArrayList<CommentVO> selectMyCommentPostList(@Param("cri")Criteria cri);
 
 	int selectMyCommentPostTotalCount(@Param("cri")Criteria cri);
 

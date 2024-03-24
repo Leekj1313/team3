@@ -55,11 +55,11 @@
 	    	<c:forEach items="${list}" var="comment">
 			<tr>
 				<td>${comment.cm_po_num}</td>
-				<td>
+				<td >
 					<c:url var="url" value="/post/detail">
 						<c:param name="num" value="${comment.post.po_num}"/>
 					</c:url>
-					<a href="${url}">${comment.post.po_title}</a>
+					<a class="aTag" href="${url}">${comment.post.po_title}</a>
 				</td>
 				<td>${comment.post.po_me_id}</td>
 				<td>${comment.cm_content}</td>

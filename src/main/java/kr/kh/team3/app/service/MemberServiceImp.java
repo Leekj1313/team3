@@ -42,7 +42,6 @@ private MemberDAO memberDao;
 			memberVO.getMe_phone() == null) {
 			return false;
 		}
-		// 정규표현식 체크 : to do..
 		
 		try {
 			//아이디가 중복되면 예외가 발생
