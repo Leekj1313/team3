@@ -44,4 +44,9 @@ public class CategoryServiceImp implements CategoryService {
 		}
 		return categoryDao.selectTotalCountCategory(cri);
 	}
+
+	@Override
+	public ArrayList<CategoryVO> getCategory() {
+		return categoryDao.selectCategory();
+	}
 }

@@ -11,7 +11,7 @@
 	<select id="selectMember" resultType="kr.kh.team3.app.model.vo.MemberVO">
 		SELECT * FROM MEMBER WHERE me_id = #{me_id}
 	</select>
-	
+
 	<select id="selectMemberId" resultType="kr.kh.team3.app.model.vo.MemberVO">
 		select me_id from member where me_name = #{me_name} and me_phone = #{me_phone}
 	</select>
@@ -75,5 +75,15 @@
 		me_authority = #{user.me_authority},
 		me_ms_state = #{user.me_ms_state}
 		where me_id = #{user.me_id}
+	</update>
+
+	<update id="updateMember">
+		UPDATE MEMBER SET 
+			me_id 	 = #{member.me_id},
+			me_pw 	 = #{member.me_pw},
+			me_email = #{member.me_email},
+			me_phone = #{member.me_phone}
+		WHERE
+		    me_name  = #{member.me_name}
 	</update>
 </mapper>

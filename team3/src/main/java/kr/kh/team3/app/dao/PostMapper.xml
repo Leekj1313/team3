@@ -4,72 +4,133 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.team3.app.dao.PostDAO">
 	<resultMap type="kr.kh.team3.app.model.vo.PostVO" id="PostMap">
-	<!-- property = vo의 객체명,column = db의 객체명 -->
-		<id property="po_num" column="po_num"/>
-		<result property="po_bo_num" column="po_bo_num"/>
-		<result property="po_me_id" column="po_me_id"/>
-		<result property="po_title" column="po_title"/>
-		<result property="po_content" column="po_content"/>
-		<result property="po_view" column="po_view"/>
-		<result property="po_date" column="po_date"/>
-		<result property="po_report_count" column="po_report_count"/>
-		<result property="po_temp" column="po_temp"/>
-		<result property="po_notice" column="po_notice"/>
-		<collection property="board" ofType="kr.kh.team3.app.model.vo.BoardVO"/>
+	<id property="po_num" column="po_num"/>
+	<result property="po_bo_num" column="po_bo_num"/>
+	<result property="po_me_id" column="po_me_id"/>
+	<result property="po_title" column="po_title"/>
+	<result property="po_content" column="po_content"/>
+	<result property="po_view" column="po_view"/>
+	<result property="po_report_count" column="po_report_count"/>
+	<result property="po_temp" column="po_temp"/>
+	<result property="po_notice" column="po_notice"/>
+	<collection property="board" ofType="kr.kh.team3.app.model.vo.BoardVO"
+		column="po_bo_num" select="selectBoard"/>
 	</resultMap>
-
-	<select id="selectPostList" resultMap="PostMap">
-		<!-- 게시판 리스트를 오름차순으로 배열  -->
-		select * from post order by po_num desc
+	<select id="selectBoard" resultType="kr.kh.team3.app.model.vo.BoardVO">
+		select * from board where bo_num = #{po_bo_num}
 	</select>
 	
-	<select id="selectBoardList" resultType="kr.kh.team3.app.model.vo.BoardVO">
-		select * from board where bo_num
-	</select>
-	<!-- 게시글 상세 : po_num으로 게시글 리스트 상세를 가져오기 -->
-	<select id="selectPost" resultMap="PostMap">
-		select * from post where po_num = #{num}
-	</select>
-	
-	<!-- useGeneratedKeys="true"를 통해 글 번호를 자동으로 증가 -->
-	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.po_num">
-		insert into post(po_title, po_content, po_me_id, po_bo_num) values
-		(#{post.po_title},#{post.po_content},#{post.po_me_id},#{post.po_bo_num})
-	</insert>
-	
-	<!-- 첨부파일 가져오기 -->
-	<select id="selectFileList" resultType="kr.kh.team3.app.model.vo.FileVO">
-		select * from file where fi_po_num = #{po_num}
-	</select>
-	
-	<select id="selectFile" resultType="kr.kh.team3.app.model.vo.FileVO">
-		select * from file where fi_num = #{fi_num}
-	</select>
-	
-	<update id="updatePost">
-		update post set
-			po_title = #{post.po_title},
-			po_content = #{post.po_content},
-			po_bo_num = #{post.po_bo_num}
-		where
-			po_num = #{post.po_num}
+	<update id="updateView">
+		update post set po_view = po_view + 1 where po_num = #{num}
 	</update>
-	
-	<insert id="insertFile">
-		insert into file(fi_bo_num, fi_name, fi_ori_name)
-		values(#{file.fi_bo_num},#{file.fi_name},#{file.fi_ori_name})
+	<select id="selectPost" resultMap="PostMap">
+		select 
+			post.*,
+			sum(case when rc_state = 1 then 1 else 0 end) as po_up
+		from post left join
+			recommend on rc_po_num = po_num
+			where po_num = #{num}
+	</select>
+	<select id="selectFileByBo_num" resultType="kr.kh.team3.app.model.vo.FileVO">
+		select * from file where fi_po_num = #{num}
+	</select>
+	<select id="selectRecommend" resultType="kr.kh.team3.app.model.vo.RecommendVO">
+		select * from recommend where rc_po_num = #{po_num} and rc_me_id = #{me_id}
+	</select>
+	<insert id="insertRecommend">
+		insert into recommend(rc_me_id, rc_po_num, rc_state)
+		values(#{re.rc_me_id},#{re.rc_po_num},#{re.rc_state})
 	</insert>
+	<update id="updateRecommend">
+		update recommend set rc_state = #{re.rc_state} where rc_num = #{re.rc_num}
+	</update>
+	<insert id="insertComment">
+		insert into comment(cm_po_num, cm_content, cm_me_id)
+		values(#{co.cm_po_num},#{co.cm_content},#{co.cm_me_id})
+	</insert>
+	<select id="selectCommentList" resultType="kr.kh.team3.app.model.vo.CommentVO">
+		select * from comment 
+		where cm_po_num = #{cri.poNum}
+		order by cm_num desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	<select id="selectTotalCountComment" resultType="int">
+		select count(*) from comment 
+		where cm_po_num = #{cri.poNum}
+	</select>
+	<select id="selectComment" resultType="kr.kh.team3.app.model.vo.CommentVO">
+		select * from comment where cm_num = #{cm_num}
+	</select>
+	<update id="updateComment">
+		update comment set cm_content = #{co.cm_content} where cm_num = #{co.cm_num}
+	</update>
+	<delete id="deleteComment">
+		delete from comment where cm_num = #{cm_num}
+	</delete>
+	<select id="selectPostList" resultMap="PostMap">
+		SELECT 
+			post.*, 
+			SUM(CASE WHEN rc_state = 1 THEN 1 ELSE 0 END) AS po_up
+		FROM post left join
+			recommend on rc_po_num = po_num
+		where po_bo_num = #{cri.boNum}
+		<if test='cri.type=="all"'>
+				and (po_title like concat('%', #{cri.search},'%') 
+				or po_me_id = #{cri.search})
+		</if>
+		<if test='cri.type=="title"'>
+			and po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="writer"'>
+			and po_me_id = #{cri.search}
+		</if>
+		GROUP BY po_num
+		ORDER BY po_num DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	<select id="selectTotalCount" resultType="int">
+		SELECT count(*)
+		FROM post left join
+			recommend on rc_po_num = po_num
+		where po_bo_num = #{cri.boNum}
+		<if test='cri.type=="all"'>
+			and (po_title like concat('%', #{cri.search},'%') 
+				or po_me_id = #{cri.search})
+		</if>
+		<if test='cri.type=="title"'>
+			and po_title like concat('%', #{cri.search},'%') 
+		</if>
+		<if test='cri.type=="writer"'>
+			and po_me_id = #{cri.search}
+		</if>
+	</select>
 	
+	<select id="selectRecentNotice" resultMap="PostMap">
+		SELECT * 
+		FROM post
+		WHERE po_notice = 1 AND po_bo_num = 1
+		ORDER BY po_date DESC
+		LIMIT 5;
+	</select>
+	
+	<select id="selectPostHotList" resultMap="PostMap">
+		SELECT 
+			post.*, 
+			SUM(CASE WHEN rc_state = 1 THEN 1 ELSE 0 END) AS po_up
+		FROM post left join
+			recommend on rc_po_num = po_num
+		where po_num
+		group by po_num
+		order by po_up desc
+		limit 5;
+	</select>
+	<select id="selectFileByPo_num" resultType="kr.kh.team3.app.model.vo.FileVO">
+		select * from file where fi_po_num = #{num} 
+	</select>
 	<delete id="deleteFile">
 		delete from file where fi_num = #{fi_num}
 	</delete>
-	
-	<update id="updateView">
-		update post
-		set
-			po_view = po_view + 1
-		where
-			po_num = #{po_view}
-	</update>
-	
+	<delete id="deletePost">
+		delete from post where po_num = #{num}
+	</delete>
 </mapper>

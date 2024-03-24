@@ -66,11 +66,11 @@
 			   		</tr>
 		   		</c:if>
 		  	</c:forEach>
-		  	<c:if test="#">
-				<tr style="text-align: left;">
-					<td>등록된 게시글이 없습니다.</td>
-				</tr>
-			</c:if>
+		  	<c:if test="${postHotList.size() == 0}">
+				  <tr style="text-align: left;">
+					  <td>등록된 게시글이 없습니다.</td>
+				  </tr>
+			  </c:if>
 		  </tbody>
 		</table>
       <hr class="d-sm-none">

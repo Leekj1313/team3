@@ -11,4 +11,6 @@ public interface CategoryService {
 
 	int getTotalCountCategory(Criteria cri);
 
+	ArrayList<CategoryVO> getCategory();
+
 }

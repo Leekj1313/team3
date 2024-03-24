@@ -26,6 +26,12 @@ public class FindPasswordServlet extends HttpServlet {
 		MemberVO user = memberService.getMemberPw(id, phone);
 		
 		if(user != null) {
+			if(user.getMe_ms_state().equals("가입대기")) {
+				request.setAttribute("msg", user.getMe_ms_state() + " 상태일 땐 시도할 수 없습니다.");
+				request.setAttribute("url", "/find/password");
+				request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
+				return;
+			}
 			request.setAttribute("msg", "정보 인증에 성공했습니다.");
 			request.setAttribute("url", "/password/update?id="+user.getMe_id());
 		}else {

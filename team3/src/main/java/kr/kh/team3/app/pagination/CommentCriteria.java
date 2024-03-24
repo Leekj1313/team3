@@ -13,4 +13,5 @@ public class CommentCriteria extends Criteria{
 		super(page, perPageNum);
 		this.poNum = poNum;
 	}
+
 }

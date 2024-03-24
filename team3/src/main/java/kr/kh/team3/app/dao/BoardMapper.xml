@@ -27,19 +27,17 @@
 	<select id="selectBoard" resultType="kr.kh.team3.app.model.vo.BoardVO">
 		select * from board where bo_num = #{boNum}
 	</select>
-	<select id="selectBoList" resultMap="BoardMap">
-		SELECT * 
-		FROM board
-		where bo_ca_num = #{cri.boNum}
-		ORDER BY bo_num DESC
-		LIMIT #{cri.pageStart}, #{cri.perPageNum}
-	</select>
-	<select id="selectTotalCountBoard" resultType="int">
-		SELECT count(*) 
-		FROM board
-		where bo_ca_num = #{cri.boNum}
-	</select>
 	<select id="selectCate" resultType="kr.kh.team3.app.model.vo.CategoryVO">
 	select * category where ca_num = #{caNum}
 	</select>
+	
+	<delete id = "deleteBoard">
+		delete from board where bo_num =#{boNum}
+	</delete>
+	
+	<update id="updateBoard">
+		update board
+		set bo_name = #{bo_name}
+		where bo_num = #{boNum}
+	</update>
 </mapper>
