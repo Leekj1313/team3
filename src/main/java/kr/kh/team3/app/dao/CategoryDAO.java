@@ -10,23 +10,20 @@ import kr.kh.team3.app.pagination.Criteria;
 
 public interface CategoryDAO {
 
-	ArrayList<CategoryVO> selectCategoryList(@Param("cri")Criteria cri);
+	ArrayList<CategoryVO> selectCategoryList(@Param("cri") Criteria cri);
 
-	int selectTotalCountCategory(@Param("cri")Criteria cri);
-  
+	int selectTotalCountCategory(@Param("cri") Criteria cri);
+
 	ArrayList<CategoryVO> selectCategory();
 
-  
-  
-	CategoryVO selectCategoryCheck(@Param("cat")String category);
+	CategoryVO selectCategoryCheck(@Param("cat") String category);
 
-	boolean insertCategory(@Param("cat")String category);
+	boolean insertCategory(@Param("cat") String category);
 
-	boolean deleteCategory(@Param("ca_num")int num);
+	boolean deleteCategory(@Param("ca_num") int num);
 
-	CategoryVO selectdbCategory(@Param("ca_num")int ca_num);
+	CategoryVO selectdbCategory(@Param("ca_num") int ca_num);
 
-	boolean updateCategory(@Param("cat")CategoryVO category);
-
+	boolean updateCategory(@Param("cat") CategoryVO category);
 
 }

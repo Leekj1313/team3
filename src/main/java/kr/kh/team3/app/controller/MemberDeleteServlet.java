@@ -30,18 +30,15 @@ public class MemberDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//삭제할 회원 아이디를 가져옴
 		String me_id = request.getParameter("id");
-		System.out.println(me_id);
 		
 		boolean res;
 		//관리자 자신인지 확인
 		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
 		if(user.getMe_id().equals(me_id)) {
 			res = false;
-			System.out.println(user.getMe_id());
 		}else {
 			res = memberService.deleteMember(me_id);
 		}
-		
 		
 		//삭제했으면 삭제했다고 알리고 회원 관리로 이동
 		if(res) {

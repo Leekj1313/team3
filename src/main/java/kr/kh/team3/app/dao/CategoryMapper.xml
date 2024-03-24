@@ -3,37 +3,51 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.team3.app.dao.CategoryDAO">
-	<select id ="selectCategoryList" resultType="kr.kh.team3.app.model.vo.CategoryVO">
+
+	<select id="selectCategoryList"
+		resultType="kr.kh.team3.app.model.vo.CategoryVO">
 		select * from category
 		ORDER BY ca_num
-		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+		LIMIT
+		#{cri.pageStart}, #{cri.perPageNum}
 	</select>
+
 	<select id="selectTotalCountCategory" resultType="int">
-		SELECT COUNT(*) FROM category
+		SELECT COUNT(*)
+		FROM category
 	</select>
-  <select id ="selectCategory" resultType="kr.kh.team3.app.model.vo.CategoryVO">
+
+	<select id="selectCategory"
+		resultType="kr.kh.team3.app.model.vo.CategoryVO">
 		select * from category
 	</select>
 
-  
-	<select id="selectCategoryCheck" resultType="kr.kh.team3.app.model.vo.CategoryVO">
+	<select id="selectCategoryCheck"
+		resultType="kr.kh.team3.app.model.vo.CategoryVO">
 		select * from category
 		WHERE ca_name = #{cat}
 	</select>
+
 	<insert id="insertCategory">
 		INSERT INTO category(ca_name)
 		VALUES(#{cat})
 	</insert>
+
 	<delete id="deleteCategory">
 		DELETE FROM category
 		WHERE ca_num = #{ca_num}
 	</delete>
-	<select id="selectdbCategory" resultType="kr.kh.team3.app.model.vo.CategoryVO">
+
+	<select id="selectdbCategory"
+		resultType="kr.kh.team3.app.model.vo.CategoryVO">
 		SELECT * FROM category WHERE ca_num = #{ca_num}
 	</select>
+
 	<update id="updateCategory">
 		UPDATE category SET
 		ca_name = #{cat.ca_name}
-		WHERE ca_num = #{cat.ca_num}
+		WHERE
+		ca_num = #{cat.ca_num}
 	</update>
+
 </mapper>

@@ -20,27 +20,27 @@ import kr.kh.team3.app.service.PostServiceImp;
 public class MypageMypostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PostService postService = new PostServiceImp();
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String search = request.getParameter("search");
 		String type = request.getParameter("type");
 		int page;
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
-		}catch(Exception e) {
+		} catch (Exception e) {
 			page = 1;
 		}
-		
-		MemberVO user = (MemberVO)request.getSession().getAttribute("user");
-		
+
+		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
+
 		Criteria cri = new Criteria(page, 2, type, search, user.getMe_id());
-		//검색어, 검색타입에 맞는 전체 게시글 개수를 가져옴
 		int totalCount = postService.getMyPostTotalCount(cri);
 		PageMaker pm = new PageMaker(5, cri, totalCount);
 		request.setAttribute("pm", pm);
-		//현재 페이지 정보에 맞는 게시글 리스트를 가져옴
 		ArrayList<PostVO> list = postService.getMyPostList(cri);
-		request.setAttribute("list", list);//화면에 전송
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/view/mypage/mypost.jsp").forward(request, response);
 	}
 

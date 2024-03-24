@@ -10,11 +10,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-
-<!-- <script type="text/javascript">
-import { Ripple, initMDB, Input } from "mdb-ui-kit";
-initMDB({ Ripple, Input });
-</script> -->
 <style type="text/css">
 
    .card-1 {
@@ -68,9 +63,6 @@ initMDB({ Ripple, Input });
 		<button class="btn btn-outline-success col-12 btn-submit" style="margin-top: 40px">회원가입</button>
 	</form>
 </div>
-
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 <script type="text/javascript">
@@ -154,8 +146,6 @@ $("[name=me_id]").change(function(){
 	flag = false;
 });
 $(".btn-submit").click(function(){
-	//정규표현식을 구현
-	
 	if(!flag){
 		alert("아이디 중복 확인을 하세요.");
 		return false;
