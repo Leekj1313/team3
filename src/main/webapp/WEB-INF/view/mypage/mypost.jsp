@@ -39,7 +39,7 @@
 				<option value="content" <c:if test='${pm.cri.type == "content"}'>selected</c:if>>내용</option>
 			</select>
 		    <input type="text" class="form-control" placeholder="검색어" name="search" value="${pm.cri.search}">
-		    <button class="btn btn-secondary">검색</button>
+		    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
 		</div>
 	</form>
 	<table class="table table-hover">

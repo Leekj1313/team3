@@ -135,11 +135,11 @@
 				<option value="writer" <c:if test='${pm.cri.type == "writer"}'>selected</c:if>>작성자</option>
 			</select>
 		    <input type="text" class="form-control" placeholder="검색어" name="search" value="${pm.cri.search}">
-		    <button class="btn btn-secondary">검색</button>
+		    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
 	  	</div>
 	</form>
   	<br>
-	<a href="<c:url value="/post/insert?bNum=${board.bo_num}"/>" class="btn btn-outline-success">글등록</a>
+	<a href="<c:url value="/post/insert?bNum=${board.bo_num}"/>" class="btn btn-success">글등록</a>
 </div>
 <jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>

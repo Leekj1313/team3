@@ -32,7 +32,7 @@
 	<h2 style="font-weight: bold">카테고리 관리</h2>
 	<div class="input-group mb-3 mt-3">
 		<input type="text" class="form-control category-content" placeholder="새로 등록할 카테고리 이름을 입력하세요.">
-		<button class="btn btn-secondary btn-category-insert" type="button">등록</button>
+		<button class="btn btn-success btn-category-insert" type="button">등록</button>
 	</div>
 
 	<table class="table table-hover category-list-table">

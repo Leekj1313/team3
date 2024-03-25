@@ -100,7 +100,7 @@
 		  		<div class="comment-input-box">
 		  			<div class="input-group">
 					    <textarea class="form-control comment-content"></textarea>
-					    <button type="button" class="btn btn-outline-success btn-comment-insert">등록</button>
+					    <button type="button" class="btn btn-success btn-comment-insert">등록</button>
 					</div>
 		  		</div>
 		  	</div>
