@@ -64,8 +64,8 @@
 			</a>
           </h3>
           <p>
-            Here you can use rows and columns to organize your footer content. Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit.
+            Be not afraid of greatness:<br>
+            some men are born great, some achieve greatness and some have greatness thrust upon them.
           </p>
         </div>
         <!-- Grid column -->
@@ -74,19 +74,19 @@
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">
-            Products
+            TEAM3
           </h6>
           <p>
-            <a href="#!" class="text-reset">Angular</a>
+            <a href="#!" class="text-reset">권기은</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">React</a>
+            <a href="#!" class="text-reset">박성훈</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Vue</a>
+            <a href="#!" class="text-reset">이광진</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Laravel</a>
+            <a href="#!" class="text-reset">이철범</a>
           </p>
         </div>
         <!-- Grid column -->
@@ -116,12 +116,12 @@
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-          <p><i class="bi bi-house-door-fill"></i> New York, NY 10012, US</p>
+          <p><i class="bi bi-house-door-fill"></i> 서울특별시 강남구 테헤란로14길 6</p>
           <p>
             <i class="bi bi-envelope-fill"></i>
             info@example.com
           </p>
-          <p><i class="bi bi-telephone-fill"></i> + 01 234 567 88</p>
+          <p><i class="bi bi-telephone-fill"></i> 1544 - 9970</p>
           <p><i class="bi bi-printer-fill"></i> + 01 234 567 89</p>
         </div>
         <!-- Grid column -->

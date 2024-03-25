@@ -111,7 +111,7 @@
 				<a class="page-link" href="${page}">${i}</a>
 			</li>
 		</c:forEach>
-		<c:if test="${pm.next }">
+		<c:if test="${pm.next}">
 			<li class="page-item">
 				<c:url var="nextUrl" value="/admin/membermanager">
 					<c:param name="type" value="${pm.cri.type}"/>
