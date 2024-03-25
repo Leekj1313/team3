@@ -27,10 +27,16 @@ public interface MemberDAO {
 
 	int selectTotalCountMember(@Param("cri")Criteria cri);
 
+	boolean updateMemberAuthority(@Param("member")MemberVO member);
+
 	boolean deleteMember(@Param("me_id")String me_id);
 
-	boolean updateMemberAuthority(@Param("user")MemberVO user);
+//	boolean updateMemberData(@Param("newStr")String newName, @Param("member")MemberVO member);
 
-	boolean updateMemberData(MemberVO member);
+	boolean updateMemberName(@Param("newName")String newName, @Param("user")MemberVO user);
+
+	boolean updateMemberEmail(@Param("newEmail")String newName, @Param("user")MemberVO user);
+
+	boolean updateMemberPhone(@Param("newPhone")String newName, @Param("user")MemberVO user);
 
 }

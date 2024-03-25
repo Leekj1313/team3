@@ -21,31 +21,13 @@ public class SignupUpdateServlet extends HttpServlet {
 	private MemberService memberService = new MemberServiceImp();
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.getRequestDispatcher("/WEB-INF/view/signupUpdate.jsp").forward(request, response);    	
+    	MemberVO user = (MemberVO)request.getSession().getAttribute("user");
+    	MemberVO newUser = memberService.getMember(user.getMe_id());
+    	
+    	//회원정보 화면에 출력
+		request.setAttribute("member", newUser);
+		request.getRequestDispatcher("/WEB-INF/view/signupUpdate.jsp").forward(request, response);   	
     }
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	   int num = 0;
-	   try {
-		   num = Integer.parseInt(request.getParameter("num"));
-	   }catch(Exception e) {
-		   e.printStackTrace();
-	   }
-	   String email = request.getParameter("email");
-	   String phone = request.getParameter("phone");
-
-	   MemberVO user = (MemberVO)request.getSession().getAttribute("user");
-	   MemberVO member = new MemberVO(email, phone, user.getMe_id());
-        
-	   boolean res = memberService.updateMemberData(member);
-       if(res) {
-			request.setAttribute("msg", "회원 정보를 수정했습니다.");
-		}else {
-			request.setAttribute("msg", "회원 정보 수정에 실패했습니다.");
-		}
-		request.setAttribute("url", "/");
-		request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
-
-	}
+		
 
 }
