@@ -1,9 +1,12 @@
+
 package kr.kh.team3.app.service;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import javax.servlet.http.Part;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -16,7 +19,9 @@ import kr.kh.team3.app.model.vo.FileVO;
 import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.model.vo.RecommendVO;
+import kr.kh.team3.app.model.vo.ReportVO;
 import kr.kh.team3.app.pagination.Criteria;
+import kr.kh.team3.app.utils.FileUploadUtils;
 
 public class PostServiceImp implements PostService {
 	
@@ -181,8 +186,10 @@ public class PostServiceImp implements PostService {
 		
 	}
 
+  
+  
 	@Override
-	public ArrayList<PostVO> getPostHotList() {
+  public ArrayList<PostVO> getPostHotList() {
 		return postDao.selectPostHotList();
 	}
 
@@ -194,7 +201,7 @@ public class PostServiceImp implements PostService {
 		//다오에게 게시글 번호를 주면서 게시글을 가져오라고 시킴
 		PostVO post = postDao.selectPost(num);
 		//게시글이 없거나 게시글 작성자와 회원 아이디가 다르면 false 반환
-		if(post == null || !post.getPo_me_id().equals(user.getMe_id())) {
+		if(post == null) {
 			return false;
 		}
 		
@@ -219,6 +226,220 @@ public class PostServiceImp implements PostService {
 			file.delete();
 		}
 		postDao.deleteFile(fileVo.getFi_num());
+	}
+  
+  
+  
+  
+  
+  
+  
+
+	public ArrayList<PostVO> getMyPostList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectMyPostList(cri);
+	}
+
+	@Override
+	public int getMyPostTotalCount(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectMyPostTotalCount(cri);
+	}
+
+	@Override
+	public ArrayList<CommentVO> getMyCommentPostList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectMyCommentPostList(cri);
+	}
+
+	@Override
+	public int getMyCommentPostTotalCount(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectMyCommentPostTotalCount(cri);
+	}
+
+	@Override
+	public ArrayList<ReportVO> getReportPostList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectReportPostList(cri);
+	}
+
+	@Override
+	public int getTotalCountReport(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectReportTotalCount(cri);
+	}
+
+	@Override
+	public boolean deleteReportPost(int num, MemberVO user) {
+		if(user == null) {
+			return false;
+		}
+		ReportVO report = postDao.selectReportPost(num);
+		
+		if(report == null) {
+			return false;
+		}
+		
+		return postDao.deleteReportPost(num);
+	}
+
+
+	@Override
+	public boolean insertPost(PostVO post, ArrayList<Part> partList) {
+		if(post==null||
+		   !checkString(post.getPo_title())||
+		   !checkString(post.getPo_me_id())) {
+			return false;
+		}
+		
+		
+		boolean res = postDao.insertPost(post);
+		if(!res) {
+			return false;
+		}
+		
+		if(partList==null||partList.size()==0) {
+			return true;
+		}
+		for(Part part : partList) {
+			uploadFile(part,post.getPo_num());
+		}
+		return true;
+	}
+
+	private void uploadFile(Part part, int po_num) {
+		if(part == null || po_num == 0) {
+			return;
+		}
+		
+		String fileOriginalName = FileUploadUtils.getFileName(part);
+		if(!checkString(fileOriginalName)) {
+			return;
+		}
+		String fileName = FileUploadUtils.upload(uploadPath, part);
+		FileVO fileVo =new FileVO(po_num, fileName, fileOriginalName);
+		
+		postDao.insertFile(fileVo);
+		
+		
+	}
+
+	@Override
+	public int insertTmpPost(PostVO tmpPost) {
+		if(tmpPost == null) {
+			return -1;
+		}
+		
+		if(!checkString(tmpPost.getPo_title())) {
+			tmpPost.setPo_title("[제목없음]");
+		}
+		
+		if(postDao.insertTmpPost(tmpPost)!= 1) {
+			return -1;
+		}
+		
+		int po_num = tmpPost.getPo_num();
+		
+		if(po_num >0) {
+			return po_num;
+		}
+		return -1;
+		
+	}
+
+	@Override
+	public boolean updateTmpPost(PostVO tmpPost, int po_num) {
+		if(tmpPost ==null) {
+			return false;
+		}
+		
+		if(!checkString(tmpPost.getPo_title())) {
+			tmpPost.setPo_title("[제목없음]");
+		}
+		
+		boolean res = postDao.updateTmpPost(tmpPost,po_num);
+		
+		return res;
+		
+		
+	}
+
+	@Override
+	public ArrayList<PostVO> getTmpPostList(MemberVO user) {
+		return postDao.selectTmpPostList(user);
+		
+	}
+
+	@Override
+	public boolean submitTmpPost(PostVO post, int po_num, ArrayList<Part> partList) {
+		if(post ==null||
+		   !checkString(post.getPo_title())||
+		   !checkString(post.getPo_content())) {
+			return false;
+		}
+		
+		boolean res = postDao.submitTmpPost(post,po_num);
+		
+		if(!res) {
+			return false;
+		}
+		
+		if(partList==null||partList.size()==0) {
+			return true;
+		}
+		
+		for(Part part : partList) {
+			uploadFile(part,po_num);
+		}
+		
+		return true;
+
+	}
+
+	@Override
+	public boolean updatePost(PostVO post, MemberVO user, ArrayList<Integer> nums, ArrayList<Part> fileList) {
+		
+		if( post == null || 
+			!checkString(post.getPo_title()) || 
+			!checkString(post.getPo_content())) {
+			return false;
+		}
+		
+		if(user == null) {
+			return false;
+		}
+
+		PostVO dbPost = postDao.selectPost(post.getPo_num());
+		
+		if(dbPost == null || !dbPost.getPo_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		
+		if(nums.size()!=0) {
+			for(int num : nums) {
+				FileVO fileVo = postDao.selectFile(num);
+				deleteFile(fileVo);
+			}
+		}
+		
+		for(Part part : fileList) {
+			uploadFile(part, post.getPo_num());
+		}
+		
+		return postDao.updatePost(post);
 	}
 
 

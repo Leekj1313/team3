@@ -15,6 +15,14 @@ public interface CategoryDAO {
 	int selectTotalCountCategory(@Param("cri")Criteria cri);
 
 	ArrayList<CategoryVO> selectCategory();
+	
+	CategoryVO selectCategoryCheck(@Param("cat")String category);
 
+	boolean insertCategory(@Param("cat")String category);
 
+	boolean deleteCategory(@Param("ca_num")int num);
+
+	CategoryVO selectdbCategory(@Param("ca_num")int ca_num);
+
+	boolean updateCategory(@Param("cat")CategoryVO category);
 }

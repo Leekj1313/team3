@@ -26,9 +26,11 @@ public class MemberVO {
 		me_email = email;
 		me_phone = phone;
 	}
-	public MemberVO(String email, String phone, String meId) {
+	
+	public MemberVO(String name, String email, String phone, String id) {
+		me_name = name;
 		me_email = email;
 		me_phone = phone;
-		me_id = meId;
+		me_id = id;
 	}
 }

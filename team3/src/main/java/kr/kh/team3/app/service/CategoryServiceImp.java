@@ -49,4 +49,50 @@ public class CategoryServiceImp implements CategoryService {
 	public ArrayList<CategoryVO> getCategory() {
 		return categoryDao.selectCategory();
 	}
+	
+	 @Override
+		public boolean checkCat(String category) {
+			CategoryVO cat = categoryDao.selectCategoryCheck(category);
+			System.out.println(category);
+			return cat == null;
+		}
+
+		@Override
+		public boolean insertCategory(String category) {
+			if(!checkString(category)) {
+				return false;
+			}
+			if(!checkCat(category)) {
+				return false;
+			}
+			return categoryDao.insertCategory(category);
+		}
+		private boolean checkString(String str) {
+			if(str == null || str.length() == 0) {
+				return false;
+			}
+			return true;
+		}
+
+		@Override
+		public boolean deleteCategory(int num) {
+					
+			return categoryDao.deleteCategory(num);
+		}
+
+		@Override
+		public boolean updateCategory(CategoryVO category) {
+			if(category == null ||
+				!checkString(category.getCa_name())){
+				return false;
+			}
+			
+			CategoryVO dbCategory = categoryDao.selectdbCategory(category.getCa_num());
+			
+			if(dbCategory == null) {
+				return false;
+			}
+			
+			return categoryDao.updateCategory(category);
+		}
 }

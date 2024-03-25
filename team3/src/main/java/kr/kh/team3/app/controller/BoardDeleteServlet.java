@@ -12,9 +12,6 @@ import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.service.BoardService;
 import kr.kh.team3.app.service.BoardServiceImp;
 
-/**
- * Servlet implementation class BoardDeleteServlet
- */
 @WebServlet("/board/delete")
 public class BoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

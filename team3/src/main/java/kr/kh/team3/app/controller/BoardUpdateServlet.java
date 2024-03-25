@@ -34,9 +34,6 @@ public class BoardUpdateServlet extends HttpServlet {
 		int res = boardService.updateBoard(bo_num,bo_name,user);
 		
 		response.getWriter().write(res+"");
-		
-
-		
 	}
 
 }

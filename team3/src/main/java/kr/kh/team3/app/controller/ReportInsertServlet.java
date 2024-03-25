@@ -29,17 +29,15 @@ public class ReportInsertServlet extends HttpServlet {
     	String reportContent = request.getParameter("content");
     	int po_num = 0;
     	try {
-    		po_num = Integer.parseInt(request.getParameter("num"));
+    		po_num = Integer.parseInt(request.getParameter("po_num"));
     	}catch(Exception e) {
     		e.printStackTrace();
+    		request.setAttribute("msg", "게시글을 찾을 수 없습니다.");
+	        request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
+	        return;
     	}
 		//신고하는 게시글을 가져옴
     	PostVO post = (PostVO)request.getSession().getAttribute("post");
-    	if (post == null) {
-	        request.setAttribute("msg", "게시글을 가져올 수 없습니다.");
-	        request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
-	        return;
-	    }
 		//게시글 신고 등록 해당 게시글 번호로 등록 => 신고유형, 신고내용
     	ReportVO report = new ReportVO(reportType, reportContent, post.getPo_num());
 		
