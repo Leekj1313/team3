@@ -74,7 +74,7 @@ $("form").validate({
 		},
 		me_id : {
 			required : true,
-			regex : /^(?=.*[0-9]+)[a-zA-Z][a-zA-Z0-9]{6,13}$/
+			regex : /^(?=.*[0-9]+)[a-zA-Z][a-zA-Z0-9]{5,15}$/
 		},
 		me_pw : {
 			required : true,
@@ -99,7 +99,7 @@ $("form").validate({
 		},
 		me_id : {
 			required : "필수 항목입니다.",
-			regex : "영문으로 시작하고, 영문자와 숫자 조합의 6~13길이 아이디를 입력하세요."
+			regex : "영문으로 시작하고, 영문자와 숫자 조합의 6~15길이 아이디를 입력하세요."
 		},
 		me_pw : {
 			required : "필수 항목입니다.",
