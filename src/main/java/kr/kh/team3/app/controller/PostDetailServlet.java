@@ -35,6 +35,14 @@ public class PostDetailServlet extends HttpServlet {
 		postService.updateView(num);
 		//서비스에게 게시글 번호를 주면서 게시글을 가져오라고 시킴
 		PostVO post = postService.getPost(num);
+		
+
+		if (post != null) {
+			if(post.getPo_temp()==1) {
+				post = null;
+			}
+		}
+		
 		//화면에 게시글을 전송
 		request.setAttribute("post", post);
 		

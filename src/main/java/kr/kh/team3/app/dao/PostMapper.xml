@@ -213,7 +213,7 @@
 	<select id="selectMyPostList" resultMap="PostMap">
 		SELECT * 
 		FROM post
-		WHERE po_me_id = #{cri.me_id}
+		WHERE po_me_id = #{cri.me_id} and po_temp != 1
 		<if test='cri.type=="all"'>
 			and po_title like concat('%', #{cri.search},'%') 
 				or po_content like concat('%', #{cri.search}, '%')
@@ -231,7 +231,7 @@
 	<select id="selectMyPostTotalCount" resultType="int">
 		SELECT count(*)
 		FROM post
-		WHERE po_me_id = #{cri.me_id}
+		WHERE po_me_id = #{cri.me_id} and po_temp != 1
 		<if test='cri.type=="all"'>
 			and po_title like concat('%', #{cri.search},'%') 
 				or po_content like concat('%', #{cri.search}, '%')
