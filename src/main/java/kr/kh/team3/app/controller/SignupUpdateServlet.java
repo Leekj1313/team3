@@ -21,12 +21,7 @@ public class SignupUpdateServlet extends HttpServlet {
 	private MemberService memberService = new MemberServiceImp();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		MemberVO user = (MemberVO)request.getSession().getAttribute("user");
-		request.setAttribute("member", user);
-		
-		ArrayList<MemberVO>list = memberService.getMemberList();
-		request.setAttribute("list", list);
+
 		request.getRequestDispatcher("/WEB-INF/view/signupUpdate.jsp").forward(request, response);
 	}
 	

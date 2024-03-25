@@ -28,7 +28,7 @@
 		  <thead>
 		    <tr>
 		      <th style="text-align: left;">
-		      	<a href="<c:url value="#"/>" class="boardname">공지게시판</a>
+		      	<a href="<c:url value="/post/list?boNum=1"/>" class="boardname">공지게시판</a>
 		      </th>
 		    </tr>
 		  </thead>
@@ -36,7 +36,7 @@
 		  <c:forEach items="${postList}" var="post">
 		   		<tr>
 		   			<td style="text-align: left;">
-		   				<a href="">${post.po_title} ${post.po_me_id} ${post.po_view}</a>
+		   				<a href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title} ${post.po_me_id} ${post.po_view}</a>
 		   			</td>
 		   		</tr>
 		  </c:forEach>
