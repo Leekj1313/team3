@@ -16,6 +16,14 @@
   	text-decoration: none;
   }
   .box1{padding: 10px; width: 220px; height: 100%; float: left; margin-top: 50px; margin-left: 60px; box-shadow: 0 3px 3px rgba(0,0,0,0.2);}
+	.aTag-home {
+		text-decoration: none; color: #046582;
+	}
+	
+	.aTag-home:hover {
+		text-decoration: underline;
+		color: #848484;
+	}
 </style>
 </head>
 <body>
@@ -36,7 +44,7 @@
 		  <c:forEach items="${postList}" var="post">
 		   		<tr>
 		   			<td style="text-align: left;">
-		   				<a href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title} ${post.po_me_id} ${post.po_view}</a>
+		   				<a class="aTag-home" href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title}</a> ${post.po_me_id} ${post.po_view}
 		   			</td>
 		   		</tr>
 		  </c:forEach>
@@ -53,7 +61,7 @@
 		<table class="table table-hover table-bordered">
 		  <thead>
 		    <tr>
-		      <th>
+		      <th style="text-align: left;">
 		      	<a href="<c:url value="/post/hotlist"/>" class="boardname">HOT게시판</a>
 		      </th>
 		    </tr>
@@ -63,10 +71,10 @@
 		   		<c:if test="${post.po_up >= 5}">
 			   		<tr>
 			   			<td style="text-align: left;">
-			   				<a href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title}</a>
+			   				<a class="aTag-home" href="<c:url value="/post/detail?num=${post.po_num}"/>">${post.po_title}</a>
 			   				${post.po_me_id} 
 			   				${post.po_view} 
-			   				${post.po_up}
+			   				<span style="color: #FA5858; font-weight: bold;">${post.po_up}</span>
 			   			</td>
 			   		</tr>
 		   		</c:if>
