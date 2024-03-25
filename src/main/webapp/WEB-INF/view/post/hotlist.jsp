@@ -9,12 +9,46 @@
 <title>게시글 리스트</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<style type="text/css">
+	.card-1 {
+		padding: 30px;
+	  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	}
+	.card-1:hover {
+	  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
+	.title-text{
+	display:block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	min-width: 100px;
+	max-width: 100px;
+	
+	}
+	
+	table tr th,table tr td {
+	text-align: center;
+	
+	}
+	
+	.aTag {
+	text-decoration: none; color: black;
+	}
+	
+	.aTag:hover {
+	text-decoration: underline;
+	color: #848484;
+	}
+	
+</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
 <jsp:include page="/WEB-INF/view/profile.jsp"/>
-<div class="container">
-	<h2>HOT 게시판</h2>
+<div class="container mt-3 col-7 card-1">
+	<h2 style="font-weight: bold">HOT 게시판</h2>
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -36,7 +70,7 @@
 							<c:url var="url" value="/post/detail">
 							<c:param name="num" value="${post.po_num}" />
 						</c:url>
-						<a href="${url}">${post.po_title}</a>
+						<a class="title-text aTag" href="${url}">${post.po_title}</a>
 						</td>
 						<td>
 							<c:url var="page" value="/post/hotlist?boNum=${board.bo_num}">
@@ -44,7 +78,7 @@
 		    					<c:param name="search" value="${post.po_me_id}"/>
 		    					<c:param name="page" value="1"/>
 							</c:url>
-							<a href="${page}">${post.po_me_id}</a>
+							<a class="aTag" href="${page}">${post.po_me_id}</a>
 						</td>
 						<td><fmt:formatDate pattern="yy/MM/dd hh:mm" value="${post.po_date}"/></td>
 						<td>${post.po_view}</td>
