@@ -3,7 +3,6 @@ package kr.kh.team3.app.service;
 import java.util.ArrayList;
 
 import kr.kh.team3.app.model.dto.LoginDTO;
-import kr.kh.team3.app.model.vo.CategoryVO;
 import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.pagination.Criteria;
 

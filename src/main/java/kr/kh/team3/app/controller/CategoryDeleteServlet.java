@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.kh.team3.app.model.vo.MemberVO;
 import kr.kh.team3.app.service.CategoryService;
 import kr.kh.team3.app.service.CategoryServiceImp;
 

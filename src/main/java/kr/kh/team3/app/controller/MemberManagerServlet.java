@@ -9,17 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import kr.kh.team3.app.model.vo.CategoryVO;
 import kr.kh.team3.app.model.vo.MemberVO;
-import kr.kh.team3.app.model.vo.PostVO;
 import kr.kh.team3.app.pagination.Criteria;
 import kr.kh.team3.app.pagination.PageMaker;
-import kr.kh.team3.app.service.CategoryService;
-import kr.kh.team3.app.service.CategoryServiceImp;
 import kr.kh.team3.app.service.MemberService;
 import kr.kh.team3.app.service.MemberServiceImp;
 

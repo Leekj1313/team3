@@ -17,6 +17,6 @@ public class CommentCriteria extends Criteria{
 	}
 
 	public CommentCriteria(int page, int i, int poNum, String me_id) {
-		this.me_id = me_id;
+		this.meId = me_id;
 	}
 }
