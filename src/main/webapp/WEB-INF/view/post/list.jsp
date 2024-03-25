@@ -50,7 +50,7 @@
 <jsp:include page="/WEB-INF/view/profile.jsp"/>
 <div class="container mt-3 col-7 card-1">
 	<h2 style="font-weight: bold">${board.bo_name}</h2>
-	<table class="table table-hover">
+	<table class="table table-hover" style="margin-top: 30px">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -101,7 +101,9 @@
 	    			<c:param name="search" value="${pm.cri.search}"/>
 	    			<c:param name="page" value="${pm.startPage-1}"/>
 	    		</c:url>
-	    		<a class="page-link" href="${prevUrl}">이전</a>
+	    		<a class="page-link" href="${prevUrl}">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
 	    	</li>
 		</c:if>
 		<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
@@ -121,7 +123,9 @@
 	    			<c:param name="search" value="${pm.cri.search}"/>
 	    			<c:param name="page" value="${pm.endPage+1}"/>
 	    		</c:url>
-	    		<a class="page-link" href="${nextUrl}">다음</a>
+	    		<a class="page-link" href="${nextUrl}">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
 	    	</li>
     	</c:if>
   	</ul>
@@ -135,11 +139,11 @@
 				<option value="writer" <c:if test='${pm.cri.type == "writer"}'>selected</c:if>>작성자</option>
 			</select>
 		    <input type="text" class="form-control" placeholder="검색어" name="search" value="${pm.cri.search}">
-		    <button class="btn btn-secondary">검색</button>
+		    <button class="btn btn-secondary"><i class="bi bi-search";></i></button>
 	  	</div>
 	</form>
   	<br>
-	<a href="<c:url value="/post/insert?bNum=${board.bo_num}"/>" class="btn btn-outline-success">글등록</a>
+	<a href="<c:url value="/post/insert?bNum=${board.bo_num}"/>" class="btn btn-success">글쓰기<i class="bi bi-pencil-fill" style="font-size:small;"></i></a>
 </div>
 <jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>

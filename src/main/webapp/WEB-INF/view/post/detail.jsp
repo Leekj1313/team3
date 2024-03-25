@@ -100,7 +100,7 @@
 		  		<div class="comment-input-box">
 		  			<div class="input-group">
 					    <textarea class="form-control comment-content"></textarea>
-					    <button type="button" class="btn btn-outline-success btn-comment-insert">등록</button>
+					    <button type="button" class="btn btn-success btn-comment-insert">등록</button>
 					</div>
 		  		</div>
 		  	</div>
@@ -265,7 +265,7 @@
 				if(pm.prev){
 					pmStr += `
 					<li class="page-item">
-						<a class="page-link" href="javascript:void(0);" data-page="\${pm.startPage-1}">이전</a>
+						<a class="page-link" href="javascript:void(0);" data-page="\${pm.startPage-1}"><span aria-hidden="true">&laquo;</span></a>
 					</li>
 					`;
 				}
@@ -282,7 +282,7 @@
 				if(pm.next){
 					pmStr += `
 					<li class="page-item">
-						<a class="page-link" href="javascript:void(0);" data-page="\${pm.endPage+1}">다음</a>
+						<a class="page-link" href="javascript:void(0);" data-page="\${pm.endPage+1}"><span aria-hidden="true">&raquo;</span></a>
 					</li>
 					`;
 				}

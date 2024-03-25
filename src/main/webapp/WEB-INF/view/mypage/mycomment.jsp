@@ -31,7 +31,7 @@
 
 <div class="container mt-3 col-6 card-1">
 	<h2 style="font-weight: bold">내가 쓴 댓글</h2>
-	<form action="<c:url value="/mypage/mycomment"/>" class="mb-3 mt-3">
+	<form action="<c:url value="/mypage/mycomment"/>" class="mb-3" style="margin-top: 30px;">
 		<div class="input-group">
 			<select name="type" class="form-select">
 				<option value="all" <c:if test='${pm.cri.type == "all"}'>selected</c:if>>전체</option>
@@ -39,7 +39,7 @@
 				<option value="cmcontent" <c:if test='${pm.cri.type == "cmcontent"}'>selected</c:if>>댓글 내용</option>
 			</select>
 		    <input type="text" class="form-control" placeholder="검색어" name="search" value="${pm.cri.search}">
-		    <button class="btn btn-secondary">검색</button>
+		    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
 		</div>
 	</form>
 	<table class="table table-hover">
@@ -55,14 +55,14 @@
 	    	<c:forEach items="${list}" var="comment">
 			<tr>
 				<td>${comment.cm_po_num}</td>
-				<td >
+				<td>
 					<c:url var="url" value="/post/detail">
 						<c:param name="num" value="${comment.post.po_num}"/>
 					</c:url>
-					<a class="aTag" href="${url}">${comment.post.po_title}</a>
+					<a class="title-text aTag" href="${url}">${comment.post.po_title}</a>
 				</td>
 				<td>${comment.post.po_me_id}</td>
-				<td>${comment.cm_content}</td>
+				<td><div class="title-text">${comment.cm_content}</div></td>
 			</tr>
 			</c:forEach>
 			<c:if test="${list.size() == 0}">

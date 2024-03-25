@@ -35,7 +35,7 @@
 
 <div class="container mt-3 col-6 card-1">
 	<h2 style="font-weight: bold">회원 관리</h2>
-	<form action="<c:url value="/admin/membermanager"/>" class="mb-3 mt-3">
+	<form action="<c:url value="/admin/membermanager"/>" class="mb-3" style="margin-top: 30px;">
 		<div class="input-group">
 			<select name="type" class="form-select">
 				<option value="meId" <c:if test='${pm.cri.type == "meId"}'>selected</c:if>>아이디</option>
@@ -43,7 +43,7 @@
 				<option value="meMsState" <c:if test='${pm.cri.type == "meMsState"}'>selected</c:if>>상태</option>
 			</select>
 		    <input type="text" class="form-control" placeholder="검색어" name="search" value="${pm.cri.search}">
-		    <button class="btn btn-secondary">검색</button>
+		    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
 		</div>
 	</form>
 	<table class="table table-hover" style="text-align: center">
