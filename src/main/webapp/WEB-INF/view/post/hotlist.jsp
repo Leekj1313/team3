@@ -12,6 +12,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
+<jsp:include page="/WEB-INF/view/profile.jsp"/>
 <div class="container">
 	<h2>HOT 게시판</h2>
 	<table class="table table-hover">

@@ -333,17 +333,23 @@
 	</select>
 	
 	<select id="selectTotalHotCount" resultType="int">
-		SELECT count(*)
-		FROM post
+		select count(*)
+		from (
+			SELECT
+				post.*,
+				SUM(CASE WHEN rc_state = 1 THEN 1 ELSE 0 END) AS po_up
+			FROM post  join
+				recommend on rc_po_num = po_num group by po_num) as po_count
+		where po_up > 4
 		<if test='cri.type=="all"'>
-			where po_title like concat('%', #{cri.search},'%') 
+			and po_title like concat('%', #{cri.search},'%') 
 				or po_me_id = #{cri.search}
 		</if>
 		<if test='cri.type=="title"'>
-			where po_title like concat('%', #{cri.search},'%') 
+			and po_title like concat('%', #{cri.search},'%') 
 		</if>
 		<if test='cri.type=="writer"'>
-			where po_me_id = #{cri.search}
+			and po_me_id = #{cri.search}
 		</if>
 	</select>
 </mapper>
