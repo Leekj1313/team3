@@ -32,7 +32,20 @@ public class PostInsertServlet extends HttpServlet {
     private PostService postService = new PostServiceImp();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int bNum = Integer.parseInt(request.getParameter("bNum"));
+		System.out.println(bNum);
 		ArrayList<BoardVO> boardList = boardService.getBoardList();
+		
+		MemberVO user = (MemberVO) request.getSession().getAttribute("user");
+		int index = -1;
+		if(!user.getMe_authority().equals("ADMIN")){
+			for(BoardVO board : boardList) {
+				if(board.getBo_name().equals("공지")) {
+					BoardVO tmp = board;
+					index = boardList.indexOf(tmp);
+				}
+			}
+			boardList.remove(index);
+		}
 		
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("bNum", bNum);
@@ -55,6 +68,16 @@ public class PostInsertServlet extends HttpServlet {
 		String writer = user.getMe_id();
 		
 		PostVO post = new PostVO(bo_num,title,content,writer);
+		
+		if(user.getMe_authority().equals("ADMIN") && bo_num == 1) {
+			post.setPo_notice(1);
+		}else if(!user.getMe_authority().equals("ADMIN") && bo_num ==1) {
+			request.setAttribute("msg", "작성 권한이 없는 게시판입니다.");
+			request.setAttribute("url","post/list?boNum="+bo_num);
+			request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
+			return;
+		}
+		
 		boolean res = false;
 		//임시저장 글을 불러온채로 등록하는지에 대한 여부
 		boolean isTemp = Boolean.parseBoolean(request.getParameter("isTemp"));

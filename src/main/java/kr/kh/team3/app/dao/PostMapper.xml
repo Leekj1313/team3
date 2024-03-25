@@ -121,7 +121,7 @@
 	<select id="selectRecentNotice" resultMap="PostMap">
 		SELECT * 
 		FROM post
-		WHERE po_notice = 1 AND po_bo_num = 1
+		WHERE po_notice = 1 AND po_bo_num = 1 AND po_temp != 1
 		ORDER BY po_date DESC
 		LIMIT 5;
 	</select>
@@ -152,8 +152,8 @@
 		select * from file where fi_po_num = #{num} 
 	</select>
 	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.po_num">
-		insert into post(po_bo_num,po_title,po_content,po_me_id,po_date) 
-		values(#{post.po_bo_num},#{post.po_title},#{post.po_content},#{post.po_me_id},now())
+		insert into post(po_bo_num,po_title,po_content,po_me_id,po_date,po_notice) 
+		values(#{post.po_bo_num},#{post.po_title},#{post.po_content},#{post.po_me_id},now(),#{post.po_notice})
 	</insert>
 	<insert id="insertFile">
 		insert into file(fi_po_num, fi_name, fi_ori_name)
@@ -192,7 +192,9 @@
 		po_title = #{post.po_title},
 		po_content = #{post.po_content},
 		po_me_id = #{post.po_me_id},
-		po_temp = 0
+		po_temp = 0,
+		po_notice = #{post.po_notice},
+		po_date = now()
 		where po_num = #{po_num}
 	</update>
 	<select id="selectFile" resultType="kr.kh.team3.app.model.vo.FileVO">
