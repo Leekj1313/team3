@@ -30,7 +30,7 @@
 
 <div class="container mt-3 col-6 card-1">
 	<h2 style="font-weight: bold">카테고리 관리</h2>
-	<div class="input-group mb-3 mt-3">
+	<div class="input-group mb-3" style="margin-top: 30px;">
 		<input type="text" class="form-control category-content" placeholder="새로 등록할 카테고리 이름을 입력하세요.">
 		<button class="btn btn-success btn-category-insert" type="button">등록</button>
 	</div>
@@ -114,7 +114,7 @@ function displayCategoryPagination(pm){
 	if(pm.prev){
 		str += `
 		<li class="page-item">
-			<a class="page-link" href="javascript:void(0);" data-page="\${pm.startPage-1}">이전</a>
+			<a class="page-link" href="javascript:void(0);" data-page="\${pm.startPage-1}"><span aria-hidden="true">&laquo;</span></a>
 		</li>
 		`;
 	}
@@ -131,7 +131,7 @@ function displayCategoryPagination(pm){
 	if(pm.next){
 		str += `
 		<li class="page-item">
-			<a class="page-link" href="javascript:void(0);" data-page="\${pm.endPage+1}">다음</a>
+			<a class="page-link" href="javascript:void(0);" data-page="\${pm.endPage+1}"><span aria-hidden="true">&raquo;</span></a>
 		</li>
 		`;
 	}

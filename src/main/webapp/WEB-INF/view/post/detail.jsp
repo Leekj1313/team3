@@ -265,7 +265,7 @@
 				if(pm.prev){
 					pmStr += `
 					<li class="page-item">
-						<a class="page-link" href="javascript:void(0);" data-page="\${pm.startPage-1}">이전</a>
+						<a class="page-link" href="javascript:void(0);" data-page="\${pm.startPage-1}"><span aria-hidden="true">&laquo;</span></a>
 					</li>
 					`;
 				}
@@ -282,7 +282,7 @@
 				if(pm.next){
 					pmStr += `
 					<li class="page-item">
-						<a class="page-link" href="javascript:void(0);" data-page="\${pm.endPage+1}">다음</a>
+						<a class="page-link" href="javascript:void(0);" data-page="\${pm.endPage+1}"><span aria-hidden="true">&raquo;</span></a>
 					</li>
 					`;
 				}

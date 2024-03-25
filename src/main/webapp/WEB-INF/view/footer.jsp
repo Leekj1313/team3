@@ -119,7 +119,7 @@
           <p><i class="bi bi-house-door-fill"></i> 서울특별시 강남구 테헤란로14길 6</p>
           <p>
             <i class="bi bi-envelope-fill"></i>
-            info@example.com
+            khteam3@kh.com
           </p>
           <p><i class="bi bi-telephone-fill"></i> 1544 - 9970</p>
           <p><i class="bi bi-printer-fill"></i> + 01 234 567 89</p>
