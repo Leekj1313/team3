@@ -30,11 +30,6 @@ public class HeaderServlet extends HttpServlet {
 		jobj.put("boardList", boardList);
 	
 		response.setContentType("application/json; charset=utf-8");
-		response.getWriter().print(jobj);
-		
-		
+		response.getWriter().print(jobj);	
 	}
-
-
-
 }

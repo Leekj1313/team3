@@ -13,7 +13,6 @@ import kr.kh.team3.app.dao.BoardDAO;
 import kr.kh.team3.app.model.vo.BoardVO;
 import kr.kh.team3.app.model.vo.CategoryVO;
 import kr.kh.team3.app.model.vo.MemberVO;
-import kr.kh.team3.app.pagination.Criteria;
 
 public class BoardServiceImp implements BoardService{
 	
