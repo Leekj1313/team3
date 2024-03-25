@@ -40,6 +40,11 @@
 		   			</td>
 		   		</tr>
 		  </c:forEach>
+		  <c:if test="${postList.size() == 0}">
+				<tr>
+					<td>등록된 공지가 없습니다.</td>
+				</tr>
+		  </c:if>
 		  </tbody>
 		</table>
       <hr class="d-sm-none">
