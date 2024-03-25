@@ -48,8 +48,8 @@
 		<table class="table table-hover table-bordered">
 		  <thead>
 		    <tr>
-		      <th style="text-align: left;">
-		      	<a href="<c:url value="#"/>"  class="boardname">HOT게시판</a>
+		      <th>
+		      	<a href="<c:url value="/post/hotlist"/>" class="boardname">HOT게시판</a>
 		      </th>
 		    </tr>
 		  </thead>
@@ -66,11 +66,12 @@
 			   		</tr>
 		   		</c:if>
 		  	</c:forEach>
+		  	
 		  	<c:if test="${postHotList.size() == 0}">
-				  <tr style="text-align: left;">
-					  <td>등록된 게시글이 없습니다.</td>
-				  </tr>
-			  </c:if>
+				<tr>
+					<td>등록된 인기글이 없습니다.</td>
+				</tr>
+			</c:if>
 		  </tbody>
 		</table>
       <hr class="d-sm-none">

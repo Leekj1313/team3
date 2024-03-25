@@ -42,7 +42,8 @@ public interface PostService {
 	
 	ArrayList<PostVO> getRecentNotice();
   
-	ArrayList<PostVO> getPostHotList();
+  
+	ArrayList<PostVO> getPostHotList(Criteria cri);
 
 	boolean deletePost(int num, MemberVO user);
   
@@ -76,5 +77,9 @@ public interface PostService {
 	int getTotalCountReport(Criteria cri);
 
 	boolean deleteReportPost(int num, MemberVO user);
+
+	ArrayList<PostVO> getPostHotMainList();
+
+	int getTotalHotCount(Criteria cri);
 
 }

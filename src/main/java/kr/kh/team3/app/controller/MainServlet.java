@@ -24,7 +24,8 @@ public class MainServlet extends HttpServlet {
 		ArrayList<PostVO> postList = postService.getRecentNotice();
 		request.setAttribute("postList", postList);
 		
-		ArrayList<PostVO> postHotList = postService.getPostHotList();
+		
+		ArrayList<PostVO> postHotList = postService.getPostHotMainList();
 		request.setAttribute("postHotList", postHotList);
 		
 		request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);

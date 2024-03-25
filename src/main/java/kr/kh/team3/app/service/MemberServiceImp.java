@@ -160,4 +160,5 @@ private MemberDAO memberDao;
 		}
 		return memberDao.updateMemberAuthority(user);
 	}
+
 }

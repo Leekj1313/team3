@@ -47,7 +47,7 @@ public interface PostDAO {
 	ArrayList<PostVO> selectRecentNotice();
 
 
-	ArrayList<PostVO> selectPostHotList();
+	ArrayList<PostVO> selectPostHotList(@Param("cri")Criteria cri);
 
 	ArrayList<FileVO> selectFileByPo_num(@Param("num")int num);
 
@@ -86,5 +86,9 @@ public interface PostDAO {
 	ReportVO selectReportPost(@Param("num")int num);
 
 	boolean deleteReportPost(@Param("num")int num);
+
+	ArrayList<PostVO> selectPostHotMainList();
+
+	int selectTotalHotCount(@Param("cri")Criteria cri);
 
 }

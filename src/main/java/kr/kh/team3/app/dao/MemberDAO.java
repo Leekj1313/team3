@@ -31,4 +31,6 @@ public interface MemberDAO {
 
 	boolean updateMemberAuthority(@Param("user")MemberVO user);
 
+	boolean updateMember(@Param("member")MemberVO member);
+
 }
