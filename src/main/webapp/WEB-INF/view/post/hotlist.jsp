@@ -66,7 +66,7 @@
 			<c:forEach items="${list}" var="post">
 					<tr>
 						<td>${post.po_num}</td>
-						<td>${post.board.bo_name}</td>
+						<td><a href="<c:url value="/post/list?boNum=${post.po_bo_num}"/>">${post.board.bo_name}</a></td>
 						<td>
 							<c:url var="url" value="/post/detail">
 							<c:param name="num" value="${post.po_num}" />
