@@ -54,7 +54,7 @@
 			<c:if test="${list.size() == 0}">
 				<tr>
 					<th colspan = "7">
-						<h3 class="text-center">등록된 게시글이 없습니다.</h3>
+						<h3 class="text-center">등록된 인기글이 없습니다.</h3>
 					</th>
 				</tr>
 			</c:if>
@@ -94,7 +94,6 @@
   	</ul>
   	<hr>
   	<form action="<c:url value="/post/hotlist"/>" class="mb-3 mt-3">
-  		<input type="hidden" id="boNum" name="boNum" value="${board.bo_num}"/>
 		<div class="input-group">
 			<select name="type" class="form-control">
 				<option value="all" <c:if test='${pm.cri.type == "all"}'>selected</c:if>>전체</option>
@@ -106,5 +105,6 @@
 	  	</div>
 	</form>
 </div>
+<jsp:include page="/WEB-INF/view/footer.jsp"/>
 </body>
 </html>

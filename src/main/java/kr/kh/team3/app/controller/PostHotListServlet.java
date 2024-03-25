@@ -24,14 +24,10 @@ public class PostHotListServlet extends HttpServlet {
 	private PostService postService = new PostServiceImp();
 	private BoardService boardService = new BoardServiceImp();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int boNum;
-		try {
-			boNum = Integer.parseInt(request.getParameter("boNum"));
-		}catch (Exception e) {
-			boNum = 0;
-		}
+		
 		ArrayList<BoardVO> boardList = boardService.getBoardList();
 		request.setAttribute("boardList", boardList);
+		
 		//검색어와 검색 타입을 가져옴. 현재 페이지 정보도 가져옴
 		String search = request.getParameter("search");
 		String type = request.getParameter("type");
