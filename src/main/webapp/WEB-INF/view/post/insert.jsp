@@ -49,6 +49,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="/WEB-INF/view/header.jsp"/>
 <jsp:include page="/WEB-INF/view/profile.jsp"/>
 <div class="container mt-3 col-7 card-1">
 	<h2 style="font-weight: bold; margin-bottom: 50px">글쓰기</h2>

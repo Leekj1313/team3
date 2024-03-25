@@ -123,7 +123,7 @@
 		FROM post
 		WHERE po_notice = 1 AND po_bo_num = 1 AND po_temp != 1
 		ORDER BY po_date DESC
-		LIMIT 5;
+		LIMIT 10;
 	</select>
 	
 
@@ -331,7 +331,7 @@
 		group by po_num
 		having po_up > 4
 		order by po_up desc
-		LIMIT 5
+		LIMIT 10
 	</select>
 	
 	<select id="selectTotalHotCount" resultType="int">
