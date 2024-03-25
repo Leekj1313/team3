@@ -190,7 +190,7 @@ public class PostServiceImp implements PostService {
 	@Override
   public ArrayList<PostVO> getPostHotList(Criteria cri) {
 		if(cri == null) {
-			cri = new Criteria();
+			cri = new Criteria(1,2);
 		}
 		return postDao.selectPostHotList(cri);
 	}
