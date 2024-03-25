@@ -76,14 +76,27 @@
 		me_ms_state = #{user.me_ms_state}
 		where me_id = #{user.me_id}
 	</update>
-
-	<update id="updateMember">
-		UPDATE MEMBER SET 
-			me_id 	 = #{member.me_id},
-			me_pw 	 = #{member.me_pw},
-			me_email = #{member.me_email},
-			me_phone = #{member.me_phone}
-		WHERE
-		    me_name  = #{member.me_name}
+	
+	<update id="updateMemberName">
+		update member set
+		me_name = #{newName}
+		where
+		me_id=#{user.me_id}
 	</update>
+	
+	<update id="updateMemberEmail">
+		update member set
+		me_email = #{newEmail}
+		where
+		me_id=#{user.me_id}
+	</update>
+	
+	<update id="updateMemberPhone">
+		update member set
+		me_phone = #{newPhone}
+		where
+		me_id=#{user.me_id}
+	</update>
+
+
 </mapper>

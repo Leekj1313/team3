@@ -147,11 +147,6 @@ private MemberDAO memberDao;
 		return memberDao.deleteMember(me_id);
 	}
 	
-	@Override
-	public boolean updateMember(MemberVO member) {
-		MemberVO dbMember = memberDao.selectMember(member.getMe_name());
-		return memberDao.updateMember(member);
-	}
 
 	@Override
 	public boolean updateMemberAuthority(MemberVO user) {
@@ -159,6 +154,61 @@ private MemberDAO memberDao;
 			return false;
 		}
 		return memberDao.updateMemberAuthority(user);
+	}
+	
+	private boolean checkString(String str) {
+		if(str == null || str.length() == 0) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean updateMemberName(MemberVO user, String newName) {
+		
+		MemberVO dbMember = memberDao.selectMember(user.getMe_id());
+		if(dbMember == null) {
+			return false;
+		}
+		if(!checkString(newName)) {
+			return false;
+		}
+		if(dbMember.getMe_name().equals(newName)) {
+			return false;
+		}
+		
+		return memberDao.updateMemberName(newName, user);
+	}
+
+	@Override
+	public boolean updateMemberEmail(MemberVO user, String newEmail) {
+		MemberVO dbMember = memberDao.selectMember(user.getMe_id());
+		if(dbMember == null) {
+			return false;
+		}
+		if(!checkString(newEmail)) {
+			return false;
+		}
+		if(dbMember.getMe_email().equals(newEmail)) {
+			return false;
+		}
+		return memberDao.updateMemberEmail(newEmail, user);
+	}
+
+	@Override
+	public boolean updateMemberPhone(MemberVO user, String newPhone) {
+		MemberVO dbMember = memberDao.selectMember(user.getMe_id());
+		if(dbMember == null) {
+			return false;
+		}
+		if(!checkString(newPhone)) {
+			return false;
+		}
+		if(dbMember.getMe_phone().equals(newPhone)) {
+			return false;
+		}
+		
+		return memberDao.updateMemberPhone(newPhone, user);
 	}
 
 }

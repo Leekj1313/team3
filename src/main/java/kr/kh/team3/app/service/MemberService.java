@@ -33,7 +33,11 @@ public interface MemberService {
 	boolean deleteMember(String me_id);
 
 	boolean updateMemberAuthority(MemberVO user);
+	
+	boolean updateMemberName(MemberVO user, String newName);
 
-	boolean updateMember(MemberVO member);
+	boolean updateMemberEmail(MemberVO user, String newEmail);
+
+	boolean updateMemberPhone(MemberVO user, String newPhone);
 
 }
