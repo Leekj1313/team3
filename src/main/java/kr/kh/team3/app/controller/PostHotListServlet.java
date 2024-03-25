@@ -37,7 +37,7 @@ public class PostHotListServlet extends HttpServlet {
 		}catch(Exception e) {
 			page = 1;
 		}
-		Criteria cri = new Criteria(page, 5, type, search);
+		Criteria cri = new Criteria(page, 2, type, search);
 		int totalCount = postService.getTotalHotCount(cri);
 		PageMaker pm = new PageMaker(5, cri, totalCount);
 		request.setAttribute("pm", pm);

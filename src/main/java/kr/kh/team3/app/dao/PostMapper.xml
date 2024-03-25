@@ -146,6 +146,7 @@
 		group by po_num
 		having po_up > 4
 		order by po_up desc
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<select id="selectFileByPo_num" resultType="kr.kh.team3.app.model.vo.FileVO">
 		select * from file where fi_po_num = #{num} 
@@ -330,7 +331,7 @@
 		group by po_num
 		having po_up > 4
 		order by po_up desc
-		limit 5;
+		LIMIT 5
 	</select>
 	
 	<select id="selectTotalHotCount" resultType="int">
