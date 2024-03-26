@@ -71,12 +71,16 @@ public class PostInsertServlet extends HttpServlet {
 		
 		if(user.getMe_authority().equals("ADMIN") && bo_num == 1) {
 			post.setPo_notice(1);
+			title = "[공지] "+ title;
+			post.setPo_title(title);
 		}else if(!user.getMe_authority().equals("ADMIN") && bo_num ==1) {
 			request.setAttribute("msg", "작성 권한이 없는 게시판입니다.");
 			request.setAttribute("url","post/list?boNum="+bo_num);
 			request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
 			return;
 		}
+		
+		
 		
 		boolean res = false;
 		//임시저장 글을 불러온채로 등록하는지에 대한 여부

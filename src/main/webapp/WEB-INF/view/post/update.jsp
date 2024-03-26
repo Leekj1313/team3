@@ -49,7 +49,10 @@
 		    <label for="board" class="form-label">게시판:</label>
 		    <select class="form-control" id="board" name="board">
 		    	<c:forEach items="${boardList}" var="board">
+		    		<!--  
 		    		<option value="${board.bo_num}">${board.bo_name}</option>
+		    		-->
+		    		<option value="${board.bo_num}" <c:if test="${post.board.bo_num == board.bo_num}">selected</c:if>>${board.bo_name}</option>
 		    	</c:forEach>
 		    </select>
 	  	</div>

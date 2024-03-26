@@ -9,6 +9,8 @@
 <!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+
 <style type="text/css">
     .card {
         background: #fff;
@@ -18,6 +20,7 @@
         /*height: 1000px;*/
         /*width: 1000px;*/
         margin: 1rem;
+        margin-left: 550px;
         position: relative;
         /* Added max-width to prevent overflow */
         max-width: 1000px;
@@ -35,6 +38,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/header.jsp"/>
+<jsp:include page="/WEB-INF/view/profile.jsp"/>
 
 <div class="card card-1 container col-5 p-5">
     <h3>회원정보 수정</h3>
@@ -98,6 +102,7 @@
     </form>
     <a href="<c:url value='/signup/delete'/>" class="btn btn-outline-dark mt-3">회원탈퇴</a>
 </div>
+<jsp:include page="/WEB-INF/view/footer.jsp"/>
 
 
 

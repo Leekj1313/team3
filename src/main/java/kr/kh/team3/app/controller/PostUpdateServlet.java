@@ -38,6 +38,7 @@ public class PostUpdateServlet extends HttpServlet {
 			num = 0;
 		}
 		PostVO post = postService.getPost(num);
+	
 		request.setAttribute("post", post);
 		
 		//작성자가 맞는지 확인
@@ -51,11 +52,27 @@ public class PostUpdateServlet extends HttpServlet {
 			return;
 		}
 		
+		
+		
 		ArrayList<FileVO> fileList = postService.getFile(num);
 		request.setAttribute("fileList", fileList);
 
 		ArrayList<BoardVO> boardList = boardService.getBoardList();
+		
+		int index = -1;
+		if(!user.getMe_authority().equals("ADMIN")){
+			for(BoardVO board : boardList) {
+				if(board.getBo_name().equals("공지")) {
+					BoardVO tmp = board;
+					index = boardList.indexOf(tmp);
+				}
+			}
+			boardList.remove(index);
+		}
+		
+		
 		request.setAttribute("boardList", boardList);
+		
 		request.getRequestDispatcher("/WEB-INF/view/post/update.jsp").forward(request, response);
 	}
 
@@ -76,6 +93,18 @@ public class PostUpdateServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		//게시글 객체로 생성
 		PostVO post = new PostVO(num, title, content, boNum);
+		
+		if(user.getMe_authority().equals("ADMIN") && boNum == 1) {
+			post.setPo_notice(1);
+			title = "[공지] "+ title;
+			post.setPo_title(title);
+		}else if(!user.getMe_authority().equals("ADMIN") && boNum ==1) {
+			request.setAttribute("msg", "작성 권한이 없는 게시판입니다.");
+			request.setAttribute("url","post/list?boNum="+boNum);
+			request.getRequestDispatcher("/WEB-INF/view/message.jsp").forward(request, response);
+			return;
+		}
+		
 		
 		//새로 추가된 첨부파일 정보 가져옴
 		ArrayList<Part> fileList = (ArrayList<Part>) request.getParts();
